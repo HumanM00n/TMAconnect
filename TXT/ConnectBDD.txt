@@ -1,0 +1,39 @@
+<?php
+// Paramètres de connexion à la base de données
+$servername = "localhost:3308";
+$username = "root";
+$password = "XVsikn92";
+$dbname = "tmaconnect";
+
+// Connexion à la base de données
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Vérifier la connexion
+if ($conn->connect_error) {
+    die("La connexion a échoué : " . $conn->connect_error);
+}
+
+// Récupérer les données du formulaire
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $login = $_POST["login"];
+    $motDePasse = $_POST["mot_de_passe"];
+
+    // Requête SQL pour vérifier les identifiants de connexion
+    $sql = "SELECT * FROM tc_utilisateur WHERE login = ? AND mot_de_passe = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $login, $motDePasse);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Vérifier si un enregistrement correspondant a été trouvé
+    if ($result->num_rows == 1) {
+        // Authentification réussie, rediriger vers la page d'accueil
+        header("Location: accueil.php");
+        exit();
+    } else {
+        // Authentification échouée, afficher un message d'erreur
+        $erreur = "Login ou mot de passe incorrect";
+    }
+}
+
+?>

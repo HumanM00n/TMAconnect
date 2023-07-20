@@ -1,0 +1,11 @@
+MDP Oublie 
+	Mail secretaria INF 
+			Creation MDP provisoire 		
+			Envoi d'un lien pour changer de MDP
+			Puis redirection vers la page de connexion 
+
+
+
+
+
+

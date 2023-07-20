@@ -1,0 +1,12 @@
+Commande pour GitHub :
+
+- Pour afficher tout les référentiels distants connectés :
+	git remote -v
+
+- Pour supprimer la connexion avec le référentiel distant :
+	git remote remove origin
+
+
+
+
+ 

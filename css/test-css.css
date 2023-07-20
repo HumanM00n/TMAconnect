@@ -1,0 +1,136 @@
+@import url("style.css");
+
+header {
+    margin-top: 20px;
+}
+
+.logo {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    padding-bottom: none;
+    height: 215px;
+}
+
+.container {
+    margin: auto;
+    border: solid;
+    height: 500px;
+    width: 1000px;
+}
+
+h2 {
+    margin: 50px;
+    margin-bottom: 50px;
+}
+
+.identifiant {
+    margin-left: 100px;
+    margin-bottom: 30px;
+    border-spacing: 5px 1rem;
+    align-items: center;
+}
+
+.btn_lmdp {
+    position: static;
+    background-color: #19C9D2;
+    color: azure;
+    margin-left: 55%;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.btn_lmdp:hover {
+    background-color: #168b96;
+}
+
+.mdp {
+    margin: 0 0 0 100px;
+}
+
+.champs_txt {
+    border-style: inset;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 50%;
+    height: 30px;
+}
+
+label {
+    margin-left: 9%;
+    position: relative;
+    outline: none;
+    box-sizing: border-box;
+}
+
+label input {
+    font: 1em;
+    background: transparent;
+}
+
+label input:focus {
+    border-color: black;
+}
+
+label body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+label .password-icon {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    margin-top: 5px;
+    top: 85%;
+    transform: translateY(-50%);
+    width: 20px;
+    transition: all 0.2s;
+    right: 10px;
+}
+
+label .password-icon .feather-eye-off {
+    display: none;
+}
+
+label .password-icon:hover {
+    cursor: pointer;
+    color: black;
+}
+
+.remember {
+    margin-top: 25px;
+}
+
+.btn_log {
+    background-color: #19C9D2;
+    color: azure;
+    margin-top: 3%;
+    margin-left: 35%;
+    width: 15%;
+}
+
+.btn_log:hover {
+    background-color: #168b96;
+}
+
+a.tma-btn {
+    text-decoration: none;
+    float: right;
+    margin-right: 100px;
+}
+
+.input--value {
+    height: 30px;
+    width: 450px;
+}
+
+input.tma-btn {
+    margin-top: 20px;
+    margin-left: 44%;
+}
+
+.remember-forgot {
+    margin-top: 25px;
+}

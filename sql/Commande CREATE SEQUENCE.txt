@@ -1,0 +1,4 @@
+INSERT INTO TC_Demande ( IdDemande , Num , Date_crea , ... ,Lien_fiche , IdEtat ) 
+VALUES ( 66 , 3216 , champs_txt.value , ... , 'Nouveau' )  
+
+INSERT INTO TC_Demande VALUES (nextval('seq_1_dmd'), 

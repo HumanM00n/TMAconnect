@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../TMAconnect/CCS/change-mdp.css">
+    <title>Changement de mot de passe</title>
+</head>
+<header>
+    <center><img class="logo" src="../TMAconnect/img/NLogo.png"></center>
+</header>
+
+<!-- Mettre l'oeil sur les champs de mot de passe -->
+
+<body>
+    <div class="container">
+        <h2>
+            Mot de passe oublié ?
+        </h2>
+        <form action="" methode="POST"></form>
+        <div class="lmpd-form">
+            <section class="input-container">
+                <p class="input--label">Ancien mot de passe</p>
+                <input class="input--value" type="text" required minlength="12" maxlength="30">
+            </section>
+
+            <section class="input-container">
+                <p class="input--label">Nouveau mot de passe</p>
+                <label>
+                    <input class="input--value" type="password" required minlength="12" maxlength="30">
+                    <!-- ICONS -->
+                    <div class="password-icon">
+                        <i data-feather="eye"></i>
+                        <i data-feather="eye-off"></i>
+                    </div>
+                </label>
+                <script src="https://unpkg.com/feather-icons"></script>
+                <script src="../TMAconnect/JS/eye.js"></script>
+            </section>
+
+            <section class="input-container">
+                <p class="input--label">Confirmation mot de passe</p>
+                <label>
+                    <input class="input--value" type="password" required minlength="12" maxlength="30">
+                    <!-- ICONS -->
+                    <div class="password-icon">
+                        <i data-feather="eye"></i>
+                        <i data-feather="eye-off"></i>
+                    </div>
+                </label>
+                <script src="https://unpkg.com/feather-icons"></script>
+                <script src="../TMAconnect/JS/oeil.js"></script>
+            </section>
+        </div>
+        <div>
+            <button class="tma-btn">Enregistrer</button>
+        </div>
+    </div>
+    <!-- Bloquer mdp oublié tant que l'id n'est pas renseigné ! -->
+</body>
+
+</html>

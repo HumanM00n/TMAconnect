@@ -1,0 +1,40 @@
+select libelle from TC_Utilisateur, TC_Service where nom = 'Rouy' and S_users = IdService;
+
+
+select IdUtil , nom , prenom , matricule , email , passwd , TC_Service.libelle , TC_Poste.libelle , TC_Droit.libelle , dateFin , derniere_connect from TC_Utilisateur, TC_Service,TC_Poste      
+, TC_Droit where S_users = IdService and P_users = IdPoste and D_users = IdDroit; 
+
+
+
+
+
+
+	Commande non-simplifié :
+
+	select IdUtil , nom , prenom , matricule , email , passwd , TC_Service.libelle , TC_Poste.libelle , TC_Droit.libelle , dateFin , derniere_connect 
+	from TC_Utilisateur, TC_Service,TC_Poste, TC_Droit 
+	where S_users = IdService and P_users = IdPoste and D_users = IdDroit;
+
+
+
+
+	Commande simplifié AVEC ALIAS:
+
+	select IdUtil , nom , prenom , matricule , email , passwd , S.libelle , P.libelle , D.libelle , dateFin , derniere_connect 
+	from TC_Utilisateur, TC_Service S,TC_Poste P, TC_Droit D 
+	where S_users = IdService and P_users = IdPoste and D_users = IdDroit;
+
+
+
+
+INSERT INTO avec un clés étrangère : 
+	INSERT INTO TC_Utilisateur VALUES ( NULL , 'Nankoo' , 'Kevin' , 'c1091' , 'c1091@cnetp.fr' , 'E.T' , 1 , 1 , 1 ,
+	CURRENT_DATE, CURRENT_TIMESTAMP );
+
+
+
+
+
+
+
+INSERT INTO tc_service VALUES ( NOT NULL, 'INF' );	

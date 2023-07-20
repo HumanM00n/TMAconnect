@@ -1,0 +1,118 @@
+* {
+    margin: 0%;
+}
+
+body {
+    margin: 0px;
+}
+
+
+.container {
+    border: 1.5px solid;
+    border-radius: 20px;
+    border-color: black;
+    margin-top: 0.7%;
+    margin-left: 15%;
+    padding-top: 19%;
+    padding-bottom: 22%;
+    width: 83%;
+    background-color: #ebebeb;
+}
+
+
+h3 {
+    border: 1.5px solid;
+    border-radius: 20px;
+    border-color: black;
+    position: absolute;
+    top: 12%;
+    margin-left: 3px;
+    padding: 0.6% 76.5% 0.6% 0.6%;
+    font-size: 185%;
+    background-color: #289297;
+    color: #f1f1f1;
+}
+
+
+
+.barre-arianne {
+    background-color: #289297;
+    border: solid 1.5px;
+    /* border-radius: 20px; */
+    border-color: black;
+    margin-top: -155px;
+    margin-left: 250px;
+    height: 70px;
+}
+
+
+.barre-arianne ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin-top: 4px;
+    margin-left: 4px;
+    padding: 0;
+    width: 500px;
+}
+
+
+.barre-arianne ul a {
+    text-align: center;
+    text-decoration: none;
+    color: aliceblue;
+}
+
+
+.barre-arianne li:not(:last-child)::after {
+    display: inline-block;
+    margin: 0 .25rem;
+    content: "/";
+}
+
+
+.logo {
+    position: relative;
+    z-index: 9;
+    height: 135px;
+}
+
+
+.Sidenav {
+    background-color: #289297;
+    border: solid 1.5px;
+    position: fixed;
+    z-index: 1;
+    padding-top: 20px;
+    overflow-x: hidden;
+    height: 100%;
+    width: 250px;
+    top: 0%;
+    left: 0%;
+}
+
+.Sidenav a {
+    display: block;
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    position: relative;
+    top: 250px;
+    font-size: 15px;
+    color: #f1f1f1;
+}
+
+
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+.Sidenav a:hover {
+    color: #afaeae;
+}

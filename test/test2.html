@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CCS/test2.css">
+    <title>NotherTest</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title>TO-Do List</title>
+    </head>
+
+    <body>
+        <section class="container">
+            <h3>Ajouter votre devoir</h3>
+            <form class="panel" action="/page-traitement-donnees" method="post">
+                <label for="nomDevoir">Nom de l'activité devoir</label>
+                <input type="text" id="nomDevoir" placeholder="Nom du devoir">
+                <label for="date">Date</label>
+                <input type="date" id="date" required>
+
+                <label for="bloc">Bloc :</label>
+                <select id="bloc">
+                    <option value="" disabled selected hidden></option>
+                    <option value="bloc1">Bloc d'activités professionnelles</option>
+                    <option value="bloc2">Bloc n°1 Services informatiques</option>
+                    <option value="bloc3">Bloc n°2 Option SLAM</option>
+                    <option value="bloc4">Bloc n°2 Option SISR</option>
+                    <option value="bloc5">Bloc n°3 Option SLAM</option>
+                    <option value="bloc6">Bloc n°3 Option SISR</option>
+                    <option value="bloc7">Bloc n°4 Culture générale</option>
+                    <option value="bloc8">Bloc n°5 Anglais</option>
+                    <option value="bloc9">Bloc n°6 Mathématiques</option>
+                    <option value="bloc10">Bloc n°7 Economie et Management</option>
+                    <option value="bloc11">Bloc facultatif</option>
+                </select>
+                <input type="text" id="tacheInput" placeholder="Nouvelle tâche">
+                <button id="ajouterBtn">Ajouter</button>
+                
+            </form>
+
+            <table class="datatable">
+                <thead>
+                    <tr>
+                        <th scope="col">Devoir</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Bloc</th>
+                    </tr>
+                </thead>
+                <tbody class="tablebody" id="tbodyTaches">
+
+                </tbody>
+            </table>
+        </section>
+
+        <script>
+            document.getElementById("ajouterBtn").addEventListener("click", ajouterTache);
+
+            function ajouterTache() {
+                var nomDevoir = document.getElementById("nomDevoir").value;
+                var date = document.getElementById("date").value;
+                var bloc = document.getElementById("bloc").value;
+                var tache = document.getElementById("tacheInput").value;
+
+                if (tache !== "") {
+                    var tbody = document.getElementById("tbodyTaches");
+
+                    var nouvelleLigne = document.createElement("tr");
+                    var celluleTache = document.createElement("td");
+                    var celluleDate = document.createElement("td");
+                    var celluleBloc = document.createElement("td");
+                    var celluleAction = document.createElement("td");
+                    var supprimerBtn = document.createElement("button");
+
+                    celluleTache.textContent = tache;
+                    celluleDate.textContent = date;
+                    celluleBloc.textContent = bloc;
+                    supprimerBtn.textContent = "Supprimer";
+
+                    supprimerBtn.addEventListener("click", function () {
+                        nouvelleLigne.remove();
+                    });
+
+                    celluleAction.appendChild(supprimerBtn);
+                    nouvelleLigne.appendChild(celluleTache);
+                    nouvelleLigne.appendChild(celluleDate);
+                    nouvelleLigne.appendChild(celluleBloc);
+                    nouvelleLigne.appendChild(celluleAction);
+                    tbody.appendChild(nouvelleLigne);
+
+                    document.getElementById("nomDevoir").value = "";
+                    document.getElementById("date").value = "";
+                    document.getElementById("bloc").selectedIndex = 0;
+                    document.getElementById("tacheInput").value = "";
+                }
+            }
+        </script>
+    </body>
+
+    </html>

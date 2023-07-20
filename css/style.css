@@ -1,0 +1,29 @@
+.tma-btn {
+    cursor: pointer;
+    padding: 10px 20px;
+    border: solid 1px black;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #19c9d2;
+    color: white;
+}
+
+.tma-btn:hover {
+    background-color: #168b96;
+}
+
+.input--value {
+    padding: 0 6px;
+    border: none;
+    border-bottom: solid 1px;
+}
+
+.input--value:focus-visible {
+    outline: none;
+}
+
+* {
+    font-size: 1rem;
+    font-family: sans-serif;
+}
