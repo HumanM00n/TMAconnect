@@ -7,6 +7,15 @@ Commande pour GitHub :
 	git remote remove origin
 
 
+--------------------- PUSH LES INFOS --------------------- 
+
+git add . --> Pour ajouter tout les fichiers 
+
+git commit -m "" --> Permet d'enregistrer les modifications 
+
+git psuh --> Pour envoyer les modifs vers Github 
+
+
 
 
  
