@@ -1,6 +1,4 @@
-<?php include('../TMAconnect/php/S-forgotMDP.php');
-
-?>
+<?php include('php/S-forgotMDP.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +20,7 @@
             Mot de passe oublié ?
         </h2>
         <?php
+        $motDePasseModifie = false; // Variable de drapeau pour indiquer si le mot de passe a été modifié avec succès
         if (isset($_POST['subpasswd'])) {
             if (empty($matricule) || empty($n_passwd) || empty($c_passwd)) {
                 echo '<center><p class="error--id">Veuillez remplir tous les champs.</p></center>';
@@ -47,6 +46,7 @@
                 ]);
 
                 echo '<center><p class="Successful">Le mot de passe a été modifié avec succès!</p></center>';
+                $motDePasseModifie = true; // Variable de drapeau pour indiquer si le mot de passe a été modifié avec succès
             }
         }
         ?>
@@ -82,17 +82,19 @@
                         </div>
                     </label>
                     <script src="https://unpkg.com/feather-icons"></script>
-                    <script src="../TMAconnect/JS/eye.js"></script>
+                    <script src="JS/oeil.js"></script>
+                    <script src="JS/eye.js"></script>
+
                 </section>
             </div>
             <div>
-                <button type="submit" class="tma-btn" name="subpasswd">Enregistrer</button>
-                <a href="../TMAconnect/index.php"><input type="button" class="tma-btn" value="⬅️ Revenir au menu"></a>
-                <!-- Remplacer par valider -->
+                <?php if (!$motDePasseModifie) { ?>
+                    <button type="submit" class="tma-btn" name="subpasswd">Enregistrer</button>
+                <?php } else { ?>
+                    <a href="./index.php"><input type="button" class="tma-btn" value="⬅️ Revenir au menu"></a>
+                <?php } ?>
             </div>
         </form>
-
-
     </div>
 </body>
 

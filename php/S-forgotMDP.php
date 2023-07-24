@@ -6,7 +6,7 @@ $row = null;
 
 if (isset($_POST['subpasswd'])) {
     $matricule = $_POST['matricule'];
-    $n_passwd = $_POST['n_passwd'];
+    $n_passwd = $_POST['n_passwd'];   
     $c_passwd = $_POST['c_passwd'];
 
     if (empty($matricule) || empty($n_passwd) || empty($c_passwd)) {
@@ -31,11 +31,12 @@ if (isset($_POST['subpasswd'])) {
                 $updateQuery = "UPDATE tc_utilisateur SET passwd = :n_passwd WHERE matricule = :matricule";
                 $updateStmt = $pdo->prepare($updateQuery);
                 $updateStmt->execute([
-                    'n_passwd' => $hashedPassword,// Utilisez directement le nouveau mot de passe
+                    'n_passwd' => $hashedPassword,
+                    // Utilisez directement le nouveau mot de passe
                     'matricule' => $matricule
                 ]);
 
-                // echo "Le mot de passe a été modifié avec succès.";
+                
             } else {
                 // echo "L'ancien mot de passe est incorrect.";
             }

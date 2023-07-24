@@ -105,7 +105,7 @@ try {
 
                                     // Effectuer une requête AJAX vers le script de déconnexion
                                     var xhr = new XMLHttpRequest();
-                                    xhr.open('GET', 'pages/<?php echo $dirIndex; ?>../php/deconnexion.php', true);
+                                    xhr.open('GET', 'pages/<?php echo $dirIndex; ?>../php/S-Deconnect.php', true);
                                     xhr.onreadystatechange = function () {
                                         if (xhr.readyState === XMLHttpRequest.DONE) {
                                             if (xhr.status === 200) {

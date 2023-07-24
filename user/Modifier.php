@@ -88,14 +88,12 @@ WHERE U.IdUtil = :idUtilisateur";
 
                     <div>
                         <label for="i_matricule">Matricule :</label>
-                        <input type="text" name="i_matricule" id="i_matricule" disabled pattern="C.*" required
-                            value="<?php echo $matricule; ?>" maxlength="5">
+                        <input type="text" name="i_matricule" id="i_matricule" disabled pattern="C.*" requiredvalue="<?php echo $matricule; ?>" maxlength="5">
                     </div>
 
                     <div>
                         <label for="i_email">Email :</label>
-                        <input type="email" name="i_email" id="i_email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                            required value="<?php echo $email; ?>">
+                        <input type="email" name="i_email" id="i_email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required value="<?php echo $email; ?>">
                     </div>
 
                     <?php
@@ -209,7 +207,7 @@ WHERE U.IdUtil = :idUtilisateur";
 
                     <div>
                         <label>Date de fin : </label>
-                        <input type="date" name="calendrier" id="calendrier" required value="<?php echo $dateFin; ?>">
+                        <input type="date" name="calendrier" id="calendrier" value="<?php echo $dateFin; ?>">
                     </div>
 
                     <?php
@@ -228,7 +226,7 @@ WHERE U.IdUtil = :idUtilisateur";
                     <div class="button-container">
                         <input type="submit" onclick="" name="btn_modifier" id="btn_modifier" value="Modifier">
                         <input type="reset" name="btn_annuler" id="btn_annuler" value="Annuler"
-                            onclick="window.location.href = '../pages/Utilisateurs.php';">
+                            onclick="window.location.href = '../user/Utilisateurs.php';">
                     </div>
 
                     <?php

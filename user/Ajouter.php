@@ -160,7 +160,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
             $prenom = isset($_POST['i_prenom']) ? $_POST['i_prenom'] : '';
             $matricule = isset($_POST['i_matricule']) ? $_POST['i_matricule'] : '';
             $email = isset($_POST['i_email']) ? $_POST['i_email'] : '';
-            $passwd = isset($_POST['i_passwd']) ? $_POST['i_passwd'] : '';
+            $passwd = isset($_POST['i_passwd']) ? password_hash($_POST['i_passwd'], PASSWORD_DEFAULT) : '';
             $S_users = isset($_POST['S_users']) ? $_POST['S_users'] : '';
             $P_users = isset($_POST['P_users']) ? $_POST['P_users'] : '';
             $D_users = isset($_POST['D_users']) ? $_POST['D_users'] : '';

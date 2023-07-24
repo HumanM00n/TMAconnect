@@ -96,7 +96,7 @@
 
         <script>
             function redirectModifierPage(idUtilisateur) {
-                window.location.href = "../pages/Modifier.php?id=" + idUtilisateur;
+                window.location.href = "../user/Modifier.php?id=" + idUtilisateur;
             }
         </script>
 
