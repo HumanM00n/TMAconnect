@@ -20,6 +20,9 @@
 </head>
 
 <body>
+
+
+
     <?php
     // informations de connexion à la base de données MySQL
     $servername = "localhost:3308"; // nom du serveur
@@ -31,12 +34,11 @@
         $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Votre code ici...
     } catch (PDOException $e) {
         echo "La connexion a �chou� : " . $e->getMessage();
     }
-    // include('../');
-    
+    include('../includes/connexion.inc.php');
+
     // Requ�te SELECT pour r�cup�rer tous les utilisateurs
     $sql = "SELECT U.IdUtil, U.nom, U.prenom, U.matricule, U.email, S.s_libelle, P.p_libelle, D.d_libelle, U.dateFin, U.derniere_connect 
         FROM tc_utilisateur U
@@ -106,6 +108,7 @@
                         // Vérification du traitement avec succès de la requête
                         if (this.readyState == 4) {
                             if (this.status == 200) {
+                                
                                 // Succès : afficher un message d'alerte
                                 var alertDiv = document.createElement("div");
                                 alertDiv.className = "alert alert-success";
@@ -140,6 +143,7 @@
                 }
             }
         </script>
+
 
         <?php
         // Fermeture du tableau HTML
