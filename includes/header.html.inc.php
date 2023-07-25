@@ -153,7 +153,7 @@ try {
                                     xhr.onreadystatechange = function () {
                                         if (xhr.readyState === XMLHttpRequest.DONE) {
                                             if (xhr.status === 200) {
-                                                window.location.href = '<?php echo $dirPages; ?>index.php'; // Rediriger vers la page index.php
+                                                window.location.href = '<?php echo $dirPages; ?>./index.ph'; // Rediriger vers la page index.php
                                             } else {
                                                 // Erreur lors de l'exécution du script de déconnexion
                                                 console.error('Erreur de déconnexion');
