@@ -31,31 +31,22 @@ if (isset($_POST['username'])) {
 ?>
 
 
+<?php 
+    function encryptPassword( $password ) {
+        $encrypted = "";
+        for( $i = strlen($password) - 1; $i >= 0 ; $i-- ) {
+            $encrypted .= chr(ord($password[$i]) + 1);
+        }
+        return $encrypted;
+    }
+    
+    function decryptPassword( $password ) {
+        $decrypted = "";
+        for( $i = strlen($password) - 1; $i >= 0 ; $i-- ) {
+            $decrypted .= chr(ord($password[$i]) - 1);
+        }
+        return $decrypted;
+    }
+?>
 
-<?php
-// $servername = "localhost:3308";
-// $username = "root";
-// $password = "XVsikn92";
-// $dbname = "tmaconnect";
-// $error = false;
 
-// try {
-//     $bdd = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-//     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-// } catch (PDOException $e) {
-//     echo "La connexion a échoué : " . $e->getMessage();
-// }
-
-// if (isset($_POST["username"]) && isset($_POST["password"])) {
-//     $st = $bdd->query("SELECT COUNT(*) FROM tc_utilisateur WHERE matricule='" . $_POST["username"] . "' AND passwd='" . $_POST["password"] . "'")->fetch();
-//     if ($st['COUNT(*)'] == 1) {
-//         session_start();
-//         $_SESSION['username'] = $_POST["username"];
-//         $_SESSION['password'] = $_POST["password"];
-//         header("Location: http://localhost/TMAconnect/home.php");
-//         exit();
-//     } else {
-//         $error = true;
-//     }
-// }
-?> 

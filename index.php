@@ -86,7 +86,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
             </section>
 
             <div class="lmdp">
-                <a href="../TMAconnect/change-mdp.php" class="tma-btn">Mot de passe oublié</a>
+                <a href="./change-mdp.php" class="tma-btn">Mot de passe oublié</a>
             </div>
 
             <section class="bloc_mdp">
@@ -125,7 +125,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
                         });
                     </script>
                 </div>
-                <a href="../TMAconnect/home.php"><input class="tma-btn" type="submit" value="Se Connecter"></a>
+                <a href="./home.php"><input class="tma-btn" type="submit" value="Se Connecter"></a>
             </section>
         </form>
         <label class="remember"><input type="checkbox">Se souvenir de moi</label>
