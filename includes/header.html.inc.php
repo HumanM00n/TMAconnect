@@ -36,7 +36,7 @@ try {
     // R�cup�rer le nom d'utilisateur � partir de la variable de session
     $username1 = $_SESSION['username'];
 
-    var_dump($_SESSION['username']);
+    var_dump($_SESSION['username']); //AFFICHE LE CONTENU DE LA VARIABLE DE SESSION -> EST UTILISE POUR VERIFIER SI L'UTILISATEUR EST CORRECTEMENT IDENTIFIE
 
     // Vérifier si l'utilisateur est connecté
     if (!isset($_SESSION['username'])) {
@@ -84,6 +84,7 @@ try {
                     <li class="Onglet"><a href="#" class="deroulant">Demandes ▼</a>
                         <ul class="sous">
                             <li><a href="<?php echo $dirPages; ?>../demande/creationDemande.php">Créer une demande</a></li>
+                            <li><a href="<?php echo $dirPages; ?>../demande/AffichageDemande">Afficher les demandes</a></li>
                         </ul>
                     </li>
                     <li class="Onglet"><a href="<?php echo $dirPages; ?>../user/Utilisateurs.php">Utilisateurs</a></li>
@@ -133,6 +134,7 @@ try {
                     <li class="Onglet"><a href="#" class="deroulant">Demandes ▼</a>
                         <ul class="sous">
                             <li><a href="#">Créer une demande</a></li>
+                            <li><a href="#">Afficher les Demandes</a></li>
                         </ul>
                     </li>
 
