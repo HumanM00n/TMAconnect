@@ -68,13 +68,13 @@ CREATE TABLE TC_Recette
 ) ENGINE=InnoDB;
 
 
-CREATE TABLE TC_Benef 
+CREATE TABLE TC_Benef
 (
-	IdBenef INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    lib_benef VARCHAR(30) NOT NULL,
-    serv_benef INT NOT NULL,
-    actif VARCHAR(3) NOT NULL,
-    FOREIGN KEY (Service) REFERENCES TC_Service(IdService)
+    IdBenef INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    lbl_benef VARCHAR(50) NOT NULL,
+    ser_benef INT NOT NULL, 
+    actif VARCHAR(3) NOT NULL, /* Clés étrangère */
+    FOREIGN KEY (ser_benef) REFERENCES TC_Service(IdService)
 )ENGINE=InnoDB;
 
 
