@@ -28,8 +28,8 @@ CREATE TABLE TC_LDOI
     date_mep INT, /* Clés étrangère */
     vrs_phx VARCHAR(20) NOT NULL,
     report VARCHAR(3) NOT NULL,
-    FOREIGN KEY (environnement) REFERENCES TC_Environnement(IdEnvironnement),
     FOREIGN KEY (nom_env) REFERENCES TC_Environnement(IdEnvironnement),
+    FOREIGN KEY (environnement) REFERENCES TC_Environnement(IdEnvironnement),
     FOREIGN KEY (date_mep) REFERENCES TC_MEP(IdMep)
 ) ENGINE=InnoDB;
 
