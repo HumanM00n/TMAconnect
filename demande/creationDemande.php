@@ -32,6 +32,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     // Requ�tes SQL pour r�cup�rer les donn�es des tables tc_domaine, tc_qualification et tc_priorite
     
     $sql0 = "SELECT libelle FROM tc_domaine";
+    // $sql0 = "SELECT libelle, IdDomaine FROM tc_domaine";
     $stmt0 = $pdo->query($sql0);
     $result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
 
@@ -61,28 +62,163 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     $sql6 = "SELECT libelle FROM tc_etat";
     $stmt6 = $pdo->query($sql6);
     $result6 = $stmt6->fetchAll(PDO::FETCH_ASSOC);
-    ?>
 
+    // Requ�tes SQL pour r�cup�rer les donn�es de la table tc_Benef
+    $sql7 = "SELECT lbl_benef FROM tc_benef";
+    $stmt7 = $pdo->query($sql7);
+    $result7 = $stmt7->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+    <?php
+
+    // début à supprimer
+    if (isset($_POST["selectDom"])){
+    echo $_POST["selectQualif"] . "|" ;
+    echo $_POST["selectPrio"] . "|" ;
+    echo $_POST["demLibelle"] . "|" ;
+    echo $_POST["demCree"] . "|" ;
+    echo $_POST["selectDemandePar"] . "|" ;
+    echo $_POST["demEmise"] . "|" ;
+    echo $_POST["selectDemandeEmisePar"] . "|" ;
+    echo $_POST["demRecu"] . "|" ;
+    echo $_POST["selectBeneficiaire"] . "|" ;
+    echo $_POST["demEtat"] . "|" ;
+    echo $_POST["selectDemandeEtat"] . "|" ;
+    echo $_POST["visaServEtude"] . "|" ;
+    echo $_POST["selectSignataire"] . "|" ;
+    echo $_POST["selectAffectation"] . "|" ;
+    echo $_POST["demFs"] . "|" ;
+    echo $_POST["demRct"] . "|" ;
+    echo $_POST["selectRegroupement"]. "|"  ;
+    echo $_POST["demAmortis"] . "|" ;
+    echo $_POST["demArchiv"]. "|" ;
+}
+    // Fin à supprimer
+
+
+    if (isset($_POST["selectDom"])
+        && isset($_POST["selectQualif"])
+        && isset($_POST["selectPrio"])
+        && isset($_POST["demLibelle"]) //N°Demande ENTRE selectDemandePar et demCree
+        && isset($_POST["demCree"])
+        && isset($_POST["selectDemandePar"])
+        && isset($_POST["demEmise"])
+        && isset($_POST["selectDemandeEmisePar"])
+        && isset($_POST["demRecu"])
+        && isset($_POST["selectBeneficiaire"])
+        && isset($_POST["demEtat"])
+        && isset($_POST["selectDemandeEtat"])
+        && isset($_POST["visaServEtude"])
+        && isset($_POST["selectSignataire"])
+        && isset($_POST["selectAffectation"])
+        && isset($_POST["demFs"])
+        && isset($_POST["demRct"])
+        && isset($_POST["selectRegroupement"])
+        && isset($_POST["demAmortis"])
+        && isset($_POST["demArchiv"])
+    ) {
+$var1 = $_POST["selectDom"] ;
+$var2 = $_POST["selectQualif"] ;
+$var3 = $_POST["selectPrio"] ;      
+$var4 = $_POST["demLibelle"] ;
+$var5 = $_POST["demCree"] ;
+$var6 = $_POST["selectDemandePar"] ;
+$var7 = $_POST["demEmise"] ;
+$var8 = $_POST["selectDemandeEmisePar"] ;
+$var9 = $_POST["demRecu"] ;
+$var10 = $_POST["selectBeneficiaire"] ;
+$var11 = $_POST["demEtat"] ;
+$var12 = $_POST["selectDemandeEtat"] ;
+$var13 = $_POST["visaServEtude"] ;
+$var14 = $_POST["selectSignataire"] ;
+$var15 = $_POST["selectAffectation"] ;
+//----------------------------------------------------------------------
+$var16 = $_POST["demFs"] ;
+$var17 = $_POST["demRct"] ;
+$var18 = $_POST["selectRegroupement"] ;
+$var19 = $_POST["demAmortis"] ;
+$var20 = $_POST["demArchiv"];
+
+        $sql = "
+  INSERT INTO tc_demandes VALUES ('',
+                                 :var1,
+                                 :var2,
+                                 :var3,    
+                                 :var4, 
+                                 :var5,
+                                 :var6,
+                                 :var7,
+                                 :var8,
+                                 :var9, 
+                                 :var10,
+                                 :var11,
+                                 :var12,
+                                 :var13,
+                                 :var14,
+                                 :var15,
+                                 :var16,
+                                 :var17,
+                                 :var18,
+                                 :var19,
+                                 :var20,
+                                 0,
+                                 0,
+                                 0,
+                                 0
+                                 )
+                           )";
+
+
+    $stmt = $pdo->prepare($sql);
+
+    // Binder les valeurs aux paramètres nommés
+    $stmt->bindValue(":var1", $var1);
+    $stmt->bindValue(":var4", $var4);
+    $stmt->bindValue(":var5", $var5);
+    $stmt->bindValue(":var7", $var7);
+    $stmt->bindValue(":var8", $var8);
+    $stmt->bindValue(":var9", $var9);
+    $stmt->bindValue(":var10", $var10);
+    $stmt->bindValue(":var11", $var11);
+    $stmt->bindValue(":var12", $var12);
+    $stmt->bindValue(":var13", $var13);
+    $stmt->bindValue(":var14", $var14);
+    $stmt->bindValue(":var15", $var15);
+    $stmt->bindValue(":var16", $var16);
+    $stmt->bindValue(":var17", $var17);
+    $stmt->bindValue(":var18", $var18);
+    $stmt->bindValue(":var19", $var19);
+    $stmt->bindValue(":var20", $var20);
+                   
+    if ($stmt->execute()) {
+    echo "Données insérées avec succès.";
+    } else {
+    echo "Erreur lors de l'insertion des données.";
+    }
+}
+ ?>
 
     <section id="menuNouvelDmd">
-        <form id="form_menuNvlDmd" name="form_menuNvlDmd" action="" method="POST">
+        <!-- <form id="form_menuNvlDmd" name="form_menuNvlDmd" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> -->
+        <form id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <fieldset id="menuDmd">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="demCreePar">Domaine :</label>
-                        <select name="selectDemandePar" id="selectDemandePar">
+                        <select name="selectDom" id="selectDom">
                             <?php
                             echo "<option value='' disabled selected hidden></option>";
                             foreach ($result0 as $row) {
                                 $lib_dom = $row['libelle'];
+                                $id_dom = $row['libelle'];
                                 echo "<option>$lib_dom</option>";
+                                // echo "<option value=$id_dom>$lib_dom</option>";
                             }
                             ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="demCreePar">Qualification :</label>
-                        <select name="selectDemandePar" id="selectDemandePar">
+                        <select name="selectQualif" id="selectQualif">
                             <?php
                             echo "<option value='' disabled selected hidden></option>";
                             foreach ($result1 as $row) {
@@ -95,7 +231,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                     <div class="form-group">
                         <label for="demCreePar">Priorité :</label>
-                        <select name="selectDemandePar" id="selectDemandePar">
+                        <select name="selectPrio" id="selectPrio">
                             <?php
                             echo "<option value='' disabled selected hidden></option>";
                             foreach ($result2 as $row) {
@@ -113,17 +249,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                 </div>
             </fieldset>
-        </form>
-
-
-
-
-
-
+        <!-- </form>
     </section>
 
     <section id="nvldemande">
-        <form id="form_nvldemande" name="form_nvldemande" action="" method="POST">
+        <form id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> -->
             <fieldset id="coordo">
                 <legend>Créer une demande</legend>
 
@@ -176,9 +306,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                         <select name="selectBeneficiaire" id="selectBeneficiaire">
                             <?php
                             echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result3 as $row) {
-                                $nom = $row['nom'];
-                                echo "<option>$nom</option>";
+                            foreach ($result7 as $row) {
+                                $lbl_benef = $row['lbl_benef'];
+                                echo "<option>$lbl_benef</option>";
                             }
                             ?>
                         </select>
@@ -235,11 +365,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                     <div class="form-group2">
                         <label for="demEmise">Fin souhaitée le :</label>
-                        <input type="date" name="demEmise" id="demEmise" required>
+                        <input type="date" name="demFs" id="demFs">
                     </div>
                     <div class="form-group2">
                         <label for="demEmise">Mise en recette prévue le (optionnel) :</label>
-                        <input type="date" name="demEmise" id="demEmise">
+                        <input type="date" name="demRct" id="demRct">
                     </div>
 
 
@@ -262,7 +392,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                     <div class="form-group">
                         <label for="demArchiv">Demande archivée le :</label>
-                        <input type="date" name="demArchiv" id="demArchiv" required>
+                        <input type="date" name="demArchiv" id="demArchiv">
                     </div>
                 </div>
 
