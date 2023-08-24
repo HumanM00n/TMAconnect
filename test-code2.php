@@ -6,19 +6,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 <html>
 
 <head>
-    <title>TMA - Création Demande</title>
+    <title>TMA </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="css/csshome.css" rel="stylesheet" type="text/css" />
     <link href="css/creationDemande.css" rel="stylesheet" type="text/css" />
-    <link rel="icon" href="../img/NLogo2.png" />
+    <link rel="icon" href="img/NLogo2.png" />
 </head>
 
 <body>
     <?php
-    include('includes/header.html.inc.php');
-
+    // include('includes/header.html.inc.php');
+    
     // Informations de connexion � la base de donn�es MySQL
     $servername = "localhost:3308"; // nom du serveur
     $username = "root"; // nom d'utilisateur
@@ -71,8 +71,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     ?>
     <?php
 
-    // début à supprimer
-    if (isset($_POST["demLibelle"])) {
+    if (isset($_POST["selectDom"])) {
+        echo $_POST["selectDom"] . "|";
+        echo $_POST["selectQualif"] . "|";
+        echo $_POST["selectPrio"] . "|";
         echo $_POST["demLibelle"] . "|";
         echo $_POST["demCree"] . "|";
         echo $_POST["selectDemandePar"] . "|";
@@ -86,18 +88,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         echo $_POST["selectSignataire"] . "|";
         echo $_POST["selectAffectation"] . "|";
         echo $_POST["demFs"] . "|";
-        echo $_POST["demMep"] . "|";
+        echo $_POST["demRct"] . "|";
         echo $_POST["selectRegroupement"] . "|";
         echo $_POST["demAmortis"] . "|";
         echo $_POST["demArchiv"] . "|";
     }
-    // Fin à supprimer
-    
 
     if (
-        isset($_POST["selectDemandePar"]) &&
+        isset($_POST["selectDom"]) &&
+        isset($_POST["selectQualif"]) &&
+        isset($_POST["selectPrio"]) &&
         isset($_POST["demLibelle"]) &&
         isset($_POST["demCree"]) &&
+        isset($_POST["selectDemandePar"]) &&
         isset($_POST["demEmise"]) &&
         isset($_POST["selectDemandeEmisePar"]) &&
         isset($_POST["demRecu"]) &&
@@ -108,73 +111,54 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         isset($_POST["selectSignataire"]) &&
         isset($_POST["selectAffectation"]) &&
         isset($_POST["demFs"]) &&
-        isset($_POST["demMep"]) &&
+        isset($_POST["demRct"]) &&
         isset($_POST["selectRegroupement"]) &&
         isset($_POST["demAmortis"]) &&
         isset($_POST["demArchiv"])
     ) {
-        // Assigner les valeurs des champs POST à des variables
-        $var1 = $_POST["selectDemandePar"];
-        $var4 = $_POST["demLibelle"];
-        $var5 = $_POST["demCree"];
-        $var7 = $_POST["demEmise"];
-        $var8 = $_POST["selectDemandeEmisePar"];
-        $var9 = $_POST["demRecu"];
-        $var10 = $_POST["selectBeneficiaire"];
-        $var11 = $_POST["demEtat"];
-        $var12 = $_POST["selectDemandeEtat"];
-        $var13 = $_POST["visaServEtude"];
-        $var14 = $_POST["selectSignataire"];
-        $var15 = $_POST["selectAffectation"];
-        $var16 = $_POST["demFs"];
-        $var17 = $_POST["demMep"];
-        $var18 = $_POST["selectRegroupement"];
-        $var19 = $_POST["demAmortis"];
-        $var20 = $_POST["demArchiv"];
+        try {
+            // Préparation de la requête d'insertion en utilisant des paramètres nommés
+            $sql = "INSERT INTO tc_demandes (IdDemande, dom_dmd, qual_dmd, prt_dmd, libelle, date_crea, util_crea, date_emet, util_emet, date_recu, util_benef, date_etat_dmd, etat_dmd, date_visa_dmd, util_sign_dmd, util_affect_dmd, date_fs, amorti_dmd, date_rct_prvu, regroupement, date_archiv) 
+            VALUES (:var1, :var2, :var3, :var4, :var5, :var6, :var7, :var8, :var9, :var10, :var11, :var12, :var13, :var14, :var15, :var16, :var17, :var18, :var19, :var20)";
 
-        // Préparer la requête SQL en utilisant des paramètres nommés
-        $sql = "
-            INSERT INTO tc_demandes (
-                champ1, champ4, champ5, champ7, champ8, champ9, champ10, champ11, champ12, 
-                champ13, champ14, champ15, champ16, champ17, champ18, champ19, champ20
-            ) VALUES (
-                :var1, :var4, :var5, :var7, :var8, :var9, :var10, :var11, :var12, 
-                :var13, :var14, :var15, :var16, :var17, :var18, :var19, :var20
-            )
-        ";
+            // Binder les valeurs aux paramètres nommés
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(":var1", $var1);
+            $stmt->bindValue(":var2", $var2);
+            $stmt->bindValue(":var3", $var3);
+            $stmt->bindValue(":var4", $var4);
+            $stmt->bindValue(":var5", $var5);
+            $stmt->bindValue(":var6", $var6);
+            $stmt->bindValue(":var7", $var7);
+            $stmt->bindValue(":var8", $var8);
+            $stmt->bindValue(":var9", $var9);
+            $stmt->bindValue(":var10", $var10);
+            $stmt->bindValue(":var11", $var11);
+            $stmt->bindValue(":var12", $var12);
+            $stmt->bindValue(":var13", $var13);
+            $stmt->bindValue(":var14", $var14);
+            $stmt->bindValue(":var15", $var15);
+            $stmt->bindValue(":var16", $var16);
+            $stmt->bindValue(":var17", $var17);
+            $stmt->bindValue(":var18", $var18);
+            $stmt->bindValue(":var19", $var19);
+            $stmt->bindValue(":var20", $var20);
 
-        $stmt = $pdo->prepare($sql);
-
-        // Binder les valeurs aux paramètres nommés
-        $stmt->bindValue(":var1", $var1);
-        $stmt->bindValue(":var4", $var4);
-        $stmt->bindValue(":var5", $var5);
-        $stmt->bindValue(":var7", $var7);
-        $stmt->bindValue(":var8", $var8);
-        $stmt->bindValue(":var9", $var9);
-        $stmt->bindValue(":var10", $var10);
-        $stmt->bindValue(":var11", $var11);
-        $stmt->bindValue(":var12", $var12);
-        $stmt->bindValue(":var13", $var13);
-        $stmt->bindValue(":var14", $var14);
-        $stmt->bindValue(":var15", $var15);
-        $stmt->bindValue(":var16", $var16);
-        $stmt->bindValue(":var17", $var17);
-        $stmt->bindValue(":var18", $var18);
-        $stmt->bindValue(":var19", $var19);
-        $stmt->bindValue(":var20", $var20);
-
-        if ($stmt->execute()) {
-            echo "Données insérées avec succès.";
-        } else {
-            echo "Erreur lors de l'insertion des données.";
+            // Exécution de la requête d'insertion
+            if ($stmt->execute()) {
+                echo "Données insérées avec succès.";
+            } else {
+                echo "Erreur lors de l'insertion des données.";
+            }
+        } catch (PDOException $e) {
+            echo "Erreur de connexion à la base de données : " . $e->getMessage();
         }
     }
-
     ?>
 
     <section id="menuNouvelDmd">
-        <form id="form_menuNvlDmd" name="form_menuNvlDmd" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+        <!-- <form id="form_menuNvlDmd" name="form_menuNvlDmd" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> -->
+        <form id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <fieldset id="menuDmd">
                 <div class="form-row">
                     <div class="form-group">
@@ -224,11 +208,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                 </div>
             </fieldset>
-        </form>
-    </section>
+            <!-- </form> -->
+            <!-- </section> -->
 
-    <section id="nvldemande">
-        <form id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <!-- <section id="nvldemande"> -->
+            <!-- <form id="form_nvldemande" name="form_nvldemande" action="" method="POST"> -->
             <fieldset id="coordo">
                 <legend>Créer une demande</legend>
 
@@ -354,8 +338,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                             <?php
                             echo "<option value='' disabled selected hidden></option>";
                             foreach ($result5 as $row) {
+                                $id_regroupe = $row['IdRegroupe'] ;
                                 $lib_regroup = $row['libelle'];
-                                echo "<option>$lib_regroup</option>";
+                                echo "<option value=$id_regroupe>$lib_regroup</option>";
                             }
                             ?>
                         </select>
