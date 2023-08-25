@@ -152,8 +152,9 @@ body {
     font-size: 14px;
 }
 
-#form_nvldemande button {
+#form_nvldemande button[type="submit"] {
     padding: 12px 20px;
+    margin-right: 10px;
     background: #0055A4;
     color: #fff;
     border: none;
@@ -164,9 +165,28 @@ body {
     transition: background-color 0.3s ease;
 }
 
-#form_nvldemande button:hover {
+
+#form_nvldemande button[type="reset"] {
+    margin-left: 50px;
+    padding: 12px 20px;
+    background: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#form_nvldemande button[type="submit"]:hover {
     background-color: #004281;
 }
+
+#form_nvldemande button[type="reset"]:hover {
+    background-color: rgb(180, 27, 27);
+}
+
 
 .input-validation {
     color: red;
@@ -252,8 +272,22 @@ label {
     margin-top: 35px; /* Ajouter une marge supérieure à la case à cocher */
 }
 
-.btnajout{
+
+.btnajout {
     display: flex;
     margin-top: 50px;
     justify-content: center;
+}
+
+
+.Successful{
+    display: block;
+    background-color: #69e95d;
+    border: 1px solid;
+    border-radius: 10px;
+    margin-top: 1%;
+    margin-bottom: -3%;
+    padding: 1.2% 1.2% 1.2% 1.2%;
+    text-align: center;
+    width: 65%;
 }
