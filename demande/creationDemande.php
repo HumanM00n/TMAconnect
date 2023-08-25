@@ -10,14 +10,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="../css/creationDemande.css" rel="stylesheet" type="text/css" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link  rel="stylesheet" type="text/css" href="../css/creationDemande.css" />
     <link rel="icon" href="../img/NLogo2.png" />
 </head>
 
 <body>
     <?php
     include('../includes/header.html.inc.php');
-    
+
     // Informations de connexion � la base de donn�es MySQL
     $servername = "localhost:3308"; // nom du serveur
     $username = "root"; // nom d'utilisateur
@@ -205,8 +206,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                 </div>
             </fieldset>
-    <section id="nvldemande">
-        <form id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> 
+            <!-- </form> -->
+            <!-- </section> -->
+
+
+            <!-- <section id="nvldemande"> -->
+            <!-- <form id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">  -->
             <fieldset id="coordo">
                 <legend>Créer une demande</legend>
 
@@ -355,15 +360,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                         <input type="date" name="demArchiv" id="demArchiv">
                     </div>
                 </div>
-
-
                 <div class="btnajout">
-                    <button type="submit" name="btnajout">CR&Eacute;ER</button>
+                    <button type="submit" >CR&Eacute;ER</button>
+                    <button type="reset">Annuler</button>
                 </div>
             </fieldset>
         </form>
-
-
     </section>
 
 
