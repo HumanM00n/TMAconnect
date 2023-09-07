@@ -1,23 +1,19 @@
-#table {
-    position: absolute;
-    justify-content: center;
-    align-content: center;
-    max-width: 23%;
-    left: 0;
-    right: 0;
-    top: 90px;
+.table {
+    border-collapse: collapse;
     margin-left: auto;
     margin-right: auto;
-    font-weight: bold;
-    font-size: 12px;
-    padding: 10px;
-    background-color: #555;
-    color: white;  /* Couleur du texte */
-    text-transform: uppercase;  /* Convertit le texte en majuscules */
-    letter-spacing: 0.5px; /* Espacement entre les lettres */
-    border-radius: 5px; /* Arrondi les coins du conteneur */
-    text-align: center;
-    padding: 12px;
     font-family: Arial, sans-serif;
-    border: 1px solid #ddd;
+    background-color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 200px; /* Ajuster la hauteur */
+    width: 100%; /* Ajuste la grandeur */
+    margin-top: 155px;
+}
+
+
+.table th {
+    width: 130px; 
 }
