@@ -9,8 +9,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     <title>TMA - Affichage des demandes</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <link href="../css/csshome.css" rel="stylesheet" type="text/css" />
+    <link href="../css/AffichageDemande.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="../img/NLogo2.png" />
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -102,14 +104,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>
-            <td>" . $row["IdDemande"] . "</td>
-            <td>" . $row["dom_dmd"] . "</td>
-            <td>" . $row["libelle"] . "</td>
-            <td>" . $row["qual_dmd"] . "</td>
-            <td>" . $row["date_crea"] . "</td>
-            <td>" . $row["charge_eval"] . "</td>
-            <td>" . $row["libelle"] . "</td>
-            <td>" . $row["date_mep"] . "</td>
+            <td>" . $row[":IdDemande"] . "</td>
+            <td>" . $row[":dom_dmd"] . "</td>
+            <td>" . $row[":libelle"] . "</td>
+            <td>" . $row[":qual_dmd"] . "</td>
+            <td>" . $row[":date_crea"] . "</td>
+            <td>" . $row[":charge_eval"] . "</td>
+            <td>" . $row[":libelle"] . "</td>
+            <td>" . $row[":date_mep"] . "</td>
             <td><!--<i class='bx bxs-download'></i>--></td>
         </tr>";
         }
@@ -118,12 +120,35 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
         // Affichage du nombre de demandes en titre de tableau
         if ($count <= 1) {
-            echo "<div id='table'>$count demande enregistré</div>";
+            // echo "<div id='table'>$count demande enregistré</div>";
         } else {
-            echo "<div id='table'>$count demandes enregistrés</div>";
+            // echo "<div id='table'>$count demandes enregistrés</div>";
         }
     }
-?>
+    ?>
+
+    <script>
+        function redirectModifierPage(idUtilisateur) {
+            window.location.href = "../user/Modifier.php?id=" + idUtilisateur;
+        }
+    </script>
+
+
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
 
     <div id="alertContainer"></div>
 
