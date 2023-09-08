@@ -1,22 +1,4 @@
-<?php
-// informations de connexion à la base de données MySQL
-$servername = "localhost:3308"; // nom du serveur
-$username = "root"; // nom d'utilisateur
-$password = "XVsikn92"; // mot de passe
-$dbname = "tmaconnect"; // nom de la base de données
-$dsn = "mysql:host=localhost:3308;dbname=tmaconnect"; //Regroupement des informations de connexion
-// création d'une connexion à la base de données
-try {
-  $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-  // Votre code ici...
-} catch (PDOException $e) {
-  echo "La connexion a �chou� : " . $e->getMessage();
-}
-?>
-
-<<!DOCTYPE html>
+<!DOCTYPE html>
   <html>
 
   <head>
@@ -29,66 +11,16 @@ try {
     <link rel="icon" href="img/NLogo2.png" />
   </head>
 
-  <?php
-  include('includes/header.html.inc.php'); ?>
+  <?php include('includes/connexion.inc.php') ?> <!--Connexion à la base de données-->
+  <?php include('includes/header.html.inc.php'); ?> <!-- Ajout de la barre de navigation-->
 
   <body>
-    <section id="modif">
-      <form class="formmodif" name="formmodif" action="" method="POST">
-        <fieldset id="infos">
-          <legend>Filtres</legend>
-          <div>
-            <label for="accesDemande">Accès Direct à la Demande</label>
-            <input type="text" size="35">
-          </div>
-          <!-- Nouveaux champs de texte -->
-          <div>
-            <label for="">Contenant du texte</label>
-            <input type="text" size="35">
-          </div>
-
-          <!-- Nouvelles listes déroulantes -->
-          <div>
-            <label for="select_departement">Domaine</label>
-            <select>
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
-              <!-- Ajoutez d'autres options selon vos besoins -->
-            </select>
-          </div>
-          <div>
-            <label for="select_poste">Demandes du groupe</label>
-            <select name="select_poste" id="select_poste">
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
-              <!-- Ajoutez d'autres options selon vos besoins -->
-            </select>
-          </div>
-        </fieldset>
-      </form>
-    </section>
-
-    <section id="modif">
-      <form class="formmodif" name="formmodif" action="" method="POST">
-        <!-- Votre formulaire -->
-        <button type="submit" class="btn btn-primary">Soumettre</button>
-      </form>
-    </section>
-
-    <?php
+<?php
     try {
-      // Informations de connexion à la base de données MySQL
-      $dsn = "mysql:host=localhost:3308;dbname=tmaconnect";
-      $username = 'root';
-      $password = 'XVsikn92';
-      // Création d'une connexion à la base de données avec PDO
-      $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-      // récupérer tous les utilisateurs
-      $sql = "SELECT * FROM tc_utilisateur";
+      include('includes/connexion.inc.php'); 
+    
+      // Récupère toutes les demandes
+      $sql = "SELECT IdDemande , dom_dmd , libelle , qual_dmd , date_crea , etat_dmd FROM tc_demandes";
       $stmt = $pdo->query($sql);
 
       if ($stmt === false) {
@@ -98,48 +30,64 @@ try {
     } catch (PDOException $e) {
       echo "Erreur de connexion à la base de données : " . $e->getMessage();
     }
-
-    // Vérification des résultats
-    if ($stmt->rowCount() > 0) {
-      $count = $stmt->rowCount();
-
-      // Création du tableau HTML
-      echo "<table class='table' id='table'>
-          <thead>
-              <tr>
-                <th>🔎</th>
-                <th>N°demande</th>
-                <th>Domaine</th>
-                <th>Libellé</th>
-                <th>Demande crée</th>
-                <th>Charge</th>
-                <th>Etat</th>
-                <th>Date MEP</th>
-              </tr>
-          </thead>
-          <tbody>";
-
-      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        echo "<tr>
-                <td>" . $row["IdDemande"] . "</td>
-                <td>" . $row["dom_dmd"] . "</td>
-                <td>" . $row["libelle"] . "</td>
-                <td>" . $row["qual_dmd"] . "</td>
-            </tr>";
-      }
-
-      echo "</tbody></table>";
-
-      // Affichage du nombre de demandes en titre de tableau
-      if ($count <= 1) {
-        echo "<div id='table'>$count  enregistré</div>";
-      } else {
-        echo "<div id='table'>$count demandes enregistrés</div>";
-      }
-    } else {
-      echo "Aucune demande trouvé";
-    }
     ?>
+
+    <!-- Affichage des résultats -->
+    <?php if ($stmt->rowCount() > 0): ?>
+      <?php
+      $count = $stmt->rowCount();
+      ?>
+
+      <!-- Création du tableau HTML -->
+      <table class='table' id='table'>
+        <thead>
+          <tr>
+            <th>🔎</th>
+            <th>N°demande</th>
+            <th>Domaine</th>
+            <th>Libellé</th>
+            <th>Type</th>
+            <th>Demande créée</th>
+            <th>Etat</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
+            <tr>
+              <td>🔎</td>
+              <td><?= $row["IdDemande"] ?></td>
+              <td><?= $row["dom_dmd"] ?></td>
+              <td><?= $row["libelle"] ?></td>
+              <td><?= $row["qual_dmd"] ?></td>
+              <td><?= $row["date_crea"] ?></td>
+              <td><?= $row["etat_dmd"] ?></td>
+            </tr>
+          <?php endwhile; ?>
+
+        </tbody>
+      </table>
+
+      <!-- Affichage du nombre de demandes en titre de tableau -->
+      <div id='table'>
+        <?= $count > 1 ? "$count demandes enregistrées" : "$count demandes enregistrées" ?>
+      </div>
+
+    <?php else: ?>
+      <div>Aucune demande trouvée</div>
+    <?php endif; ?>
+
+    <div class="btnexcel">
+        <button><span class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></span> Télécharger au formatExcel</button>
+    </div>
+
+    <script>
+        document.querySelector(".btnexcel button").addEventListener("click", function () {
+            // Rediriger vers la page telechargement.php
+            window.location.href = "includes/telech.excel.php";
+        });
+    </script>
+
 
   </body>
 
