@@ -11,7 +11,7 @@ if (isset($_POST['btnajout'])) {
     // Insérer les données dans la base de données
     $sqlInsert = "INSERT INTO table_demandes (libelle, date_creation, ...) VALUES (?, ?, ...)";
     $stmtInsert = $pdo->prepare($sqlInsert);
-    $stmtInsert->execute([$demLibelle, $demCree, ...]);
+    $stmtInsert->execute([$demLibelle, $demCree,]);
 
     // Rediriger ou afficher un message de succès
     header("Location: page_succes.php"); // Redirection vers une page de succès
@@ -37,7 +37,7 @@ if (isset($_POST["demLibelle"])
 && isset($_POST["selectRegroupement"]) 
 && isset($_POST["demAmortis"]) 
 && isset($_POST["demArchiv"])) {
-  $st = $bdd->prepare("
+  $stmt = $bdd->prepare("
   INSERT INTO tc_demandes VALUES ('', 0 , 0 , 0 ,
                                  :$_POST'[demLibelle]', 
                                  :$_POST'[demCree]',
