@@ -1,0 +1,116 @@
+/* STYLE SU TABLEAU */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* STYLE POUR LES FILTRES */
+
+#modif {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
+    background: linear-gradient(#f5f5f5, #e8e8e8);
+}
+
+.formmodif {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    margin-top: 75px;
+    margin-bottom: 0;
+    height: 100%; /* Définit la hauteur du formulaire à 100% du conteneur parent */
+    display: flex;
+    flex-direction: column; /* Aligne les éléments du formulaire en colonne */
+    justify-content: center; /* Centre les éléments verticalement */
+}
+
+.formmodif fieldset {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 30px; /* Augmenter l'espacement entre les champs */
+    display: grid;
+    grid-template-columns: auto auto auto;
+    flex-direction: row-reverse;
+}
+
+
+.formmodif h1 {
+    text-align: center;
+    color: #333;
+}
+
+
+.formmodif legend {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.formmodif div {
+    margin: 1% 1% 1% 1%;
+}
+
+.formmodif label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+
+
+/* .formmodif select {
+    width: 50%;
+    padding: 12px;
+    flex-grow: 1;
+} */
+
+
+.formmodif input[type="number"] {
+    width: 100%; /* Ajuster la largeur du champ de type number */
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.formmodif button {
+    padding: 12px 20px;
+    background: #0055A4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* Styles supplémentaires pour un aspect esthétique */
+.formmodif {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+
+.formmodif button {
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.formmodif button:hover {
+    background-color: #004281;
+}
