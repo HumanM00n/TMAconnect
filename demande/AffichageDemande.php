@@ -12,7 +12,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="../css/csshome.css" rel="stylesheet" type="text/css" />
-    <link href="../css/AffichageDemande.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="../img/NLogo2.png" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -20,6 +19,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="../css/AffichageDemande.css" rel="stylesheet">
 </head>
 
 <body>
@@ -29,7 +29,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
     <?php
     try {
-        $sql = "SELECT IdDemande , dom_dmd , libelle , qual_dmd , date_crea , etat_dmd FROM tc_demandes";
+        $sql = "SELECT D.IdDemande , DOM.libelle , D.libelle , Q.libelle , D.date_crea , E.libelle 
+                FROM tc_demandes D, tc_domaine DOM , tc_qualif Q , tc_etat E
+                WHERE D.dom_dmd = DOM.IdDomaine 
+                AND D.qual_dmd = Q.IdQual
+                AND D.etat_dmd = E.IdEtat";
+
         $stmt = $pdo->query($sql);
 
         if ($stmt === false) {
@@ -49,12 +54,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
             // Calculer la position de départ
             $positionDepart = ($page - 1) * $nombreParPage;
 
-            $sql = "SELECT IdDemande , dom_dmd , libelle , qual_dmd , date_crea , etat_dmd FROM tc_demandes
-                LIMIT :positionDepart, :nombreParPage";
+            // $sql = "SELECT IdDemande , dom_dmd , libelle , qual_dmd , date_crea , etat_dmd FROM tc_demandes
+            //     LIMIT :positionDepart, :nombreParPage";
 
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(':positionDepart', $positionDepart, PDO::PARAM_INT);
-            $stmt->bindValue(':nombreParPage', $nombreParPage, PDO::PARAM_INT);
+            // $stmt->bindValue(':positionDepart', $positionDepart, PDO::PARAM_INT);
+            // $stmt->bindValue(':nombreParPage', $nombreParPage, PDO::PARAM_INT);
             $stmt->execute();
         }
     } catch (PDOException $e) {
@@ -80,36 +85,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
             </thead>
             <tbody>
 
-                <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
+                <?php while ($row = $stmt->fetch(PDO::FETCH_BOTH)): ?>
                     <tr>
                         <td>🔎</td>
-                        <td><?= $row["IdDemande"] ?></td>
-                        <td><?= $row["dom_dmd"] ?></td>
-                        <td><?= $row["libelle"] ?></td>
-                        <td><?= $row["qual_dmd"] ?></td>
-                        <td><?= $row["date_crea"] ?></td>
+                        <td><?= $row[0] ?></td>
+                        <td><?= $row[1] ?></td> 
+                        <td><?= $row[2] ?></td> 
+                        <td><?= $row[3] ?></td> 
+                        <td><?= $row[4] ?></td> 
                         <td>2</td>
-                        <td><?= $row["etat_dmd"] ?></td>
+                        <td><?= $row[5] ?></td> 
                         <td>30-09-2023</td>
-                        <td><i class='bx bxs-download'></i></td>
+                        <td><i class='bx bx-download'></i></td>
                     </tr>
                 <?php endwhile; ?>
 
             </tbody>
         </table>
-
-        <!-- Affichage du nombre de demandes en titre de tableau -->
-        <?php
-        // Cr�ation du tableau HTML
-        echo "<table id='idTable' name='idTable'>";
-        // Affichage du nombre d'employ�s en titre de tableau
-        if ($count <= 1) {
-            echo "<div id='tableau'>$count demande enregistré</div>";
-        } else {
-            echo "<div id='tableau'>$count demandes enregistrés</div>";
-        }
-        ?>
-
+        
     <?php else: ?>
         <div>Aucune demande trouvée</div>
     <?php endif; ?>
@@ -138,7 +131,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         </ul>
     </nav> -->
 
-
+    
     <div id="alertContainer"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
