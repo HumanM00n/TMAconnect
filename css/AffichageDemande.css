@@ -1,6 +1,5 @@
 table {
     border-collapse: collapse;
-    width: 120%;
     margin-left: auto;
     margin-right: auto;
     font-family: Arial, sans-serif;
@@ -9,16 +8,15 @@ table {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-height: 200px; /* Ajuster la hauteur */
-    margin-top: 155px;
+    min-height: 200px; /* Ajuste la hauteur */
+    margin-top: 350px;
 }
-
 
 table th {
-    width: 160px; 
+    width: 150px; 
 }
-
 
 table td {
-    max-width: 2%;
+    width: 150px; /*Ajuste la même taille du tableau avec celle de l'en-tête  */ 
 }
+
