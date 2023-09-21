@@ -1,0 +1,14 @@
+Renseignement :
+	pointer-events:
+	inset:
+
+Transform: translate()
+Transform: translate3d()
+Transform: translateX()
+Transform: translateY()
+Transform: translateZ()
+------------------------------------------------------	
+	:Valid	or :Valid ~
+	:focus  or :focus ~ 
+
+
