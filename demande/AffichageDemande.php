@@ -26,6 +26,65 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     <?php include('../includes/connexion.inc.php') ?>
     <?php include('../includes/header.html.inc.php') ?>
 
+    <section id="modif">
+    <form class="formmodif" name="formmodif" action="" method="POST">
+      <fieldset id="infos">
+        <legend>Filtres</legend>
+
+        <!-- Liste déroulante pour le domaine -->
+        <div class="label-container">
+          <label for="select_domaine">Domaine</label>
+          <select name="select_domaine" id="select_domaine">
+            <?php
+            echo "<option value='' disabled selected hidden></option>";
+            foreach ($result0 as $row) {
+              $lib_dom = $row['libelle'];
+              echo "<option value=$id_dom>$lib_dom</option>";
+            }
+            ?>
+          </select>
+        </div>
+
+        <div class="label-container">
+          <label for="select_etat">Etat</label>
+          <select name="select_etat" id="select_etat">
+            <?php
+            echo "<option value='' disabled selected hidden></option>";
+            foreach ($result1 as $row) {
+              $lib_etat = $row['libelle'];
+              echo "<option value=$id_etat>$lib_etat</option>";
+            }
+            ?>
+          </select>
+        </div>
+        
+        <div class="label-container">
+          <label for="num-dmd">N°Demande</label>
+          <input type="number" id="num-dmd" name="num-dmd" size="35">
+        </div>
+
+        <div>
+          <!-- Nouveaux champs de texte -->
+          <label for="input_lib">Libellé de la Demande</label>
+          <input type="text" name="input-lib" id="input_lib">
+            <?php
+            //echo "<option value='' disabled selected hidden></option>";
+            //foreach ($result2 as $row) {
+              //$lib_dmd = $row['libelle'];
+              //echo "<option value=$id_dmd>$lib_dmd</option>";
+            //}
+            ?>  
+        </div>
+
+
+        <div class="bloc-btn">
+          <button type="submit">Appliquer</button>
+          <button type="reset">Réinitialiser</button>
+        </div>
+      </fieldset>
+    </form>
+  </section>
+
 
     <?php
     try {
@@ -134,6 +193,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     
     <div id="alertContainer"></div>
 
+    <!-- <script src="../js/Filtre-dmd.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
