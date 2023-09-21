@@ -1,0 +1,23 @@
+<!-- <?php include('php/S-Remember.php'); ?> 
+
+<?php
+session_start();
+?>
+
+
+Commande pour GitHub :
+
+- Pour afficher tout les référentiels distants connectés :
+	git remote -v
+
+- Pour supprimer la connexion avec le référentiel distant :
+	git remote remove origin
+
+
+--------------------- PUSH LES INFOS --------------------- 
+
+git add . --> Pour ajouter tout les fichiers 
+
+git commit nom_fichier -m "" --> Permet d'enregistrer les modifications 
+
+git psuh --> Pour envoyer les modifs vers Github 
