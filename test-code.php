@@ -16,38 +16,54 @@
 <?php include('includes/header.html.inc.php'); ?> <!-- Ajout de la barre de navigation-->
 
 <body>
+  <!-- Liste déroulante pour le domaine -->
   <section id="modif">
     <form class="formmodif" name="formmodif" action="" method="POST">
       <fieldset id="infos">
         <legend>Filtres</legend>
-        <div>
-          <label for="accesDemande">Accès Direct à la Demande</label>
-          <input type="text" size="35">
+
+        <!-- Liste déroulante pour le domaine -->
+        <div class="label-container">
+          <label for="select_domaine">Domaine</label>
+          <select name="select_domaine" id="select_domaine">
+            <?php
+            echo "<option value='' disabled selected hidden></option>";
+            foreach ($result0 as $row) {
+              $lib_dom = $row['libelle'];
+              echo "<option value=$id_dom>$lib_dom</option>";
+            }
+            ?>
+          </select>
         </div>
-        <!-- Nouveaux champs de texte -->
+
+        <div class="label-container">
+          <label for="select_etat">Etat</label>
+          <select name="select_etat" id="select_etat">
+            <?php
+            echo "<option value='' disabled selected hidden></option>";
+            foreach ($result2 as $row) {
+              $lib_etat = $row['libelle'];
+              echo "<option value=$id_etat>$lib_etat</option>";
+            }
+            ?>
+          </select>
+        </div>
+        
+        <div class="label-container">
+          <label for="num-dmd">N°Demande</label>
+          <input type="number" size="35">
+        </div>
+
         <div>
-          <label for="">Contenant du texte</label>
+          <!-- Nouveaux champs de texte -->
+          <label for="">Libellé la Demande</label>
           <input type="text" size="35">
         </div>
 
-        <!-- Nouvelles listes déroulantes -->
-        <div>
-          <label for="select_departement">Domaine</label>
-          <select>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <!-- Ajoutez d'autres options selon vos besoins -->
-          </select>
-        </div>
-        <div>
-          <label for="select_poste">Demandes du groupe</label>
-          <select name="select_poste" id="select_poste">
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <!-- Ajoutez d'autres options selon vos besoins -->
-          </select>
+
+        <div class="block-btn">
+          <button type="submit">Appliquer</button>
+          <button type="reset">Réinitialiser</button>
         </div>
       </fieldset>
     </form>
@@ -114,13 +130,25 @@
         <?php while ($row = $stmt->fetch(PDO::FETCH_BOTH)): ?>
           <tr>
             <td>🔎</td>
-            <td><?= $row[0] ?></td>
-            <td><?= $row[1] ?></td> 
-            <td><?= $row[2] ?></td> 
-            <td><?= $row[3] ?></td> 
-            <td><?= $row[4] ?></td> 
+            <td>
+              <?= $row[0] ?>
+            </td>
+            <td>
+              <?= $row[1] ?>
+            </td>
+            <td>
+              <?= $row[2] ?>
+            </td>
+            <td>
+              <?= $row[3] ?>
+            </td>
+            <td>
+              <?= $row[4] ?>
+            </td>
             <td>2</td>
-            <td><?= $row[5] ?></td> 
+            <td>
+              <?= $row[5] ?>
+            </td>
             <td>30-09-2023</td>
             <td><i class='bx bx-download'></i></td>
           </tr>
