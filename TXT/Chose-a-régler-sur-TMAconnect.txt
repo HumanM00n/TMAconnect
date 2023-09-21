@@ -1,0 +1,8 @@
+Chose a régler sur TMAconnect :
+	- Problème de css sur la page "Ajouter.php
+	- Les initiales qui ne se mettent pas à la place du lbl "Mon Profil", sur les pages :  //Requête sql avec la clause Where "Like%" ?
+		-- Home.php
+		-- Utilisateurs.php
+		-- Ajouter.php
+	- Puis la Fontionalitée "Se déconnecter" qui ne marche pas  	
+	
