@@ -1,3 +1,4 @@
+document.cookie = ""
 document.addEventListener('DOMContentLoaded', function() {
     const tableDemandes = document.getElementById('tableDemandes');
     const filtres = document.querySelectorAll('.filtre');
