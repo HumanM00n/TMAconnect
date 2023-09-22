@@ -1,3 +1,5 @@
+/* @import url(creationDemande.css); */
+
 table {
     border-collapse: collapse;
     margin-left: auto;
@@ -23,12 +25,11 @@ table td {
 
 
 
-#modif {
+.modif {
     display: flex; 
     justify-content: center;
     align-items: center;
-    min-height: 35vh;
-    /* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
+    min-height: 35vh;/* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
     background: (#f5f5f5, #e8e8e8);
 }
 
@@ -45,8 +46,7 @@ table td {
     align-items: flex-start; /* Aligne les éléments en haut */
     position: absolute; /* Permet d'utiliser les propriétés top, right, etc. */
     top: 0; /* Place l'élément en haut */
-    right: 0; /* Place l'élément à droite */
-    
+    right: 115px; /* Place l'élément à droite */
 }
 
 
@@ -62,14 +62,11 @@ table td {
 .formmodif .label-container {
     text-align: center;
     display: inline-block;
-    width: calc(33% - 10px);
-    /* Chaque label-container occupe un tiers de la largeur moins la marge */
+    width: calc(33% - 10px); /* Chaque label-container occupe un tiers de la largeur moins la marge */
     margin: 0;
     margin-top: -21px;
-    vertical-align: top;
-    /* Aligner les div en haut */
-    box-sizing: border-box;
-    /* Inclure la marge dans la largeur calculée */
+    vertical-align: top; /* Aligner les div en haut */
+    box-sizing: border-box; /* Inclure la marge dans la largeur calculée */
 }
 
 
@@ -97,14 +94,12 @@ table td {
 
 
 .formmodif input[type="number"] {
-    width: 35%;
-    /* Ajuster la largeur du champ de type number */
+    width: 35%; /* Ajuster la largeur du champ de type number */
 }
 
 
 .formmodif input[type="text"] {
-    width: 80%;
-    /* Ajuster la largeur du champ de type number */
+    width: 80%; /* Ajuster la largeur du champ de type number */
 }
 
 input[type=number]::-webkit-inner-spin-button {
