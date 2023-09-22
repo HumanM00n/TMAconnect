@@ -26,7 +26,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     <?php include('../includes/connexion.inc.php') ?>
     <?php include('../includes/header.html.inc.php') ?>
 
-    <section id="modif">
+    <section class="modif">
     <form class="formmodif" name="formmodif" action="" method="POST">
       <fieldset id="infos">
         <legend>Filtres</legend>
@@ -66,14 +66,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         <div>
           <!-- Nouveaux champs de texte -->
           <label for="input_lib">Libellé de la Demande</label>
-          <input type="text" name="input-lib" id="input_lib">
-            <?php
-            //echo "<option value='' disabled selected hidden></option>";
-            //foreach ($result2 as $row) {
-              //$lib_dmd = $row['libelle'];
-              //echo "<option value=$id_dmd>$lib_dmd</option>";
-            //}
-            ?>  
+          <input type="text" name="input-lib" id="input_lib"> 
         </div>
 
 
@@ -146,7 +139,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                 <?php while ($row = $stmt->fetch(PDO::FETCH_BOTH)): ?>
                     <tr>
-                        <td>🔎</td>
+                        <td><a href="./detailDemande.php?idDemande=<?php echo $row[0]?>">🔎</a></td>
                         <td><?= $row[0] ?></td>
                         <td><?= $row[1] ?></td> 
                         <td><?= $row[2] ?></td> 
@@ -161,7 +154,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
             </tbody>
         </table>
-        
+
     <?php else: ?>
         <div>Aucune demande trouvée</div>
     <?php endif; ?>
