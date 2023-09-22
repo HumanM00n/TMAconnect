@@ -361,7 +361,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                     </div>
                 </div>
                 <div class="btnajout">
-                    <button type="submit" >CR&Eacute;ER</button>
+                    <button type="submit">Valider</button>
                     <button type="reset">Annuler</button>
                 </div>
             </fieldset>
