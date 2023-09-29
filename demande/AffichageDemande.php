@@ -26,6 +26,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     <?php include('../includes/connexion.inc.php') ?>
     <?php include('../includes/header.html.inc.php') ?>
 
+    <?php
+    // Requ�tes SQL pour le filtre de recherche des demandes 
+    
+    $sql0 = "SELECT libelle FROM tc_domaine";
+    $stmt0 = $pdo->query($sql0);
+    $result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
+
+    // Requ�tes SQL pour r�cup�rer les donn�es de la table tc_etat
+    $sql1 = "SELECT libelle FROM tc_etat";
+    $stmt1 = $pdo->query($sql1);
+    $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+
     <section class="modif">
     <form class="formmodif" name="formmodif" action="" method="POST">
       <fieldset id="infos">
@@ -165,9 +178,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         }
     </script>
 
-    <!-- PAGINATION -->
+   <!-- PAGINATION TABLEAU DEMANDE -->
 
-    <!-- <nav aria-label="..." style="display: flex; justify-content: center; align-items: flex-end;"> 
+    <nav class="div--pagination" aria-label="..."> 
         <ul class="pagination">
             <li class="page-item disabled">
                 <a class="page-link">Previous</a>
@@ -181,7 +194,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                 <a class="page-link" href="#">Next</a>
             </li>
         </ul>
-    </nav> -->
+    </nav>
 
     
     <div id="alertContainer"></div>
