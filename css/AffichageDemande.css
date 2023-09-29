@@ -29,7 +29,7 @@ table td {
     display: flex; 
     justify-content: center;
     align-items: center;
-    min-height: 35vh;/* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
+    min-height: 32vh;/* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
     background: (#f5f5f5, #e8e8e8);
 }
 
@@ -46,16 +46,18 @@ table td {
     align-items: flex-start; /* Aligne les éléments en haut */
     position: absolute; /* Permet d'utiliser les propriétés top, right, etc. */
     top: 0; /* Place l'élément en haut */
-    right: 115px; /* Place l'élément à droite */
+    right: 0; /* Place l'élément à droite */
 }
 
 
 .formmodif fieldset {
-    border: 1px solid #ccc;
+    border: 1px solid #333;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 30px; /* Augmenter l'espacement entre les champs */
-    width: 80%;
+    width: 85%;
+    max-height: 300px;
+    background-color: #f5f5f5;
 }
 
 
@@ -67,6 +69,7 @@ table td {
     margin-top: -21px;
     vertical-align: top; /* Aligner les div en haut */
     box-sizing: border-box; /* Inclure la marge dans la largeur calculée */
+    height: 75px;
 }
 
 
@@ -83,7 +86,7 @@ table td {
 }
 
 .formmodif div {
-    margin: 1% 1% 1% 1%;
+    margin: 1% 1% 1% 4%;
 }
 
 .formmodif label {
@@ -115,7 +118,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 
 #select_etat {
-    width: 220px;
+    width: 302px;
     padding: 1%;
     margin-bottom: 10px;
 }
@@ -156,7 +159,7 @@ input[type="submit"]:hover {
 
 
 .formmodif button {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
@@ -164,3 +167,17 @@ input[type="submit"]:hover {
 .formmodif button:hover {
     background-color: #004281;
 }
+
+
+.div--pagination {
+    position: fixed; /*Positionné de manière fixe en bas de la page, indépendamment du défilement de l'utilisateur.*/ 
+    bottom: 30px; /*Pace l'élément en bas de la page */
+    left: 50%;
+    transform: translateX(-50%); /*Ramène l'élément de 50% de sa propre largeur vers la gauche, le centrant parfaitement.*/
+    display: flex; /*Active le modèle de boîte flexible.*/
+    justify-content: center; /*Centre l'élément horizontalement à l'intérieur de son conteneur.*/
+    align-items: center; /*Centre l'élément verticalement à l'intérieur de son conteneur.*/
+    width: 100%; /*Fait en sorte que l'élément occupe toute la largeur de son conteneur parent.*/
+    background-color: #ffffff; /* Couleur d'arrière-plan, à adapter selon vos besoins */
+  }
+  
