@@ -166,7 +166,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                                 $id_dom = $row['IdDomaine'];
                                 $lib_dom = $row['libelle'];
                                 echo "<option value=$id_dom>$lib_dom</option>";
-                                // echo "<option>$lib_dom</option>";
                             }
                             ?>
                         </select>
@@ -206,12 +205,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                 </div>
             </fieldset>
-            <!-- </form> -->
-            <!-- </section> -->
 
-
-            <!-- <section id="nvldemande"> -->
-            <!-- <form id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">  -->
             <fieldset id="coordo">
                 <legend>Créer une demande</legend>
 
