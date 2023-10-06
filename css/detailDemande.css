@@ -1,0 +1,291 @@
+body {
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.barre-arianne {
+    position: fixed; /* utiliser "fixed" pour que la barre reste visible en tout temps */
+    top: 0px;
+    overflow: visible;
+    left: 0;
+    right: 0;
+    background-color: #289297;
+    z-index: 80;
+}
+
+.barre-arianne ul {
+    list-style-type: none; /* enlÃ¨ve les puces de la liste */
+    margin: 0;
+    padding: 0;
+    display: flex; /* utilise Flexbox pour aligner les Ã©lÃ©ments horizontalement */
+}
+
+.barre-arianne .Onglet {
+    margin: 0;
+    padding: 0;
+    position: relative; /* ajoute une position relative pour les Ã©lÃ©ments de menu dÃ©roulant */
+}
+
+.barre-arianne a {
+    display: block; /* rend les liens cliquables sur toute la hauteur de la barre */
+    color: white; /* couleur du texte des liens */
+    text-align: center; /* centre le texte horizontalement */
+    font-weight: bold;
+    padding: 20px 20px; /* ajoute un peu de marge autour du texte */
+    text-decoration: none; /* enlÃ¨ve les soulignements par dÃ©faut */
+    text-align: center;
+    padding: 25px;
+}
+
+/* effet de survol des liens */
+.barre-arianne a:hover {
+    background-color: #0c156b;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Styles spÃ©cifiques pour le menu dÃ©roulant */
+.barre-arianne .sous {
+    display: none;
+    position: absolute;
+    background-color: #289297;
+    left: 0;
+    font-size: 15px;
+    top: 100%;
+    z-index: 100;
+}
+
+.barre-arianne li:hover .sous {
+    display: block;
+}
+
+.barre-arianne .sous li {
+    display: block;
+}
+
+
+.barre-arianne .sous2 {
+    display: none;
+    position: absolute;
+    background-color: #289297;
+    left: auto;
+    right: 0;
+    font-size: 15px;
+    top: 100%;
+    z-index: 100;
+    width: fit-content; /* Ajuste la largeur du menu dÃ©roulant Ã  son contenu */
+    white-space: nowrap;
+}
+
+.barre-arianne li:hover .sous2 {
+    display: block;
+}
+
+.barre-arianne .sous2 li {
+    display: block;
+    margin-left: 0px;
+}
+
+.MonCompte{
+    position: absolute;
+    right: 0;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    font-weight: 900;
+}
+
+
+
+#nvldemande {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: linear-gradient(#f5f5f5, #e8e8e8);
+}
+
+#form_nvldemande {
+    width: 800px;
+    margin: 45px auto 0;
+    padding: 0;
+}
+
+#form_nvldemande legend {
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #555;
+    margin-left: 35.5%;
+}
+
+#form_nvldemande .form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+#form_nvldemande .form-group {
+    width: 48%;
+    margin-bottom: 10px;
+}
+
+#form_nvldemande label {
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+#form_nvldemande input[type="date"]{
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+}
+
+
+#form_nvldemande select {
+    width: 100%;
+    padding: 9px;
+    font-size: 14px;
+}
+
+#form_nvldemande button[type="submit"] {
+    padding: 12px 20px;
+    margin-right: 10px;
+    background: #0055A4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+
+#form_nvldemande button[type="reset"] {
+    margin-left: 50px;
+    padding: 12px 20px;
+    background: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#form_nvldemande button[type="submit"]:hover {
+    background-color: #004281;
+}
+
+#form_nvldemande button[type="reset"]:hover {
+    background-color: rgb(180, 27, 27);
+}
+
+
+.input-validation {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Styles pour le texte de l'Ã©tiquette */
+label {
+    display: block; /* Affiche le texte de l'Ã©tiquette en tant que bloc */
+    margin-bottom: 15px; /* Ajoute un espace en bas de l'Ã©tiquette */
+    font-weight: bold; /* Met en Ã©vidence le texte de l'Ã©tiquette */
+    margin-top: 8px;
+}
+
+#coordo{
+    margin-bottom: 100px;
+}
+
+#form_nvldemande .form-group2 {
+    width: 48%;
+    margin-bottom: 10px;
+    margin-top: 55px;
+}
+
+
+.libelleDemande input[type="text"] {
+    width: 100%;
+    padding: 5px; /* Augmenter la taille du padding */
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+
+
+
+#menuNouvelDmd {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    margin-top: 50px;
+}
+
+#form_menuNvlDmd {
+    padding: 10px;
+
+}
+
+#form_menuNvlDmd .form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+#form_menuNvlDmd .form-group {
+    width: 20%;
+    margin-bottom: 10px;
+}
+
+#form_menuNvlDmd label {
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+#form_menuNvlDmd select{
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+}
+
+#form_menuNvlDmd input[type="text"]{
+    width: 100%;
+    padding: 3px;
+    font-size: 14px;
+}
+
+
+.form-group input[type="checkbox"] {
+    width: 50px; /* Modifier la largeur de la case à cocher */
+    height: 22px; /* Modifier la hauteur de la case à cocher */
+    margin-top: 35px; /* Ajouter une marge supérieure à la case à cocher */
+}
+
+
+.btnajout {
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+}
+
+
+.Successful{
+    display: block;
+    background-color: #69e95d;
+    border: 1px solid;
+    border-radius: 10px;
+    margin-top: 1%;
+    margin-bottom: -3%;
+    padding: 1.2% 1.2% 1.2% 1.2%;
+    text-align: center;
+    width: 65%;
+}
