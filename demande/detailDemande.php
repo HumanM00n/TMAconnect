@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link href="../css/AffichageDemande.css" rel="stylesheet">
+    <link href="../css/detailDemande.css" rel="stylesheet">
     <link href="../css/csshome.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -24,118 +24,117 @@
     <?php include('../includes/header.html.inc.php') ?>
 
     <?php
-    // Vérifiez si l'ID de la demande a été soumis
-    if (isset($_POST['IdDdemande'])) {
-        $id_demande = $_POST['IdDdemande'];
+    // // Vérifiez si l'ID de la demande a été soumis
+    // if (isset($_POST['IdDdemande'])) {
+    //     $id_demande = $_POST['IdDdemande'];
 
-        try {
-            // Connexion à la base de données avec PDO
-            $pdo = new PDO('mysql:host=localhost:3308;dbname=tmaconnect', 'root', 'XVsikn92');
+    //     try {
+    //         // Connexion à la base de données avec PDO
+    //         $pdo = new PDO('mysql:host=localhost:3308;dbname=tmaconnect', 'root', 'XVsikn92');
 
-            // Définir le mode d'erreur de PDO sur Exception
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //         // Définir le mode d'erreur de PDO sur Exception
+    //         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // Préparez la requête pour éviter les injections SQL
-            $requete = $pdo->prepare("SELECT dom_dmd, qual_dmd, prt_dmd, libelle, date_crea, util_crea, date_emet, util_emet, date_recu, util_benef, date_etat_dmd, etat_dmd, date_visa_dmd, util_sign_dmd, util_affect_dmd, date_fs, amorti_dmd, date_rct_prvu, regroupement, date_archiv FROM tc_demandes WHERE IdDdemande = :IdDdemande");
-            $requete->bindParam(':IdDdemande', $id_demande, PDO::PARAM_INT);
+    //         // Préparez la requête pour éviter les injections SQL
+    //         // $requete = $pdo->prepare("SELECT dom_dmd, qual_dmd, prt_dmd, libelle, date_crea, util_crea, date_emet, util_emet, date_recu, util_benef, date_etat_dmd, etat_dmd, date_visa_dmd, util_sign_dmd, util_affect_dmd, date_fs, amorti_dmd, date_rct_prvu, regroupement, date_archiv FROM tc_demandes WHERE IdDdemande = :IdDdemande");
+    //         // $requete->bindParam(':IdDdemande', $id_demande, PDO::PARAM_INT);
 
-            // Exécutez la requête
-            $requete->execute();
+    //         // Exécutez la requête
+    //         $requete->execute();
 
-            // Récupérez les données de la demande
-            $demande = $requete->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            echo "Erreur : Problème de connexion " . $e->getMessage();
-        }
+    //         // Récupérez les données de la demande
+    //         $demande = $requete->fetch(PDO::FETCH_ASSOC);
+    //     } catch (PDOException $e) {
+    //         echo "Erreur : Problème de connexion " . $e->getMessage();
+    //     }
 
-        // Fermez la connexion
-        $pdo = null;
-    }
+    //     // Fermez la connexion
+    //     $pdo = null;
+    //}
     ?>
 <?php 
-// Requ�tes SQL pour r�cup�rer les l'intégralité des données de la table tc_demandes
+//Requ�tes SQL pour r�cup�rer les l'intégralité des données de la table tc_demandes
 
-$sql0 = "SELECT dom_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt0 = $pdo->query($sql0);
-$result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
+// $sql0 = "SELECT dom_dmd FROM tc_demande INNER JOIN tc_domaine.IdDomaine = tc_demande.tc_domaine_libelle";
+// $stmt0 = $pdo->query($sql0);
+// $result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
 
-$sql1 = "SELECT quald_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt1 = $pdo->query($sql1);
-$result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+// $sql1 = "SELECT quald_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt1 = $pdo->query($sql1);
+// $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
-$sql2 = "SELECT prt_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt2 = $pdo->query($sql2);
-$result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+// $sql2 = "SELECT prt_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt2 = $pdo->query($sql2);
+// $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
-$sql3 = "SELECT libelle FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt3 = $pdo->query($sql3);
-$result3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+// $sql3 = "SELECT libelle FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt3 = $pdo->query($sql3);
+// $result3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+
+// $sql4 = "SELECT date_crea FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt4 = $pdo->query($sql4);
+// $result4 = $stmt4->fetchAll(PDO::FETCH_ASSOC);
+
+// $sql5 = "SELECT util_crea FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt5 = $pdo->query($sql5);
+// $result5 = $stmt5->fetchAll(PDO::FETCH_ASSOC);
+
+// $sql6 = "SELECT date_emet FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt6 = $pdo->query($sql6);
+// $result6 = $stmt6->fetchAll(PDO::FETCH_ASSOC);
+
+// $sql7 = "SELECT util_emet FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt7 = $pdo->query($sql7);
+// $result7 = $stmt7->fetchAll(PDO::FETCH_ASSOC);
+
+// $sql8 = "SELECT date_recu FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt8 = $pdo->query($sql8);
+// $result8 = $stmt8->fetchAll(PDO::FETCH_ASSOC);
 
 
-$sql4 = "SELECT date_crea FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt4 = $pdo->query($sql4);
-$result4 = $stmt4->fetchAll(PDO::FETCH_ASSOC);
+// $sql9 = "SELECT util_benef FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt9 = $pdo->query($sql9);
+// $result9 = $stmt9->fetchAll(PDO::FETCH_ASSOC);
 
-$sql5 = "SELECT util_crea FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt5 = $pdo->query($sql5);
-$result5 = $stmt5->fetchAll(PDO::FETCH_ASSOC);
+// $sql10 = "SELECT date_etat_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt10 = $pdo->query($sql10);
+// $result10 = $stmt10->fetchAll(PDO::FETCH_ASSOC);
 
-$sql6 = "SELECT date_emet FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt6 = $pdo->query($sql6);
-$result6 = $stmt6->fetchAll(PDO::FETCH_ASSOC);
+// $sql11 = "SELECT etat_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt11 = $pdo->query($sql11);
+// $result11 = $stmt11->fetchAll(PDO::FETCH_ASSOC);
 
-$sql7 = "SELECT util_emet FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt7 = $pdo->query($sql7);
-$result7 = $stmt7->fetchAll(PDO::FETCH_ASSOC);
+// $sql12 = "SELECT date_visa_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt12 = $pdo->query($sql12);
+// $result12 = $stmt12->fetchAll(PDO::FETCH_ASSOC);
 
-$sql8 = "SELECT date_recu FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt8 = $pdo->query($sql8);
-$result8 = $stmt8->fetchAll(PDO::FETCH_ASSOC);
+// $sql13 = "SELECT util_sign_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt13 = $pdo->query($sql13);
+// $result13 = $stmt13->fetchAll(PDO::FETCH_ASSOC);
 
+// $sql14 = "SELECT util_affect_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt14 = $pdo->query($sql14);
+// $result14 = $stmt14->fetchAll(PDO::FETCH_ASSOC);
 
-$sql9 = "SELECT util_benef FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt9 = $pdo->query($sql9);
-$result9 = $stmt9->fetchAll(PDO::FETCH_ASSOC);
+// $sql15 = "SELECT date_fs FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt15 = $pdo->query($sql15);
+// $result15 = $stmt15->fetchAll(PDO::FETCH_ASSOC);
 
-$sql10 = "SELECT date_etat_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt10 = $pdo->query($sql10);
-$result10 = $stmt10->fetchAll(PDO::FETCH_ASSOC);
+// $sql16 = "SELECT amorti_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt16 = $pdo->query($sql16);
+// $result16 = $stmt16->fetchAll(PDO::FETCH_ASSOC);
 
-$sql11 = "SELECT etat_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt11 = $pdo->query($sql11);
-$result11 = $stmt11->fetchAll(PDO::FETCH_ASSOC);
+// $sql17 = "SELECT date_rct_prevu FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt17 = $pdo->query($sql17);
+// $result17 = $stmt17->fetchAll(PDO::FETCH_ASSOC);
 
-$sql12 = "SELECT date_visa_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt12 = $pdo->query($sql12);
-$result12 = $stmt12->fetchAll(PDO::FETCH_ASSOC);
+// $sql18 = "SELECT regroupement FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt18 = $pdo->query($sql18);
+// $result18 = $stmt18->fetchAll(PDO::FETCH_ASSOC);
 
-$sql13 = "SELECT util_sign_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt13 = $pdo->query($sql13);
-$result13 = $stmt13->fetchAll(PDO::FETCH_ASSOC);
-
-$sql14 = "SELECT util_affect_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt14 = $pdo->query($sql14);
-$result14 = $stmt14->fetchAll(PDO::FETCH_ASSOC);
-
-$sql15 = "SELECT date_fs FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt15 = $pdo->query($sql15);
-$result15 = $stmt15->fetchAll(PDO::FETCH_ASSOC);
-
-$sql16 = "SELECT amorti_dmd FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt16 = $pdo->query($sql16);
-$result16 = $stmt16->fetchAll(PDO::FETCH_ASSOC);
-
-$sql17 = "SELECT date_rct_prevu FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt17 = $pdo->query($sql17);
-$result17 = $stmt17->fetchAll(PDO::FETCH_ASSOC);
-
-$sql18 = "SELECT regroupement FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt18 = $pdo->query($sql18);
-$result18 = $stmt18->fetchAll(PDO::FETCH_ASSOC);
-
-$sql19 = "SELECT date_archiv FROM tc_demande WHERE IdDdemande = :IdDdemande";
-$stmt19 = $pdo->query($sql19);
-$result19 = $stmt19->fetchAll(PDO::FETCH_ASSOC);
+// $sql19 = "SELECT date_archiv FROM tc_demande WHERE IdDdemande = :IdDdemande";
+// $stmt19 = $pdo->query($sql19);
+// $result19 = $stmt19->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
@@ -146,11 +145,11 @@ $result19 = $stmt19->fetchAll(PDO::FETCH_ASSOC);
                 <div class="form-row">
                     <div class="form-group">
                         <label for="demCreePar">Domaine :</label>
-                        <select name="selectDom" id="selectDom">
+                        <input name="selectDom" id="selectDom">
                             <?php
                             echo "<option value='' disabled selected hidden></option>";
                             foreach ($result0 as $row) {
-                                $id_dom = $row['IdDomaine'];
+                                $id_dom = $row[':IdDomaine'];
                                 $lib_dom = $row['libelle'];
                                 echo "<option value=$id_dom>$lib_dom</option>";
                             }
