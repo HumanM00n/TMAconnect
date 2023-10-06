@@ -6,79 +6,236 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 <html>
 
 <head>
-    <title>TMA - Affichage des demandes</title>
+    <title>TC2</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="../css/csshome.css" rel="stylesheet" type="text/css" />
-    <link rel="icon" href="../img/NLogo2.png" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link href="../css/AffichageDemande.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/csshome.css" />
+    <link rel="stylesheet" type="text/css" href="css/detailDemande.css" />
+    <link rel="icon" href="img/NLogo2.png" />
 </head>
 
 <body>
-    <?php include('../includes/connexion.inc.php') ?>
-    <?php include('../includes/header.html.inc.php') ?>
-
     <?php
-    // Vérifiez si l'ID de la demande a été soumis
-    if (isset($_POST['IdDdemande'])) {
-        $id_demande = $_POST['IdDdemande'];
+    include('includes/header.html.inc.php');
 
-        try {
-            // Connexion à la base de données avec PDO
-            $pdo = new PDO('mysql:host=localhost:3308;dbname=tmaconnect', 'root', 'XVsikn92');
+    // Informations de connexion � la base de donn�es MySQL
+    $servername = "localhost:3308"; // nom du serveur
+    $username = "root"; // nom d'utilisateur
+    $password = "XVsikn92"; // mot de passe
+    $dbname = "tmaconnect"; // nom de la base de donn�es
+    // Cr�ation d'une connexion � la base de donn�es avec PDO
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
-            // Définir le mode d'erreur de PDO sur Exception
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Configuration des attributs de PDO
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // Préparez la requête pour éviter les injections SQL
-            $requete = $pdo->prepare("SELECT dom_dmd, qual_dmd, prt_dmd, libelle, date_crea, util_crea, date_emet, util_emet, date_recu, util_benef, date_etat_dmd, etat_dmd, date_visa_dmd, util_sign_dmd, util_affect_dmd, date_fs, amorti_dmd, date_rct_prvu, regroupement, date_archiv FROM tc_demandes WHERE IdDdemande = :IdDdemande");
-            $requete->bindParam(':IdDdemande', $id_demande, PDO::PARAM_INT);
-
-            // Exécutez la requête
-            $requete->execute();
-
-            // Récupérez les données de la demande
-            $demande = $requete->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            echo "Erreur : Problème de connexion " . $e->getMessage();
-        }
-
-        // Fermez la connexion
-        $pdo = null;
-    }
     ?>
 
-   <!-- PAGINATION TABLEAU DEMANDE -->
+    <section id="menuNouvelDmd">
+        <div id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <fieldset id="menuDmd">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="demCreePar">Domaine :</label>
+                        <input name="selectDom" id="selectDom">
+                            <?php
+                            ?>
+                        </input>
+                    </div>
+                    <div class="form-group">
+                        <label for="demCreePar">Qualification :</label>
+                        <select name="selectQualif" id="selectQualif">
+                            <?php
+                            echo "<option value='' disabled selected hidden></option>";
+                            foreach ($result1 as $row) {
+                                $id_qual = $row['IdQual'];
+                                $lib_qual = $row['libelle'];
+                                echo "<option value=$id_qual>$lib_qual</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
 
-    <nav class="div--pagination" aria-label="..."> 
-        <ul class="pagination">
-            <li class="page-item disabled">
-                <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
+                    <div class="form-group">
+                        <label for="demCreePar">Priorité :</label>
+                        <select name="selectPrio" id="selectPrio">
+                            <?php
+                            echo "<option value='' disabled selected hidden></option>";
+                            foreach ($result2 as $row) {
+                                $id_prt = $row['IdPriorite'];
+                                $lib_prt = $row['libelle'];
+                                echo "<option value=$id_prt>$lib_prt</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
 
-    
-    <div id="alertContainer"></div>
+                    <div class="form-group">
+                        <label for="numDemande">N° demande :</label>
+                        <input type="text" name="numDemande" id="numDemande" size="35" disabled pattern="[0-9]">
+                    </div>
 
-    <!-- <script src="../js/Filtre-dmd.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+                </div>
+            </fieldset>
+
+            <fieldset id="coordo">
+                <legend>Créer une demande</legend>
+
+                <div class="libelleDemande">
+                    <label for="demLibelle">Libellé demande :</label>
+                    <input type="text" name="demLibelle" id="demLibelle" size="35"
+                        pattern="^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ�?ÀÂÄÃÅÇÉÈÊË�?ÌÎ�?ÑÓÒÔÖÕÚÙÛÜ�?ŸÆŒ\s\-]+$" required
+                        required oninput="convertToUppercase(this)">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="demCree">Demande créée le :</label>
+                        <input type="date" name="demCree" id="demCree" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="demCreePar">Par :</label>
+                        <select name="selectDemandePar" id="selectDemandePar">
+                            <?php
+                            echo "<option value='' disabled selected hidden></option>";
+                            foreach ($result3 as $row) {
+                                $id_util = $row['IdUtil'];
+                                $nom = $row['nom'];
+                                echo "<option value=$id_util>$nom</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="demEmise">Demande émise le :</label>
+                        <input type="date" name="demEmise" id="demEmise" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="demEmisePar">Par :</label>
+                        <select name="selectDemandeEmisePar" id="selectDemandeEmisePar">
+                            <?php
+                            echo "<option value='' disabled selected hidden></option>";
+                            foreach ($result3 as $row) {
+                                $id_util = $row['IdUtil'];
+                                $nom = $row['nom'];
+                                echo "<option value=$id_util>$nom</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="demRecu">Demande reçue le :</label>
+                        <input type="date" name="demRecu" id="demRecu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="beneficiaire">Bénéficiaire :</label>
+                        <select name="selectBeneficiaire" id="selectBeneficiaire">
+                            <?php
+                            echo "<option value='' disabled selected hidden></option>";
+                            foreach ($result7 as $row) {
+                                $id_benef = $row['IdBenef'];
+                                $lbl_benef = $row['lbl_benef'];
+                                echo "<option value=$id_benef>$lbl_benef</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="demCree">Etat de la demande :</label>
+                        <input type="date" name="demEtat" id="demEtat" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="etat">Etat :</label>
+                        <select name="selectDemandeEtat" id="selectDemandeEtat">
+                            <?php
+                            echo "<option value='' disabled selected hidden></option>";
+                            foreach ($result6 as $row) {
+                                $id_etat = $row['IdEtat'];
+                                $etat = $row['libelle'];
+                                echo "<option value=$id_etat>$etat</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="visaServEtude">Visa service étude :</label>
+                        <input type="date" name="visaServEtude" id="visaServEtude" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signataire">Signataire :</label>
+                        <select name="selectSignataire" id="selectSignataire">
+                            <?php
+                            echo "<option value='' disabled selected hidden></option>";
+                            foreach ($result4 as $row) {
+                                $id_sign = $row['IdUtil'];
+                                $lib_sign = $row['nom'];
+                                echo "<option value=$id_sign>$lib_sign</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                    </div>
+                    <div class="form-group">
+                        <label for="affection">Affectation de la demande :</label>
+                        <select name="selectAffectation" id="selectAffectation">
+                            <?php
+                            echo "<option value='' disabled selected hidden></option>";
+                            foreach ($result4 as $row) {
+                                $id_affect = $row['IdUtil'];
+                                $lib_affect = $row['nom'];
+                                echo "<option value=$id_affect>$lib_affect</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group2">
+                        <label for="demEmise">Fin souhaitée le :</label>
+                        <input type="date" name="demFs" id="demFs">
+                    </div>
+                    <div class="form-group2">
+                        <label for="demEmise">Mise en recette prévue le (optionnel) :</label>
+                        <input type="date" name="demRct" id="demRct">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="regroupement">Regroupement :</label>
+                        <select name="selectRegroupement" id="selectRegroupement">
+                            <?php
+                            echo "<option value='' disabled selected hidden></option>";
+                            foreach ($result5 as $row) {
+                                $id_regroupe = $row['IdRegroupe'];
+                                $lib_regroupe = $row['libelle'];
+                                echo "<option value=$id_regroupe>$lib_regroupe</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="demAmortis">Demande amortissable</label>
+                        <input type="checkbox" name="demAmortis" id="demAmortis">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="demArchiv">Demande archivée le :</label>
+                        <input type="date" name="demArchiv" id="demArchiv">
+                    </div>
+                </div>
+                <div class="btnajout">
+                    <button type="">Retour</button>
+                </div>
+            </fieldset>
+        </div>
+    </section>
+
+
 </body>
 
 </html>
