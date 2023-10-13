@@ -6,7 +6,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 <html>
 
 <head>
-  <title>TMA - Test1</title>
+  <title>TC1</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -14,7 +14,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <!-- <link rel="stylesheet" type="text/css" href="css/test-css.css" /> -->
+  <link rel="stylesheet" type="text/css" href="css/test-css.css" />
   <link rel="stylesheet" type="text/css" href="css/csshome.css" />
   <link rel="stylesheet" type="text/css" href="css/AffichageDemande.css" />
   <link rel="icon" href="img/NLogo2.png" />
@@ -147,8 +147,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
       <tbody>
 
         <?php while ($row = $stmt->fetch(PDO::FETCH_BOTH)): ?>
-          <tr>
-            <td class="afficherDetails"><button id="monBouton">🔎</button></td>
+          <tr class="afficherDetails">
+            <td><button id="monBouton" data-id=<?= $row[0] ?>>🔎</button></td>
             <td>
               <?= $row[0] ?>
             </td>
@@ -171,9 +171,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
             <td>30-09-2023</td>
             <td><i class='bx bx-download'></i></td>
           </tr>
-
-
-          
 
         <?php endwhile; ?>
 
@@ -202,26 +199,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     </ul>
   </nav>
 
-  <div id="alertContainer"></div>
+  <!-- <div id="alertContainer"></div> -->
 
-
-  <!-- Le script JavaScript pour afficher les détails -->
-  <script>
-    document.getElementById('afficherDetails').addEventListener('click', function() {
-        const detailsDemande = document.getElementById('detailsDemande');
-
-        // Vérifiez si les détails sont déjà visibles
-        if (detailsDemande.style.display === 'none') {
-            detailsDemande.style.display = 'block'; // Affiche les détails
-        } else {
-            detailsDemande.style.display = 'none'; // Cache les détails
-        }
-    });
-</script>
-
-
-  <script src="js/date.js"></script>
-  <script src="js/Filtre-dmd.js"></script>
+  <script src="js/detailDemande.js"></script> <!-- Script js pour afficher les détails -->
+  <script src="js/date.js"></script> <!-- Script js pour modifier le format des input date -->
+  <script src="js/Filtre-dmd.js"></script> <!-- Script js pour la recherche des demandes avec le filtre -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
