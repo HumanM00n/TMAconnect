@@ -1,17 +1,29 @@
-document.querySelectorAll('.afficherDetails').forEach(bouton => {
+// let afficherDetails = document.getElementById('menuNouvelDmd');
+
+document.querySelectorAll('#monBouton').forEach(bouton => {
     bouton.addEventListener('click', function () {
-        const row = this.parentElement.parentElement; // Récupère la ligne parente de l'émoticône
-        const detailsDemande = row.nextElementSibling;
+        fetch('test-code2.php')
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error('Erreur :', error);
+            });
+        const row = this.parentElement.parentElement; // Récupère la ligne parente du bouton
+        const detailsDemande = document.createElement('tr'); // Crée une nouvelle ligne pour les détails
 
-        // Vérifiez si les détails sont déjà visibles
-        if (detailsDemande.style.display === 'none') {
-            detailsDemande.style.display = 'table-row'; // Affiche la ligne des détails
+        detailsDemande.innerHTML = '<td colspan="10">bonjour</td>';
 
-            // Faites défiler vers le bas jusqu'à la section 'menuNouvelDmd'
-            document.getElementById('menuNouvelDmd').scrollIntoView({ behavior: 'smooth' });
+        if (!row.classList.contains('details-visible')) {
+            row.classList.add('details-visible');
+            row.after(detailsDemande); // Ajoute les détails après la ligne de demande
         } else {
-            detailsDemande.style.display = 'none'; // Cache la ligne des détails
+            row.classList.remove('details-visible');
+            const detailsRow = row.nextElementSibling; // Récupère la ligne des détails
+            if (detailsRow && detailsRow.classList.contains('afficherDetails')) {
+                detailsRow.remove(); // Supprime les détails s'ils sont déjà visibles
+            }
         }
     });
 });
-
