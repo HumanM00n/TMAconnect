@@ -33,7 +33,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     // Requ�tes SQL pour r�cup�rer les donn�es des tables tc_domaine, tc_qualification et tc_priorite
     
     $sql0 = "SELECT IdDomaine, libelle FROM tc_domaine";
-    // $sql0 = "SELECT libelle, IdDomaine FROM tc_domaine";
     $stmt0 = $pdo->query($sql0);
     $result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
 
@@ -68,10 +67,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     $sql7 = "SELECT IdBenef, lbl_benef FROM tc_benef";
     $stmt7 = $pdo->query($sql7);
     $result7 = $stmt7->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql8 = "SELECT IdDemande FROM tc_demandes";
+    $stmt8 = $pdo->query($sql8);
+    $result8 = $stmt8->fetchAll(PDO::FETCH_ASSOC);
     ?>
     <?php
     if (
-        isset($_POST["selectDom"])
+        isset($_POST["numDemande"])
+        && isset($_POST["selectDom"])
+        && isset($_POST["selectDom"])
         && isset($_POST["selectQualif"])
         && isset($_POST["selectPrio"])
         && isset($_POST["demLibelle"]) //N°Demande ENTRE selectDemandePar et demCree
@@ -92,6 +97,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         && isset($_POST["selectRegroupement"])
         && isset($_POST["demArchiv"])
     ) {
+        $var0 = $_POST["numDemande"];
         $var1 = $_POST["selectDom"];
         $var2 = $_POST["selectQualif"];
         $var3 = $_POST["selectPrio"];
@@ -120,6 +126,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         $stmt = $pdo->prepare($sql);
 
         // Binder les valeurs aux paramètres nommés
+        $stmt->bindValue(":var0", $var0);
         $stmt->bindValue(":var1", $var1);
         $stmt->bindValue(":var2", $var2);
         $stmt->bindValue(":var3", $var3);
@@ -201,6 +208,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                     <div class="form-group">
                         <label for="numDemande">N° demande :</label>
                         <input type="text" name="numDemande" id="numDemande" size="35" disabled pattern="[0-9]">
+                        <?php
+                            echo "<option value='' disabled selected hidden></option>";
+                            foreach ($result8 as $row) {
+                                $id_dmd = $row['IdDemande'];
+                                echo "<option value=$id_dmd</option>";
+                            }
+                            ?>
                     </div>
 
                 </div>
