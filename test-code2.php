@@ -1,74 +1,52 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
--->
 <html>
 
 <head>
     <title>TC2</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/csshome.css" />
-    <link rel="stylesheet" type="text/css" href="css/detailDemande.css" />
-    <link rel="icon" href="img/NLogo2.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/test.css">
 </head>
 
 <body>
+
     <?php
-    include('includes/header.html.inc.php');
-
-    // Informations de connexion � la base de donn�es MySQL
-    $servername = "localhost:3308"; // nom du serveur
-    $username = "root"; // nom d'utilisateur
-    $password = "XVsikn92"; // mot de passe
-    $dbname = "tmaconnect"; // nom de la base de donn�es
-    // Cr�ation d'une connexion � la base de donn�es avec PDO
-    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-
-    // Configuration des attributs de PDO
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    // include('includes/header.html.inc.php');
+// include('includes/connexion.inc.php'); 
+    
+    // $id_demande =$_GET['id_demande']; 
+// echo $id_demande
     ?>
 
     <section id="menuNouvelDmd">
-        <div id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+        <form id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <fieldset id="menuDmd">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="demCreePar">Domaine :</label>
-                        <input name="selectDom" id="selectDom">
-                            <?php
-                            ?>
-                        </input>
+                        <input name="selectDom" id="selectDom" class="inputInfos">
+                        <?php
+
+                        ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="demCreePar">Qualification :</label>
-                        <select name="selectQualif" id="selectQualif">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result1 as $row) {
-                                $id_qual = $row['IdQual'];
-                                $lib_qual = $row['libelle'];
-                                echo "<option value=$id_qual>$lib_qual</option>";
-                            }
-                            ?>
+                        <input name="selectQualif" id="selectQualif" class="inputInfos">
+                        <?php
+
+                        ?>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="demCreePar">Priorité :</label>
-                        <select name="selectPrio" id="selectPrio">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result2 as $row) {
-                                $id_prt = $row['IdPriorite'];
-                                $lib_prt = $row['libelle'];
-                                echo "<option value=$id_prt>$lib_prt</option>";
-                            }
-                            ?>
+                        <input name="selectPrio" id="selectPrio" class="inputInfos">
+                        <?php
+
+                        ?>
                         </select>
                     </div>
 
@@ -81,8 +59,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
             </fieldset>
 
             <fieldset id="coordo">
-                <legend>Créer une demande</legend>
-
                 <div class="libelleDemande">
                     <label for="demLibelle">Libellé demande :</label>
                     <input type="text" name="demLibelle" id="demLibelle" size="35"
@@ -93,88 +69,63 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                 <div class="form-row">
                     <div class="form-group">
                         <label for="demCree">Demande créée le :</label>
-                        <input type="date" name="demCree" id="demCree" required>
+                        <input type="text" name="demCree" id="demCree">
                     </div>
                     <div class="form-group">
                         <label for="demCreePar">Par :</label>
-                        <select name="selectDemandePar" id="selectDemandePar">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result3 as $row) {
-                                $id_util = $row['IdUtil'];
-                                $nom = $row['nom'];
-                                echo "<option value=$id_util>$nom</option>";
-                            }
-                            ?>
+                        <input name="selectDemandePar" id="selectDemandePar" class="inputInfos">
+                        <?php
+
+                        ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="demEmise">Demande émise le :</label>
-                        <input type="date" name="demEmise" id="demEmise" required>
+                        <input type="text" name="demEmise" id="demEmise" class="infosDate">
                     </div>
                     <div class="form-group">
                         <label for="demEmisePar">Par :</label>
-                        <select name="selectDemandeEmisePar" id="selectDemandeEmisePar">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result3 as $row) {
-                                $id_util = $row['IdUtil'];
-                                $nom = $row['nom'];
-                                echo "<option value=$id_util>$nom</option>";
-                            }
-                            ?>
+                        <input name="selectDemandeEmisePar" id="selectDemandeEmisePar" class="inputInfos">
+                        <?php
+
+                        ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="demRecu">Demande reçue le :</label>
-                        <input type="date" name="demRecu" id="demRecu" required>
+                        <input type="text" name="demRecu" id="demRecu" class="infosDate">
                     </div>
                     <div class="form-group">
                         <label for="beneficiaire">Bénéficiaire :</label>
-                        <select name="selectBeneficiaire" id="selectBeneficiaire">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result7 as $row) {
-                                $id_benef = $row['IdBenef'];
-                                $lbl_benef = $row['lbl_benef'];
-                                echo "<option value=$id_benef>$lbl_benef</option>";
-                            }
-                            ?>
+                        <input name="selectBeneficiaire" id="selectBeneficiaire" class="inputInfos">
+                        <?php
+
+                        ?>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="demCree">Etat de la demande :</label>
-                        <input type="date" name="demEtat" id="demEtat" required>
+                        <label for="demCree">Etat de la demande au :</label>
+                        <input type="text" name="demEtat" id="demEtat" class="infosDate">
                     </div>
                     <div class="form-group">
                         <label for="etat">Etat :</label>
-                        <select name="selectDemandeEtat" id="selectDemandeEtat">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result6 as $row) {
-                                $id_etat = $row['IdEtat'];
-                                $etat = $row['libelle'];
-                                echo "<option value=$id_etat>$etat</option>";
-                            }
-                            ?>
+                        <input name="selectDemandeEtat" id="selectDemandeEtat" class="inputInfos">
+                        <?php
+
+                        ?>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="visaServEtude">Visa service étude :</label>
-                        <input type="date" name="visaServEtude" id="visaServEtude" required>
+                        <label for="visaServEtude">Visa service étude au :</label>
+                        <input type="text" name="visaServEtude" id="visaServEtude" class="infosDate">
                     </div>
                     <div class="form-group">
                         <label for="signataire">Signataire :</label>
-                        <select name="selectSignataire" id="selectSignataire">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result4 as $row) {
-                                $id_sign = $row['IdUtil'];
-                                $lib_sign = $row['nom'];
-                                echo "<option value=$id_sign>$lib_sign</option>";
-                            }
-                            ?>
+                        <input name="selectSignataire" id="selectSignataire" class="inputInfos">
+                        <?php
+
+                        ?>
                         </select>
                     </div>
 
@@ -182,40 +133,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                     </div>
                     <div class="form-group">
                         <label for="affection">Affectation de la demande :</label>
-                        <select name="selectAffectation" id="selectAffectation">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result4 as $row) {
-                                $id_affect = $row['IdUtil'];
-                                $lib_affect = $row['nom'];
-                                echo "<option value=$id_affect>$lib_affect</option>";
-                            }
-                            ?>
+                        <input name="selectAffectation" id="selectAffectation" class="inputInfos">
+                        <?php
+
+                        ?>
                         </select>
                     </div>
 
 
                     <div class="form-group2">
                         <label for="demEmise">Fin souhaitée le :</label>
-                        <input type="date" name="demFs" id="demFs">
+                        <input type="text" name="demFs" id="demFs" class="infosDate">
                     </div>
                     <div class="form-group2">
                         <label for="demEmise">Mise en recette prévue le (optionnel) :</label>
-                        <input type="date" name="demRct" id="demRct">
+                        <input type="text" name="demRct" id="demRct" class="infosDate">
                     </div>
 
 
                     <div class="form-group">
                         <label for="regroupement">Regroupement :</label>
-                        <select name="selectRegroupement" id="selectRegroupement">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result5 as $row) {
-                                $id_regroupe = $row['IdRegroupe'];
-                                $lib_regroupe = $row['libelle'];
-                                echo "<option value=$id_regroupe>$lib_regroupe</option>";
-                            }
-                            ?>
+                        <input name="selectRegroupement" id="selectRegroupement" class="inputInfos">
+                        <?php
+
+                        ?>
                         </select>
                     </div>
                     <div class="form-group">
@@ -225,17 +166,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                     <div class="form-group">
                         <label for="demArchiv">Demande archivée le :</label>
-                        <input type="date" name="demArchiv" id="demArchiv">
+                        <input type="text" name="demArchiv" id="demArchiv" class="infosDate">
                     </div>
                 </div>
-                <div class="btnajout">
-                    <button type="">Retour</button>
-                </div>
             </fieldset>
-        </div>
+        </form>
     </section>
-
 
 </body>
 
-</html>
+<html>
