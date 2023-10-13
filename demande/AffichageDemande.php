@@ -6,7 +6,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 <html>
 
 <head>
-    <title>TMA - Affichage des demandes</title>
+    <title>TMA - Affichage Demandes</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -50,7 +50,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
           <select name="select_domaine" id="select_domaine">
             <?php
             echo "<option value='' disabled selected hidden></option>";
-            foreach ($result0 as $row) {
+            foreach ($result1 as $row) {
               $lib_dom = $row['libelle'];
               echo "<option value=$id_dom>$lib_dom</option>";
             }
@@ -152,7 +152,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                 <?php while ($row = $stmt->fetch(PDO::FETCH_BOTH)): ?>
                     <tr>
-                        <td><a href="./detailDemande.php?idDemande=<?php echo $row[0]?>">🔎</a></td>
+                        <!-- <td><a href="./detailDemande.php?idDemande=<?php echo $row[0]?>">🔎</a></td> -->
+                        <td>🔎</td>
                         <td><?= $row[0] ?></td>
                         <td><?= $row[1] ?></td> 
                         <td><?= $row[2] ?></td> 
