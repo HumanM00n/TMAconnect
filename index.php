@@ -47,8 +47,6 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
     }
 }
 
-
-
 function Authentification($username1, $case_cochee) 
 {
     // Test d'authentification
