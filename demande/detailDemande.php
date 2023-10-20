@@ -127,13 +127,8 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="demCree">Demande créée le :</label>
-
-                        <input type="text" name="demCree" id="demCree" disabled pattern="[0-9]"
-                        <?php 
-                            // foreach ($result as $row) {
-                                $date= $row[5];
-                            // }
-                        ?> value="<?php echo $date; ?>">
+                        <input type="text" name="demCree" id="demCree" required
+                            value="<?php echo $result['demCree']; ?>">
                     </div>
 
                     <div class="form-group">
@@ -301,3 +296,7 @@
 
 </html>
 
+
+</body>
+
+</html>

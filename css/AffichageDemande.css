@@ -16,6 +16,7 @@ table {
 
 table th {
     width: 150px;
+    margin-bottom: 1rem;
 }
 
 table td {
@@ -181,3 +182,9 @@ input[type="submit"]:hover {
     background-color: #ffffff; /* Couleur d'arrière-plan, à adapter selon vos besoins */
   }
   
+
+  /* CSS pour masquer les détails initialement */
+tr.demande + tr.details { display: none; }
+
+/* CSS pour afficher les détails quand ils sont visibles */
+tr.demande.details-visible + tr.details { display: table-row; }

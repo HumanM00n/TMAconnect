@@ -88,7 +88,6 @@
 
                     <div class="form-group">
                         <label for="demCreePar">Priorité :</label>
-
                         <input name="selectPrio" id="selectPrio" class="inputInfos" disabled pattern="[0-9]"
                         <?php 
                             foreach ($result as $row) {
@@ -292,6 +291,7 @@
             </fieldset>
         </form>
     </section>
+</div>
 
 </div>
 

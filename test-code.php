@@ -10,14 +10,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" type="text/css" href="css/test-css.css" />
   <link rel="stylesheet" type="text/css" href="css/csshome.css" />
   <link rel="stylesheet" type="text/css" href="css/AffichageDemande.css" />
   <link rel="icon" href="img/NLogo2.png" />
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -25,7 +26,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
   <?php include('includes/header.html.inc.php') ?>
   <?php include('includes/connexion.inc.php') ?>
 
-  <!-- FILTRES DES DEMANDES  -->
+<!----------------------------------------
+|             Filtres des demandes       | 
+------------------------------------------>
   <?php
   // Requ�tes SQL pour le filtre de recherche des demandes 
   
@@ -90,10 +93,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
       </fieldset>
     </form>
   </section>
-  <!-- --------------------------------------------------------------------------------------------------------- -->
 
+<!----------------------------------------
+|  Requêtes pour récupérer les demandes  | 
+------------------------------------------>
   <?php
   try {
+
     $sql = "SELECT D.IdDemande , DOM.libelle , D.libelle , Q.libelle , D.date_crea , E.libelle 
                 FROM tc_demandes D, tc_domaine DOM , tc_qualif Q , tc_etat E
                 WHERE D.dom_dmd = DOM.IdDomaine 
@@ -127,7 +133,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
   }
   ?>
 
-  <!-- TABLEAU DES DEMANDES-->
+<!----------------------------------------
+|           Tableau Des demandes          | 
+------------------------------------------>
   <?php if ($stmt->rowCount() > 0): ?>
     <table class='table' id='table'>
       <thead>
@@ -181,12 +189,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     <div>Aucune demande trouvée</div>
   <?php endif; ?>
 
-  <!-- PAGINATION TABLEAU DEMANDE -->
+<!--------------------------------------------
+|             Pagination Du Tableau          |  
+--------------------------------------------->
 
   <nav class="div--pagination" aria-label="...">
     <ul class="pagination">
       <li class="page-item disabled">
-        <a class="page-link">Previous</a>
+        <a class="page-link">Précédent</a>
       </li>
       <li class="page-item"><a class="page-link" href="#">1</a></li>
       <li class="page-item active" aria-current="page">
@@ -194,14 +204,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
       </li>
       <li class="page-item"><a class="page-link" href="#">3</a></li>
       <li class="page-item">
-        <a class="page-link" href="#">Next</a>
+        <a class="page-link" href="#">Suivant</a>
       </li>
     </ul>
   </nav>
 
   <!-- <div id="alertContainer"></div> -->
 
-  <script src="js/detailDemande.js"></script> <!-- Script js pour afficher les détails -->
+  <!-- <script src="js/detailDemande.js"></script> Script js pour afficher les détails -->
   <script src="js/date.js"></script> <!-- Script js pour modifier le format des input date -->
   <script src="js/Filtre-dmd.js"></script> <!-- Script js pour la recherche des demandes avec le filtre -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
