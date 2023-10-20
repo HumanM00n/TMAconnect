@@ -78,6 +78,7 @@
                             // }
                               ?> value="<?php echo $dom_dmd; ?>">
                     </div>
+
                     <div class="form-group">
                         <label for="demCreePar">Qualification :</label>
                         <input name="selectQualif" id="selectQualif" class="inputInfos" disabled pattern="[0-9]"
@@ -126,14 +127,15 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="demCree">Demande créée le :</label>
+
                         <input type="text" name="demCree" id="demCree" disabled pattern="[0-9]"
                         <?php 
                             // foreach ($result as $row) {
                                 $date= $row[5];
                             // }
                         ?> value="<?php echo $date; ?>">
-
                     </div>
+
                     <div class="form-group">
                         <label for="demCreePar">Par :</label>
                         <input name="selectDemandePar" id="selectDemandePar" class="inputInfos" disabled pattern="[0-9]"
@@ -297,4 +299,5 @@
 
 </body>
 
-<html>
+</html>
+

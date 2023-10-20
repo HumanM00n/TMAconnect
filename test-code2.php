@@ -57,9 +57,7 @@
     $stmt->bindParam(':IdDemande', $idDemande, PDO::PARAM_INT);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_BOTH); 
-
-    
-    ?>
+?>
 
     <div class="btnajout">
         <button onClick=" history.back();">Retour</button>
@@ -90,6 +88,7 @@
 
                     <div class="form-group">
                         <label for="demCreePar">Priorité :</label>
+
                         <input name="selectPrio" id="selectPrio" class="inputInfos" disabled pattern="[0-9]"
                         <?php 
                             foreach ($result as $row) {
@@ -293,8 +292,8 @@
             </fieldset>
         </form>
     </section>
+
 </div>
 
 </body>
 
-<html>

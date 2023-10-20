@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // informations de connexion à la base de données MySQL
 $servername = "localhost:3308"; // nom du serveur
@@ -24,7 +23,10 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
     if ($st->execute()) {
         $hashedPassword = $st->fetchColumn();
 
-        if ($hashedPassword && password_verify($_POST["password"], $hashedPassword)) {
+        if ($hashedPassword && password_verify($_POST["password"], $hashedPassword)) { 
+            
+            session_start();
+
             $username1 = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
             $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
@@ -43,6 +45,44 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
     } else {
         $error = true;
     }
+}
+
+
+
+function Authentification($username1, $case_cochee) 
+{
+    // Test d'authentification
+    $_SESSION['username'] = $username1; // Stocke l'identifiant de l'utilisateur dans la session
+    if($case_cochee)
+        $_SESSION['lifetime'] = 60*2; // Si la case est cochée, définir la durée de session à 45 minutes
+    else
+        $_SESSION['lifetime'] = 60*1; // Sinon, définir la durée de session à 5 minutes
+
+    $_SESSION['activite'] = time(); // Stocke le temps actuel comme dernière activité
+}
+
+function activite ()
+{
+    // Vérifie si les clés de session nécessaires sont définies et si la durée de session n'a pas expiré
+    if(isset($_SESSION['lifetime']) && isset($_SESSION['activite']) && ($_SESSION['lifetime'] + $_SESSION['activite'] > time()))
+    {
+        $_SESSION['activite'] = time(); // Met à jour le temps de la dernière activité utilisateur
+    }
+    else
+    {   
+        session_unset(); // Supprime les données de session
+        session_destroy(); // Détruit la session
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $user = $_POST["username"]; // Récupère l'identifiant de l'utilisateur à partir du formulaire
+
+    // Vérifie si la case a été cochée
+    $case_cochee = isset($_POST["case_cochee"]);
+
+    Authentification($user, $case_cochee); // Appelle la fonction d'authentification avec les paramètres appropriés
+    activite(); // Vérifie et met à jour l'activité de session
 }
 ?>
 
@@ -127,8 +167,8 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
                 </div>
                 <a href="./home.php"><input class="tma-btn" type="submit" value="Se Connecter"></a>
             </section>
+            <label class="remember"><input type="checkbox" id="case_cochee" name="case_cochee">Se souvenir de moi</label>
         </form>
-        <label class="remember"><input type="checkbox">Se souvenir de moi</label>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 
@@ -137,3 +177,4 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
 </body>
 
 </html>
+
