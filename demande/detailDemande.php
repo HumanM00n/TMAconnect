@@ -57,8 +57,6 @@
     $stmt->execute();
     // $result = $stmt->fetchAll(PDO::FETCH_BOTH);
     $row = $stmt->fetch(PDO::FETCH_BOTH);
-
-    
     ?>
 
     <div class="btnajout">
