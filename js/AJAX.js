@@ -8,7 +8,9 @@ document.getElementById('formFiltre').addEventListener('submit', function (event
 
     // Effectuez la requête AJAX
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../php/S-Filtre?select_domaine=' + select_domaine + '&select_etat=' + select_etat + '&num-dmd=' + num_dmd, true);
+    xhr.open('POST', '../php/S-Filtre', true); // Modification de la méthode ici
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Ajout de l'en-tête
+
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 400) {
             // La requête a réussi, vous pouvez mettre à jour le contenu du tableau ici
@@ -18,5 +20,7 @@ document.getElementById('formFiltre').addEventListener('submit', function (event
             console.error(xhr);
         }
     };
-    xhr.send();
+
+    // Envoyez les données du formulaire avec la requête POST
+    xhr.send('select_domaine=' + select_domaine + '&select_etat=' + select_etat + '&num-dmd=' + num_dmd);
 });
