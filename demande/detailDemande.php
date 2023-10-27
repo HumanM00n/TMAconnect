@@ -55,7 +55,6 @@
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':IdDemande', $idDemande, PDO::PARAM_INT);
     $stmt->execute();
-    // $result = $stmt->fetchAll(PDO::FETCH_BOTH);
     $row = $stmt->fetch(PDO::FETCH_BOTH);
     ?>
 
@@ -71,40 +70,32 @@
                         <label for="demCreePar">Domaine :</label>
                         <input name="selectDom" id="selectDom" class="inputInfos" disabled pattern="[0-9]" 
                         <?php 
-                            // foreach ($result as $row) {
-                                $dom_dmd = $row[1];
-                            // }
-                              ?> value="<?php echo $dom_dmd; ?>">
+                            $dom_dmd = $row[1];
+                        ?> value="<?php echo $dom_dmd; ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="demCreePar">Qualification :</label>
                         <input name="selectQualif" id="selectQualif" class="inputInfos" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $qual_dmd = $row[2];
-                            // }
-                              ?> value="<?php echo $qual_dmd; ?>">
+                            $qual_dmd = $row[2];
+                        ?> value="<?php echo $qual_dmd; ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="demCreePar">Priorité :</label>
                         <input name="selectPrio" id="selectPrio" class="inputInfos" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $prt_dmd = $row[3];
-                            // }
-                              ?> value="<?php echo $qual_dmd; ?>">
+                            $prt_dmd = $row[3];
+                        ?> value="<?php echo $qual_dmd; ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="numDemande">N° demande :</label>
                         <input type="text" name="numDemande" id="numDemande" size="35" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $id_dmd = $row[0];
-                            // }
-                              ?> value="<?php echo $id_dmd; ?>">
+                            $id_dmd = $row[0];
+                        ?> value="<?php echo $id_dmd; ?>">
                     </div>
 
                 </div>
@@ -116,76 +107,64 @@
                     <input type="text" name="demLibelle" id="demLibelle" size="35"
                         pattern="^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ�?ÀÂÄÃÅÇÉÈÊË�?ÌÎ�?ÑÓÒÔÖÕÚÙÛÜ�?ŸÆŒ\s\-]+$" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $lbl_dmd= $row[4];
-                            // }
-                              ?> value="<?php echo $lbl_dmd; ?>">
+                            $lbl_dmd= $row[4];
+                        ?> value="<?php echo $lbl_dmd; ?>">
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="demCree">Demande créée le :</label>
-                        <input type="text" name="demCree" id="demCree" required
-                            value="<?php echo $result['demCree']; ?>">
+                        <input type="text" name="demCree" id="demCree" requiredc lass="inputInfos" disabled pattern="[0-9]"
+                        <?php
+                            $date = $row[5];
+                         ?> value="<?php echo $date; ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="demCreePar">Par :</label>
                         <input name="selectDemandePar" id="selectDemandePar" class="inputInfos" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $nom = $row[6];
-                            // }
-                              ?> value="<?php echo $nom; ?>">
-                
+                        $nom = $row[6];
+                        ?> value="<?php echo $nom; ?>">
                     </div>
+
                     <div class="form-group">
                         <label for="demEmise">Demande émise le :</label>
                         <input type="text" name="demEmise" id="demEmise" class="infosDate" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $date = $row[7];
-                            // }
+                            $date = $row[7];
                         ?> value="<?php echo $date; ?>">
-
                     </div>
+
                     <div class="form-group">
                         <label for="demEmisePar">Par :</label>
                         <input name="selectDemandeEmisePar" id="selectDemandeEmisePar" class="inputInfos" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $nom = $row[8];
-                            // }
+                            $nom = $row[8];
                         ?> value="<?php echo $nom; ?>">
-
                     </div>
+
                     <div class="form-group">
                         <label for="demRecu">Demande reçue le :</label>
                         <input type="text" name="demRecu" id="demRecu" class="infosDate" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $date = $row[9];
-                            // }
+                            $date = $row[9];
                         ?> value="<?php echo $date; ?>">
-
                     </div>
+
                     <div class="form-group">
                         <label for="beneficiaire">Bénéficiaire :</label>
                         <input name="selectBeneficiaire" id="selectBeneficiaire" class="inputInfos" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $nom = $row[10];
-                            // }
+                            $nom = $row[10];
                         ?> value="<?php echo $nom; ?>">
-
                     </div>
+
                     <div class="form-group">
                         <label for="demCree">Etat de la demande au :</label>
                         <input type="text" name="demEtat" id="demEtat" class="infosDate" disabled pattern="[0-9]" 
                         <?php 
-                            // foreach ($result as $row) {
-                                $date= $row[11];
-                            // }
+                            $date= $row[11];
                         ?> value="<?php echo $date; ?>">
                     </div>
 
@@ -193,9 +172,7 @@
                         <label for="etat">Etat :</label>
                         <input name="selectDemandeEtat" id="selectDemandeEtat" class="inputInfos" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $etat_dmd = $row[12];
-                            // }
+                            $etat_dmd = $row[12];
                         ?> value="<?php echo $etat_dmd; ?>">
                     </div>
 
@@ -203,9 +180,7 @@
                         <label for="visaServEtude">Visa service étude au :</label>
                         <input type="text" name="visaServEtude" id="visaServEtude" class="infosDate" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $date = $row[13];
-                            // }
+                            $date = $row[13];
                         ?> value="<?php echo $date; ?>">
                     </div>
 
@@ -213,21 +188,18 @@
                         <label for="signataire">Signataire :</label>
                         <input name="selectSignataire" id="selectSignataire" class="inputInfos" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $etat_dmd = $row[14];
-                            // }
+                            $etat_dmd = $row[14];
                         ?> value="<?php echo $etat_dmd; ?>">
                     </div>
 
                     <div class="form-group">
                     </div>
+
                     <div class="form-group">
                         <label for="affection">Affectation de la demande :</label>
                         <input name="selectAffectation" id="selectAffectation" class="inputInfos" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $nom= $row[15];
-                            // }
+                            $nom= $row[15];
                         ?> value="<?php echo $nom; ?>">
                     </div>
 
@@ -236,9 +208,7 @@
                         <label for="demEmise">Fin souhaitée le :</label>
                         <input type="text" name="demFs" id="demFs" class="infosDate" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $date = $row[16];
-                            // }
+                            $date = $row[16];
                         ?> value="<?php echo $date; ?>">
                     </div>
 
@@ -246,9 +216,7 @@
                         <label for="demEmise">Mise en recette prévue le (optionnel) :</label>
                         <input type="text" name="demRct" id="demRct" class="infosDate" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $date = $row[17];
-                            // }
+                            $date = $row[17];
                         ?> value="<?php echo $date; ?>">                        
                     </div>
 
@@ -257,19 +225,15 @@
                         <label for="regroupement">Regroupement :</label>
                         <input name="selectRegroupement" id="selectRegroupement" class="inputInfos" disabled pattern="[0-9]" 
                         <?php 
-                            // foreach ($result as $row) {
-                                $nom = $row[18];
-                            // }
+                            $nom = $row[18];
                         ?> value="<?php echo $nom; ?>">
                         
                     <div class="form-group-Amort">
                         <label for="demAmortis">Demande amortissable</label>
                         <input type="checkbox" name="demAmortis" id="demAmortis" disabled pattern="[0-9]" 
                         <?php 
-                            // foreach ($result as $row) {
-                                $amorti_dmd = $row[19];
-                            // }
-                            if ($amorti_dmd == 'on') {
+                            $amorti_dmd = $row[19];
+                        if ($amorti_dmd == 'on') {
                             echo "checked='checked'";
                             }
                         ?>>
@@ -279,10 +243,8 @@
                         <label for="demArchiv">Demande archivée le :</label>
                         <input type="text" name="demArchiv" id="demArchiv" class="infosDate" disabled pattern="[0-9]"
                         <?php 
-                            // foreach ($result as $row) {
-                                $date = $row[20];
-                            // }
-                        ?> value="<?php echo $date; ?>"> 
+                            $date = $row[20];
+                         ?> value="<?php echo $date; ?>"> 
                     </div>
                 </div>
             </fieldset>
