@@ -10,9 +10,21 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Récupérer les données du formulaire 
-    $select_domaine = isset($_GET['select_domaine']) ? $_GET['select_domaine'] : '';
-    $select_etat = isset($_GET['select_etat']) ? $_GET['select_etat'] : '';
-    $num_dmd = isset($_GET['num-dmd']) ? $_GET['num-dmd'] : '';
+    // $select_domaine = filter_input(INPUT_POST, 'select_domaine', FILTER_SANITIZE_STRING);
+    // $select_etat = filter_input(INPUT_POST, 'select_etat', FILTER_SANITIZE_STRING);
+    
+
+    $select_domaine = isset($_POST['select_domaine']) ? $_POST['select_domaine'] : '';
+    $select_etat = isset($_POST['select_etat']) ? $_POST['select_etat'] : '';
+    $num_dmd = isset($_POST['num-dmd']) ? $_POST['num-dmd'] : '';
+
+    echo $_POST['select_domaine'];
+    echo $_POST['select_etat'];
+
+    // echo $select_domaine;
+    // echo $select_etat;
+    // echo $num_dmd;
+
 
     // Construire la requête SQL en fonction des valeurs du formulaire
     $sql = "SELECT D.IdDemande, DOM.libelle, D.libelle, Q.libelle, D.date_crea, E.libelle 
@@ -20,19 +32,40 @@ try {
             WHERE D.dom_dmd = DOM.IdDomaine 
             AND D.qual_dmd = Q.IdQual
             AND D.etat_dmd = E.IdEtat";
+// début
 
-    if ($select_domaine != '') {
-        $sql .= " AND DOM.libelle = '$select_domaine'";
+if ($select_domaine != '' && $select_etat != '' && $num_dmd != '') {
+    $sql .= " AND DOM.libelle = '$select_domaine' AND E.libelle = '$select_etat' AND D.IdDemande = $num_dmd";
+} else {
+    if ($select_domaine != '' && $select_etat != '') {
+        $sql .= " AND DOM.libelle = '$select_domaine' AND E.libelle = '$select_etat' ";
+    } else {
+        if ($select_domaine != '' && $num_dmd != '') {
+            $sql .= " AND DOM.libelle = '$select_domaine' AND D.IdDemande = $num_dmd";
+        } else {
+            if ($select_etat != '' && $num_dmd != '') {
+                $sql .= " AND E.libelle = '$select_etat' AND D.IdDemande = $num_dmd";
+            } else {
+                if ($select_domaine != '') {
+                    $sql .= " AND DOM.libelle = '$select_domaine'";
+                } else {
+                    if ($select_etat != '') {
+                        $sql .= " AND E.libelle = '$select_etat' ";
+                    } else {
+                        if ($num_dmd != '') {
+                            $sql .= " AND D.IdDemande = $num_dmd";
+                        }
+                    }
+                }
+            }
+        }
     }
+}
+?>
 
-    if ($select_etat != '') {
-        $sql .= " AND E.libelle = '$select_etat'";
-    }
+<!-- [0] -->
 
-    if ($num_dmd != '') {
-        $sql .= " AND D.IdDemande = $num_dmd";
-    }
-
+<?php
     $stmt = $pdo->query($sql);
 
     // Vérification des résultats
@@ -42,14 +75,14 @@ try {
 
         while ($row = $stmt->fetch(PDO::FETCH_BOTH)) {
             $html .= '<tr class="afficherDetails">';
-            $html .= '<td><button><a href="detailDemande.php?idDemande='.$row[0].'">🔎</a></button></td>';
-            $html .= '<td>'.$row[0].'</td>';
-            $html .= '<td>'.$row[1].'</td>';
-            $html .= '<td>'.$row[2].'</td>';
-            $html .= '<td>'.$row[3].'</td>';
-            $html .= '<td>'.$row[4].'</td>';
+            $html .= '<td><button><a href="detailDemande.php?idDemande=' . $row[0] . '">🔎</a></button></td>';
+            $html .= '<td>' . $row[0] . '</td>';
+            $html .= '<td>' . $row[1] . '</td>';
+            $html .= '<td>' . $row[2] . '</td>';
+            $html .= '<td>' . $row[3] . '</td>';
+            $html .= '<td>' . $row[4] . '</td>';
             $html .= '<td>2</td>';
-            $html .= '<td>'.$row[5].'</td>';
+            $html .= '<td>' . $row[5] . '</td>';
             $html .= '<td>30-09-2023</td>';
             $html .= '<td><i class="bx bx-download"></i></td>';
             $html .= '</tr>';
