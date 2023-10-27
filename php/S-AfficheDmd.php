@@ -13,8 +13,7 @@
     } catch (PDOException $e) {
         echo "La connexion a �chou� : " . $e->getMessage();
     }
-    // include('../');
-    
+        
     // Requ�te SELECT pour r�cup�rer toutes les demandes
     $sql = "SELECT D.IdDemande, D., U.prenom, U.matricule, U.email, S.s_libelle, P.p_libelle, D.d_libelle, U.dateFin, U.derniere_connect 
         FROM tc_utilisateur U
