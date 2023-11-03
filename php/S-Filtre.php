@@ -4,27 +4,22 @@ $servername = "localhost:3308"; // nom du serveur
 $username = "root"; // nom d'utilisateur
 $password = "XVsikn92"; // mot de passe
 $dbname = "tmaconnect"; // nom de la base de données
+// Création d'une connexion à la base de données
 
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Récupérer les données du formulaire 
-    // $select_domaine = filter_input(INPUT_POST, 'select_domaine', FILTER_SANITIZE_STRING);
-    // $select_etat = filter_input(INPUT_POST, 'select_etat', FILTER_SANITIZE_STRING);
-    
-
     $select_domaine = isset($_POST['select_domaine']) ? $_POST['select_domaine'] : '';
     $select_etat = isset($_POST['select_etat']) ? $_POST['select_etat'] : '';
-    $num_dmd = isset($_POST['num-dmd']) ? $_POST['num-dmd'] : '';
+    $num_dmd = isset($_POST['num_dmd']) ? $_POST['num_dmd'] : '';
+    $lib_dmd = isset($_POST['lib_dmd']) ? $_POST['lib_dmd'] : '';
 
-    echo $_POST['select_domaine'];
-    echo $_POST['select_etat'];
-
-    // echo $select_domaine;
-    // echo $select_etat;
-    // echo $num_dmd;
-
+    // // Ajoutez ces lignes pour vérifier les valeurs
+    // var_dump($select_domaine);
+    // var_dump($select_etat);
+    // var_dump($num_dmd);
+    // var_dump($lib_dmd);
 
     // Construire la requête SQL en fonction des valeurs du formulaire
     $sql = "SELECT D.IdDemande, DOM.libelle, D.libelle, Q.libelle, D.date_crea, E.libelle 
@@ -32,41 +27,42 @@ try {
             WHERE D.dom_dmd = DOM.IdDomaine 
             AND D.qual_dmd = Q.IdQual
             AND D.etat_dmd = E.IdEtat";
-// début
 
-if ($select_domaine != '' && $select_etat != '' && $num_dmd != '') {
-    $sql .= " AND DOM.libelle = '$select_domaine' AND E.libelle = '$select_etat' AND D.IdDemande = $num_dmd";
-} else {
-    if ($select_domaine != '' && $select_etat != '') {
-        $sql .= " AND DOM.libelle = '$select_domaine' AND E.libelle = '$select_etat' ";
+    $stmt = $pdo->query($sql);
+
+    if ($lib_dmd != '') {
+        $lib_dmd_param = "%$lib_dmd%";
+        $stmt->bindParam(':lib_dmd', $lib_dmd_param, PDO::PARAM_STR); //Contient la chaîne de caractères à rechercher (avec les % autour)
+        $sql .= " AND D.libelle LIKE :lib_dmd";
+    }
+
+    if ($select_domaine != '' && $select_etat != '' && $num_dmd != '') {
+        $sql .= " AND DOM.libelle = '$select_domaine' AND E.libelle = '$select_etat' AND D.IdDemande = $num_dmd";
     } else {
-        if ($select_domaine != '' && $num_dmd != '') {
-            $sql .= " AND DOM.libelle = '$select_domaine' AND D.IdDemande = $num_dmd";
+        if ($select_domaine != '' && $select_etat != '') {
+            $sql .= " AND DOM.libelle = '$select_domaine' AND E.libelle = '$select_etat' ";
         } else {
-            if ($select_etat != '' && $num_dmd != '') {
-                $sql .= " AND E.libelle = '$select_etat' AND D.IdDemande = $num_dmd";
+            if ($select_domaine != '' && $num_dmd != '') {
+                $sql .= " AND DOM.libelle = '$select_domaine' AND D.IdDemande = $num_dmd";
             } else {
-                if ($select_domaine != '') {
-                    $sql .= " AND DOM.libelle = '$select_domaine'";
+                if ($select_etat != '' && $num_dmd != '') {
+                    $sql .= " AND E.libelle = '$select_etat' AND D.IdDemande = $num_dmd";
                 } else {
-                    if ($select_etat != '') {
-                        $sql .= " AND E.libelle = '$select_etat' ";
+                    if ($select_domaine != '') {
+                        $sql .= " AND DOM.libelle = '$select_domaine'";
                     } else {
-                        if ($num_dmd != '') {
-                            $sql .= " AND D.IdDemande = $num_dmd";
+                        if ($select_etat != '') {
+                            $sql .= " AND E.libelle = '$select_etat' ";
+                        } else {
+                            if ($num_dmd != '') {
+                                $sql .= " AND D.IdDemande = $num_dmd";
+                            }
                         }
                     }
                 }
             }
         }
     }
-}
-?>
-
-<!-- [0] -->
-
-<?php
-    $stmt = $pdo->query($sql);
 
     // Vérification des résultats
     if ($stmt->rowCount() > 0) {
