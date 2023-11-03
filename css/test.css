@@ -1,348 +1,190 @@
-body {
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
+/* @import url(creationDemande.css); */
+
+table {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
     font-family: Arial, sans-serif;
-}
-
-.barre-arianne {
-    position: fixed; /* utiliser "fixed" pour que la barre reste visible en tout temps */
-    top: 0px;
-    overflow: visible;
-    left: 0;
-    right: 0;
-    background-color: #289297;
-    z-index: 80;
-}
-
-.barre-arianne ul {
-    list-style-type: none; /* enlÃ¨ve les puces de la liste */
-    margin: 0;
-    padding: 0;
-    display: flex; /* utilise Flexbox pour aligner les Ã©lÃ©ments horizontalement */
-}
-
-.barre-arianne .Onglet {
-    margin: 0;
-    padding: 0;
-    position: relative; /* ajoute une position relative pour les Ã©lÃ©ments de menu dÃ©roulant */
-}
-
-.barre-arianne a {
-    display: block; /* rend les liens cliquables sur toute la hauteur de la barre */
-    color: white; /* couleur du texte des liens */
-    text-align: center; /* centre le texte horizontalement */
-    font-weight: bold;
-    padding: 20px 20px; /* ajoute un peu de marge autour du texte */
-    text-decoration: none; /* enlÃ¨ve les soulignements par dÃ©faut */
-    text-align: center;
-    padding: 25px;
-}
-
-/* effet de survol des liens */
-.barre-arianne a:hover {
-    background-color: #0c156b;
-    color: white;
-    text-decoration: none;
-}
-
-
-/* Styles spÃ©cifiques pour le menu dÃ©roulant */
-.barre-arianne .sous {
-    display: none;
-    position: absolute;
-    background-color: #289297;
-    left: 0;
-    font-size: 15px;
-    top: 100%;
-    z-index: 100;
-}
-
-.barre-arianne li:hover .sous {
-    display: block;
-}
-
-.barre-arianne .sous li {
-    display: block;
-}
-
-
-.barre-arianne .sous2 {
-    display: none;
-    position: absolute;
-    background-color: #289297;
-    left: auto;
-    right: 0;
-    font-size: 15px;
-    top: 100%;
-    z-index: 100;
-    width: fit-content; /* Ajuste la largeur du menu dÃ©roulant Ã  son contenu */
-    white-space: nowrap;
-}
-
-.barre-arianne li:hover .sous2 {
-    display: block;
-}
-
-.barre-arianne .sous2 li {
-    display: block;
-    margin-left: 0px;
-}
-
-.MonCompte{
-    position: absolute;
-    right: 0;
-    display: flex;
-    gap: 20px;
-    flex-direction: row;
-    font-weight: 900;
-}
-
-
-#nvldemande {
+    background-color: #FFF;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    border: 2px solid;
-    background: linear-gradient(#f5f5f5, #e8e8e8);
+    flex-direction: column;
+    min-height: 200px; /* Ajuste la hauteur au minimum */
+    margin-top: 45px
 }
 
-#form_nvldemande {
-    width: 800px; 
-    height: 915px;
-    margin: 8px auto 0;
-    padding: 0;
+table th {
+    width: 150px;
+    margin-bottom: 1rem;
 }
 
-#form_nvldemande div {
-    margin-bottom: -13px;
+table td {
+    width: 150px;
+    /*Ajuste la même taille du tableau avec celle de l'en-tête  */
 }
 
-#form_nvldemande legend {
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #555;
-    margin-left: 35.5%;
+
+
+.modif {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    min-height: 32vh;/* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
+    background: (#f5f5f5, #e8e8e8);
 }
 
-#form_nvldemande .form-row {
+
+.formmodif {
+    width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    margin-top: 75px;
+    margin-bottom: 0;
     display: flex;
-    justify-content: space-between;
-    margin: 2px auto 0;
+    justify-content: center; /* Centre les éléments horizontalement */
+    align-items: flex-start; /* Aligne les éléments en haut */
+    position: absolute; /* Permet d'utiliser les propriétés top, right, etc. */
+    top: 0; /* Place l'élément en haut */
+    right: 0; /* Place l'élément à droite */
 }
 
-#form_nvldemande fieldset {
-    margin-bottom: 30px;
-    height: 115px;
+
+.formmodif fieldset {
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 30px; /* Augmenter l'espacement entre les champs */
+    width: 85%;
+    max-height: 300px;
+    background-color: #f5f5f5;
 }
 
-#form_nvldemande .form-group {
-    width: 48%;
-    margin-bottom: 3px;
-}
 
-#form_nvldemande label {
+.formmodif .label-container {
+    text-align: center;
     display: inline-block;
+    width: calc(33% - 10px); /* Chaque label-container occupe un tiers de la largeur moins la marge */
+    margin: 0;
+    margin-top: -21px;
+    vertical-align: top; /* Aligner les div en haut */
+    box-sizing: border-box; /* Inclure la marge dans la largeur calculée */
+    height: 75px;
+}
+
+
+.formmodif h1 {
+    text-align: center;
+    color: #333;
+}
+
+
+.formmodif legend {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.formmodif div {
+    margin: 1% 1% 1% 4%;
+}
+
+.formmodif label {
+    display: block;
     margin-bottom: 5px;
     color: #333;
 }
 
-#form_nvldemande input[type="infosDate"] {
+
+.formmodif input[type="number"] {
+    width: 35%; /* Ajuster la largeur du champ de type number */
+}
+
+
+.formmodif input[type="text"] {
+    width: 80%; /* Ajuster la largeur du champ de type number */
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+
+#select_domaine {
+    width: 180px;
+    padding: 1%;
+    margin-bottom: 10px;
+}
+
+
+#select_etat {
+    width: 302px;
+    padding: 1%;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
     width: 100%;
-    padding: 5px;
-    font-size: 14px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
-
-#form_nvldemande select {
-    width: 100%;
-    padding: 9px;
-    font-size: 9px;
+input[type="submit"]:hover {
+    background-color: #45a049;
 }
 
-#form_nvldemande .inputInfos {
-    width: 90%;
-    padding: 9px;
-    font-size: 16px;
-    height: 30px;
+.bloc-btn {
+    display: block;
+    float: right;
 }
 
-#form_nvldemande button[type="submit"] {
+.formmodif button {
     padding: 12px 20px;
-    margin-right: 10px;
     background: #0055A4;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+
+/* Styles supplémentaires pour un aspect esthétique */
+.formmodif {
+    font-family: Arial, sans-serif;
     font-size: 16px;
+}
+
+
+.formmodif button {
+    font-size: 13px;
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
-
-#form_nvldemande button[type="reset"] {
-    margin-left: 50px;
-    padding: 12px 20px;
-    background: red;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-#form_nvldemande button[type="submit"]:hover {
+.formmodif button:hover {
     background-color: #004281;
 }
 
-#form_nvldemande button[type="reset"]:hover {
-    background-color: rgb(180, 27, 27);
-}
 
-#form_nvldemande input[type="text"] {
-    width: 90%;
-    padding: 9px;
-    font-size: 16px;
-    height: 30px;
-}
+.div--pagination {
+    position: fixed; /*Positionné de manière fixe en bas de la page, indépendamment du défilement de l'utilisateur.*/ 
+    bottom: 30px; /*Pace l'élément en bas de la page */
+    left: 50%;
+    transform: translateX(-50%); /*Ramène l'élément de 50% de sa propre largeur vers la gauche, le centrant parfaitement.*/
+    display: flex; /*Active le modèle de boîte flexible.*/
+    justify-content: center; /*Centre l'élément horizontalement à l'intérieur de son conteneur.*/
+    align-items: center; /*Centre l'élément verticalement à l'intérieur de son conteneur.*/
+    width: 100%; /*Fait en sorte que l'élément occupe toute la largeur de son conteneur parent.*/
+    background-color: #ffffff; /* Couleur d'arrière-plan, à adapter selon vos besoins */
+  }
+  
 
+  /* CSS pour masquer les détails initialement */
+tr.demande + tr.details { display: none; }
 
-.input-validation {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-/* Styles pour le texte de l'Ã©tiquette */
-label {
-    display: block; /* Affiche le texte de l'Ã©tiquette en tant que bloc */
-    margin-bottom: 15px; /* Ajoute un espace en bas de l'Ã©tiquette */
-    font-weight: bold; /* Met en Ã©vidence le texte de l'Ã©tiquette */
-    margin-top: 8px;
-}
-
-#coordo{
-    margin-bottom: 100px;
-}
-
-#form_nvldemande .form-group2 {
-    width: 48%;
-    margin-bottom: 10px;
-    /* margin-top: 12px; */
-}
-
-#form_nvldemande .form-row .form-group-Amort {
-    width: 48%;
-    margin: -60px 0px 0px 439px
-}
-
-.form-group input[type="checkbox"] {
-    width: 50px; /* Modifier la largeur de la case à cocher */
-    height: 22px; /* Modifier la hauteur de la case à cocher */
-    position: relative; /* Définit sa postion relative ajusté avec des propriétes comme top, left, right et bottom*/
-    left: 175px; /* Déplace l'élément de 175 pixels vers la droite par rapport à sa position normale */
-    bottom: 29px; /* Déplace l'élément de 29 pixels vers le bas par rapport à sa position normale */
-
-}
-
-
-.libelleDemande input[type="text"] {
-    width: 100%;
-    padding: 5px; /* Augmenter la taille du padding */
-    margin-bottom: 20px;
-    font-size: 13px;
-}
-
-#form_nvldemande input#demLibelle  {
-    width: 95%;
-    padding: 9px;
-    font-size: 16px;
-    height: 30px;
-}
-
-
-#menuNouvelDmd {
-    display: flex;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    height: 100%;
-    margin-top: 25px;
-    border: 2px solid black;
-    border-radius: 8px;
-    background: rgba(218, 218, 218, 0.281);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-}
-
-#form_menuNvlDmd {
-    padding: 10px;
-}
-
-#form_menuNvlDmd .form-row {
-    display: flex;
-    justify-content: space-between;
-}
-
-#form_menuNvlDmd .form-group {
-    width: 20%;
-    margin-bottom: 10px;
-}
-
-#form_menuNvlDmd label {
-    display: inline-block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-#form_menuNvlDmd select{
-    width: 100%;
-    padding: 5px;
-    font-size: 14px;
-}
-
-#form_menuNvlDmd input[type="text"]{
-    width: 100%;
-    padding: 3px;
-    font-size: 14px;
-}
-
-.btnajout {
-    align-items: center;
-    justify-content: start;
-    display: flex;
-    margin-top: 20px;
-    margin-left: 20px;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.btnajout button {
-    padding: 10px 16px;
-    background: #0055A4;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-
-.Successful{
-    display: block;
-    background-color: #69e95d;
-    border: 1px solid;
-    border-radius: 10px;
-    margin-top: 1%;
-    margin-bottom: -3%;
-    padding: 1.2% 1.2% 1.2% 1.2%;
-    text-align: center;
-    width: 65%;
-}
+/* CSS pour afficher les détails quand ils sont visibles */
+tr.demande.details-visible + tr.details { display: table-row; }
