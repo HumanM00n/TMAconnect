@@ -4,11 +4,19 @@ document.getElementById('formFiltre').addEventListener('submit', function (event
     // Récupérez les valeurs des champs de filtre
     var select_domaine = document.getElementById('select_domaine').value;
     var select_etat = document.getElementById('select_etat').value;
-    var num_dmd = document.getElementById('num-dmd').value;
+    var num_dmd = document.getElementById('num_dmd').value;
+    var lib_dmd = document.getElementById('lib_dmd').value;
+    
+    // On utilise console.log pour afficher les valeurs
+    console.log('select_domaine:', select_domaine);
+    console.log('select_etat:', select_etat);
+    console.log('num_dmd:', num_dmd)
+    console.log('lib_dmd:', lib_dmd)
+
 
     // Effectuez la requête AJAX
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../php/S-Filtre', true); // Modification de la méthode ici
+    xhr.open('POST', 'php/S-Filtre.php', true); // Modification de la méthode ici
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Ajout de l'en-tête
 
     xhr.onload = function () {
@@ -19,8 +27,9 @@ document.getElementById('formFiltre').addEventListener('submit', function (event
             // Une erreur s'est produite
             console.error(xhr);
         }
-    };
+    }; 
 
     // Envoyez les données du formulaire avec la requête POST
-    xhr.send('select_domaine=' + select_domaine + '&select_etat=' + select_etat + '&num-dmd=' + num_dmd);
+    xhr.send('select_domaine=' + select_domaine + '&select_etat=' + select_etat + '&num_dmd=' + num_dmd + '&lib_dmd=' + lib_dmd);
+
 });
