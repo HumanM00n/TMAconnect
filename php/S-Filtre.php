@@ -1,3 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+        <path
+            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+    </symbol>
+</svg>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="../css/test.css" rel="stylesheet" type="text/css">
+
 <?php
 // informations de connexion à la base de données MySQL
 $servername = "localhost:3308"; // nom du serveur
@@ -15,12 +25,6 @@ try {
     $num_dmd = isset($_POST['num_dmd']) ? $_POST['num_dmd'] : '';
     $lib_dmd = isset($_POST['lib_dmd']) ? $_POST['lib_dmd'] : '';
 
-    // // Ajoutez ces lignes pour vérifier les valeurs
-    // var_dump($select_domaine);
-    // var_dump($select_etat);
-    // var_dump($num_dmd);
-    // var_dump($lib_dmd);
-
     // Construire la requête SQL en fonction des valeurs du formulaire
     $sql = "SELECT D.IdDemande, DOM.libelle, D.libelle, Q.libelle, D.date_crea, E.libelle 
             FROM tc_demandes D, tc_domaine DOM, tc_qualif Q, tc_etat E
@@ -28,13 +32,6 @@ try {
             AND D.qual_dmd = Q.IdQual
             AND D.etat_dmd = E.IdEtat";
 
-    $stmt = $pdo->query($sql);
-
-    if ($lib_dmd != '') {
-        $lib_dmd_param = "%$lib_dmd%";
-        $stmt->bindParam(':lib_dmd', $lib_dmd_param, PDO::PARAM_STR); //Contient la chaîne de caractères à rechercher (avec les % autour)
-        $sql .= " AND D.libelle LIKE :lib_dmd";
-    }
 
     if ($select_domaine != '' && $select_etat != '' && $num_dmd != '') {
         $sql .= " AND DOM.libelle = '$select_domaine' AND E.libelle = '$select_etat' AND D.IdDemande = $num_dmd";
@@ -64,6 +61,8 @@ try {
         }
     }
 
+    $stmt = $pdo->query($sql);
+
     // Vérification des résultats
     if ($stmt->rowCount() > 0) {
         $count = $stmt->rowCount();
@@ -87,7 +86,12 @@ try {
         $html .= '</tbody></table>';
         echo $html;
     } else {
-        echo "Aucune demande trouvée";
+        echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div>
+          Aucune demande trouvée
+        </div>
+      </div>';
     }
 } catch (PDOException $e) {
     echo "Erreur de connexion à la base de données : " . $e->getMessage();
