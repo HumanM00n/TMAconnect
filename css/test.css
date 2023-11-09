@@ -10,7 +10,8 @@ table {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-height: 200px; /* Ajuste la hauteur au minimum */
+    min-height: 200px;
+    /* Ajuste la hauteur au minimum */
     margin-top: 45px
 }
 
@@ -27,10 +28,11 @@ table td {
 
 
 .modif {
-    display: flex; 
+    display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 32vh;/* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
+    min-height: 32vh;
+    /* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
     background: (#f5f5f5, #e8e8e8);
 }
 
@@ -43,11 +45,16 @@ table td {
     margin-top: 75px;
     margin-bottom: 0;
     display: flex;
-    justify-content: center; /* Centre les éléments horizontalement */
-    align-items: flex-start; /* Aligne les éléments en haut */
-    position: absolute; /* Permet d'utiliser les propriétés top, right, etc. */
-    top: 0; /* Place l'élément en haut */
-    right: 0; /* Place l'élément à droite */
+    justify-content: center;
+    /* Centre les éléments horizontalement */
+    align-items: flex-start;
+    /* Aligne les éléments en haut */
+    position: absolute;
+    /* Permet d'utiliser les propriétés top, right, etc. */
+    top: 0;
+    /* Place l'élément en haut */
+    right: 0;
+    /* Place l'élément à droite */
 }
 
 
@@ -55,7 +62,8 @@ table td {
     border: 1px solid #333;
     padding: 10px;
     border-radius: 5px;
-    margin-bottom: 30px; /* Augmenter l'espacement entre les champs */
+    margin-bottom: 30px;
+    /* Augmenter l'espacement entre les champs */
     width: 85%;
     max-height: 300px;
     background-color: #f5f5f5;
@@ -65,11 +73,14 @@ table td {
 .formmodif .label-container {
     text-align: center;
     display: inline-block;
-    width: calc(33% - 10px); /* Chaque label-container occupe un tiers de la largeur moins la marge */
+    width: calc(33% - 10px);
+    /* Chaque label-container occupe un tiers de la largeur moins la marge */
     margin: 0;
     margin-top: -21px;
-    vertical-align: top; /* Aligner les div en haut */
-    box-sizing: border-box; /* Inclure la marge dans la largeur calculée */
+    vertical-align: top;
+    /* Aligner les div en haut */
+    box-sizing: border-box;
+    /* Inclure la marge dans la largeur calculée */
     height: 75px;
 }
 
@@ -98,12 +109,14 @@ table td {
 
 
 .formmodif input[type="number"] {
-    width: 35%; /* Ajuster la largeur du champ de type number */
+    width: 35%;
+    /* Ajuster la largeur du champ de type number */
 }
 
 
 .formmodif input[type="text"] {
-    width: 80%; /* Ajuster la largeur du champ de type number */
+    width: 80%;
+    /* Ajuster la largeur du champ de type number */
 }
 
 input[type=number]::-webkit-inner-spin-button {
@@ -171,20 +184,84 @@ input[type="submit"]:hover {
 
 
 .div--pagination {
-    position: fixed; /*Positionné de manière fixe en bas de la page, indépendamment du défilement de l'utilisateur.*/ 
-    bottom: 30px; /*Pace l'élément en bas de la page */
+    position: fixed;
+    /*Positionné de manière fixe en bas de la page, indépendamment du défilement de l'utilisateur.*/
+    bottom: 30px;
+    /*Pace l'élément en bas de la page */
     left: 50%;
-    transform: translateX(-50%); /*Ramène l'élément de 50% de sa propre largeur vers la gauche, le centrant parfaitement.*/
-    display: flex; /*Active le modèle de boîte flexible.*/
-    justify-content: center; /*Centre l'élément horizontalement à l'intérieur de son conteneur.*/
-    align-items: center; /*Centre l'élément verticalement à l'intérieur de son conteneur.*/
-    width: 100%; /*Fait en sorte que l'élément occupe toute la largeur de son conteneur parent.*/
-    background-color: #ffffff; /* Couleur d'arrière-plan, à adapter selon vos besoins */
-  }
-  
+    transform: translateX(-50%);
+    /*Ramène l'élément de 50% de sa propre largeur vers la gauche, le centrant parfaitement.*/
+    display: flex;
+    /*Active le modèle de boîte flexible.*/
+    justify-content: center;
+    /*Centre l'élément horizontalement à l'intérieur de son conteneur.*/
+    align-items: center;
+    /*Centre l'élément verticalement à l'intérieur de son conteneur.*/
+    width: 100%;
+    /*Fait en sorte que l'élément occupe toute la largeur de son conteneur parent.*/
+    background-color: #ffffff;
+    /* Couleur d'arrière-plan, à adapter selon vos besoins */
+}
 
-  /* CSS pour masquer les détails initialement */
-tr.demande + tr.details { display: none; }
+
+/* CSS pour masquer les détails initialement */
+tr.demande+tr.details {
+    display: none;
+}
 
 /* CSS pour afficher les détails quand ils sont visibles */
-tr.demande.details-visible + tr.details { display: table-row; }
+tr.demande.details-visible+tr.details {
+    display: table-row;
+}
+
+
+.error--id {
+    display: block;
+    background-color: #9ec5fe;
+    border: 1px solid;
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-bottom: -3%;
+    padding: 1.2% 1.2% 1.2% 1.2%;
+    text-align: center;
+    width: 65%;
+}
+
+/* ## ~~ CSS FOR ELEMENT BOOTSTRAP ## ~~  */
+
+.align-items-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    width: 80%;
+}
+
+.d-flex {
+    display: -ms-flexbox !important;
+    display: flex !important;
+    background-color: #9ec5fe !important;
+    border: 0.2rem solid #77aaf7 !important;
+    color: #000000 !important;
+    position: relative;
+    right: 60px;
+}
+
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.flex-shrink-0 {
+    -ms-flex-negative: 0!important;
+    flex-shrink: 0!important;
+    position: relative;
+    right: 160px;
+}
+
+svg {
+    /* color: #f8d7da; */
+    width: 120px;
+    height: 90px;
+}
