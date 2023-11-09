@@ -30,6 +30,7 @@ document.getElementById('formFiltre').addEventListener('submit', function (event
     }; 
 
     // Envoyez les données du formulaire avec la requête POST
-    xhr.send('select_domaine=' + select_domaine + '&select_etat=' + select_etat + '&num_dmd=' + num_dmd + '&lib_dmd=' + lib_dmd);
+    // xhr.send('select_domaine=' + select_domaine + '&select_etat=' + select_etat + '&num_dmd=' + num_dmd + '&lib_dmd=' + lib_dmd);
+    xhr.send('select_domaine=' + select_domaine + '&select_etat=' + select_etat + '&num_dmd=' + num_dmd);
 
 });
