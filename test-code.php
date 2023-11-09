@@ -3,7 +3,7 @@
 <html>
 
 <head>
-<title>TMA - test1</title>
+  <title>TMA - test1</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -19,24 +19,17 @@
   <?php include('includes/header.html.inc.php') ?>
 
   <?php
+
   // Requ�tes SQL pour le filtre de recherche des demandes 
-  
-  $sql0 = "SELECT libelle FROM tc_domaine";
+  $sql0 = "SELECT IdDomaine , libelle FROM tc_domaine";
   $stmt0 = $pdo->query($sql0);
   $result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
 
   // Requ�tes SQL pour r�cup�rer les donn�es de la table tc_etat
-  $sql1 = "SELECT libelle FROM tc_etat";
+  $sql1 = "SELECT IdEtat , libelle FROM tc_etat";
   $stmt1 = $pdo->query($sql1);
   $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
-  // $sql2 = "SELECT * FROM tc_demandes WHERE dom_dmd LIKE '%dom_dmd%'";
-  // $stmt2 = $pdo->query($sql2);
-  // $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-  
-  // $sql3 = "SELECT * FROM tc_demandes WHERE etat_dmd LIKE 'T%' ";
-  // $stmt3 = $pdo->query($sql3);
-  // $result3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
   ?>
 
   <section class="modif">
@@ -53,7 +46,7 @@
             foreach ($result0 as $row) {
               $id_dom = $row['IdDomaine'];
               $lib_dom = $row['libelle'];
-              echo "<option value='$id_dom'>$lib_dom</option>";
+              echo "<option value='$lib_dom'>$lib_dom</option>";
             }
             ?>
           </select>
@@ -67,7 +60,7 @@
             foreach ($result1 as $row) {
               $id_etat = $row['IdEtat'];
               $lib_etat = $row['libelle'];
-              echo "<option value='$id_etat'>$lib_etat</option>";
+              echo "<option value='$lib_etat'>$lib_etat</option>";
             }
             ?>
           </select>
@@ -79,7 +72,6 @@
         </div>
 
         <div>
-          <!-- Nouveaux champs de texte -->
           <label for="lib_dmd">Libellé de la Demande</label>
           <input type="text" name="lib_dmd" id="lib_dmd">
         </div>
@@ -87,14 +79,13 @@
 
 
         <div class="bloc-btn">
-          <button type="submit" id="submit">Appliquer</button>
+          <button type="submit" id="submit" name="appliquer">Appliquer</button>
           <button type="reset">Réinitialiser</button>
         </div>
       </fieldset>
     </form>
   </section>
-
-
+ 
 <!-----------------------------------------
 |           Tableau Des demandes          | 
 ------------------------------------------>
@@ -102,7 +93,7 @@
   <?php if ($stmt->rowCount() > 0): ?>
 
     <div id="table-container" class='table'>
-      <?php include('php/S-Filtre.php'); ?>
+      <?php include_once('php/S-Filtre.php'); ?>
     </div>
 
   <?php else: ?>
@@ -129,7 +120,7 @@
     </ul>
   </nav>
 
-  <div id="alertContainer"></div>
+  <!-- <div id="alertContainer"></div> -->
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
