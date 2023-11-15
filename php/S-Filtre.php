@@ -33,34 +33,23 @@ try {
             AND D.etat_dmd = E.IdEtat";
 
 
-    if ($select_domaine != '' && $select_etat != '' && $num_dmd != '') {
-        $sql .= " AND DOM.libelle = '$select_domaine' AND E.libelle = '$select_etat' AND D.IdDemande = $num_dmd";
-    } else {
-        if ($select_domaine != '' && $select_etat != '') {
-            $sql .= " AND DOM.libelle = '$select_domaine' AND E.libelle = '$select_etat' ";
-        } else {
-            if ($select_domaine != '' && $num_dmd != '') {
-                $sql .= " AND DOM.libelle = '$select_domaine' AND D.IdDemande = $num_dmd";
-            } else {
-                if ($select_etat != '' && $num_dmd != '') {
-                    $sql .= " AND E.libelle = '$select_etat' AND D.IdDemande = $num_dmd";
-                } else {
-                    if ($select_domaine != '') {
-                        $sql .= " AND DOM.libelle = '$select_domaine'";
-                    } else {
-                        if ($select_etat != '') {
-                            $sql .= " AND E.libelle = '$select_etat' ";
-                        } else {
-                            if ($num_dmd != '') {
-                                $sql .= " AND D.IdDemande = $num_dmd";
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    if ($select_domaine != '') {
+        $sql .= " AND DOM.libelle = '$select_domaine'";
     }
 
+    if ($select_etat != '') {
+        $sql .= " AND E.libelle = '$select_etat' ";
+    }
+
+    if ($num_dmd != '') {
+        $sql .= " AND D.IdDemande = $num_dmd";
+    }
+    
+    if ($lib_dmd != '') {
+        $sql .= " AND D.libelle LIKE '$lib_dmd'";
+    }
+
+    // echo $sql;
     $stmt = $pdo->query($sql);
 
     // Vérification des résultats
