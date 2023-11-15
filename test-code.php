@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <?php include('includes/connexion.inc.php') ?>
+  <?php include('includes/connexion.inc.php') ?> 
   <?php include('includes/header.html.inc.php') ?>
 
   <?php
