@@ -16,7 +16,7 @@ document.getElementById('formFiltre').addEventListener('submit', function (event
 
     // Effectuez la requête AJAX
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'php/S-Filtre.php', true); // Modification de la méthode ici
+    xhr.open('POST', '../php/S-Filtre.php', true); // Modification de la méthode ici
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Ajout de l'en-tête
 
     xhr.onload = function () {
