@@ -49,7 +49,6 @@ try {
         $sql .= " AND D.libelle LIKE '$lib_dmd'";
     }
 
-    // echo $sql;
     $stmt = $pdo->query($sql);
 
     // Vérification des résultats
