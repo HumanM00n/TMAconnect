@@ -252,11 +252,7 @@
     </section>
 </div>
 
-</body>
-
-</html>
-
-
+<script src="../js/date.js"></script>
 </body>
 
 </html>
