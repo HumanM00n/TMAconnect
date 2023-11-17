@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="lst-obj-impact.css">
     <link rel="stylesheet" href="../css/csshome.css">
-    <title>TMAconnect-ldoi</title>
+    <title>TMAldoi</title>
 </head>
 <?php include('../includes/connexion.inc.php') ?>
 
