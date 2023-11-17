@@ -393,7 +393,7 @@ function verificationPassword($argument) {
     $resultat = verificationPasswordGPT($motDePasse);
 
     // Affichage du résultat
-    echo $resultat ? 'Mot de passe valide' : 'Mot de passe invalide';
+    echo $resultat ? 'Mot de passe valide' : 'Mot de passe invalide ';
 ?>
 
 
@@ -421,8 +421,6 @@ function verificationPassword($argument) {
 
 ?>
 
-<br>
-
 <?php 
     //CORRECTION CHATGPT
 function verificationPassword2($password) {
@@ -445,8 +443,87 @@ $motDePasse = 'Abcd1234';
 $resultat = verificationPassword2($motDePasse);
 
 // Affichage du résultat
-echo $resultat ? 'Mot de passe valide' : 'Mot de passe invalide';
+echo $resultat ? 'Mot de passe valide' : 'Mot de passe invalide'; 
 ?>
 
+<br>
+<br>
 
-<?php ?>
+<?php 
+// Créer une fonction from scratch qui s'appelle capital(). 
+// Elle prendra un argument de type string. 
+// Elle devra retourner le nom de la capitale des pays suivants :
+
+    function capital(string $pays): string {
+        $paysetcapital = [
+            'France' => 'Paris',
+            'Allemangne' => 'Berlin',
+            'Italie' => 'Rome',
+            'Maroc' => 'Rabat',
+            'Espagne' => 'Madrid',
+            'Portugal' => 'Lisbonne',
+            'Angleterre' => 'Londres',
+        ];
+
+        return $paysetcapital[$pays] ?? 'Inconnu';
+    }
+
+    echo capital('France'); echo '<br>';
+    echo capital('Angleterre');
+?>
+
+<br>
+
+<?php 
+// Créer une fonction from scratch qui s'appelle listHTML(). Elle prendra deux arguments :
+// Un string représentant le nom de la liste
+// Un array représentant les élements de cette liste
+// Elle devra retourner une liste HTML. Chaque element de cette liste viendra du tableau passé en paramètre.
+
+// Exemple : Paramètre : Titre : Capitale Liste : ["Paris", "Berlin", "Moscou"] Résultat : <h3>Capitale</h3><ul><li>Paris</li><li>Berlin</li><li>Moscou</li></ul>
+
+//Comme vous pouvez le voir il n'y a pas d'espace ni de retour à la ligne entre les élements de la liste. Pas d'espace non plus entre le titre et la liste.
+
+//Si le titre est null et vide il faut que la fonction retourne null. Si l'array est vide, il faut que la fonction retourne null.
+
+function listHTML(array $elements) {
+    // Vérifie si le paramètre est un tableau 
+    if (!is_array($elements)) { 
+        return '<p>Erreur : Le paramètre doit être un tableau</p>';
+    }
+
+    // Commence la liste HTML
+    $listHTML = '<ul>';
+
+    // Ajoute chaque élément du tableau à la liste HTML
+    foreach ($elements as $element) {
+        $listHTML .= '<li>' . htmlspecialchars($element) . '</li>'; // Échappe les caractères spéciaux et prévient les attaques XSS.
+    }
+
+    // Termine la liste HTML 
+    $listHTML .= '</ul>';
+
+    // Retourne la liste générée
+    return $listHTML;
+}
+
+// Définition du tableau $paysetcapital
+$paysetcapital = [
+    'France' => 'Paris',
+    'Allemagne' => 'Berlin',
+    'Italie' => 'Rome',
+    'Maroc' => 'Rabat',
+    'Espagne' => 'Madrid',
+    'Portugal' => 'Lisbonne',
+    'Angleterre' => 'Londres',
+];
+
+// Exemple d'utilisation avec le tableau $paysetcapital
+$listeGeneree = listHTML($paysetcapital);
+
+// Affiche la liste générée
+echo $listeGeneree;
+?>
+
+<br>
+
