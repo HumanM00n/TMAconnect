@@ -1,299 +1,197 @@
-<!DOCTYPE html>
-<html>
+<link rel="stylesheet" href="css/csshome.css">
+<?php
+// Sommes-nous sur l'index ? Récupération du nom de page dans $pageActuelle
+$scriptName = filter_input(INPUT_SERVER, 'SCRIPT_NAME');
+$pageActuelle = substr($scriptName, strrpos($scriptName, '/') + 1);
+if ($pageActuelle === 'home.php') {
+    $dirIndex = './';
+    $dirPages = './pages/';
+} else {
+    $dirIndex = '../';
+    $dirPages = './';
+}
 
-<head>
-    <title>TC2</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="css/csshome.css"> -->
-    <link rel="stylesheet" href="css/test.css">
-    <link rel="icon" href="img/NLogo2.png" />
-</head>
 
-<body>
-    <?php include('includes/connexion.inc.php'); ?>
+$scriptName = filter_input(INPUT_SERVER, 'SCRIPT_NAME');
+$pageActuelle = basename($scriptName); // Récupère le nom de fichier sans le chemin
+$pageActuelle = pathinfo($pageActuelle, PATHINFO_FILENAME); // Récupère le nom de fichier sans l'extension
 
-    <?php
-    $idDemande = $_GET['idDemande'];
-    $sql = "SELECT 
-            D.IdDemande, 
-            DOM.libelle , 
-            Q.libelle, 
-            P.libelle, 
-            D.libelle, 
-            D.date_crea, 
-            U1.nom, 
-            D.date_emet, 
-            U2.nom, 
-            D.date_recu, 
-            U3.nom, 
-            D.date_etat_dmd, 
-            E.libelle, 
-            D.date_visa_dmd, 
-            U4.nom, 
-            U5.nom, 
-            D.date_fs, 
-            D.date_rct_prvu,
-            R.libelle, 
-            D.amorti_dmd,  
-            D.date_archiv 
+echo "<title>TMAconnect - $pageActuelle</title>";
 
-        FROM tc_demandes D, tc_domaine DOM , tc_qualif Q , tc_priorite P , tc_utilisateur U1 , tc_utilisateur U2 , tc_utilisateur U3 , tc_utilisateur U4 , tc_utilisateur U5 , tc_etat E , tc_regroupement R
-        WHERE D.IdDemande = :IdDemande
-        AND D.dom_dmd = DOM.IdDomaine 
-        AND D.qual_dmd = Q.IdQual
-        AND D.prt_dmd = P.IdPriorite
-        AND D.util_crea = U1.IdUtil
-        AND D.util_emet = U2.IdUtil
-        AND D.util_benef = U3.IdUtil
-        AND D.etat_dmd = E.IdEtat
-        AND D.util_sign_dmd = U4.IdUtil
-        AND D.util_affect_dmd = U5.IdUtil
-        AND D.regroupement = R.IdRegroupe";
+session_start();
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':IdDemande', $idDemande, PDO::PARAM_INT);
+try {
+    // Votre code de connexion � la base de donn�es
+    // ...
+// informations de connexion à la base de données MySQL
+    $servername = "localhost:3308"; // nom du serveur
+    $username = "root"; // nom d'utilisateur
+    $password = "XVsikn92"; // mot de passe
+    $dbname = "tmaconnect"; // nom de la base de données
+// création d'une connexion à la base de données
+
+
+    $bdd = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // R�cup�rer le nom d'utilisateur � partir de la variable de session
+    $username1 = $_SESSION['username'];
+
+    var_dump($_SESSION['username']); //AFFICHE LE CONTENU DE LA VARIABLE DE SESSION -> EST UTILISE POUR VERIFIER SI L'UTILISATEUR EST CORRECTEMENT IDENTIFIE
+
+    // Vérifier si l'utilisateur est connecté
+    if (!isset($_SESSION['username'])) {
+        // Rediriger l'utilisateur vers la page de connexion.
+        header("Location: http://localhost/TMAconnect/index.php");
+        exit();
+    }
+
+    $sql0 = "SELECT prenom, nom, d_users FROM tc_utilisateur WHERE matricule = :username ";
+    $stmt0 = $bdd->prepare($sql0);
+    $stmt0->bindParam(':username', $username1);
+    $stmt0->execute();
+
+    // $sql0 = "SELECT prenom, nom FROM tc_utilisateur WHERE matricule = :username AND d_users = 1";
+    // $stmt0 = $bdd->prepare($sql0);
+    // $stmt0->bindParam(':username', $username1);
+    // $stmt0->execute();
+
+    $result = $stmt0->fetch(PDO::FETCH_ASSOC);
+
+    $nom = $result['nom'];
+    $initNom = substr($nom, 0, 1);
+
+    $prenom = $result['prenom'];
+    $initPrenom = substr($prenom, 0, 1);
+
+    $affichage = $initPrenom . $initNom;
+
+    // Requ�te SQL pour v�rifier les droits de l'utilisateur
+    $sql = "SELECT d_users FROM tc_utilisateur WHERE matricule = :username AND d_users <> 1";
+    $stmt = $bdd->prepare($sql);
+    $stmt->bindParam(':username', $username1);
     $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_BOTH); 
-?>
 
-    <div class="btnajout">
-        <button onClick=" history.back();">Retour</button>
-    </div>
-<div class="container">
-    <section id="menuNouvelDmd">
-        <form id="form_nvldemande" name="form_nvldemande" action="" method="GET">
-            <fieldset id="menuDmd">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="demCreePar">Domaine :</label>
-                        <input name="selectDom" id="selectDom" class="inputInfos" disabled pattern="[0-9]" 
-                        <?php 
-                            foreach ($result as $row) {
-                                $dom_dmd = $row[1];
-                            }
-                              ?> value="<?php echo $dom_dmd; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="demCreePar">Qualification :</label>
-                        <input name="selectQualif" id="selectQualif" class="inputInfos" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $qual_dmd = $row[2];
-                            }
-                              ?> value="<?php echo $qual_dmd; ?>">
-                    </div>
+    try {
+        // V�rifier si l'utilisateur a le droit 1
 
-                    <div class="form-group">
-                        <label for="demCreePar">Priorité :</label>
-                        <input name="selectPrio" id="selectPrio" class="inputInfos" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $prt_dmd = $row[3];
-                            }
-                              ?> value="<?php echo $qual_dmd; ?>">
-                    </div>
+        //Debut logique d'habilitation des droits utilisateurs , on utilise qu'une requête SQL
+        // if ($stmt0->rowCount() )
+            // if $D_users = 1 // Je déssine l'écran Super Admin
+            // elseif $D_users = 2 // Je déssine l'écran Chef de service 
+            // elseif $D_users = 3 // Je déssine l'écran Admin
+            // elseif $D_users = 4 // Je déssine l'écran Utilisateur
+            //Fin logique d'habilitation des droits utilisateurs , on utilise qu'une requête SQL
+            
+        if ($stmt0->rowCount() && $stmt->rowCount() > 0) {
 
-                    <div class="form-group">
-                        <label for="numDemande">N° demande :</label>
-                        <input type="text" name="numDemande" id="numDemande" size="35" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $id_dmd = $row[0];
-                            }
-                              ?> value="<?php echo $id_dmd; ?>">
-                    </div>
+            // L'utilisateur a le droit 1
+            ?>
 
-                </div>
-            </fieldset>
-
-            <fieldset id="coordo">
-                <div class="libelleDemande">
-                    <label for="demLibelle">Libellé demande :</label>
-                    <input type="text" name="demLibelle" id="demLibelle" size="35"
-                        pattern="^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ�?ÀÂÄÃÅÇÉÈÊË�?ÌÎ�?ÑÓÒÔÖÕÚÙÛÜ�?ŸÆŒ\s\-]+$" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $lbl_dmd= $row[4];
-                            }
-                              ?> value="<?php echo $lbl_dmd; ?>">
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="demCree">Demande créée le :</label>
-                        <input type="text" name="demCree" id="demCree" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $date= $row[5];
-                            }
-                        ?> value="<?php echo $date; ?>">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="demCreePar">Par :</label>
-                        <input name="selectDemandePar" id="selectDemandePar" class="inputInfos" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $nom = $row[6];
-                            }
-                              ?> value="<?php echo $nom; ?>">
+            <head>
+                <meta charset="UTF-8">
                 
-                    </div>
-                    <div class="form-group">
-                        <label for="demEmise">Demande émise le :</label>
-                        <input type="text" name="demEmise" id="demEmise" class="infosDate" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $date = $row[7];
-                            }
-                        ?> value="<?php echo $date; ?>">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="demEmisePar">Par :</label>
-                        <input name="selectDemandeEmisePar" id="selectDemandeEmisePar" class="inputInfos" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $nom = $row[8];
-                            }
-                        ?> value="<?php echo $nom; ?>">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="demRecu">Demande reçue le :</label>
-                        <input type="text" name="demRecu" id="demRecu" class="infosDate" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $date = $row[9];
-                            }
-                        ?> value="<?php echo $date; ?>">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="beneficiaire">Bénéficiaire :</label>
-                        <input name="selectBeneficiaire" id="selectBeneficiaire" class="inputInfos" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $nom = $row[10];
-                            }
-                        ?> value="<?php echo $nom; ?>">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="demCree">Etat de la demande au :</label>
-                        <input type="text" name="demEtat" id="demEtat" class="infosDate" disabled pattern="[0-9]" 
-                        <?php 
-                            foreach ($result as $row) {
-                                $date= $row[11];
-                            }
-                        ?> value="<?php echo $date; ?>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="etat">Etat :</label>
-                        <input name="selectDemandeEtat" id="selectDemandeEtat" class="inputInfos" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $etat_dmd = $row[12];
-                            }
-                        ?> value="<?php echo $etat_dmd; ?>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="visaServEtude">Visa service étude au :</label>
-                        <input type="text" name="visaServEtude" id="visaServEtude" class="infosDate" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $date = $row[13];
-                            }
-                        ?> value="<?php echo $date; ?>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="signataire">Signataire :</label>
-                        <input name="selectSignataire" id="selectSignataire" class="inputInfos" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $etat_dmd = $row[14];
-                            }
-                        ?> value="<?php echo $etat_dmd; ?>">
-                    </div>
-
-                    <div class="form-group">
-                    </div>
-                    <div class="form-group">
-                        <label for="affection">Affectation de la demande :</label>
-                        <input name="selectAffectation" id="selectAffectation" class="inputInfos" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $nom= $row[15];
-                            }
-                        ?> value="<?php echo $nom; ?>">
-                    </div>
+            </head>
+            <nav class="barre-arianne">
 
 
-                    <div class="form-group2">
-                        <label for="demEmise">Fin souhaitée le :</label>
-                        <input type="text" name="demFs" id="demFs" class="infosDate" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $date = $row[16];
-                            }
-                        ?> value="<?php echo $date; ?>">
-                    </div>
+                <ul>
+                    <li class="Onglet"><a href="<?php echo $dirPages; ?>../home">Accueil</a></li>
+                    <li class="Onglet"><a href="#" class="deroulant">Demandes ▼</a>
+                        <ul class="sous">
+                            <li><a href="<?php echo $dirPages; ?>../demande/creationDemande.php">Créer une demande</a></li>
+                            <li><a href="<?php echo $dirPages; ?>../demande/AffichageDemande">Afficher les demandes</a></li>
+                        </ul>
+                    </li>
+                    <li class="Onglet"><a href="<?php echo $dirPages; ?>../user/Utilisateurs.php">Utilisateurs</a></li>
 
-                    <div class="form-group2">
-                        <label for="demEmise">Mise en recette prévue le (optionnel) :</label>
-                        <input type="text" name="demRct" id="demRct" class="infosDate" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $date = $row[17];
-                            }
-                        ?> value="<?php echo $date; ?>">                        
-                    </div>
+                    <li class="NomPage">
+                        <?php $pageActuelle ?>
+                    </li>
 
+                    <li class="MonCompte"><a href="#">
+                            <?php echo $affichage ?>
+                        </a>
+                        <ul class="sous2">
+                            <li><a href="<?php echo $dirPages; ?>../user/MonProfil.php">Mon Profil</a></li>
+                            <li><a href="#" id="logout-link">Se d&eacute;connecter</a></li>
 
-                    <div class="form-group">
-                        <label for="regroupement">Regroupement :</label>
-                        <input name="selectRegroupement" id="selectRegroupement" class="inputInfos" disabled pattern="[0-9]" 
-                        <?php 
-                            foreach ($result as $row) {
-                                $nom = $row[18];
-                            }
-                        ?> value="<?php echo $nom; ?>">
-                        
-                    <div class="form-group-Amort">
-                        <label for="demAmortis">Demande amortissable</label>
-                        <input type="checkbox" name="demAmortis" id="demAmortis" disabled pattern="[0-9]" 
-                        <?php 
-                            foreach ($result as $row) {
-                                $amorti_dmd = $row[19];
-                            }
-                            if ($amorti_dmd == 'on') {
-                            echo "checked='checked'";
-                            }
-                        ?>>
-                    </div>
+                            <script>
+                                document.getElementById('logout-link').addEventListener('click', function (event) {
+                                    event.preventDefault(); // Empêche l'ouverture de lien
 
-                    <div class="form-group">
-                        <label for="demArchiv">Demande archivée le :</label>
-                        <input type="text" name="demArchiv" id="demArchiv" class="infosDate" disabled pattern="[0-9]"
-                        <?php 
-                            foreach ($result as $row) {
-                                $date = $row[20];
-                            }
-                        ?> value="<?php echo $date; ?>"> 
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </section>
-</div>
+                                    // Effectuer une requête AJAX vers le script de déconnexion
+                                    var xhr = new XMLHttpRequest();
+                                    xhr.open('GET', 'pages/<?php echo $dirIndex; ?>../php/S-Deconnect.php', true);
+                                    xhr.onreadystatechange = function () {
+                                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                                            if (xhr.status === 200) {
+                                                window.location.href = '<?php echo $dirPages; ?>../index.php'; // Rediriger vers la page index.php
+                                            } else {
+                                                // Erreur lors de l'exécution du script de déconnexion
+                                                console.error('Erreur de déconnexion');
+                                            }
+                                        }
+                                    };
+                                    xhr.send();
+                                });
+                            </script>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <?php
+        } elseif ($stmt0->rowCount()) {
+            ?>
+            <nav class="barre-arianne">
+                <ul>
 
-</div>
+                    <li class="Onglet"><a href="<?php echo $dirPages; ?>../home.php">Accueil</a></li>
+                    <li class="Onglet"><a href="#" class="deroulant">Demandes ▼</a>
+                        <ul class="sous">
+                            <li><a href="#">Créer une demande</a></li>
+                            <li><a href="../demande/AffichageDemande">Afficher les Demandes</a></li>
+                        </ul>
+                    </li>
 
-</body>
+                    <li class="MonCompte"><a href="#">
+                            <?php echo $affichage ?>
+                        </a>
+                        <ul class="sous2">
+                            <li><a href="<?php echo $dirPages; ?>../user/monProfil.php">Mon Profil</a></li>
+                            <li><a href="#" id="logout-link">Se d&eacute;connecter</a></li>
 
+                            <script>
+                                document.getElementById('logout-link').addEventListener('click', function (event) {
+                                    event.preventDefault(); // Empêche l'ouverture de lien
+
+                                    // Effectuer une requête AJAX vers le script de déconnexion
+                                    var xhr = new XMLHttpRequest();
+                                    xhr.open('GET', 'php/<?php echo $dirIndex; ?>S-Deconnect.php', true);
+                                    xhr.onreadystatechange = function () {
+                                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                                            if (xhr.status === 200) {
+                                                window.location.href = '<?php echo $dirPages; ?>./index.php'; // Rediriger vers la page index.php
+                                            } else {
+                                                // Erreur lors de l'exécution du script de déconnexion
+                                                console.error('Erreur de déconnexion');
+                                            }
+                                        }
+                                    };
+                                    xhr.send();
+                                });
+                            </script>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <?php
+        }
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+} catch (PDOException $e) {
+    echo "La connexion a �chou� : " . $e->getMessage();
+}
+?>
