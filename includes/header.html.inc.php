@@ -77,8 +77,6 @@ try {
                 <meta charset="UTF-8">
             </head>
             <nav class="barre-arianne">
-
-
                 <ul>
                     <li class="Onglet"><a href="<?php echo $dirPages; ?>../home">Accueil</a></li>
                     <li class="Onglet"><a href="#" class="deroulant">Demandes ▼</a>
