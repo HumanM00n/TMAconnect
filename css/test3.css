@@ -1,0 +1,27 @@
+.btn-group {
+    width: 80%; /* Utilisation de pourcentage pour la largeur */
+    max-width: 35rem; /* Limite la largeur maximale à 35rem */
+    margin: 1.5rem auto auto auto; /* Centrer l'élément horizontalement avec une marge supérieure de 1rem */
+    display: flex;
+    justify-content: center; /* Espacement égal entre les éléments */
+    position: relative;
+}
+
+
+.btn-group a {
+    color: #289297; /* Couleur du texte pour les liens */
+    background-color: white; /* Couleur de fond pour les liens */
+    border-color: #289297;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-group a:active,
+.btn-group a:hover,
+.btn-group a:focus {
+    color: white !important;
+    background-color: #289297 !important;
+    border-color: #289297 !important;
+    text-decoration: none;
+}

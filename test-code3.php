@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<!--
+
+<!-- <!DOCTYPE html>
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
 -->
@@ -13,6 +13,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/creationDemande.css" />
+    <link rel="stylesheet" href="css/test3.css" type="text/css">
     <link rel="icon" href="img/NLogo2.png" />
 </head>
 
@@ -163,6 +164,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
     <section id="menuNouvelDmd">
         <form id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Liste des objets impactés</a>
+                <a href="#" class="btn btn-primary">Evaluation</a>
+                <a href="#" class="btn btn-primary">Recette</a>
+                <a href="#" class="btn btn-primary">Mise en production</a>
+            </div>
             <fieldset id="menuDmd">
                 <div class="form-row">
                     <div class="form-group">
@@ -371,15 +378,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                 </div>
                 <div class="btnajout">
                     <button type="submit">Valider</button>
+                    <button type="reset">Annuler</button>
+                </div>
             </fieldset>
-            <div class="modal-dialog modal-dialog-centered">
-                <button type="reset">Annuler</button>
-            </div>
         </form>
     </section>
 
+    <!-- Lien vers Boostrap.js  -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Lien vers jQuery et jQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </body>
 
 </html>

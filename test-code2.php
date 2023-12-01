@@ -1,197 +1,110 @@
-<link rel="stylesheet" href="css/csshome.css">
-<?php
-// Sommes-nous sur l'index ? Récupération du nom de page dans $pageActuelle
-$scriptName = filter_input(INPUT_SERVER, 'SCRIPT_NAME');
-$pageActuelle = substr($scriptName, strrpos($scriptName, '/') + 1);
-if ($pageActuelle === 'home.php') {
-    $dirIndex = './';
-    $dirPages = './pages/';
-} else {
-    $dirIndex = '../';
-    $dirPages = './';
-}
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/csshome.css">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="icon" href="img/NLogo2.png" />
+    <title>TestMEP</title>
+</head>
 
-$scriptName = filter_input(INPUT_SERVER, 'SCRIPT_NAME');
-$pageActuelle = basename($scriptName); // Récupère le nom de fichier sans le chemin
-$pageActuelle = pathinfo($pageActuelle, PATHINFO_FILENAME); // Récupère le nom de fichier sans l'extension
+<?php include('includes/connexion.inc.php') ?>
+<?php include('includes/header.html.inc.php') ?>
 
-echo "<title>TMAconnect - $pageActuelle</title>";
-
-session_start();
-
-try {
-    // Votre code de connexion � la base de donn�es
-    // ...
-// informations de connexion à la base de données MySQL
-    $servername = "localhost:3308"; // nom du serveur
-    $username = "root"; // nom d'utilisateur
-    $password = "XVsikn92"; // mot de passe
-    $dbname = "tmaconnect"; // nom de la base de données
-// création d'une connexion à la base de données
-
-
-    $bdd = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // R�cup�rer le nom d'utilisateur � partir de la variable de session
-    $username1 = $_SESSION['username'];
-
-    var_dump($_SESSION['username']); //AFFICHE LE CONTENU DE LA VARIABLE DE SESSION -> EST UTILISE POUR VERIFIER SI L'UTILISATEUR EST CORRECTEMENT IDENTIFIE
-
-    // Vérifier si l'utilisateur est connecté
-    if (!isset($_SESSION['username'])) {
-        // Rediriger l'utilisateur vers la page de connexion.
-        header("Location: http://localhost/TMAconnect/index.php");
-        exit();
+<body>
+    <?php
+    if (
+        isset($_POST["numDemande"])
+    ) {
+        $IdDemande = $_POST["numDemande"];
     }
 
-    $sql0 = "SELECT prenom, nom, d_users FROM tc_utilisateur WHERE matricule = :username ";
-    $stmt0 = $bdd->prepare($sql0);
-    $stmt0->bindParam(':username', $username1);
-    $stmt0->execute();
+    // $sql0 = "SELECT libelle FROM tc_demandes WHERE IdDemande = :IdDemande";
+    // $stmt0 = $pdo->query($sql0);
+    // $result0 = $stmt0->fetch(PDO::FETCH_ASSOC);
+    // echo
+    
+    $sql2 = "SELECT nom FROM tc_utilisateur WHERE S_users = 1 AND 7";
+    $stmt2 = $pdo->query($sql2);
+    $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-    // $sql0 = "SELECT prenom, nom FROM tc_utilisateur WHERE matricule = :username AND d_users = 1";
-    // $stmt0 = $bdd->prepare($sql0);
-    // $stmt0->bindParam(':username', $username1);
-    // $stmt0->execute();
-
-    $result = $stmt0->fetch(PDO::FETCH_ASSOC);
-
-    $nom = $result['nom'];
-    $initNom = substr($nom, 0, 1);
-
-    $prenom = $result['prenom'];
-    $initPrenom = substr($prenom, 0, 1);
-
-    $affichage = $initPrenom . $initNom;
-
-    // Requ�te SQL pour v�rifier les droits de l'utilisateur
-    $sql = "SELECT d_users FROM tc_utilisateur WHERE matricule = :username AND d_users <> 1";
-    $stmt = $bdd->prepare($sql);
-    $stmt->bindParam(':username', $username1);
-    $stmt->execute();
-
-    try {
-        // V�rifier si l'utilisateur a le droit 1
-
-        //Debut logique d'habilitation des droits utilisateurs , on utilise qu'une requête SQL
-        // if ($stmt0->rowCount() )
-            // if $D_users = 1 // Je déssine l'écran Super Admin
-            // elseif $D_users = 2 // Je déssine l'écran Chef de service 
-            // elseif $D_users = 3 // Je déssine l'écran Admin
-            // elseif $D_users = 4 // Je déssine l'écran Utilisateur
-            //Fin logique d'habilitation des droits utilisateurs , on utilise qu'une requête SQL
-            
-        if ($stmt0->rowCount() && $stmt->rowCount() > 0) {
-
-            // L'utilisateur a le droit 1
-            ?>
-
-            <head>
-                <meta charset="UTF-8">
-                
-            </head>
-            <nav class="barre-arianne">
+    if (isset($_POST['btn-group'])) {
+        // Le bouton "btnajouter" a été bloqué
+        $libelle = isset($_POST['libelle']) ? $_POST['libelle'] : '';
+        $date_mep = isset($_POST['date_mep']) ? $_POST['date_mep'] : '';
+        $util_date_mep = isset($_POST['util_date_mep']) ? $_POST['util_date_mep'] : '';
 
 
-                <ul>
-                    <li class="Onglet"><a href="<?php echo $dirPages; ?>../home">Accueil</a></li>
-                    <li class="Onglet"><a href="#" class="deroulant">Demandes ▼</a>
-                        <ul class="sous">
-                            <li><a href="<?php echo $dirPages; ?>../demande/creationDemande.php">Créer une demande</a></li>
-                            <li><a href="<?php echo $dirPages; ?>../demande/AffichageDemande">Afficher les demandes</a></li>
-                        </ul>
-                    </li>
-                    <li class="Onglet"><a href="<?php echo $dirPages; ?>../user/Utilisateurs.php">Utilisateurs</a></li>
-
-                    <li class="NomPage">
-                        <?php $pageActuelle ?>
-                    </li>
-
-                    <li class="MonCompte"><a href="#">
-                            <?php echo $affichage ?>
-                        </a>
-                        <ul class="sous2">
-                            <li><a href="<?php echo $dirPages; ?>../user/MonProfil.php">Mon Profil</a></li>
-                            <li><a href="#" id="logout-link">Se d&eacute;connecter</a></li>
-
-                            <script>
-                                document.getElementById('logout-link').addEventListener('click', function (event) {
-                                    event.preventDefault(); // Empêche l'ouverture de lien
-
-                                    // Effectuer une requête AJAX vers le script de déconnexion
-                                    var xhr = new XMLHttpRequest();
-                                    xhr.open('GET', 'pages/<?php echo $dirIndex; ?>../php/S-Deconnect.php', true);
-                                    xhr.onreadystatechange = function () {
-                                        if (xhr.readyState === XMLHttpRequest.DONE) {
-                                            if (xhr.status === 200) {
-                                                window.location.href = '<?php echo $dirPages; ?>../index.php'; // Rediriger vers la page index.php
-                                            } else {
-                                                // Erreur lors de l'exécution du script de déconnexion
-                                                console.error('Erreur de déconnexion');
-                                            }
-                                        }
-                                    };
-                                    xhr.send();
-                                });
-                            </script>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-            <?php
-        } elseif ($stmt0->rowCount()) {
-            ?>
-            <nav class="barre-arianne">
-                <ul>
-
-                    <li class="Onglet"><a href="<?php echo $dirPages; ?>../home.php">Accueil</a></li>
-                    <li class="Onglet"><a href="#" class="deroulant">Demandes ▼</a>
-                        <ul class="sous">
-                            <li><a href="#">Créer une demande</a></li>
-                            <li><a href="../demande/AffichageDemande">Afficher les Demandes</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="MonCompte"><a href="#">
-                            <?php echo $affichage ?>
-                        </a>
-                        <ul class="sous2">
-                            <li><a href="<?php echo $dirPages; ?>../user/monProfil.php">Mon Profil</a></li>
-                            <li><a href="#" id="logout-link">Se d&eacute;connecter</a></li>
-
-                            <script>
-                                document.getElementById('logout-link').addEventListener('click', function (event) {
-                                    event.preventDefault(); // Empêche l'ouverture de lien
-
-                                    // Effectuer une requête AJAX vers le script de déconnexion
-                                    var xhr = new XMLHttpRequest();
-                                    xhr.open('GET', 'php/<?php echo $dirIndex; ?>S-Deconnect.php', true);
-                                    xhr.onreadystatechange = function () {
-                                        if (xhr.readyState === XMLHttpRequest.DONE) {
-                                            if (xhr.status === 200) {
-                                                window.location.href = '<?php echo $dirPages; ?>./index.php'; // Rediriger vers la page index.php
-                                            } else {
-                                                // Erreur lors de l'exécution du script de déconnexion
-                                                console.error('Erreur de déconnexion');
-                                            }
-                                        }
-                                    };
-                                    xhr.send();
-                                });
-                            </script>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-
-            <?php
-        }
-    } catch (PDOException $e) {
-        echo "Erreur : " . $e->getMessage();
+        $sql = "INSERT INTO tc_mep (nom, prenom, matricule, email, passwd, S_users, P_users, D_users, dateFin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$nom, $prenom, $matricule, $email, $passwd, $S_users, $P_users, $D_users, $datefin]);
     }
-} catch (PDOException $e) {
-    echo "La connexion a �chou� : " . $e->getMessage();
-}
-?>
+
+    ?>
+
+    <main>
+        <section class="container" id="container">
+            <h3><b>Mise en production</b></h3>
+            <form class="row g-3" method="post ">
+                <div class="col-md-6" id="divText">
+                    <label for="inputLib" class="form-label">Libellé</label>
+                    <input type="text" class="form-control" id="inputLib" disabled
+                    <?php 
+                        $lbl_dmd= $row[0];
+                        ?>
+                    value="<?php echo $lbl_dmd; ?>">
+                </div>
+
+                <div class="infosColumn">
+                    <div class="col-md-4" id="divPar">
+                        <label for="inputState" class="form-label">Par</label>
+                        <select id="inputState" class="form-select">
+                            <?php
+                            echo "<option value=''></option>";
+                            foreach ($result2 as $row) {
+                                $id_util = $row['IdUtil'];
+                                $nom = $row['nom'];
+                                echo "<option value='$id_util'>$nom</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6" id="divDate">
+                        <label for="inputDate" class="form-label">Date de mise en production</label>
+                        <input type="text" class="form-control" id="datepicker" pattern="\d{1,2}/\d{1,2}/\d{4}"
+                            placeholder="jj/mm/aaaa">
+                    </div>
+
+                    <div class="col-md-6" id="divNumber">
+                        <label for="inputNumber" class="form-label">Procédure de mise en production</label>
+                        <input type="number" class="form-control" id="inputNumber">
+                    </div>
+                </div>
+                <div class="btnajout">
+                    <button type="submit">Valider</button>
+                    <button type="reset">Annuler</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- Lien vers Boostrap.js  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- Lien vers jQuery et jQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/date.js"></script>
+
+
+</body>
+
+</html>
