@@ -18,52 +18,59 @@
 
 <body>
     <?php
-    if (
-        isset($_POST["numDemande"])
-    ) {
-        $IdDemande = $_POST["numDemande"];
-    }
-
-    // $sql0 = "SELECT libelle FROM tc_demandes WHERE IdDemande = :IdDemande";
-    // $stmt0 = $pdo->query($sql0);
-    // $result0 = $stmt0->fetch(PDO::FETCH_ASSOC);
-    // echo
+    // Requête pou récupérer le libellé de la demande 
+    $sql0 = "SELECT libelle FROM tc_demandes WHERE IdDemande = 8";
+    $stmt0 = $pdo->query($sql0);
+    $row0 = $stmt0->fetch(PDO::FETCH_ASSOC); //Permet de récupérer avec les noms de colonnes de la table 
     
+    // Requête pou récupérer les noms qui ont pour service TMA 
     $sql2 = "SELECT nom FROM tc_utilisateur WHERE S_users = 1 AND 7";
     $stmt2 = $pdo->query($sql2);
-    $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+    $result2 = $stmt2->fetch(PDO::FETCH_ASSOC); //Permet de récupérer avec les noms de colonnes de la table 
 
-    if (isset($_POST['btn-group'])) {
-        // Le bouton "btnajouter" a été bloqué
-        $libelle = isset($_POST['libelle']) ? $_POST['libelle'] : '';
-        $date_mep = isset($_POST['date_mep']) ? $_POST['date_mep'] : '';
-        $util_date_mep = isset($_POST['util_date_mep']) ? $_POST['util_date_mep'] : '';
-
-
-        $sql = "INSERT INTO tc_mep (nom, prenom, matricule, email, passwd, S_users, P_users, D_users, dateFin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$nom, $prenom, $matricule, $email, $passwd, $S_users, $P_users, $D_users, $datefin]);
-    }
-
+    // Requête pou récupérer le libellé de la demande 
+    $sql0 = "SELECT IdDemande FROM tc_demandes WHERE IdDemande = 8";
+    $stmt0 = $pdo->query($sql0);
+    $row0 = $stmt0->fetch(PDO::FETCH_ASSOC); //Permet de récupérer avec les noms de colonnes de la table
     ?>
 
+    <?php
+    // if (
+    //     isset($_POST["inputUtil"])
+    //     && isset($_POST["datepicker"])
+    //     && isset($_POST["inputNumber"])
+    
+    // ) {
+    //     $var0 = $_POST["inputUtil"];
+    //     $var1 = $_POST["datepicker"];
+    //     $var2 = $_POST["inputNumber"];
+    // }
+    // // Requête d'insertion des données
+    // $sql = "INSERT INTO tc_mep (date_mep, util_date_mep) VALUES (:var1, :var2)";
+
+    // $stmt = $pdo->prepare($sql);
+
+    // // Binder les valeurs aux paramètres nommés
+    // $stmt->bindValue(":var1", $var1);
+    // $stmt->bindValue(":var2", $var2);
+
+    ?>
     <main>
         <section class="container" id="container">
             <h3><b>Mise en production</b></h3>
             <form class="row g-3" method="post ">
                 <div class="col-md-6" id="divText">
                     <label for="inputLib" class="form-label">Libellé</label>
-                    <input type="text" class="form-control" id="inputLib" disabled
-                    <?php 
-                        $lbl_dmd= $row[0];
-                        ?>
+                    <input type="text" class="form-control" id="inputLib" disabled <?php
+                    $lbl_dmd = $row0['libelle'];
+                    ?>
                     value="<?php echo $lbl_dmd; ?>">
                 </div>
 
                 <div class="infosColumn">
                     <div class="col-md-4" id="divPar">
-                        <label for="inputState" class="form-label">Par</label>
-                        <select id="inputState" class="form-select">
+                        <label for="inputUtil" class="form-label">Par</label>
+                        <select id="inputUtil" class="form-select">
                             <?php
                             echo "<option value=''></option>";
                             foreach ($result2 as $row) {
