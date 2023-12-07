@@ -14,47 +14,57 @@
 </head>
 
 <?php include('includes/connexion.inc.php') ?>
-<?php include('includes/header.html.inc.php') ?>
 
 <body>
     <?php
-    // Requête pou récupérer le libellé de la demande 
-    $sql0 = "SELECT libelle FROM tc_demandes WHERE IdDemande = 8";
-    $stmt0 = $pdo->query($sql0);
-    $row0 = $stmt0->fetch(PDO::FETCH_ASSOC); //Permet de récupérer avec les noms de colonnes de la table 
     
-    // Requête pou récupérer les noms qui ont pour service TMA 
-    $sql2 = "SELECT nom FROM tc_utilisateur WHERE S_users = 1 AND 7";
-    $stmt2 = $pdo->query($sql2);
-    $result2 = $stmt2->fetch(PDO::FETCH_ASSOC); //Permet de récupérer avec les noms de colonnes de la table 
-
-    // Requête pou récupérer le libellé de la demande 
-    $sql0 = "SELECT IdDemande FROM tc_demandes WHERE IdDemande = 8";
+    $id_Demande = 8;
+    
+    // Requête pour récupérer le libellé de la demande
+    $sql0 = "SELECT libelle FROM tc_demandes WHERE IdDemande =" . $id_Demande;
     $stmt0 = $pdo->query($sql0);
-    $row0 = $stmt0->fetch(PDO::FETCH_ASSOC); //Permet de récupérer avec les noms de colonnes de la table
+    $row0 = $stmt0->fetch(PDO::FETCH_ASSOC);
+
+    // Requête pour récupérer les noms qui ont pour service TMA
+    $sql1 = "SELECT nom FROM tc_utilisateur WHERE S_users = 1 AND 7"; 
+    $stmt1 = $pdo->query($sql1);
+    $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+    // Requête pour récupérer le numéro de la demande
+    $sql2 = "SELECT IdDemande FROM tc_demandes WHERE IdDemande =" . $id_Demande;
+    $stmt2 = $pdo->query($sql2);
+    $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
     ?>
 
     <?php
-    // if (
-    //     isset($_POST["inputUtil"])
-    //     && isset($_POST["datepicker"])
-    //     && isset($_POST["inputNumber"])
-    
-    // ) {
-    //     $var0 = $_POST["inputUtil"];
-    //     $var1 = $_POST["datepicker"];
-    //     $var2 = $_POST["inputNumber"];
-    // }
-    // // Requête d'insertion des données
-    // $sql = "INSERT INTO tc_mep (date_mep, util_date_mep) VALUES (:var1, :var2)";
+    if (
+        isset($_POST["datepicker"])
+        && isset($_POST["inputUtil"])
+    ) {
+        $var0 = $_POST["datepicker"];
+        $var1 = $_POST["inputUtil"];
 
-    // $stmt = $pdo->prepare($sql);
+        // Requête d'insertion des données
+        $sql = "INSERT INTO tc_mep (date_mep, util_date_mep) VALUES (:var0, :var1)";
 
-    // // Binder les valeurs aux paramètres nommés
-    // $stmt->bindValue(":var1", $var1);
-    // $stmt->bindValue(":var2", $var2);
+        $stmt = $pdo->prepare($sql);
 
+        // Binder les valeurs aux paramètres nommés
+        $stmt->bindValue(":var0", $var0);
+        $stmt->bindValue(":var1", $var1);
+
+        try {
+            if ($stmt->execute()) {
+                echo '<center><p class="Successful">Données insérées avec succès!</p></center>';
+            } else {
+                echo "Erreur lors de l'insertion des données.";
+            }
+        } catch (PDOException $e) {
+            echo "Erreur de connexion à la base de données : " . $e->getMessage();
+        }
+    }
     ?>
+
     <main>
         <section class="container" id="container">
             <h3><b>Mise en production</b></h3>
@@ -73,7 +83,7 @@
                         <select id="inputUtil" class="form-select">
                             <?php
                             echo "<option value=''></option>";
-                            foreach ($result2 as $row) {
+                            foreach ($result1 as $row) {
                                 $id_util = $row['IdUtil'];
                                 $nom = $row['nom'];
                                 echo "<option value='$id_util'>$nom</option>";
