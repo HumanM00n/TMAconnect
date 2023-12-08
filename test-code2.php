@@ -5,8 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <symbol id="check-circle-fill" viewBox="0 0 16 16">
+            <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        </symbol>
+    </svg>
     <link rel="stylesheet" href="css/csshome.css">
     <link rel="stylesheet" href="css/test.css">
     <link rel="icon" href="img/NLogo2.png" />
@@ -17,16 +24,16 @@
 
 <body>
     <?php
-    
+
     $id_Demande = 8;
-    
+
     // Requête pour récupérer le libellé de la demande
     $sql0 = "SELECT libelle FROM tc_demandes WHERE IdDemande =" . $id_Demande;
     $stmt0 = $pdo->query($sql0);
     $row0 = $stmt0->fetch(PDO::FETCH_ASSOC);
 
     // Requête pour récupérer les noms qui ont pour service TMA
-    $sql1 = "SELECT nom FROM tc_utilisateur WHERE S_users = 1 AND 7"; 
+    $sql1 = "SELECT IdUtil, nom FROM tc_utilisateur WHERE S_users = 1 AND 7";
     $stmt1 = $pdo->query($sql1);
     $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
@@ -45,7 +52,7 @@
         $var1 = $_POST["inputUtil"];
 
         // Requête d'insertion des données
-        $sql = "INSERT INTO tc_mep (date_mep, util_date_mep) VALUES (:var0, :var1)";
+        $sql = "INSERT INTO tc_mep (date_mep, util_emet_mep) VALUES (:var0, :var1)";
 
         $stmt = $pdo->prepare($sql);
 
@@ -55,9 +62,19 @@
 
         try {
             if ($stmt->execute()) {
-                echo '<center><p class="Successful">Données insérées avec succès!</p></center>';
+                echo '<div class="alert alert-success d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                <div>
+                  An example success alert with an icon
+                </div>
+              </div>';
             } else {
-                echo "Erreur lors de l'insertion des données.";
+                echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                  An example danger alert with an icon
+                </div>
+              </div>';
             }
         } catch (PDOException $e) {
             echo "Erreur de connexion à la base de données : " . $e->getMessage();
@@ -68,25 +85,25 @@
     <main>
         <section class="container" id="container">
             <h3><b>Mise en production</b></h3>
-            <form class="row g-3" method="post ">
+            <form class="row g-3" method="post">
                 <div class="col-md-6" id="divText">
                     <label for="inputLib" class="form-label">Libellé</label>
                     <input type="text" class="form-control" id="inputLib" disabled <?php
                     $lbl_dmd = $row0['libelle'];
                     ?>
-                    value="<?php echo $lbl_dmd; ?>">
+    value="<?php echo $lbl_dmd; ?>">
                 </div>
 
                 <div class="infosColumn">
                     <div class="col-md-4" id="divPar">
                         <label for="inputUtil" class="form-label">Par</label>
-                        <select id="inputUtil" class="form-select">
+                        <select id="inputUtil" name="inputUtil" class="form-select">
                             <?php
                             echo "<option value=''></option>";
                             foreach ($result1 as $row) {
                                 $id_util = $row['IdUtil'];
                                 $nom = $row['nom'];
-                                echo "<option value='$id_util'>$nom</option>";
+                                echo "<option value=$id_util>$nom</option>";
                             }
                             ?>
                         </select>
@@ -94,32 +111,55 @@
 
                     <div class="col-md-6" id="divDate">
                         <label for="inputDate" class="form-label">Date de mise en production</label>
-                        <input type="text" class="form-control" id="datepicker" pattern="\d{1,2}/\d{1,2}/\d{4}"
-                            placeholder="jj/mm/aaaa">
+                        <input type="text" class="form-control" id="datepicker" name="datepicker"
+                            pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="jj/mm/aaaa">
                     </div>
 
                     <div class="col-md-6" id="divNumber">
                         <label for="inputNumber" class="form-label">Procédure de mise en production</label>
-                        <input type="number" class="form-control" id="inputNumber">
+                        <input type="number" class="form-control" id="inputNumber" disabled <?php
+                        $id_Demande = $row2['IdDemande'];
+                        ?> value="<?php echo $id_Demande; ?>">
                     </div>
                 </div>
                 <div class="btnajout">
-                    <button type="submit">Valider</button>
+                    <button type="submit" name="btnajout">Valider</button>
                     <button type="reset">Annuler</button>
+
+                    <?php
+                    if (isset($_POST['btnajout'])) {
+                        // Le bouton "btnajouter" a été cliqué.
+                        $date_mep = isset($_POST['datepicker']) ? $_POST['datepicker'] : '';
+                        $util_mep = isset($_POST['inputUtil']) ? $_POST['inputUtil'] : '';
+
+                        $date_mep_bon_format = substr($date_mep, 6, 4) . substr($date_mep, 3, 2) . substr($date_mep, 0, 2);
+                        $sql = "INSERT INTO tc_mep (date_mep, util_emet_mep) VALUES (?, ?)";
+
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute([$date_mep_bon_format, $util_mep]);
+                    }
+                    ?>
+
                 </div>
             </form>
         </section>
     </main>
 
-    <!-- Lien vers Boostrap.js  -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-
-    <!-- Lien vers jQuery et jQuery UI -->
+    <!-- Lien vers jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="js/date.js"></script>
+
+    <!-- Lien vers Bootstrap.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-eOJMYuvWlv6Kk1V19EtiWZq1lDHfVIK3tu7W7SQa5n3eNMDWivcFdHZISdRlNW9x"
+        crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var toastElement = document.querySelector('.toast');
+            var toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        });
+
+    </script>
 
 
 </body>
