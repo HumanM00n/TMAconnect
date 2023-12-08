@@ -118,7 +118,17 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 204%;
 }
 
-
+.Successful{
+    display: block;
+    background-color: #69e95d;
+    border: 1px solid;
+    border-radius: 10px;
+    margin-top: 1%;
+    margin-bottom: -3%;
+    padding: 1.2% 1.2% 1.2% 1.2%;
+    text-align: center;
+    width: 65%;
+}
 
 
 @media (max-width: 767px) {
@@ -174,4 +184,31 @@ tbody, td, tfoot, th, thead, tr {
 
 .btnajout button[type="reset"]:hover {
     background-color: rgb(221, 18, 18);
+}
+
+
+.alert {
+    display: flex;
+    justify-content: flex;
+    align-items: center;
+    width: 35%;
+    margin: 18px auto auto 0;
+    margin-top: 18px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-success svg {
+    fill: #155724;
+    width: 25px;
+}
+
+.alert-success div {
+    margin-left: 12px; /* Ajustez la marge à votre préférence */
 }
