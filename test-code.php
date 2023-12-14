@@ -2,24 +2,25 @@
 <html>
 
 <head>
-  <title>TMATest1</title>
+  <title>TC1</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link href="css/test-css.css" rel="stylesheet" type="text/css">
-  <link rel="icon" href="img/NLogo2.png" />
+  <link href="../css/test-css.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="../img/NLogo2.png" />
 </head>
 
 <body>
-  <?php include('includes/connexion.inc.php'); ?>
+  <?php include('../includes/connexion.inc.php'); ?>
 
   <!------------------------------------------
   |             REQUETE SQL                   | 
   ------------------------------------------->
 
   <?php
-    $id_Demande = 8;
+    $id_Demande = $_GET['idDemande'];
+    $idDemande = $_GET['idDemande'];
     $sql = "SELECT 
             D.IdDemande, 
             DOM.libelle , 
