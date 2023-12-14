@@ -17,15 +17,25 @@
     <link rel="stylesheet" href="css/csshome.css">
     <link rel="stylesheet" href="css/test.css">
     <link rel="icon" href="img/NLogo2.png" />
-    <title>TestMEP</title>
+    <title>TC2</title>
 </head>
 
 <?php include('includes/connexion.inc.php') ?>
 
 <body>
+  <!------------------------------------------
+  |             BOUTON "RETOUR"              | 
+  ------------------------------------------->
+    <div class="btnretour">
+        <button onClick=" history.back();">Retour</button>
+    </div>
+
+   <!------------------------------------------
+  |             REQUETE SQL                   | 
+   -------------------------------------------->
     <?php
 
-    $id_Demande = 8;
+    $id_Demande = "IdDemande";
 
     // Requête pour récupérer le libellé de la demande
     $sql0 = "SELECT libelle FROM tc_demandes WHERE IdDemande =" . $id_Demande;
@@ -63,25 +73,28 @@
         try {
             if ($stmt->execute()) {
                 echo '<div class="alert alert-success d-flex align-items-center" role="alert">
-                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                <div>
-                  An example success alert with an icon
-                </div>
-              </div>';
+                    <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                    <div>
+                      Mise en production effectuée avec succès !
+                    </div>
+                  </div>';
             } else {
                 echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
-                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                <div>
-                  An example danger alert with an icon
-                </div>
-              </div>';
+                    <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                      Une erreur s\'est produite lors de linsertion d\'une mise en production.
+                    </div>
+                  </div>';
             }
         } catch (PDOException $e) {
-            echo "Erreur de connexion à la base de données : " . $e->getMessage();
+            echo "Erreur lors de l'insertion ! " . $e->getMessage();
         }
     }
     ?>
 
+  <!------------------------------------------
+  |              FORMULAIRE MEP              | 
+  ------------------------------------------->
     <main>
         <section class="container" id="container">
             <h3><b>Mise en production</b></h3>
@@ -160,7 +173,6 @@
         });
 
     </script>
-
 
 </body>
 
