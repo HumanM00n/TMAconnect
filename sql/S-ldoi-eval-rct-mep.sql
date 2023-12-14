@@ -21,13 +21,7 @@ CREATE TABLE TC_LDOI
     type VARCHAR(10) NOT NULL,
     environnement INT NOT NULL, /* Clés étrangère */
     libelle VARCHAR(50) NOT NULL,
-    nv_ldoi VARCHAR(3) NOT NULL,
-    archv_ldoi VARCHAR(3) NOT NULL,
-    date_mtnc DATE NOT NULL,
-    bibliotheque VARCHAR(20) NOT NULL,
     date_mep INT, /* Clés étrangère */
-    vrs_phx VARCHAR(20) NOT NULL,
-    report VARCHAR(3) NOT NULL,
     FOREIGN KEY (nom_env) REFERENCES TC_Environnement(IdEnvironnement),
     FOREIGN KEY (environnement) REFERENCES TC_Environnement(IdEnvironnement),
     FOREIGN KEY (date_mep) REFERENCES TC_MEP(IdMep)
