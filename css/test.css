@@ -9,13 +9,14 @@ main {
     width: 1200px;
     height: 500px;
     display: grid;
-    margin-top: 110px;
+    margin-top: 130px;
     padding: 7%;
     border: 2px solid black;
     border-radius: 8px;
     background: rgb(219 219 219 / 28%);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(50px);
+    /* margin-top: 48px; */
 }
 
 h3 {
@@ -59,13 +60,13 @@ h3 {
     -moz-appearance: none;
     appearance: none;
     background-color: var(--bs-body-bg);
-    background-image: var(--bs-form-select-bg-img),var(--bs-form-select-bg-icon,none);
+    background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     background-size: 16px 12px;
     border: var(--bs-border-width) solid var(--bs-border-color);
     border-radius: var(--bs-border-radius);
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 input[type="date"] {
@@ -118,7 +119,7 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 204%;
 }
 
-.Successful{
+.Successful {
     display: block;
     background-color: #69e95d;
     border: 1px solid;
@@ -138,7 +139,12 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 
-tbody, td, tfoot, th, thead, tr {
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
     border-color: inherit;
     border-style: solid;
     border-width: 0;
@@ -187,15 +193,18 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 
+.moved {
+    margin-top: 0px;
+}
+
 .alert {
     display: flex;
     justify-content: flex;
     align-items: center;
-    width: 35%;
-    margin: 18px auto auto 0;
-    margin-top: 18px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 36%;
+    height: 60px;
+    border-radius: 10px;
+    margin: 0px auto -50px auto;
 }
 
 .alert-success {
@@ -210,5 +219,35 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .alert-success div {
-    margin-left: 12px; /* Ajustez la marge à votre préférence */
+    margin-left: 12px;
+    /* Ajustez la marge à votre préférence */
+}
+
+
+.btnretour {
+    align-items: center;
+    justify-content: start;
+    display: flex;
+    margin: 20px 0 0 20px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+
+.btnretour button:hover {
+    background-color: #013b72;
+}
+
+
+.btnretour button {
+    padding: 12px 16px;
+    background: #0055A4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
