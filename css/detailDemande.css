@@ -5,99 +5,60 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.barre-arianne {
-    position: fixed; /* utiliser "fixed" pour que la barre reste visible en tout temps */
-    top: 0px;
-    overflow: visible;
-    left: 0;
-    right: 0;
-    background-color: #289297;
-    z-index: 80;
-}
-
-.barre-arianne ul {
-    list-style-type: none; /* enlÃ¨ve les puces de la liste */
-    margin: 0;
-    padding: 0;
-    display: flex; /* utilise Flexbox pour aligner les Ã©lÃ©ments horizontalement */
-}
-
-.barre-arianne .Onglet {
-    margin: 0;
-    padding: 0;
-    position: relative; /* ajoute une position relative pour les Ã©lÃ©ments de menu dÃ©roulant */
-}
-
-.barre-arianne a {
-    display: block; /* rend les liens cliquables sur toute la hauteur de la barre */
-    color: white; /* couleur du texte des liens */
-    text-align: center; /* centre le texte horizontalement */
-    font-weight: bold;
-    padding: 20px 20px; /* ajoute un peu de marge autour du texte */
-    text-decoration: none; /* enlÃ¨ve les soulignements par dÃ©faut */
-    text-align: center;
-    padding: 25px;
-}
-
-/* effet de survol des liens */
-.barre-arianne a:hover {
-    background-color: #0c156b;
-    color: white;
-    text-decoration: none;
-}
-
-
-/* Styles spÃ©cifiques pour le menu dÃ©roulant */
-.barre-arianne .sous {
-    display: none;
-    position: absolute;
-    background-color: #289297;
-    left: 0;
-    font-size: 15px;
-    top: 100%;
-    z-index: 100;
-}
-
-.barre-arianne li:hover .sous {
-    display: block;
-}
-
-.barre-arianne .sous li {
-    display: block;
-}
-
-
-.barre-arianne .sous2 {
-    display: none;
-    position: absolute;
-    background-color: #289297;
-    left: auto;
-    right: 0;
-    font-size: 15px;
-    top: 100%;
-    z-index: 100;
-    width: fit-content; /* Ajuste la largeur du menu dÃ©roulant Ã  son contenu */
-    white-space: nowrap;
-}
-
-.barre-arianne li:hover .sous2 {
-    display: block;
-}
-
-.barre-arianne .sous2 li {
-    display: block;
-    margin-left: 0px;
-}
-
-.MonCompte{
-    position: absolute;
-    right: 0;
+main {
     display: flex;
-    gap: 20px;
-    flex-direction: row;
-    font-weight: 900;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
 }
 
+/*---------------------------
+|          TAB BAR          | 
+---------------------------*/
+
+.container-fluid {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-left: 0;
+    margin-top: 1rem;
+    list-style: none;
+    width: 41%;
+
+}
+
+.nav-tabs {
+    border-bottom: 3px solid #dee2e6;
+}
+
+
+li>a {
+    color: #333;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+
+li a:hover {
+    color: #289297;
+}
+
+
+/*---------------------------
+|      DETAIL DEMANDE       | 
+---------------------------*/
 
 #nvldemande {
     display: flex;
@@ -109,7 +70,7 @@ body {
 }
 
 #form_nvldemande {
-    width: 800px; 
+    width: 800px;
     height: 915px;
     margin: 8px auto 0;
     padding: 0;
@@ -219,13 +180,16 @@ body {
 
 /* Styles pour le texte de l'Ã©tiquette */
 label {
-    display: block; /* Affiche le texte de l'Ã©tiquette en tant que bloc */
-    margin-bottom: 15px; /* Ajoute un espace en bas de l'Ã©tiquette */
-    font-weight: bold; /* Met en Ã©vidence le texte de l'Ã©tiquette */
+    display: block;
+    /* Affiche le texte de l'Ã©tiquette en tant que bloc */
+    margin-bottom: 15px;
+    /* Ajoute un espace en bas de l'Ã©tiquette */
+    font-weight: bold;
+    /* Met en Ã©vidence le texte de l'Ã©tiquette */
     margin-top: 8px;
 }
 
-#coordo{
+#coordo {
     margin-bottom: 100px;
 }
 
@@ -241,23 +205,29 @@ label {
 }
 
 .form-group input[type="checkbox"] {
-    width: 50px; /* Modifier la largeur de la case à cocher */
-    height: 22px; /* Modifier la hauteur de la case à cocher */
-    position: relative; /* Définit sa postion relative ajusté avec des propriétes comme top, left, right et bottom*/
-    left: 175px; /* Déplace l'élément de 175 pixels vers la droite par rapport à sa position normale */
-    bottom: 29px; /* Déplace l'élément de 29 pixels vers le bas par rapport à sa position normale */
+    width: 50px;
+    /* Modifier la largeur de la case à cocher */
+    height: 22px;
+    /* Modifier la hauteur de la case à cocher */
+    position: relative;
+    /* Définit sa postion relative ajusté avec des propriétes comme top, left, right et bottom*/
+    left: 175px;
+    /* Déplace l'élément de 175 pixels vers la droite par rapport à sa position normale */
+    bottom: 29px;
+    /* Déplace l'élément de 29 pixels vers le bas par rapport à sa position normale */
 
 }
 
 
 .libelleDemande input[type="text"] {
     width: 100%;
-    padding: 5px; /* Augmenter la taille du padding */
+    padding: 5px;
+    /* Augmenter la taille du padding */
     margin-bottom: 20px;
     font-size: 13px;
 }
 
-#form_nvldemande input#demLibelle  {
+#form_nvldemande input#demLibelle {
     width: 95%;
     padding: 9px;
     font-size: 16px;
@@ -271,8 +241,9 @@ label {
     margin-left: auto;
     margin-right: auto;
     height: 100%;
-    margin-top: 0;
-    border: 2px solid black;
+    margin-top: 50px;
+    margin-bottom: 47px;
+    border: 2px solid #333;
     border-radius: 8px;
     background: rgb(219 219 219 / 28%);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -299,13 +270,13 @@ label {
     color: #333;
 }
 
-#form_menuNvlDmd select{
+#form_menuNvlDmd select {
     width: 100%;
     padding: 5px;
     font-size: 14px;
 }
 
-#form_menuNvlDmd input[type="text"]{
+#form_menuNvlDmd input[type="text"] {
     width: 100%;
     padding: 3px;
     font-size: 14px;
@@ -315,27 +286,36 @@ label {
     align-items: center;
     justify-content: start;
     display: flex;
-    margin-top: 20px;
-    margin-left: 20px;
+    position: relative;
     font-size: 14px;
     font-weight: bold;
     transition: background-color 0.3s ease;
+    z-index: 1;
 }
 
 .btnajout button {
+    width: 5rem;
+    height: 3rem;
+    position: absolute;
+    top: 17px;
+    left: 19px;
     padding: 10px 16px;
-    background: #0055A4;
-    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    background: #289297;
+    color: #fff;
+}
+
+.btnajout button:hover {
+    background-color: #287074;
+    transition: 0.3s ease;
 }
 
 
-.Successful{
+.Successful {
     display: block;
     background-color: #69e95d;
     border: 1px solid;
@@ -346,3 +326,32 @@ label {
     text-align: center;
     width: 65%;
 }
+
+.btn-group {
+    width: 80%; /* Utilisation de pourcentage pour la largeur */
+    max-width: 35rem; /* Limite la largeur maximale à 35rem */
+    margin: 1.5rem auto auto auto; /* Centrer l'élément horizontalement avec une marge supérieure de 1rem */
+    display: flex;
+    justify-content: center; /* Espacement égal entre les éléments */
+    position: relative;
+}
+
+
+.btn-group a {
+    color: #289297; /* Couleur du texte pour les liens */
+    background-color: white; /* Couleur de fond pour les liens */
+    border-color: #289297;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-group a:active,
+.btn-group a:hover,
+.btn-group a:focus {
+    color: white !important;
+    background-color: #289297 !important;
+    border-color: #289297 !important;
+    text-decoration: none;
+}
+
