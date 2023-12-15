@@ -2,20 +2,24 @@
 <html>
 
 <head>
-    <title>TMA - Détail de la Demande</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="../css/detailDemande.css">
-    <link rel="icon" href="../img/NLogo2.png" />
+  <title>TMA - Détail Demande</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="../css/test-css.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="../img/NLogo2.png" />
 </head>
 
 <body>
-    <?php include('../includes/connexion.inc.php'); ?>
+  <?php include('../includes/connexion.inc.php'); ?>
 
-    <?php
-    $idDemande = $_GET['idDemande'];
+  <!------------------------------------------
+  |             REQUETE SQL                   | 
+  ------------------------------------------->
+
+  <?php
+    $id_Demande = $_GET['idDemande'];
     $sql = "SELECT 
             D.IdDemande, 
             DOM.libelle , 
@@ -53,15 +57,49 @@
         AND D.regroupement = R.IdRegroupe";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':IdDemande', $idDemande, PDO::PARAM_INT);
+    $stmt->bindParam(':IdDemande', $id_Demande, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_BOTH);
     ?>
 
-    <div class="btnajout">
-        <button onClick=" history.back();">Retour</button>
-    </div>
-<div class="container">
+<?php
+// Récupérer l'ID de la demande depuis la variable GET
+// $id_Demande = isset($_GET['id']) ? $_GET['id'] : null;
+$id_Demande = isset($_GET['idDemande']) ? $_GET['idDemande'] : null;
+
+
+if ($id_Demande !== null) {
+  
+} else {
+    echo 'ID de demande manquant.';
+}
+?> 
+
+  <!------------------------------------------
+  |             BOUTON "RETOUR"              | 
+  ------------------------------------------->
+
+  <div class="btnajout">
+    <button onClick=" history.back();">Retour</button>
+  </div>
+
+  <!---------------------------
+  |          TAB BAR          | 
+  ---------------------------->
+
+  <div class="btn-group">
+    <a href="#" class="btn btn-primary">Liste des objets impactés</a>
+    <a href="#" class="btn btn-primary">Evaluation</a>
+    <a href="#" class="btn btn-primary">Recette</a>
+    <a href="../facturation/mise-en-prod.php?idDemande=<?php echo $id_Demande; ?>" class="btn btn-primary">Mise en production</a>
+  </div>
+
+  <main>
+    <!------------------------------------------
+  |          DETAIL DE LA DEMANDE            | 
+  ------------------------------------------->
+
+  <div class="container">
     <section id="menuNouvelDmd">
         <form id="form_nvldemande" name="form_nvldemande" method="GET">
             <fieldset id="menuDmd">
@@ -251,11 +289,13 @@
         </form>
     </section>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Lien vers jQuery --> 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- Le lien vers jQuery UI -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> <!-- Lien vers Bootstrap JS -->
-<script src="../js/date.js"></script>
+   
+  </main>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="../js/date.js"></script>
 
 </body>
 
