@@ -95,11 +95,7 @@
             echo "Erreur lors de l'insertion ! " . $e->getMessage();
         }
     }
-    ?>
-
-  <!------------------------------------------
-  |               MODIFICATION               | 
-   ------------------------------------------>    
+    ?>  
 
 
   <!------------------------------------------
@@ -114,7 +110,7 @@
                     <input type="text" class="form-control" id="inputLib" disabled <?php
                     $lbl_dmd = $row0['libelle'];
                     ?>
-                        value="<?php echo $lbl_dmd; ?>">
+                    value="<?php echo $lbl_dmd; ?>">
                 </div>
 
                 <div class="infosColumn">
@@ -147,8 +143,22 @@
                 </div>
 
                 <div class="btnajout">
-                    <button type="submit" name="btnajout">Valider</button>
-                    <button type="reset">Annuler</button>
+                    <?php if ($IdMep > 0) { ?>
+                        <button> type= "submit" name="btn_modifier">Valider</button>;
+                    <?php }else{ ?>
+                        <button type="reset">Annuler</button>
+            
+
+                if ($IdMep > 0) { // Il y a un bien une mep qui a été saisie
+                         "Afficher le bouton modifier"; // Ajouter le bouton
+                        $sql5 = "UPDATE tc_mep SET date_mep = " . $date_mep_bon_format . " , util_emet_mep  = " . $IdUtil . " WHERE IdMep = " . $IdMep;
+                        $stmt5 = $pdo->prepare($sql5);
+                        $result5 = $stmt5->execute();
+                    } else  {
+                        echo "Afficher le bouton Valider";
+                    }
+                    
+                    
 
                     <?php
                     if (isset($_POST['btnajout'])) {
@@ -159,12 +169,16 @@
                         $date_mep_bon_format = substr($date_mep, 6, 4) . substr($date_mep, 3, 2) . substr($date_mep, 0, 2);
                         $sql = "INSERT INTO tc_mep (date_mep, util_emet_mep) VALUES (?, ?)";
 
+                    // <!------------------------------------------
+                    // |               MODIFICATION               | 
+                    //  ------------------------------------------> 
+
                         $stmt = $pdo->prepare($sql);
                         $stmt->execute([$date_mep_bon_format, $util_mep]);
 
                         $id = $pdo->lastInsertId(); //Récupère l'id avec lequel je vais mettre à jour la table tc_demandes
                         echo $id;
-
+                                                                // Cibler la ligne que je vais mettre à jour 
                         $sql4 = "UPDATE tc_demandes SET IdMep = "   . $id . " WHERE IdDemande = " . $id_Demande;
                         $stmt4 = $pdo->prepare($sql4);
                         $result4 = $stmt4->execute();
@@ -175,22 +189,12 @@
                     $stmt3 = $pdo->query($sql3);
                     $row3 = $stmt3->fetch(PDO::FETCH_ASSOC);
                     $IdMep = $row3['IdMep'];
+                    
 
 
-                    if ($IdMep > 0) { // Il y a un bien une mep qui a été saisie
-                        echo "Afficher le bouton modifier";
-                    } else  {
-                        echo "Afficher le bouton Valider";
-                    }
+                    
 
                     ?>
-
-<!-- 
-<?php if (!$motDePasseModifie) { ?>
-                    <button type="submit" class="tma-btn" name="subpasswd">Enregistrer</button>
-                <?php } else { ?>
-                    <a href="./index.php"><input type="button" class="tma-btn" value="⬅️ Revenir au menu"></a>
-                <?php } ?> -->
                 </div>
             </form>
         </section>
