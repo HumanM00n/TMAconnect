@@ -1,18 +1,23 @@
-@import url(csshome.css);
+main {
+    display: flex;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+}
 
 #container {
     width: 1200px;
-    height: 100%;
-    display: flex;
-    margin-top: 110px;
-    padding: 9%;
+    height: 500px;
+    display: grid;
+    margin-top: 130px;
+    padding: 7%;
     border: 2px solid black;
     border-radius: 8px;
     background: rgb(219 219 219 / 28%);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(50px);
+    /* margin-top: 48px; */
 }
-
 
 h3 {
     display: flex;
@@ -21,12 +26,13 @@ h3 {
     flex-direction: row;
     position: fixed;
     top: 8%;
-    left: 37%;
+    left: 39%;
 }
 
 .form-control {
     display: block;
-    width: 100%;
+    width: 36%;
+    /* Utiliser la largeur à 100% pour s'adapter à la grille */
     height: calc(1.5em + 0.75rem + 2px);
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
@@ -37,25 +43,215 @@ h3 {
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-#inputLib {
-    width: 320%;
+.form-select {
+    --bs-form-select-bg-img: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e);
+    display: block;
+    width: 66%;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-#inputAddress {
-    width: 30%;
+input[type="date"] {
+    appearance: none;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    width: 31%;
+    color: #333;
 }
 
-.col-12 {
-    margin-top: 50px;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-}
-
-
-.col-md-4 {
+.infosColumn {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 30px;
+}
+
+.infosColumn #divPar,
+.infosColumn #divDate {
+    display: flex;
+    flex-direction: column;
+}
+
+.infosColumn #divDate {
+    order: 1;
+}
+
+.infosColumn #divPar {
+    order: 2;
+    margin-left: -122px;
+}
+
+/* Désactiver le spinner sur les champs input de type number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+.infosColumn #divNumber {
+    order: 3;
+}
+
+.col-md-6>#inputLib {
+    width: 204%;
+}
+
+.Successful {
+    display: block;
+    background-color: #69e95d;
+    border: 1px solid;
+    border-radius: 10px;
+    margin-top: 1%;
+    margin-bottom: -3%;
+    padding: 1.2% 1.2% 1.2% 1.2%;
+    text-align: center;
+    width: 65%;
+}
+
+
+@media (max-width: 767px) {
+    .col-md-6:nth-child(1) {
+        width: auto;
+    }
+}
+
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    width: 270px;
+}
+
+.btnajout {
+    align-items: flex-end;
+    justify-content: flex-end;
+    display: flex;
+    position: relative;
+    top: 70px;
+    left: 65px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+}
+
+.btnajout button {
+    width: 5.8rem;
+    height: 3.2rem;
+    padding: 10px 16px;
+    margin-left: 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    background: #289297;
+    color: #fff;
+}
+
+.btnajout button:hover {
+    background-color: #287074;
+    transition: 0.3s ease;
+}
+
+
+.btnajout button[type="reset"] {
+    background-color: red;
+}
+
+.btnajout button[type="reset"]:hover {
+    background-color: rgb(221, 18, 18);
+}
+
+
+.moved {
+    margin-top: 0px;
+}
+
+.alert {
+    display: flex;
+    justify-content: flex;
+    align-items: center;
+    width: 36%;
+    height: 60px;
+    border-radius: 10px;
+    margin: 0px auto -50px auto;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-success svg {
+    fill: #155724;
+    width: 25px;
+}
+
+.alert-success div {
+    margin-left: 12px;
+    /* Ajustez la marge à votre préférence */
+}
+
+
+.btnretour {
+    align-items: center;
+    justify-content: start;
+    display: flex;
+    margin: 20px 0 0 20px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btnretour button {
+    width: 5rem;
+    height: 3rem;
+    position: absolute;
+    top: 17px;
+    left: 19px;
+    /* padding: 12px 16px; */
+    padding: 10px 16px;
+    background: #289297;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+
+.btnretour button:hover {
+    background-color: #287074;
 }
