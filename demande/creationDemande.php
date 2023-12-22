@@ -17,7 +17,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
 <body>
     <?php
-    include('../includes/header.html.inc.php');
+    // include('../includes/header.html.inc.php');
 
     // Informations de connexion � la base de donn�es MySQL
     $servername = "localhost:3308"; // nom du serveur
@@ -97,7 +97,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         && isset($_POST["selectRegroupement"])
         && isset($_POST["demArchiv"])
     ) {
-        $var0 = $_POST["numDemande"];
+        // $var0 = $_POST["numDemande"];
         $var1 = $_POST["selectDom"];
         $var2 = $_POST["selectQualif"];
         $var3 = $_POST["selectPrio"];
@@ -121,12 +121,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
         // Préparation de la requête d'insertion en utilisant des paramètres nommés
         $sql = "INSERT INTO tc_demandes (dom_dmd, qual_dmd, prt_dmd, libelle, date_crea, util_crea, date_emet, util_emet, date_recu, util_benef, date_etat_dmd, etat_dmd, date_visa_dmd, util_sign_dmd, util_affect_dmd, date_fs, amorti_dmd, date_rct_prvu, regroupement, date_archiv, IdLdoi, IdEval, IdRecette, IdMep) 
-                VALUES (:var1, :var2, :var3, :var4, :var5, :var6, :var7, :var8, :var9, :var10, :var11, :var12, :var13, :var14, :var15, :var16, :var17, :var18, :var19, :var20, 1, 1, 1, 1)";
+                VALUES (:var1, :var2, :var3, :var4, :var5, :var6, :var7, :var8, :var9, :var10, :var11, :var12, :var13, :var14, :var15, :var16, :var17, :var18, :var19, :var20)";
 
         $stmt = $pdo->prepare($sql);
 
+        echo $sql;
+
         // Binder les valeurs aux paramètres nommés
-        $stmt->bindValue(":var0", $var0);
+        // $stmt->bindValue(":var0", $var0);
         $stmt->bindValue(":var1", $var1);
         $stmt->bindValue(":var2", $var2);
         $stmt->bindValue(":var3", $var3);
@@ -207,7 +209,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                     <div class="form-group">
                         <label for="numDemande">N° demande :</label>
-                        <input type="text" name="numDemande" id="numDemande" size="35" disabled pattern="[0-9]">
+                        <input type="text" name="numDemande" id="numDemande" size="35" pattern="[0-9]" disabled>
                         <?php
                             echo "<option value='' disabled selected hidden></option>";
                             foreach ($result8 as $row) {
@@ -225,8 +227,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                 <div class="libelleDemande">
                     <label for="demLibelle">Libellé demande :</label>
-                    <input type="text" name="demLibelle" id="demLibelle" size="35"
-                        pattern="^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ�?ÀÂÄÃÅÇÉÈÊË�?ÌÎ�?ÑÓÒÔÖÕÚÙÛÜ�?ŸÆŒ\s\-]+$" required
+                    <input type="text" name="demLibelle" id="demLibelle" size=""
+                        pattern="[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ�?ÀÂÄÃÅÇÉÈÊË�?ÌÎ�?ÑÓÒÔÖÕÚÙÛÜ�?ŸÆŒ\s\-]+$" required
                         required oninput="convertToUppercase(this)">
                 </div>
 
