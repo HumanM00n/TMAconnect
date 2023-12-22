@@ -146,7 +146,6 @@ $inputUtil_value = isset($_POST['inputUtil']) ? $_POST['inputUtil'] : '';
         }
     </script>
 
-    <!-- ... (existing scripts) ... -->
 </body>
 
 </html>
