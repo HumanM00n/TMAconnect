@@ -8,8 +8,7 @@ table {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-height: 200px;
-    /* Ajuste la hauteur au minimum */
+    min-height: 200px; /* Ajuste la hauteur au minimum */
     margin-top: 45px
 }
 
@@ -19,18 +18,20 @@ table th {
 }
 
 table td {
-    width: 150px;
-    /*Ajuste la même taille du tableau avec celle de l'en-tête  */
+    width: 150px; /*Ajuste la même taille du tableau avec celle de l'en-tête  */
 }
 
+#table thead tr th.icone-loupe {
+    position: relative;
+    padding-left: 65px; /* Ajustez la valeur selon vos besoins pour déplacer l'icône vers la droite */
+}
 
 
 .modif {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 32vh;
-    /* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
+    min-height: 32vh; /* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
     background: (#f5f5f5, #e8e8e8);
 }
 
