@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <?php include('../includes/connexion.inc.php') ?> 
+  <?php include('../includes/connexion.inc.php') ?>
   <?php include('../includes/header.html.inc.php') ?>
 
   <?php
@@ -85,8 +85,8 @@
       </fieldset>
     </form>
   </section>
- 
-<!-----------------------------------------
+
+  <!-----------------------------------------
 |           Tableau Des demandes          | 
 ------------------------------------------>
 
@@ -94,13 +94,13 @@
 
     <div id="table-container" class='table'>
       <?php include_once('../php/S-Filtre.php'); ?>
-    </div>
+  </div>
 
   <?php else: ?>
     <div>Aucune demande trouvée</div>
   <?php endif; ?>
 
-<!--------------------------------------------
+  <!--------------------------------------------
 |             Pagination Du Tableau          |  
 --------------------------------------------->
 
@@ -120,13 +120,17 @@
     </ul>
   </nav>
 
-  <!-- <div id="alertContainer"></div> -->
-
+  <!-- Lien vers jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+  <!-- Lien vers Bootstrap.js -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Lien vers les script JS -->
   <script src="../js/AJAX.js"></script>
+
 </body>
 
 </html>
