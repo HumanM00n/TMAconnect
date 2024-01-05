@@ -6,7 +6,6 @@
 </svg>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- <link href="../css/test.css" rel="stylesheet" type="text/css"> -->
 
 <?php
 // informations de connexion à la base de données MySQL
@@ -26,11 +25,12 @@ try {
     $lib_dmd = isset($_POST['lib_dmd']) ? $_POST['lib_dmd'] : '';
 
     // Construire la requête SQL en fonction des valeurs du formulaire
-    $sql = "SELECT D.IdDemande, DOM.libelle, D.libelle, Q.libelle, D.date_crea, E.libelle 
-            FROM tc_demandes D, tc_domaine DOM, tc_qualif Q, tc_etat E
+    $sql = "SELECT D.IdDemande, DOM.libelle, D.libelle, Q.libelle, D.date_crea, E.libelle, M.date_mep
+            FROM tc_demandes D, tc_domaine DOM, tc_qualif Q, tc_etat E, tc_mep M
             WHERE D.dom_dmd = DOM.IdDomaine 
             AND D.qual_dmd = Q.IdQual
-            AND D.etat_dmd = E.IdEtat";
+            AND D.etat_dmd = E.IdEtat
+            AND D.IdMep = M.IdMep";
 
 
     if ($select_domaine != '') {
@@ -44,7 +44,7 @@ try {
     if ($num_dmd != '') {
         $sql .= " AND D.IdDemande = $num_dmd";
     }
-    
+
     if ($lib_dmd != '') {
         $sql .= " AND D.libelle LIKE '$lib_dmd'";
     }
@@ -54,7 +54,7 @@ try {
     // Vérification des résultats
     if ($stmt->rowCount() > 0) {
         $count = $stmt->rowCount();
-        $html = '<table class="table" id="table"><thead><tr><th>🔎</th><th>N°demande</th><th>Domaine</th><th>Libellé</th><th>Type</th><th>Demande créée</th><th>Charge</th><th>Etat</th><th>Date MEP</th><th>Télécharger</th></tr></thead><tbody>';
+        $html = '<table class="table" id="table"><thead><tr><th class="icone-loupe">🔎</th><th>N°demande</th><th>Domaine</th><th>Libellé</th><th>Type</th><th>Demande créée</th><th>Charge</th><th>Etat</th><th>Date MEP</th><th>Télécharger</th></tr></thead><tbody>';
 
         while ($row = $stmt->fetch(PDO::FETCH_BOTH)) {
             $html .= '<tr class="afficherDetails">';
@@ -64,15 +64,20 @@ try {
             $html .= '<td>' . $row[2] . '</td>';
             $html .= '<td>' . $row[3] . '</td>';
             $html .= '<td>' . $row[4] . '</td>';
-            $html .= '<td>2</td>';
             $html .= '<td>' . $row[5] . '</td>';
-            $html .= '<td>30-09-2023</td>';
+            $html .= '<td>' . $row[6] . '</td>';
+
+            // Formater la date au format dd-mm-yyyy
+            $formattedDate = date("d-m-Y", strtotime($row[7]));
+            $html .= '<td>' . $formattedDate . '</td>';
+
             $html .= '<td><i class="bx bx-download"></i></td>';
             $html .= '</tr>';
         }
-
         $html .= '</tbody></table>';
+
         echo $html;
+
     } else {
         echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
         <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
