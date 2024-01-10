@@ -26,12 +26,11 @@ try {
 
     // Construire la requête SQL en fonction des valeurs du formulaire
     $sql = "SELECT D.IdDemande, DOM.libelle, D.libelle, Q.libelle, D.date_crea, E.libelle, M.date_mep
-            FROM tc_demandes D, tc_domaine DOM, tc_qualif Q, tc_etat E, tc_mep M
-            WHERE D.dom_dmd = DOM.IdDomaine 
-            AND D.qual_dmd = Q.IdQual
-            AND D.etat_dmd = E.IdEtat
-            AND D.IdMep = M.IdMep";
-
+    FROM tc_demandes D
+    JOIN tc_domaine DOM ON D.dom_dmd = DOM.IdDomaine 
+    JOIN tc_qualif Q ON D.qual_dmd = Q.IdQual
+    JOIN tc_etat E ON D.etat_dmd = E.IdEtat
+    LEFT JOIN tc_mep M ON D.IdMep = M.IdMep";
 
     if ($select_domaine != '') {
         $sql .= " AND DOM.libelle = '$select_domaine'";
@@ -63,28 +62,35 @@ try {
             $html .= '<td>' . $row[1] . '</td>';
             $html .= '<td>' . $row[2] . '</td>';
             $html .= '<td>' . $row[3] . '</td>';
-            $html .= '<td>' . $row[4] . '</td>';
-            $html .= '<td>' . $row[5] . '</td>';
-            $html .= '<td>' . $row[6] . '</td>';
-
-            // Formater la date au format dd-mm-yyyy
-            $formattedDate = date("d-m-Y", strtotime($row[7]));
+            $formattedDate = date("d-m-Y", strtotime($row[4]));
             $html .= '<td>' . $formattedDate . '</td>';
+            $html .= '<td>' . $row[5] . '</td>';
+            $html .= '<td>2</td>'; // Quand l'eval sera faite, changer et appliquer sur cette ligne le row6 et mettre la date_mep $row7
+
+            // Vérifier si la colonne de tc_mep existe dans le tableau $row
+            if (isset($row[6])) {
+                // Formater la date au format dd-mm-yyyy
+                $formattedDate = date("d-m-Y", strtotime($row[6]));
+                $html .= '<td>' . $formattedDate . '</td>';
+            } else {
+                $html .= '<td>Indice 6 non défini</td>';
+            }
 
             $html .= '<td><i class="bx bx-download"></i></td>';
             $html .= '</tr>';
         }
+
         $html .= '</tbody></table>';
 
         echo $html;
 
     } else {
         echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
-        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-        <div>
-          Aucune demande trouvée
-        </div>
-      </div>';
+<svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+<div>
+  Aucune demande trouvée
+</div>
+</div>';
     }
 } catch (PDOException $e) {
     echo "Erreur de connexion à la base de données : " . $e->getMessage();
