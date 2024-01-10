@@ -12,14 +12,104 @@ table {
     margin-top: 45px
 }
 
+
 table th {
     width: 150px;
     margin-bottom: 1rem;
 }
 
 table td {
-    width: 150px; /*Ajuste la même taille du tableau avec celle de l'en-tête  */
+    width: 210px; /*Ajuste la même taille du tableau avec celle de l'en-tête  */
 }
+
+.table td, .table th {
+    width: 200px;
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+#table thead tr th:first-child {
+    width: 99px;
+}
+
+#table tbody tr td:first-child {
+    width: 101.9px;
+}
+
+#table thead tr th:nth-child(2) {
+    width: 50px;
+}
+
+#table tbody tr td:nth-child(2) {
+    width: 110px;
+}
+
+
+#table thead tr th:nth-child(4) {
+    width: 650px;
+}
+
+#table tbody tr td:nth-child(4) {
+    width: 650px;
+}
+
+
+#table thead tr th:nth-child(5) {
+    width: 110px;
+}
+
+#table tbody tr td:nth-child(5) {
+    width: 110px;
+}
+
+
+#table thead tr th:nth-child(6) {
+    width: 155px;
+}
+
+#table tbody tr td:nth-child(6) {
+    width: 155px;
+}
+
+
+#table thead tr th:nth-child(7) {
+    width: 135px;
+}
+
+#table tbody tr td:nth-child(7) {
+    width: 135px;
+}
+
+
+#table thead tr th:nth-child(8) {
+    width: 90px;
+}
+
+#table tbody tr td:nth-child(8) {
+    width: 90px;
+}
+
+
+#table thead tr th:nth-child(9) {
+    width: 155px;
+}
+
+#table tbody tr td:nth-child(9) {
+    width: 155px;
+}
+
+
+#table thead tr th:nth-child(10) {
+    width: 120px;
+}
+
+#table tbody tr td:nth-child(10) {
+    width: 120px;
+}
+
+
+
 
 #table thead tr th.icone-loupe {
     position: relative;
