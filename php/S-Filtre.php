@@ -64,8 +64,8 @@ try {
             $html .= '<td>' . $row[3] . '</td>';
             $formattedDate = date("d-m-Y", strtotime($row[4]));
             $html .= '<td>' . $formattedDate . '</td>';
-            $html .= '<td>' . $row[5] . '</td>';
             $html .= '<td>2</td>'; // Quand l'eval sera faite, changer et appliquer sur cette ligne le row6 et mettre la date_mep $row7
+            $html .= '<td>' . $row[5] . '</td>';
 
             // Vérifier si la colonne de tc_mep existe dans le tableau $row
             if (isset($row[6])) {
