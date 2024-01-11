@@ -23,14 +23,17 @@ try {
     $select_etat = isset($_POST['select_etat']) ? $_POST['select_etat'] : '';
     $num_dmd = isset($_POST['num_dmd']) ? $_POST['num_dmd'] : '';
     $lib_dmd = isset($_POST['lib_dmd']) ? $_POST['lib_dmd'] : '';
+    $lib_dmd = str_replace("'", "''", $lib_dmd);
 
     // Construire la requête SQL en fonction des valeurs du formulaire
-    $sql = "SELECT D.IdDemande, DOM.libelle, D.libelle, Q.libelle, D.date_crea, E.libelle, M.date_mep
-    FROM tc_demandes D
-    JOIN tc_domaine DOM ON D.dom_dmd = DOM.IdDomaine 
-    JOIN tc_qualif Q ON D.qual_dmd = Q.IdQual
-    JOIN tc_etat E ON D.etat_dmd = E.IdEtat
-    LEFT JOIN tc_mep M ON D.IdMep = M.IdMep";
+    $sql = "SELECT D.IdDemande, DOM.libelle, D.libelle, Q.libelle, D.date_crea, E.libelle, M.date_mep AS date_mep
+            FROM tc_demandes D
+            JOIN tc_domaine DOM ON D.dom_dmd = DOM.IdDomaine 
+            JOIN tc_qualif Q ON D.qual_dmd = Q.IdQual
+            JOIN tc_etat E ON D.etat_dmd = E.IdEtat
+            JOIN tc_mep M ON D.IdMep = M.IdMep 
+            ORDER BY D.IdDemande";
+
 
     if ($select_domaine != '') {
         $sql .= " AND DOM.libelle = '$select_domaine'";
@@ -68,7 +71,7 @@ try {
             $html .= '<td>' . $row[5] . '</td>';
 
             // Vérifier si la colonne de tc_mep existe dans le tableau $row
-            if (isset($row[6])) {
+            if (isset($row['date_mep']) || isset($row[6])) {
                 // Formater la date au format dd-mm-yyyy
                 $formattedDate = date("d-m-Y", strtotime($row[6]));
                 $html .= '<td>' . $formattedDate . '</td>';
