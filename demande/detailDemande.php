@@ -155,7 +155,8 @@ if ($id_Demande !== null) {
                         <input type="text" name="demCree" id="demCree" requiredc lass="inputInfos" disabled pattern="[0-9]"
                         <?php
                             $date = $row[5];
-                         ?> value="<?php echo $date; ?>">
+                            $formattedDate = date("d-m-Y", strtotime($date));
+                         ?> value="<?php echo $formattedDate; ?>">
                     </div>
 
                     <div class="form-group">
@@ -171,7 +172,8 @@ if ($id_Demande !== null) {
                         <input type="text" name="demEmise" id="demEmise" class="infosDate" disabled pattern="[0-9]"
                         <?php 
                             $date = $row[7];
-                        ?> value="<?php echo $date; ?>">
+                            $formattedDate = date("d-m-Y", strtotime($date));
+                        ?> value="<?php echo $formattedDate; ?>">
                     </div>
 
                     <div class="form-group">
@@ -187,7 +189,8 @@ if ($id_Demande !== null) {
                         <input type="text" name="demRecu" id="demRecu" class="infosDate" disabled pattern="[0-9]"
                         <?php 
                             $date = $row[9];
-                        ?> value="<?php echo $date; ?>">
+                            $formattedDate = date("d-m-Y", strtotime($date));
+                        ?> value="<?php echo $formattedDate; ?>">
                     </div>
 
                     <div class="form-group">
@@ -203,7 +206,8 @@ if ($id_Demande !== null) {
                         <input type="text" name="demEtat" id="demEtat" class="infosDate" disabled pattern="[0-9]" 
                         <?php 
                             $date= $row[11];
-                        ?> value="<?php echo $date; ?>">
+                            $formattedDate = date("d-m-Y", strtotime($date));
+                        ?> value="<?php echo $formattedDate; ?>">
                     </div>
 
                     <div class="form-group">
@@ -219,7 +223,8 @@ if ($id_Demande !== null) {
                         <input type="text" name="visaServEtude" id="visaServEtude" class="infosDate" disabled pattern="[0-9]"
                         <?php 
                             $date = $row[13];
-                        ?> value="<?php echo $date; ?>">
+                            $formattedDate = date("d-m-Y", strtotime($date));
+                        ?> value="<?php echo $formattedDate; ?>">
                     </div>
 
                     <div class="form-group">
@@ -247,7 +252,8 @@ if ($id_Demande !== null) {
                         <input type="text" name="demFs" id="demFs" class="infosDate" disabled pattern="[0-9]"
                         <?php 
                             $date = $row[16];
-                        ?> value="<?php echo $date; ?>">
+                            $formattedDate = date("d-m-Y", strtotime($date));
+                        ?> value="<?php echo $formattedDate; ?>">
                     </div>
 
                     <div class="form-group2">
@@ -255,7 +261,8 @@ if ($id_Demande !== null) {
                         <input type="text" name="demRct" id="demRct" class="infosDate" disabled pattern="[0-9]"
                         <?php 
                             $date = $row[17];
-                        ?> value="<?php echo $date; ?>">                        
+                            $formattedDate = date("d-m-Y", strtotime($date));
+                        ?> value="<?php echo $formattedDate; ?>">                        
                     </div>
 
 
@@ -265,24 +272,27 @@ if ($id_Demande !== null) {
                         <?php 
                             $nom = $row[18];
                         ?> value="<?php echo $nom; ?>">
-                        
+                    </div> <!-- Fin de la balise de groupe -->
+
                     <div class="form-group-Amort">
                         <label for="demAmortis">Demande amortissable</label>
                         <input type="checkbox" name="demAmortis" id="demAmortis" disabled pattern="[0-9]" 
-                        <?php 
+                     <?php 
                             $amorti_dmd = $row[19];
-                        if ($amorti_dmd == 'on') {
+                            if ($amorti_dmd == 'on') {
                             echo "checked='checked'";
-                            }
+                        }
                         ?>>
                     </div>
+
 
                     <div class="form-group">
                         <label for="demArchiv">Demande archivée le :</label>
                         <input type="text" name="demArchiv" id="demArchiv" class="infosDate" disabled pattern="[0-9]"
                         <?php 
                             $date = $row[20];
-                         ?> value="<?php echo $date; ?>"> 
+                            $formattedDate = date("d-m-Y", strtotime($date));
+                         ?> value="<?php echo $formattedDate; ?>"> 
                     </div>
                 </div>
             </fieldset>
