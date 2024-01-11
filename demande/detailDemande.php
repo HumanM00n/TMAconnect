@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link href="../css/test-css.css" rel="stylesheet" type="text/css">
+  <link href="../css/detailDemande.css" rel="stylesheet" type="text/css">
   <link rel="icon" href="../img/NLogo2.png" />
 </head>
 
@@ -64,7 +64,6 @@
 
 <?php
 // Récupérer l'ID de la demande depuis la variable GET
-// $id_Demande = isset($_GET['id']) ? $_GET['id'] : null;
 $id_Demande = isset($_GET['idDemande']) ? $_GET['idDemande'] : null;
 
 
@@ -272,7 +271,7 @@ if ($id_Demande !== null) {
                         <?php 
                             $nom = $row[18];
                         ?> value="<?php echo $nom; ?>">
-                    </div> <!-- Fin de la balise de groupe -->
+                    </div> 
 
                     <div class="form-group-Amort">
                         <label for="demAmortis">Demande amortissable</label>
