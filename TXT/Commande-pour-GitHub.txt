@@ -14,3 +14,10 @@ git add . --> Pour ajouter tout les fichiers
 git commit nom_fichier -m "" --> Permet d'enregistrer les modifications 
 
 git psuh --> Pour envoyer les modifs vers Github 
+
+
+--------------------- CONFLITS --------------------- 
+
+- Effectuez un git pull pour récupérer les dernières modifications de la branche distante dans votre branche locale :
+	git pull origin main
+
