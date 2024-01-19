@@ -45,7 +45,7 @@
                     'matricule' => $matricule
                 ]);
 
-                echo '<center><p class="Successful">Le mot de passe a été modifié avec succès!</p></center>';
+                echo '<center><p class="Successful">Le mot de passe a été modifié avec succès !</p></center>';
                 $motDePasseModifie = true; // Variable de drapeau pour indiquer si le mot de passe a été modifié avec succès
             }
         }
@@ -91,7 +91,7 @@
                 <?php if (!$motDePasseModifie) { ?>
                     <button type="submit" class="tma-btn" name="subpasswd">Enregistrer</button>
                 <?php } else { ?>
-                    <a href="./index.php"><input type="button" class="tma-btn" value="⬅️ Revenir au menu"></a>
+                    <a href="./index.php"><input type="button" class="tma-btn" value="⬅️ Revenir à la page de connexion"></a>
                 <?php } ?>
             </div>
         </form>
