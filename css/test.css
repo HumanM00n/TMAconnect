@@ -1,125 +1,235 @@
-main {
-    display: flex;
-    width: auto;
-    height: auto;
-    box-sizing: border-box;
+body {
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
-#container {
-    width: 1200px;
-    height: 500px;
-    display: grid;
-    margin-top: 130px;
-    padding: 7%;
-    border: 2px solid black;
-    border-radius: 8px;
-    background: rgb(219 219 219 / 28%);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-    /* margin-top: 48px; */
-}
 
-h3 {
+#nvldemande {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    flex-direction: row;
-    position: fixed;
-    top: 8%;
-    left: 39%;
+    align-items: center;
+    height: 100%;
+    background: linear-gradient(#f5f5f5, #e8e8e8);
 }
 
-.form-control {
+#form_nvldemande {
+    width: 800px;
+    margin: 45px auto 0;
+    padding: 0;
+}
+
+#form_nvldemande legend {
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #555;
+    margin-left: 35.5%;
+}
+
+
+#form_nvldemande .form-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+#form_nvldemande .form-group {
+    width: calc(25% - 10px);
+    margin-bottom: 10px;
+}
+
+
+#form_nvldemande .custom-form .form-group:last-child {
+    width: 100%;
+}
+
+
+#form_nvldemande .custom-form label {
     display: block;
-    /* width: 15%; */
-    width: 36%;
-    /* Utiliser la largeur à 100% pour s'adapter à la grille */
-    height: calc(1.5em + 0.75rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
-
-.form-select {
-    --bs-form-select-bg-img: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e);
-    display: block;
-    width: 51%;
-    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: var(--bs-body-color);
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: var(--bs-body-bg);
-    background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 16px 12px;
-    border: var(--bs-border-width) solid var(--bs-border-color);
-    border-radius: var(--bs-border-radius);
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
-
-input[type="date"] {
-    appearance: none;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 14px;
-    width: 31%;
+    margin-bottom: 5px;
     color: #333;
 }
 
-.infosColumn {
+
+#form_nvldemande input[type="text"],
+#form_nvldemande input[type="date"],
+#form_nvldemande select {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+}
+
+
+
+/* #form_nvldemande .custom-form select {
+    width: 100%;
+    padding: 9px;
+    font-size: 14px;
+} */
+
+
+/* #form_nvldemande input[type="date"]{
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+} */
+
+
+#form_nvldemande select {
+    width: 100%;
+    padding: 9px;
+    font-size: 14px;
+}
+
+
+#form_nvldemande button {
+    padding: 12px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+
+/* #form_nvldemande button[type="submit"] {
+    padding: 12px 20px;
+    margin-right: 10px;
+    background: #0055A4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+} */
+
+
+
+#form_nvldemande button[type="reset"] {
+    background: red;
+    margin-left: 50px;
+}
+/* #form_nvldemande button[type="reset"] {
+    margin-left: 50px;
+    padding: 12px 20px;
+    background: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+} */
+
+#form_nvldemande button[type="submit"]:hover {
+    background-color: #004281;
+}
+
+#form_nvldemande button[type="reset"]:hover {
+    background-color: rgb(180, 27, 27);
+}
+
+
+.input-validation {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Styles pour le texte de l'Ã©tiquette */
+label {
+    display: block; /* Affiche le texte de l'Ã©tiquette en tant que bloc */
+    margin-bottom: 15px; /* Ajoute un espace en bas de l'Ã©tiquette */
+    font-weight: bold; /* Met en Ã©vidence le texte de l'Ã©tiquette */
+    margin-top: 8px;
+}
+
+#coordo{
+    margin-bottom: 100px;
+}
+
+#form_nvldemande .form-group2 {
+    width: 48%;
+    margin-bottom: 10px;
+    margin-top: 55px;
+}
+
+
+.libelleDemande input[type="text"] {
+    width: 100%;
+    padding: 5px; /* Augmenter la taille du padding */
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+
+
+
+#menuNouvelDmd {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    margin-top: 50px;
+}
+
+#form_menuNvlDmd {
+    padding: 10px;
+
+}
+
+#form_menuNvlDmd .form-row {
+    display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 30px;
 }
 
-.infosColumn #divPar,
-.infosColumn #divDate {
+#form_menuNvlDmd .form-group {
+    width: 20%;
+    margin-bottom: 10px;
+}
+
+#form_menuNvlDmd label {
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+#form_menuNvlDmd select{
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+}
+
+#form_menuNvlDmd input[type="text"]{
+    width: 100%;
+    padding: 3px;
+    font-size: 14px;
+}
+
+
+.form-group input[type="checkbox"] {
+    width: 50px; /* Modifier la largeur de la case à cocher */
+    height: 22px; /* Modifier la hauteur de la case à cocher */
+    margin-top: 35px; /* Ajouter une marge supérieure à la case à cocher */
+}
+
+
+.btnajout {
     display: flex;
-    flex-direction: column;
-}
-
-.infosColumn #divDate {
-    order: 1;
-}
-
-.infosColumn #divPar {
-    order: 2;
-    margin-left: -122px;
-}
-
-/* Désactiver le spinner sur les champs input de type number */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+    margin-top: 50px;
+    justify-content: center;
 }
 
 
-.infosColumn #divNumber {
-    order: 3;
-}
-
-.col-md-6>#inputLib {
-    width: 204%;
-}
-
-.Successful {
+.Successful{
     display: block;
     background-color: #69e95d;
     border: 1px solid;
@@ -129,125 +239,4 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 1.2% 1.2% 1.2% 1.2%;
     text-align: center;
     width: 65%;
-}
-
-
-@media (max-width: 767px) {
-    .col-md-6:nth-child(1) {
-        width: auto;
-    }
-}
-
-
-tbody,
-td,
-tfoot,
-th,
-thead,
-tr {
-    border-color: inherit;
-    border-style: solid;
-    border-width: 0;
-    width: 270px;
-}
-
-.btnajout {
-    align-items: flex-end;
-    justify-content: flex-end;
-    display: flex;
-    position: relative;
-    top: 70px;
-    left: 65px;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    z-index: 1;
-}
-
-.btnajout button {
-    width: 5.8rem;
-    height: 3.2rem;
-    padding: 10px 16px;
-    margin-left: 1.5rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    background: #289297;
-    color: #fff;
-}
-
-.btnajout button:hover {
-    background-color: #287074;
-    transition: 0.3s ease;
-}
-
-
-.btnajout button[type="reset"] {
-    background-color: red;
-}
-
-.btnajout button[type="reset"]:hover {
-    background-color: rgb(221, 18, 18);
-}
-
-
-.moved {
-    margin-top: 0px;
-}
-
-.alert {
-    display: flex;
-    justify-content: flex;
-    align-items: center;
-    width: 36%;
-    height: 60px;
-    border-radius: 10px;
-    margin: 0px auto -50px auto;
-}
-
-.alert-success {
-    color: #155724;
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-}
-
-.alert-success svg {
-    fill: #155724;
-    width: 25px;
-}
-
-.alert-success div {
-    margin-left: 12px;
-    /* Ajustez la marge à votre préférence */
-}
-
-
-.btnretour {
-    align-items: center;
-    justify-content: start;
-    display: flex;
-    margin: 20px 0 0 20px;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-
-.btnretour button:hover {
-    background-color: #013b72;
-}
-
-
-.btnretour button {
-    padding: 12px 16px;
-    background: #0055A4;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
 }
