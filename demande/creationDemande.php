@@ -165,7 +165,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     <section id="menuNouvelDmd">
         <form id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <fieldset id="menuDmd">
-                <div class="form-row">
+                <!-- <div class="form-row"> -->
                     <div class="form-group">
                         <label for="demCreePar">Domaine :</label>
                         <select name="selectDom" id="selectDom">
@@ -218,8 +218,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                             }
                             ?>
                     </div>
-
-                </div>
             </fieldset>
 
             <fieldset id="coordo">
