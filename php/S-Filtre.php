@@ -31,8 +31,7 @@ try {
             JOIN tc_domaine DOM ON D.dom_dmd = DOM.IdDomaine 
             JOIN tc_qualif Q ON D.qual_dmd = Q.IdQual
             JOIN tc_etat E ON D.etat_dmd = E.IdEtat
-            JOIN tc_mep M ON D.IdMep = M.IdMep 
-            ORDER BY D.IdDemande";
+            JOIN tc_mep M ON D.IdMep = M.IdMep";
 
 
     if ($select_domaine != '') {
@@ -50,6 +49,8 @@ try {
     if ($lib_dmd != '') {
         $sql .= " AND D.libelle LIKE '$lib_dmd'";
     }
+    
+    $sql .= " ORDER BY D.IdDemande ";
 
     $stmt = $pdo->query($sql);
 
