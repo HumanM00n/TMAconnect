@@ -86,13 +86,18 @@
         // Boucle � travers tous les utilisateurs et affichage des r�sultats
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             // Convertir le format de la date 
-            $formattedDate = date("d-m-Y", strtotime($row["dateFin"]));
-            $formattedDate = date("d-m-Y", strtotime($row["derniere_connect"]));
+            if ($row["dateFin"] == "0000-00-00") {
+                $formattedDate = " - ";
+            } else {
+                $formattedDate = date("d-m-Y", strtotime($row["dateFin"]));
+            }
+            $format_Date = date("d-m-Y", strtotime($row["derniere_connect"]));
 
             echo "<tr><td>" . $row["IdUtil"] . "</td><td>" . $row["nom"] . "</td><td>" . $row["prenom"] . "</td><td>" . $row["matricule"] . "</td><td>" . $row["email"] . "</td><td>" . $row["s_libelle"] . "</td><td>" . $row["p_libelle"] . "</td>"
-                . "<td>" . $row["d_libelle"] . "</td><td>" . $formattedDate. "</td><td>" . $formattedDate . "</td>"
+                . "<td>" . $row["d_libelle"] . "</td><td>" . $formattedDate . "</td><td>" . $format_Date . "</td>"
                 . "<td><button class='iconemodif' onclick='redirectModifierPage(" . $row['IdUtil'] . ")' title='Modifier les informations'><span class='fa fa-pencil-square-o fa-lg'></span></button><button class='iconesuppr' onclick=\"confirmation(" . $row["IdUtil"] . ")\" title='Supprimer employ�'><span class='fa fa-trash fa-lg' aria-hidden='true'></span></button></td></tr>";
         }
+
         ?>
 
         <script>
