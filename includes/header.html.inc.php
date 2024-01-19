@@ -82,7 +82,7 @@ try {
                     <li class="Onglet"><a href="#" class="deroulant">Demandes ▼</a>
                         <ul class="sous">
                             <li><a href="<?php echo $dirPages; ?>../demande/creationDemande.php">Créer une demande</a></li>
-                            <li><a href="<?php echo $dirPages; ?>../demande/AffichageDemande">Afficher les demandes</a></li>
+                            <li><a href="<?php echo $dirPages; ?>../demande/AffichageDemande.php">Afficher les demandes</a></li>
                         </ul>
                     </li>
                     <li class="Onglet"><a href="<?php echo $dirPages; ?>../user/Utilisateurs.php">Utilisateurs</a></li>
@@ -127,7 +127,6 @@ try {
             ?>
             <nav class="barre-arianne">
                 <ul>
-
                     <li class="Onglet"><a href="<?php echo $dirPages; ?>../home.php">Accueil</a></li>
                     <li class="Onglet"><a href="#" class="deroulant">Demandes ▼</a>
                         <ul class="sous">
