@@ -71,13 +71,12 @@
           <input type="number" id="num_dmd" name="num_dmd" size="35">
         </div>
 
-        <div>
+        <div class="label-container" id="divLibelle">
           <label for="lib_dmd">Libellé de la Demande</label>
           <input type="text" name="lib_dmd" id="lib_dmd">
         </div>
 
-
-
+        
         <div class="bloc-btn">
           <button type="submit" id="submit" name="appliquer">Appliquer</button>
           <button type="reset">Réinitialiser</button>
@@ -106,7 +105,7 @@
 
   <nav class="div--pagination" aria-label="...">
     <ul class="pagination">
-      <li class="page-item disabled">
+      <li class="page-item">
         <a class="page-link">Précédent</a>
       </li>
       <li class="page-item active"><a class="page-link" href="#">1</a></li>
