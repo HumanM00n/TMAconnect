@@ -79,7 +79,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         && isset($_POST["selectDom"])
         && isset($_POST["selectQualif"])
         && isset($_POST["selectPrio"])
-        && isset($_POST["demLibelle"]) //N°Demande ENTRE selectDemandePar et demCree
+        && isset($_POST["demLibelle"]) 
         && isset($_POST["demCree"])
         && isset($_POST["selectDemandePar"])
         && isset($_POST["demEmise"])
@@ -97,7 +97,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         && isset($_POST["selectRegroupement"])
         && isset($_POST["demArchiv"])
     ) {
-        // $var0 = $_POST["numDemande"];
+        $var0 = $_POST["numDemande"];
         $var1 = $_POST["selectDom"];
         $var2 = $_POST["selectQualif"];
         $var3 = $_POST["selectPrio"];
@@ -125,10 +125,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
         $stmt = $pdo->prepare($sql);
 
-        echo $sql;
-
         // Binder les valeurs aux paramètres nommés
-        // $stmt->bindValue(":var0", $var0);
+        $stmt->bindValue(":var0", $var0);
         $stmt->bindValue(":var1", $var1);
         $stmt->bindValue(":var2", $var2);
         $stmt->bindValue(":var3", $var3);
@@ -165,7 +163,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     <section id="menuNouvelDmd">
         <form id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <fieldset id="menuDmd">
-                <!-- <div class="form-row"> -->
+                <div class="form-row-top">
                     <div class="form-group">
                         <label for="demCreePar">Domaine :</label>
                         <select name="selectDom" id="selectDom">
@@ -210,18 +208,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                     <div class="form-group">
                         <label for="numDemande">N° demande :</label>
                         <input type="text" name="numDemande" id="numDemande" size="35" pattern="[0-9]" disabled>
-                        <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result8 as $row) {
-                                $id_dmd = $row['IdDemande'];
-                                echo "<option value=$id_dmd</option>";
-                            }
-                            ?>
                     </div>
+                </div>
             </fieldset>
 
             <fieldset id="coordo">
-                <legend>Créer une demande</legend>
+                <!-- <legend>Créer une demande</legend> -->
 
                 <div class="libelleDemande">
                     <label for="demLibelle">Libellé demande :</label>
@@ -283,7 +275,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="demCree">Etat de la demande :</label>
+                        <label for="demCree">Date état de la demande :</label>
                         <input type="date" name="demEtat" id="demEtat" required>
                     </div>
                     <div class="form-group">
@@ -301,7 +293,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                     </div>
 
                     <div class="form-group">
-                        <label for="visaServEtude">Visa service étude :</label>
+                        <label for="visaServEtude">Date visa service étude :</label>
                         <input type="date" name="visaServEtude" id="visaServEtude" required>
                     </div>
                     <div class="form-group">
