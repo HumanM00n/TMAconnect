@@ -135,7 +135,7 @@ table td {
 
 
 .formmodif {
-    width: 950px;
+    width: 1350px;
     margin-left: auto;
     margin-right: auto;
     padding: 0px;
@@ -169,12 +169,22 @@ table td {
 .formmodif .label-container {
     text-align: center;
     display: inline-block;
-    width: calc(33% - 10px); /* Chaque label-container occupe un tiers de la largeur moins la marge */
+    width: calc(21.7% - 14px); /* Chaque label-container occupe un tiers de la largeur moins la marge */
     margin: 0;
     margin-top: -21px;
     vertical-align: top; /* Aligner les div en haut */
     box-sizing: border-box; /* Inclure la marge dans la largeur calculée */
     height: 75px;
+}
+
+#divLibelle label {
+    position: relative;
+    right: 30px;
+}
+
+#divLibelle{
+    position: relative;
+    right: 60px;
 }
 
 
@@ -191,7 +201,7 @@ table td {
 }
 
 .formmodif div {
-    margin: 1% 1% 1% 4.5%;
+    margin: 1% 1% 1% 8%;
 }
 
 .formmodif label {
@@ -202,13 +212,13 @@ table td {
 
 
 .formmodif input[type="number"] {
-    width: 35%;
+    width: 20%;
     /* Ajuster la largeur du champ de type number */
 }
 
 
 .formmodif input[type="text"] {
-    width: 80%;
+    width: 212%;
     /* Ajuster la largeur du champ de type number */
 }
 
