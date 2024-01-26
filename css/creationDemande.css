@@ -110,8 +110,14 @@ body {
 
 #form_nvldemande {
     width: 800px;
-    margin: 45px auto 0;
-    padding: 0;
+    /* margin: 35px auto 0; */
+    /* padding: 0; */
+}
+
+#form_nvldemande select {
+    width: 90%;
+    padding: 7px;
+    font-size: 14px;
 }
 
 #form_nvldemande legend {
@@ -121,10 +127,29 @@ body {
     margin-left: 35.5%;
 }
 
+#menuDmd {
+    display: flex;
+    width: 980px;
+    /* position: relative;
+    bottom: 80px; */
+}
+
+
+#menuDmd .form-row-top {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-row-top .form-group {
+    padding-left: 10px;
+}
+
 #form_nvldemande .form-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    padding-left: 17px;
 }
+
 
 #form_nvldemande .form-group {
     width: 48%;
@@ -137,45 +162,32 @@ body {
     color: #333;
 }
 
+.libelleDemande {
+    margin-left: 11px;
+    width: 835px;
+}
+
+
 #form_nvldemande input[type="date"]{
-    width: 100%;
+    width: 48%;
     padding: 5px;
     font-size: 14px;
 }
 
 
-#form_nvldemande select {
-    width: 100%;
-    padding: 9px;
+#coordo select {
+    width: 48%;
+    padding: 7px;
     font-size: 14px;
+    margin-left: 5px;
 }
 
-#form_nvldemande button[type="submit"] {
-    padding: 12px 20px;
-    margin-right: 10px;
-    background: #0055A4;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+#numDemande {
+    width: 133px;
+    height: 37px;
 }
 
 
-#form_nvldemande button[type="reset"] {
-    margin-left: 50px;
-    padding: 12px 20px;
-    background: red;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
 
 #form_nvldemande button[type="submit"]:hover {
     background-color: #004281;
@@ -202,12 +214,13 @@ label {
 
 #coordo{
     margin-bottom: 100px;
+    width: auto;
 }
 
 #form_nvldemande .form-group2 {
-    width: 48%;
+    width: 50%;
     margin-bottom: 10px;
-    margin-top: 55px;
+    /* margin-top: 55px; */
 }
 
 
@@ -217,8 +230,6 @@ label {
     margin-bottom: 20px;
     font-size: 13px;
 }
-
-
 
 
 #menuNouvelDmd {
@@ -277,6 +288,33 @@ label {
     justify-content: center;
 }
 
+
+#form_nvldemande button[type="submit"] {
+    padding: 12px 20px;
+    margin-right: 10px;
+    background: #0055A4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+
+#form_nvldemande button[type="reset"] {
+    margin-left: 50px;
+    padding: 12px 20px;
+    background: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
 
 .Successful{
     display: block;
