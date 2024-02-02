@@ -6,378 +6,286 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 <html>
 
 <head>
-    <title>TMA - Création Demande</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link  rel="stylesheet" type="text/css" href="css/test.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link href="css/csshome.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="img/NLogo2.png" />
+
+
+    <?php
+    $scriptName = filter_input(INPUT_SERVER, 'SCRIPT_NAME');
+    $pageActuelle = basename($scriptName); // Récupère le nom de fichier sans le chemin
+    $pageActuelle = pathinfo($pageActuelle, PATHINFO_FILENAME); // Récupère le nom de fichier sans l'extension
+    
+    // echo "<title>TMAconnect - $pageActuelle</title>";
+    echo "<title>TC1</title>";
+    ?>
 </head>
 
 <body>
-    <?php
-    // include('../includes/header.html.inc.php');
+    <header>
+        <!-- <?php include('includes/header.html.inc.php'); ?> -->
+    </header>
 
+    <?php
     // Informations de connexion � la base de donn�es MySQL
     $servername = "localhost:3308"; // nom du serveur
     $username = "root"; // nom d'utilisateur
     $password = "XVsikn92"; // mot de passe
     $dbname = "tmaconnect"; // nom de la base de donn�es
-    // Cr�ation d'une connexion � la base de donn�es avec PDO
-    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-
-    // Configuration des attributs de PDO
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Requ�tes SQL pour r�cup�rer les donn�es des tables tc_domaine, tc_qualification et tc_priorite
     
-    $sql0 = "SELECT IdDomaine, libelle FROM tc_domaine";
-    $stmt0 = $pdo->query($sql0);
-    $result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
+    try {
+        // Cr�ation d'une connexion � la base de donn�es avec PDO
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
-    $sql1 = "SELECT IdQual ,libelle FROM tc_qualif";
-    $stmt1 = $pdo->query($sql1);
-    $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+        // Configuration des attributs de PDO
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql2 = "SELECT IdPriorite, libelle FROM tc_priorite";
-    $stmt2 = $pdo->query($sql2);
-    $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-
-    // Requ�tes SQL pour r�cup�rer les donn�es de la table tc_utilisateur
-    $sql3 = "SELECT IdUtil, nom FROM tc_utilisateur";
-    $stmt3 = $pdo->query($sql3);
-    $result3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
-
-    // Requ�tes SQL pour r�cup�rer les donn�es de la table tc_utilisateur avec une clause where pour le "Signataire"
-    $sql4 = "SELECT IdUtil, nom FROM tc_utilisateur WHERE S_users = '1' OR S_users = '4'";
-    $stmt4 = $pdo->query($sql4);
-    $result4 = $stmt4->fetchAll(PDO::FETCH_ASSOC);
-
-    $sql5 = "SELECT IdRegroupe, libelle FROM tc_regroupement";
-    $stmt5 = $pdo->query($sql5);
-    $result5 = $stmt5->fetchAll(PDO::FETCH_ASSOC);
-
-    // Requ�tes SQL pour r�cup�rer les donn�es de la table tc_etat
-    $sql6 = "SELECT IdEtat, libelle FROM tc_etat";
-    $stmt6 = $pdo->query($sql6);
-    $result6 = $stmt6->fetchAll(PDO::FETCH_ASSOC);
-
-    // Requ�tes SQL pour r�cup�rer les donn�es de la table tc_Benef
-    $sql7 = "SELECT IdBenef, lbl_benef FROM tc_benef";
-    $stmt7 = $pdo->query($sql7);
-    $result7 = $stmt7->fetchAll(PDO::FETCH_ASSOC);
-
-    $sql8 = "SELECT IdDemande FROM tc_demandes";
-    $stmt8 = $pdo->query($sql8);
-    $result8 = $stmt8->fetchAll(PDO::FETCH_ASSOC);
-    ?>
-    <?php
-    if (
-        isset($_POST["numDemande"])
-        && isset($_POST["selectDom"])
-        && isset($_POST["selectDom"])
-        && isset($_POST["selectQualif"])
-        && isset($_POST["selectPrio"])
-        && isset($_POST["demLibelle"]) //N°Demande ENTRE selectDemandePar et demCree
-        && isset($_POST["demCree"])
-        && isset($_POST["selectDemandePar"])
-        && isset($_POST["demEmise"])
-        && isset($_POST["selectDemandeEmisePar"])
-        && isset($_POST["demRecu"])
-        && isset($_POST["selectBeneficiaire"])
-        && isset($_POST["demEtat"])
-        && isset($_POST["selectDemandeEtat"])
-        && isset($_POST["visaServEtude"])
-        && isset($_POST["selectSignataire"])
-        && isset($_POST["selectAffectation"])
-        && isset($_POST["demFs"])
-        && isset($_POST["demAmortis"])
-        && isset($_POST["demRct"])
-        && isset($_POST["selectRegroupement"])
-        && isset($_POST["demArchiv"])
-    ) {
-        // $var0 = $_POST["numDemande"];
-        $var1 = $_POST["selectDom"];
-        $var2 = $_POST["selectQualif"];
-        $var3 = $_POST["selectPrio"];
-        $var4 = $_POST["demLibelle"];
-        $var5 = $_POST["demCree"];
-        $var6 = $_POST["selectDemandePar"];
-        $var7 = $_POST["demEmise"];
-        $var8 = $_POST["selectDemandeEmisePar"];
-        $var9 = $_POST["demRecu"];
-        $var10 = $_POST["selectBeneficiaire"];
-        $var11 = $_POST["demEtat"];
-        $var12 = $_POST["selectDemandeEtat"];
-        $var13 = $_POST["visaServEtude"];
-        $var14 = $_POST["selectSignataire"];
-        $var15 = $_POST["selectAffectation"];
-        $var16 = $_POST["demFs"];
-        $var17 = $_POST["demAmortis"];
-        $var18 = $_POST["demRct"];
-        $var19 = $_POST["selectRegroupement"];
-        $var20 = $_POST["demArchiv"];
-
-        // Préparation de la requête d'insertion en utilisant des paramètres nommés
-        $sql = "INSERT INTO tc_demandes (dom_dmd, qual_dmd, prt_dmd, libelle, date_crea, util_crea, date_emet, util_emet, date_recu, util_benef, date_etat_dmd, etat_dmd, date_visa_dmd, util_sign_dmd, util_affect_dmd, date_fs, amorti_dmd, date_rct_prvu, regroupement, date_archiv, IdLdoi, IdEval, IdRecette, IdMep) 
-                VALUES (:var1, :var2, :var3, :var4, :var5, :var6, :var7, :var8, :var9, :var10, :var11, :var12, :var13, :var14, :var15, :var16, :var17, :var18, :var19, :var20)";
-
+        // R�cup�ration des informations de l'utilisateur � afficher dans les champs de saisie
+        // $idUtilisateur = $_GET['id'];
+        $sql = "SELECT U.nom, U.prenom, U.matricule, U.email, S.IdService, P.IdPoste, D.IdDroit, U.dateFin
+FROM tc_utilisateur U
+INNER JOIN tc_service S ON U.S_users = S.IdService
+INNER JOIN tc_poste P ON U.P_users = P.IdPoste
+INNER JOIN tc_droit D ON U.D_users = D.IdDroit
+WHERE U.IdUtil = :idUtilisateur";
         $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+        $stmt->execute();
 
-        echo $sql;
-
-        // Binder les valeurs aux paramètres nommés
-        // $stmt->bindValue(":var0", $var0);
-        $stmt->bindValue(":var1", $var1);
-        $stmt->bindValue(":var2", $var2);
-        $stmt->bindValue(":var3", $var3);
-        $stmt->bindValue(":var4", $var4);
-        $stmt->bindValue(":var5", $var5);
-        $stmt->bindValue(":var6", $var6);
-        $stmt->bindValue(":var7", $var7);
-        $stmt->bindValue(":var8", $var8);
-        $stmt->bindValue(":var9", $var9);
-        $stmt->bindValue(":var10", $var10);
-        $stmt->bindValue(":var11", $var11);
-        $stmt->bindValue(":var12", $var12);
-        $stmt->bindValue(":var13", $var13);
-        $stmt->bindValue(":var14", $var14);
-        $stmt->bindValue(":var15", $var15);
-        $stmt->bindValue(":var16", $var16);
-        $stmt->bindValue(":var17", $var17);
-        $stmt->bindValue(":var18", $var18);
-        $stmt->bindValue(":var19", $var19);
-        $stmt->bindValue(":var20", $var20);
-
-        try {
-            if ($stmt->execute()) {
-                echo '<center><p class="Successful">Données insérées avec succès!</p></center>';
-            } else {
-                echo "Erreur lors de l'insertion des données.";
-            }
-        } catch (PDOException $e) {
-            echo "Erreur de connexion à la base de données : " . $e->getMessage();
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $nom = $row['nom'];
+            $prenom = $row['prenom'];
+            $matricule = $row['matricule'];
+            $email = $row['email'];
+            $service = $row['IdService'];
+            $poste = $row['IdPoste'];
+            $droit = $row['IdDroit'];
+            $dateFin = $row['dateFin'];
         }
+        ?>
+
+        <section id="modif">
+            <form class="formmodif" name="formmodif" action="" method="POST">
+                <fieldset id="infos">
+                    <legend>Editer un employé</legend>
+                    <div>
+                        <label for="i_nom">Nom :</label>
+                        <input type="text" name="i_nom" id="i_nom" size="35" disabled value="<?php echo $nom; ?>">
+                    </div>
+
+                    <div>
+                        <label for="i_prenom">Prénom :</label>
+                        <input type="text" name="i_prenom" id="i_prenom" size="35" disabled
+                            pattern="^[a-zA-Z�����������������������������������������������������ݟƌ\s\-]+$" required
+                            oninput="convertToUppercase(this)" value="<?php echo $prenom; ?>">
+                    </div>
+
+                    <div>
+                        <label for="i_matricule">Matricule :</label>
+                        <input type="text" name="i_matricule" id="i_matricule" disabled pattern="C.*"
+                            requiredvalue="<?php echo $matricule; ?>" maxlength="5">
+                    </div>
+
+                    <div>
+                        <label for="i_email">Email :</label>
+                        <input type="email" name="i_email" id="i_email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                            required value="<?php echo $email; ?>">
+                    </div>
+
+                    <?php
+                    if (isset($_POST['btn_modifier'])) {
+                        $idUtilisateur = $_GET['id'];
+                        $nouvelEmail = $_POST['i_email'];
+
+                        $sql = "UPDATE tc_utilisateur SET email = :nouvelEmail WHERE IdUtil = :idUtilisateur";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':nouvelEmail', $nouvelEmail, PDO::PARAM_STR);
+                        $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+                        $result = $stmt->execute();
+                    }
+
+                    $sql0 = "SELECT IdService, s_libelle FROM tc_service";
+                    $stmt0 = $pdo->query($sql0);
+                    $result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
+
+                    $sql1 = "SELECT IdPoste, p_libelle FROM tc_poste";
+                    $stmt1 = $pdo->query($sql1);
+                    $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+                    $sql2 = "SELECT IdDroit, d_libelle FROM tc_droit";
+                    $stmt2 = $pdo->query($sql2);
+                    $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                    ?>
+
+                    <div>
+                        <label for="lst_droit">Service :</label>
+                        <select name="S_users" id="S_users" required>
+                            <?php
+                            foreach ($result0 as $row) {
+                                $idService = $row['IdService'];
+                                $libelle1 = $row['s_libelle'];
+                                $selected = ($idService == $service) ? 'selected' : '';
+                                echo "<option value='$idService' $selected>$libelle1</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <?php
+                    if (isset($_POST['btn_modifier'])) {
+                        $idUtilisateur = $_GET['id'];
+                        $nouveauServ = $_POST['S_users'];
+
+                        $sql = "UPDATE tc_utilisateur SET S_users = :nouveauServ WHERE IdUtil = :idUtilisateur";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':nouveauServ', $nouveauServ, PDO::PARAM_INT);
+                        $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+                        $result = $stmt->execute();
+                    }
+                    ?>
+
+
+                    <div>
+                        <label for="lst_droit">Poste :</label>
+                        <select name="P_users" id="P_users" required>
+                            <?php
+                            foreach ($result1 as $row) {
+                                $idPoste = $row['IdPoste'];
+                                $libelle2 = $row['p_libelle'];
+                                $selected = ($idPoste == $poste) ? 'selected' : '';
+                                echo "<option value='$idPoste' $selected>$libelle2</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <?php
+                    if (isset($_POST['btn_modifier'])) {
+                        $idUtilisateur = $_GET['id'];
+                        $nouveauPoste = $_POST['P_users'];
+
+                        $sql = "UPDATE tc_utilisateur SET P_users = :nouveauPoste WHERE IdUtil = :idUtilisateur";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':nouveauPoste', $nouveauPoste, PDO::PARAM_INT);
+                        $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+                        $result = $stmt->execute();
+                    }
+                    ?>
+
+
+                    <div>
+                        <label for="lst_droit">Droit :</label>
+                        <select name="D_users" id="D_users" required value="<?php echo $droit; ?>">
+                            <?php
+                            foreach ($result2 as $row) {
+                                $idDroit = $row['IdDroit'];
+                                $libelle3 = $row['d_libelle'];
+                                $selected = ($idDroit == $droit) ? 'selected' : '';
+                                echo "<option value='$idDroit' $selected>$libelle3</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <?php
+                    if (isset($_POST['btn_modifier'])) {
+                        $idUtilisateur = $_GET['id'];
+                        $nouveauDroit = $_POST['D_users'];
+
+                        $sql = "UPDATE tc_utilisateur SET D_users = :nouveauDroit WHERE IdUtil = :idUtilisateur";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':nouveauDroit', $nouveauDroit, PDO::PARAM_INT);
+                        $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+                        $result = $stmt->execute();
+                    }
+                    ?>
+
+
+                    <div>
+                        <label>Date de fin : </label>
+                        <input type="date" name="calendrier" id="calendrier" value="<?php echo $dateFin; ?>">
+                    </div>
+
+                    <?php
+                    if (isset($_POST['btn_modifier'])) {
+                        $idUtilisateur = $_GET['id'];
+                        $nouvelleDate = $_POST['calendrier'];
+
+                        $sql = "UPDATE tc_utilisateur SET dateFin = :nouvelleDate WHERE IdUtil = :idUtilisateur";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':nouvelleDate', $nouvelleDate, PDO::PARAM_STR);
+                        $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+                        $result = $stmt->execute();
+                    }
+                    ?>
+
+                    <div class="button-container">
+                        <input type="submit" onclick="" name="btn_modifier" id="btn_modifier" value="Modifier">
+                        <input type="reset" name="btn_annuler" id="btn_annuler" value="Annuler"
+                            onclick="window.location.href = 'user/Utilisateurs.php';">
+                    </div>
+
+                    <?php
+                    if (isset($_POST['btn_modifier'])) {
+                        // Le bouton "btnajouter" a été cliqué
+                        if ($result) {
+                            ?>
+                            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+                                <div class="toast-header">
+                                    <i class="far fa-check-circle" style="color: #ffffff;"></i>
+                                    <strong class="text-white">&ensp;TMA Connect</strong>
+                                </div>
+                                <div class="toast-body">
+                                    Les informations ont été modifiées.
+                                </div>
+                            </div>
+
+                            <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+                            <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  -->
+                            <script>
+                                $(document).ready(function () {
+                                    $('.toast').toast('show');
+                                });
+                            </script>
+
+                            <?php
+                        } else {
+                            ?>
+
+                            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+                                <div class="toast-header1">
+                                    <i class="fas fa-times" style="color: #ffffff;"></i>
+                                    <strong class="text-white">&ensp;TMA Connect</strong>
+                                </div>
+                                <div class="toast-body">
+                                    Erreur lors des modifications.
+                                </div>
+                            </div>
+
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+                            <script>
+                                $(document).ready(function () {
+                                    $('.toast').toast('show');
+                                });
+                            </script>
+
+                            <?php
+                        }
+                    }
+    } catch (PDOException $e) {
+        die("La connexion a �chou�: " . $e->getMessage());
     }
     ?>
-
-    <section id="menuNouvelDmd">
-        <form id="form_nvldemande" name="form_nvldemande" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-            <fieldset id="menuDmd">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="demCreePar">Domaine :</label>
-                        <select name="selectDom" id="selectDom">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result0 as $row) {
-                                $id_dom = $row['IdDomaine'];
-                                $lib_dom = $row['libelle'];
-                                echo "<option value=$id_dom>$lib_dom</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="demCreePar">Qualification :</label>
-                        <select name="selectQualif" id="selectQualif">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result1 as $row) {
-                                $id_qual = $row['IdQual'];
-                                $lib_qual = $row['libelle'];
-                                echo "<option value=$id_qual>$lib_qual</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="demCreePar">Priorité :</label>
-                        <select name="selectPrio" id="selectPrio">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result2 as $row) {
-                                $id_prt = $row['IdPriorite'];
-                                $lib_prt = $row['libelle'];
-                                echo "<option value=$id_prt>$lib_prt</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="numDemande">N° demande :</label>
-                        <input type="text" name="numDemande" id="numDemande" size="35" pattern="[0-9]" disabled>
-                        <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result8 as $row) {
-                                $id_dmd = $row['IdDemande'];
-                                echo "<option value=$id_dmd</option>";
-                            }
-                            ?>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset id="coordo">
-                <legend>Créer une demande</legend>
-
-                <div class="libelleDemande">
-                    <label for="demLibelle">Libellé demande :</label>
-                    <input type="text" name="demLibelle" id="demLibelle" size=""
-                        pattern="[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ�?ÀÂÄÃÅÇÉÈÊË�?ÌÎ�?ÑÓÒÔÖÕÚÙÛÜ�?ŸÆŒ\s\-]+$" required
-                        required oninput="convertToUppercase(this)">
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="demCree">Demande créée le :</label>
-                        <input type="date" name="demCree" id="demCree" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="demCreePar">Par :</label>
-                        <select name="selectDemandePar" id="selectDemandePar">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result3 as $row) {
-                                $id_util = $row['IdUtil'];
-                                $nom = $row['nom'];
-                                echo "<option value=$id_util>$nom</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="demEmise">Demande émise le :</label>
-                        <input type="date" name="demEmise" id="demEmise" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="demEmisePar">Par :</label>
-                        <select name="selectDemandeEmisePar" id="selectDemandeEmisePar">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result3 as $row) {
-                                $id_util = $row['IdUtil'];
-                                $nom = $row['nom'];
-                                echo "<option value=$id_util>$nom</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="demRecu">Demande reçue le :</label>
-                        <input type="date" name="demRecu" id="demRecu" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="beneficiaire">Bénéficiaire :</label>
-                        <select name="selectBeneficiaire" id="selectBeneficiaire">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result7 as $row) {
-                                $id_benef = $row['IdBenef'];
-                                $lbl_benef = $row['lbl_benef'];
-                                echo "<option value=$id_benef>$lbl_benef</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="demCree">Etat de la demande :</label>
-                        <input type="date" name="demEtat" id="demEtat" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="etat">Etat :</label>
-                        <select name="selectDemandeEtat" id="selectDemandeEtat">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result6 as $row) {
-                                $id_etat = $row['IdEtat'];
-                                $etat = $row['libelle'];
-                                echo "<option value=$id_etat>$etat</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="visaServEtude">Visa service étude :</label>
-                        <input type="date" name="visaServEtude" id="visaServEtude" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="signataire">Signataire :</label>
-                        <select name="selectSignataire" id="selectSignataire">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result4 as $row) {
-                                $id_sign = $row['IdUtil'];
-                                $lib_sign = $row['nom'];
-                                echo "<option value=$id_sign>$lib_sign</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                    </div>
-                    <div class="form-group">
-                        <label for="affection">Affectation de la demande :</label>
-                        <select name="selectAffectation" id="selectAffectation">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result4 as $row) {
-                                $id_affect = $row['IdUtil'];
-                                $lib_affect = $row['nom'];
-                                echo "<option value=$id_affect>$lib_affect</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-
-
-                    <div class="form-group2">
-                        <label for="demEmise">Fin souhaitée le :</label>
-                        <input type="date" name="demFs" id="demFs">
-                    </div>
-                    <div class="form-group2">
-                        <label for="demEmise">Mise en recette prévue le (optionnel) :</label>
-                        <input type="date" name="demRct" id="demRct">
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="regroupement">Regroupement :</label>
-                        <select name="selectRegroupement" id="selectRegroupement">
-                            <?php
-                            echo "<option value='' disabled selected hidden></option>";
-                            foreach ($result5 as $row) {
-                                $id_regroupe = $row['IdRegroupe'];
-                                $lib_regroupe = $row['libelle'];
-                                echo "<option value=$id_regroupe>$lib_regroupe</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="demAmortis">Demande amortissable</label>
-                        <input type="checkbox" name="demAmortis" id="demAmortis">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="demArchiv">Demande archivée le :</label>
-                        <input type="date" name="demArchiv" id="demArchiv">
-                    </div>
-                </div>
-                <div class="btnajout">
-                    <button type="submit">Valider</button>
-                    <button type="reset">Annuler</button>
-                </div>
             </fieldset>
         </form>
     </section>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
