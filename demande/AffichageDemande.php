@@ -3,7 +3,7 @@
 <html>
 
 <head>
-  <title>TMA - Affichage Demande</title>
+  <title>Affichage Demande - TMAconnect</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -31,6 +31,18 @@
   $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
   ?>
+
+  <!------------------------------------------
+  |             BOUTON "RETOUR"              | 
+  ------------------------------------------->
+
+  <a href="creationDemande.php" class="btnajout">
+    <button onClick="window.location.href='creationDemande.php';"> Créer une demande</button>
+  </a>
+
+  <!------------------------------------------
+  |      FILTRE ET TABLEAU DES DEMANDES      | 
+  ------------------------------------------->
 
   <section class="modif">
     <form id="formFiltre" class="formmodif" name="formmodif" action="" method="POST">
@@ -76,7 +88,7 @@
           <input type="text" name="lib_dmd" id="lib_dmd">
         </div>
 
-        
+
         <div class="bloc-btn">
           <button type="submit" id="submit" name="appliquer">Appliquer</button>
           <button type="reset">Réinitialiser</button>
@@ -93,7 +105,7 @@
 
     <div id="table-container" class='table'>
       <?php include_once('../php/S-Filtre.php'); ?>
-  </div>
+    </div>
 
   <?php else: ?>
     <div>Aucune demande trouvée</div>
@@ -103,18 +115,20 @@
 |             Pagination Du Tableau          |  
 --------------------------------------------->
 
-  <nav class="div--pagination" aria-label="...">
+  <nav class="div--pagination" aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item">
-        <a class="page-link">Précédent</a>
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
       </li>
-      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-      <li class="page-item " aria-current="page">
-        <a class="page-link" href="#">2</a>
-      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
       <li class="page-item"><a class="page-link" href="#">3</a></li>
       <li class="page-item">
-        <a class="page-link" href="#">Suivant</a>
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
       </li>
     </ul>
   </nav>
