@@ -1,135 +1,103 @@
-<!DOCTYPE html>
+<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+    <path
+      d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+  </symbol>
+</svg>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<html>
+<?php
+// informations de connexion à la base de données MySQL
+$servername = "localhost:3308"; // nom du serveur
+$username = "root"; // nom d'utilisateur
+$password = "XVsikn92"; // mot de passe
+$dbname = "tmaconnect"; // nom de la base de données
 
-<head>
-  <title>TC4</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="css/csshome.css" rel="stylesheet" type="text/css" />
-  <link href="css/AffichageDemande.css" rel="stylesheet" type="text/css">
-  <link rel="icon" href="img/NLogo2.png" />
-</head>
+try {
+  $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-<body>
-  <?php include('includes/connexion.inc.php') ?>
-  <?php include('includes/header.html.inc.php') ?>
+  $select_domaine = isset($_POST['select_domaine']) ? $_POST['select_domaine'] : '';
+  $select_etat = isset($_POST['select_etat']) ? $_POST['select_etat'] : '';
+  $num_dmd = isset($_POST['num_dmd']) ? $_POST['num_dmd'] : '';
+  $lib_dmd = isset($_POST['lib_dmd']) ? $_POST['lib_dmd'] : '';
+  $lib_dmd = str_replace("'", "''", $lib_dmd);
 
-  <?php
+  // Requête SQL du tableau
+  $sql = "SELECT D.IdDemande, DOM.libelle, D.libelle, Q.libelle, D.date_crea, E.libelle, M.date_mep AS date_mep
+            FROM tc_demandes D
+            JOIN tc_domaine DOM ON D.dom_dmd = DOM.IdDomaine 
+            JOIN tc_qualif Q ON D.qual_dmd = Q.IdQual
+            JOIN tc_etat E ON D.etat_dmd = E.IdEtat
+            JOIN tc_mep M ON D.IdMep = M.IdMep";
+  
 
-  // Requ�tes SQL pour le filtre de recherche des demandes 
-  $sql0 = "SELECT IdDomaine , libelle FROM tc_domaine";
-  $stmt0 = $pdo->query($sql0);
-  $result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
+  if ($select_domaine != '') {
+    $sql .= " AND DOM.libelle = '$select_domaine'";
+  }
 
-  // Requ�tes SQL pour r�cup�rer les donn�es de la table tc_etat
-  $sql1 = "SELECT IdEtat , libelle FROM tc_etat";
-  $stmt1 = $pdo->query($sql1);
-  $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+  if ($select_etat != '') {
+    $sql .= " AND E.libelle = '$select_etat' ";
+  }
 
-  ?>
+  if ($num_dmd != '') {
+    $num_dmd = $num_dmd . '%';
+    $sql .= " AND CAST(D.IdDemande AS CHAR) LIKE '$num_dmd' ";
+  }
 
-  <section class="modif">
-    <form id="formFiltre" class="formmodif" name="formmodif" action="" method="POST">
-      <fieldset id="infos">
-        <legend>Filtres</legend>
+  if ($lib_dmd != '') {
+    $sql .= " AND D.libelle LIKE '$lib_dmd'";
+  }
 
-        <!-- Liste déroulante pour le domaine -->
-        <div class="label-container">
-          <label for="select_domaine">Domaine</label>
-          <select name="select_domaine" id="select_domaine" data-filter>
-            <?php
-            echo "<option value=''></option>";
-            foreach ($result0 as $row) {
-              $id_dom = $row['IdDomaine'];
-              $lib_dom = $row['libelle'];
-              echo "<option value='$lib_dom'>$lib_dom</option>";
-            }
-            ?>
-          </select>
-        </div>
+  $sql .= " ORDER BY D.IdDemande DESC LIMIT 20";
 
-        <div class="label-container">
-          <label for="select_etat">Etat</label>
-          <select name="select_etat" id="select_etat" data-filter>
-            <?php
-            echo "<option value=''></option>";
-            foreach ($result1 as $row) {
-              $id_etat = $row['IdEtat'];
-              $lib_etat = $row['libelle'];
-              echo "<option value='$lib_etat'>$lib_etat</option>";
-            }
-            ?>
-          </select>
-        </div>
+  $stmt = $pdo->query($sql);
 
-        <div class="label-container">
-          <label for="num_dmd">N°Demande</label>
-          <input type="number" id="num_dmd" name="num_dmd" size="35">
-        </div>
+  // Vérification des résultats
+  if ($stmt->rowCount() > 0) {
+    $count = $stmt->rowCount();
+    $html = '<table class="table" id="table"><thead><tr><th class="icone-loupe">🔎</th><th>N°demande</th><th>Domaine</th><th>Libellé</th><th>Type</th><th>Demande créée</th><th>Charge</th><th>Etat</th><th>Date MEP</th><th>Télécharger</th></tr></thead><tbody>';
 
-        <div class="label-container" id="divLibelle">
-          <label for="lib_dmd">Libellé de la Demande</label>
-          <input type="text" name="lib_dmd" id="lib_dmd">
-        </div>
+    while ($row = $stmt->fetch(PDO::FETCH_BOTH)) {
+      $html .= '<tr class="afficherDetails">';
+      $html .= '<td><button><a href="detailDemande.php?idDemande=' . $row[0] . '">🔎</a></button></td>';
+      $html .= '<td>' . $row[0] . '</td>';
+      $html .= '<td>' . $row[1] . '</td>';
+      $html .= '<td>' . $row[2] . '</td>';
+      $html .= '<td>' . $row[3] . '</td>';
+      $formattedDate = date("d-m-Y", strtotime($row[4]));
+      $html .= '<td>' . $formattedDate . '</td>';
+      $html .= '<td>2</td>'; // Quand l'eval sera faite, changer et appliquer sur cette ligne le row6 et mettre la date_mep $row7
+      $html .= '<td>' . $row[5] . '</td>';
 
-        
-        <div class="bloc-btn">
-          <button type="submit" id="submit" name="appliquer">Appliquer</button>
-          <button type="reset">Réinitialiser</button>
-        </div>
-      </fieldset>
-    </form>
-  </section>
+      // Vérifier si la colonne de tc_mep existe dans le tableau $row
+      if (isset($row['date_mep']) || isset($row[6])) {
+        // Formater la date au format dd-mm-yyyy
+        $formattedDate = date("d-m-Y", strtotime($row[6]));
+        $html .= '<td>' . $formattedDate . '</td>';
+      } else {
+        $html .= '<td>Indice 6 non défini</td>';
+      }
 
-  <!-----------------------------------------
-|           Tableau Des demandes          | 
------------------------------------------->
+      $html .= '<td><i class="bx bx-download"></i></td>';
+      $html .= '</tr>';
+    }
 
-  <?php if ($stmt->rowCount() > 0): ?>
+    $html .= '</tbody></table>';
 
-    <div id="table-container" class='table'>
-      <?php include_once('php/S-Filtre.php'); ?>
-  </div>
+    echo $html;
 
-  <?php else: ?>
-    <div>Aucune demande trouvée</div>
-  <?php endif; ?>
+  } else {
+    echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
+<svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+<div id="libError">
+  <p>Aucune demande trouvée</p>
+</div>
+</div>';
+  }
+} catch (PDOException $e) {
+  echo "Erreur de connexion à la base de données : " . $e->getMessage();
+}
+?>
 
-  <!--------------------------------------------
-|             Pagination Du Tableau          |  
---------------------------------------------->
-
-  <nav class="div--pagination" aria-label="...">
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link">Précédent</a>
-      </li>
-      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-      <li class="page-item " aria-current="page">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Suivant</a>
-      </li>
-    </ul>
-  </nav>
-
-  <!-- Lien vers jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
-  <!-- Lien vers Bootstrap.js -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Lien vers les script JS -->
-  <script src="js/AJAX.js"></script>
-
-</body>
-
-</html>
