@@ -43,7 +43,7 @@ $(document).ready(function () {
         var formData = new FormData(this);
 
         $.ajax({
-            url: 'test-code4.php',
+            url: '../php/S-Filtre.php',
             type: 'POST',
             data: formData,
             contentType: false,
@@ -60,7 +60,7 @@ $(document).ready(function () {
     $('#num_dmd').on('input', function () {
         var numDmdValue = $(this).val();
 
-        $.post('test-code4.php', { num_dmd: numDmdValue }, function (data) {
+        $.post('../php/S-Filtre.php', { num_dmd: numDmdValue }, function (data) {
             $('#table').html(data);
         });
     });
