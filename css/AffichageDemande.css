@@ -1,9 +1,201 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; 
     box-sizing: border-box;
 }
+
+/*---------------------------
+|          NAVBAR           | 
+---------------------------*/
+
+.barre-arianne {
+    font-family: Arial, sans-serif; 
+    font-size: 16px;
+}
+
+/*---------------------------
+|       BOUTON RETOUR       | 
+---------------------------*/
+
+.btnajout {
+    align-items: center;
+    justify-content: start;
+    display: flex;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+}
+
+.btnajout button {
+    width: 170px;
+    height: 65px;
+    position: absolute;
+    top: 52px;
+    left: 19px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    background: #289297;
+    color: #fff;
+}
+
+.btnajout button:hover {
+    background-color: #287074;
+    transition: 0.3s ease;
+}
+
+
+/*---------------------------
+|       FILTRE DEMANDE      | 
+---------------------------*/
+
+.modif {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 32vh; /* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
+    background: (#f5f5f5, #e8e8e8);
+}
+
+
+.formmodif {
+    width: 1350px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 75px;
+    margin-bottom: 0;
+    padding: 0px;
+    position: absolute;
+    top: 0;
+    right: 60px;
+    font-family: Arial, sans-serif; 
+    font-size: 16px;
+}
+
+
+.formmodif fieldset {
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    width: 85%;
+    max-height: 300px;
+    background-color: #f5f5f5;
+    position: absolute;
+    left: 212px;
+}
+
+
+.formmodif .label-container {
+    text-align: center;
+    display: inline-block;
+    width: calc(21.7% - 14px); /* Chaque label-container occupe un tiers de la largeur moins la marge */
+    margin: 0;
+    margin-top: -21px;
+    vertical-align: top; /* Aligne² les div en haut */
+    box-sizing: border-box; /* Inclure la marge dans la largeur calculée */
+    height: 75px;
+}
+
+#divLibelle label {
+    position: relative;
+    right: 30px;
+}
+
+#divLibelle{
+    position: relative;
+    right: 60px;
+}
+
+
+.formmodif h1 {
+    text-align: center;
+    color: #333;
+}
+
+
+.formmodif legend {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.formmodif div {
+    margin: 1% 1% 1% 8%;
+}
+
+.formmodif label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+
+.formmodif input[type="number"] {
+    width: 20%;
+}
+
+
+.formmodif input[type="text"] {
+    width: 212%;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+
+#select_domaine {
+    width: 180px;
+    padding: 1%;
+    margin-bottom: 10px;
+}
+
+
+#select_etat {
+    width: 302px;
+    padding: 1%;
+    margin-bottom: 10px;
+}
+
+
+.bloc-btn {
+    display: block;
+    float: right;
+}
+
+.formmodif button {
+    padding: 12px 20px;
+    background: #0055A4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.formmodif button {
+    font-size: 13px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.formmodif button:hover {
+    background-color: #004281;
+}
+
+
+/*---------------------------
+|         TABLEAU           | 
+---------------------------*/
 
 
 table {
@@ -121,189 +313,29 @@ table td {
 
 #table thead tr th.icone-loupe {
     position: relative;
-    padding-left: 34px; /* Ajustez la valeur selon vos besoins pour déplacer l'icône vers la droite */
+    padding-left: 34px; /* Déplacer l'icône vers la droite */
 }
 
 
-.modif {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 32vh; /* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
-    background: (#f5f5f5, #e8e8e8);
-}
-
-
-.formmodif {
-    width: 1350px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0px;
-    margin-top: 75px;
-    margin-bottom: 0;
-    display: flex;
-    justify-content: center;
-    /* Centre les éléments horizontalement */
-    align-items: flex-start;
-    /* Aligne les éléments en haut */
-    position: absolute;
-    /* Permet d'utiliser les propriétés top, right, etc. */
-    top: 0;
-    /* Place l'élément en haut */
-    right: 0;
-    /* Place l'élément à droite */
-}
-
-
-.formmodif fieldset {
-    border: 1px solid #333;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 30px;
-    width: 85%;
-    max-height: 300px;
-    background-color: #f5f5f5;
-}
-
-
-.formmodif .label-container {
-    text-align: center;
-    display: inline-block;
-    width: calc(21.7% - 14px); /* Chaque label-container occupe un tiers de la largeur moins la marge */
-    margin: 0;
-    margin-top: -21px;
-    vertical-align: top; /* Aligner les div en haut */
-    box-sizing: border-box; /* Inclure la marge dans la largeur calculée */
-    height: 75px;
-}
-
-#divLibelle label {
-    position: relative;
-    right: 30px;
-}
-
-#divLibelle{
-    position: relative;
-    right: 60px;
-}
-
-
-.formmodif h1 {
-    text-align: center;
-    color: #333;
-}
-
-
-.formmodif legend {
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #555;
-}
-
-.formmodif div {
-    margin: 1% 1% 1% 8%;
-}
-
-.formmodif label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-
-.formmodif input[type="number"] {
-    width: 20%;
-    /* Ajuster la largeur du champ de type number */
-}
-
-
-.formmodif input[type="text"] {
-    width: 212%;
-    /* Ajuster la largeur du champ de type number */
-}
-
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-
-
-#select_domaine {
-    width: 180px;
-    padding: 1%;
-    margin-bottom: 10px;
-}
-
-
-#select_etat {
-    width: 302px;
-    padding: 1%;
-    margin-bottom: 10px;
-}
-
-input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.bloc-btn {
-    display: block;
-    float: right;
-}
-
-.formmodif button {
-    padding: 12px 20px;
-    background: #0055A4;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-
-/* Styles supplémentaires pour un aspect esthétique */
-.formmodif {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-}
-
-
-.formmodif button {
-    font-size: 13px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.formmodif button:hover {
-    background-color: #004281;
-}
-
+/*---------------------------
+|         PAGINATION        | 
+---------------------------*/
 
 .div--pagination {
-    position: fixed;
-    /*Positionné de manière fixe en bas de la page, indépendamment du défilement de l'utilisateur.*/
-    bottom: 30px;
-    /*Pace l'élément en bas de la page */
-    left: 50%;
-    transform: translateX(-50%);
-    /*Ramène l'élément de 50% de sa propre largeur vers la gauche, le centrant parfaitement.*/
-    display: flex;
-    /*Active le modèle de boîte flexible.*/
-    justify-content: center;
-    /*Centre l'élément horizontalement à l'intérieur de son conteneur.*/
-    align-items: center;
-    /*Centre l'élément verticalement à l'intérieur de son conteneur.*/
     width: 100%;
-    /*Fait en sorte que l'élément occupe toute la largeur de son conteneur parent.*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%); /*Ramène l'élément de 50% de sa propre largeur vers la gauche, le centrant parfaitement.*/
     background-color: #ffffff;
-    /* Couleur d'arrière-plan, à adapter selon vos besoins */
+}
+
+.page-link:focus {
+    color: #fff;
+    background-color: #007bff;
 }
 
 
@@ -318,34 +350,29 @@ tr.demande.details-visible+tr.details {
 }
 
 
-.error--id {
-    display: block;
-    background-color: #9ec5fe;
-    border: 1px solid;
-    border-radius: 10px;
-    margin-top: 2%;
-    margin-bottom: -3%;
-    padding: 1.2% 1.2% 1.2% 1.2%;
-    text-align: center;
-    width: 65%;
-}
-
 /* ## ~~ CSS FOR ELEMENT BOOTSTRAP ## ~~  */
 
 .align-items-center {
     -ms-flex-align: center !important;
     align-items: center !important;
-    width: 80%;
+    width: 50%;
 }
 
 .d-flex {
     display: -ms-flexbox !important;
     display: flex !important;
-    background-color: #9ec5fe !important;
-    border: 0.2rem solid #77aaf7 !important;
+    background-color: #d12d2d !important;
+    border: 0.1rem solid #000000 !important;
     color: #000000 !important;
     position: relative;
     right: 60px;
+}
+
+#libError>p {
+    margin: 0;
+    padding: 0;
+    font-size: larger;
+    font-weight: bold;
 }
 
 .alert {
@@ -360,11 +387,10 @@ tr.demande.details-visible+tr.details {
     -ms-flex-negative: 0!important;
     flex-shrink: 0!important;
     position: relative;
-    right: 160px;
+    right: 50px;
 }
 
 svg {
-    /* color: #f8d7da; */
     width: 120px;
     height: 90px;
 }
