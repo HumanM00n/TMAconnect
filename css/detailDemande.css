@@ -178,19 +178,20 @@ h5 {
     padding: 0;
 }
 
-.libelleDemande input[type="text"] {
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 20px;
-    font-size: 13px;
+
+.libelleDemande {
+    margin-left: -3px;
 }
 
-#form_nvldemande input#demLibelle {
-    width: 95%;
-    padding: 9px;
-    font-size: 16px;
+.libelleDemande input[type="text"] {
+    width: 91%;
     height: 30px;
+    padding: 9px;
+    margin-bottom: 20px;
+    margin-left: -2px;
+    font-size: 16px;
 }
+
 
 #form_nvldemande legend {
     font-weight: bold;
