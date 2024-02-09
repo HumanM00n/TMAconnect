@@ -1,9 +1,141 @@
-body {
+body{
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     box-sizing: border-box;
 }
+
+/*---------------------------
+|     BARRE DE NAVIGATION   |
+----------------------------*/
+
+
+.barre-arianne {
+    position: fixed; /* utiliser "fixed" pour que la barre reste visible en tout temps */
+    top: 0px;
+    overflow: visible;
+    left: 0;
+    right: 0;
+    background-color: #289297;
+    z-index: 80;
+}
+
+.barre-arianne ul {
+    list-style-type: none; /* enlève les puces de la liste */
+    margin: 0;
+    padding: 0;
+    display: flex; /* utilise Flexbox pour aligner les éléments horizontalement */
+}
+
+.barre-arianne .Onglet {
+    margin: 0;
+    padding: 0;
+    position: relative; /* ajoute une position relative pour les éléments de menu déroulant */
+}
+
+.barre-arianne a {
+    display: block; /* rend les liens cliquables sur toute la hauteur de la barre */
+    color: white; /* couleur du texte des liens */
+    text-align: center; /* centre le texte horizontalement */
+    font-weight: bold;
+    padding: 20px 20px; /* ajoute un peu de marge autour du texte */
+    text-decoration: none; /* enlève les soulignements par défaut */
+    text-align: center;
+    padding: 25px;
+}
+
+/* effet de survol des liens */
+.barre-arianne a:hover {
+    background-color: #0c156b;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Styles spécifiques pour le menu déroulant */
+.barre-arianne .sous {
+    display: none;
+    position: absolute;
+    background-color: #289297;
+    left: 0;
+    font-size: 15px;
+    top: 100%;
+    z-index: 100;
+}
+
+.barre-arianne li:hover .sous {
+    display: block;
+}
+
+.barre-arianne .sous li {
+    display: block;
+}
+
+
+.barre-arianne .sous2 {
+    display: none;
+    position: absolute;
+    background-color: #289297;
+    left: auto;
+    right: 0;
+    font-size: 15px;
+    top: 100%;
+    z-index: 100;
+    width: fit-content; /* Ajuste la largeur du menu déroulant à son contenu */
+    white-space: nowrap;
+}
+
+.barre-arianne li:hover .sous2 {
+    display: block;
+}
+
+.barre-arianne .sous2 li {
+    display: block;
+    margin-left: 0px;
+}
+
+
+
+
+.MonCompte{
+    position: absolute;
+    right: 0;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    font-weight: 900;
+
+}
+
+
+/*------------------------------
+|    TABLEAU DES UTILISATEURS   |
+-------------------------------*/
+
+#tableau {
+    position: absolute;
+    justify-content: center;
+    align-content: center;
+    max-width: 23%;
+    left: 0;
+    right: 0;
+    top: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 10px;
+    background-color: #555;
+    color: white;  /* Couleur du texte */
+    text-transform: uppercase;  /* Convertit le texte en majuscules */
+    letter-spacing: 0.5px; /* Espacement entre les lettres */
+    border-radius: 5px; /* Arrondi les coins du conteneur */
+    text-align: center;
+    padding: 12px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ddd;
+}
+
 
 
 table {
@@ -16,153 +148,239 @@ table {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-height: 200px; /* Ajuste la hauteur au minimum */
-    margin-top: 45px
-}
-
-
-table th {
-    width: 150px;
-    margin-bottom: 1rem;
-}
-
-table td {
-    width: 210px; /*Ajuste la même taille du tableau avec celle de l'en-tête  */
-}
-
-.table td, .table th {
-    width: 200px;
-    padding: 0.75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-}
-
-#table thead tr th:first-child {
-    width: 99px;
-}
-
-#table tbody tr td:first-child {
-    width: 101.9px;
-}
-
-#table thead tr th:nth-child(2) {
-    width: 50px;
-}
-
-#table tbody tr td:nth-child(2) {
-    width: 110px;
-}
-
-
-#table thead tr th:nth-child(4) {
-    width: 650px;
-}
-
-#table tbody tr td:nth-child(4) {
-    width: 650px;
-}
-
-
-#table thead tr th:nth-child(5) {
-    width: 110px;
-}
-
-#table tbody tr td:nth-child(5) {
-    width: 110px;
-}
-
-
-#table thead tr th:nth-child(6) {
-    width: 155px;
-}
-
-#table tbody tr td:nth-child(6) {
-    width: 155px;
-}
-
-
-#table thead tr th:nth-child(7) {
-    width: 90px;
-}
-
-#table tbody tr td:nth-child(7) {
-    width: 90px;
-}
-
-
-#table thead tr th:nth-child(8) {
-    width: 135px;
-}
-
-#table tbody tr td:nth-child(8) {
-    width: 135px;
-}
-
-
-#table thead tr th:nth-child(9) {
-    width: 155px;
-}
-
-#table tbody tr td:nth-child(9) {
-    width: 155px;
-}
-
-
-#table thead tr th:nth-child(10) {
-    width: 120px;
-}
-
-#table tbody tr td:nth-child(10) {
-    width: 120px;
+    min-height: 200px; /* Ajuster la hauteur */
+    margin-top: 155px;
 }
 
 
 
+th, td {
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
 
-#table thead tr th.icone-loupe {
-    position: relative;
-    padding-left: 34px; /* Ajustez la valeur selon vos besoins pour déplacer l'icône vers la droite */
+th {
+    background-color: #555;
+    color: #fff;
+}
+
+tr:nth-child(all) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
 }
 
 
-.modif {
+/*------------------------------------
+|  BOUTON EXPORT EXCEL UTILISATEURS   |
+-------------------------------------*/
+
+.btnexcel{
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    align-content: flex-end;
+    top: 80px;
+    right: 0;
+    margin-right: 7px;
+}
+
+
+.btnexcel button {
+    padding: 10px 16px;
+    background: #24AF37;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btnexcel button:hover {
+    background-color: #1C8129;
+}
+
+
+/*------------------------------------
+|  AUTRES BOUTON (Submit, Retour)    | 
+-------------------------------------*/
+
+.btnajout {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+
+.btnajout button {
+    padding: 10px 16px;
+    background: #0055A4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btnajout button:hover {
+    background-color: #004281;
+}
+
+/*--------------------------
+|  FORMULAIRE DES DEMANDES  | 
+---------------------------*/
+
+#nvldemande {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 32vh; /* Définit la hauteur minimale du conteneur à 100% de la hauteur de la fenêtre */
-    background: (#f5f5f5, #e8e8e8);
+    height: 100%;
+    background: linear-gradient(#f5f5f5, #e8e8e8);
+}
+
+#form_nvldemande {
+    width: 800px; /* Ajuster la largeur selon vos besoins */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px; /* Augmenter l'espacement intérieur */
+    margin-top: 75px;
+    margin-bottom: 0;
+}
+
+#form_nvldemande h1 {
+    text-align: center;
+    color: #333;
+}
+
+#form_nvldemande fieldset {
+    margin-bottom: 30px; /* Augmenter l'espacement entre les champs */
+}
+
+#form_nvldemande legend {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+    margin-left: 35.5%
+}
+
+#form_nvldemande div {
+    margin-bottom: 10px;
+}
+
+#form_nvldemande label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+#form_nvldemande input[type="text"],
+#form_nvldemande input[type="email"],
+#form_nvldemande select {
+    width: 100%;
+    padding: 12px; /* Augmenter la taille du padding */
+}
+
+#form_nvldemande input[type="number"] {
+    width: 50%; /* Ajuster la largeur du champ de type number */
+}
+
+#form_nvldemande button {
+    padding: 12px 20px;
+    background: #0055A4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.input-validation {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Styles supplémentaires pour un aspect esthétique */
+#form_nvldemande {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+
+
+#form_nvldemande input[type="text"],
+#form_nvldemande input[type="email"],
+#form_nvldemande select {
+    font-size: 14px;
+}
+
+#form_nvldemande button {
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#form_nvldemande button:hover {
+    background-color: #004281;
+}
+
+
+#modif {
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    height: 56.8rem;
+    background: linear-gradient(#f5f5f5, #e8e8e8);
 }
 
 
 .formmodif {
     width: 1350px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0px;
-    margin-top: 75px;
-    margin-bottom: 0;
+    height: 91.8%;
     display: flex;
     justify-content: center;
-    /* Centre les éléments horizontalement */
-    align-items: flex-start;
-    /* Aligne les éléments en haut */
-    position: absolute;
-    /* Permet d'utiliser les propriétés top, right, etc. */
-    top: 0;
-    /* Place l'élément en haut */
-    right: 0;
-    /* Place l'élément à droite */
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 75px;
+    margin-bottom: 0;
+    padding: 0px;
+    font-family: Arial, sans-serif; 
+    font-size: 16px;
 }
 
 
 .formmodif fieldset {
-    border: 1px solid #333;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 30px;
     width: 85%;
-    max-height: 300px;
-    background-color: #f5f5f5;
+    max-height: 700px;
+    position: absolute;
+    padding: 10px;
+    margin-bottom: 30px;
+    border: 0.1px solid rgb(219 219 219 / 28%);
+    border-radius: 4px;
+    background: rgb(219 219 219 / 28%);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(50px);
+}
+
+
+.formmodif legend {
+    justify-content: center;
+    display: flex;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
 }
 
 
@@ -172,199 +390,297 @@ table td {
     width: calc(21.7% - 14px); /* Chaque label-container occupe un tiers de la largeur moins la marge */
     margin: 0;
     margin-top: -21px;
-    vertical-align: top; /* Aligner les div en haut */
+    vertical-align: top; /* Aligne² les div en haut */
     box-sizing: border-box; /* Inclure la marge dans la largeur calculée */
     height: 75px;
 }
 
-#divLibelle label {
+.infosColumn {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 250px;
+}
+
+.infosColumn input[type="text"] {
+    width: 135px;
+    height: 32px;
     position: relative;
-    right: 30px;
 }
 
-#divLibelle{
+
+.infosColumn2 input[type="text"] {
+    width: 135px;
+    height: 32px;
     position: relative;
-    right: 60px;
+}
+
+.infosColumn2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    bottom: 391px;
+}
+
+.infosColumn2 label {
+    position: relative;
+    right: 41px;
+}
+
+.infosColumn2 label:nth-child(1){
+    position: relative;
+    right: 36px;
+}
+
+.infosColumn2 select {
+    width: 135px;
+    height: 32px;
+}
+
+.form-check {
+    display: inline-flex;  
+    flex-wrap: wrap-reverse;
+}
+ 
+
+
+
+/* Styles pour l'élément de calendrier */
+input[type="date"] {
+    appearance: none; /* Supprime l'apparence native du navigateur */
+    padding: 8px; /* Ajoute un espace autour de l'élément */
+    border: 1px solid #ccc; /* Ajoute une bordure */
+    border-radius: 4px; /* Ajoute une bordure arrondie */
+    background-color: #fff; /* Définit la couleur de fond */
+    font-size: 14px; /* Définit la taille de la police */
+    color: #333; /* Définit la couleur du texte */
+}
+
+/* Styles pour l'icône du calendrier */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent; /* Supprime l'arrière-plan par défaut de l'icône */
+    padding: 4px; /* Ajoute un espacement autour de l'icône */
+    cursor: pointer; /* Définit le curseur de la souris au survol de l'icône */
+}
+
+/* Styles pour le texte de l'étiquette */
+label {
+    display: block; /* Affiche le texte de l'étiquette en tant que bloc */
+    margin-bottom: 15px; /* Ajoute un espace en bas de l'étiquette */
+    font-weight: bold; /* Met en évidence le texte de l'étiquette */
+    margin-top: 8px;
 }
 
 
-.formmodif h1 {
-    text-align: center;
-    color: #333;
-}
-
-
-.formmodif legend {
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #555;
-}
-
-.formmodif div {
-    margin: 1% 1% 1% 8%;
-}
-
-.formmodif label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-
-.formmodif input[type="number"] {
-    width: 20%;
-    /* Ajuster la largeur du champ de type number */
-}
-
-
-.formmodif input[type="text"] {
-    width: 212%;
-    /* Ajuster la largeur du champ de type number */
-}
-
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-
-
-#select_domaine {
-    width: 180px;
-    padding: 1%;
-    margin-bottom: 10px;
-}
-
-
-#select_etat {
-    width: 302px;
-    padding: 1%;
-    margin-bottom: 10px;
-}
-
-input[type="submit"] {
-    width: 100%;
+.iconemodif {
+    display: inline-block;
     padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.bloc-btn {
-    display: block;
-    float: right;
-}
-
-.formmodif button {
-    padding: 12px 20px;
-    background: #0055A4;
+    background-color: #0055A4;
     color: #fff;
     border: none;
+    margin: 2px;
     border-radius: 5px;
     cursor: pointer;
-}
-
-
-/* Styles supplémentaires pour un aspect esthétique */
-.formmodif {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-}
-
-
-.formmodif button {
-    font-size: 13px;
-    font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
-.formmodif button:hover {
-    background-color: #004281;
+.iconemodif:hover {
+    background-color: #289297;
 }
 
 
-.div--pagination {
-    position: fixed;
-    /*Positionné de manière fixe en bas de la page, indépendamment du défilement de l'utilisateur.*/
-    bottom: 30px;
-    /*Pace l'élément en bas de la page */
-    left: 50%;
-    transform: translateX(-50%);
-    /*Ramène l'élément de 50% de sa propre largeur vers la gauche, le centrant parfaitement.*/
-    display: flex;
-    /*Active le modèle de boîte flexible.*/
-    justify-content: center;
-    /*Centre l'élément horizontalement à l'intérieur de son conteneur.*/
-    align-items: center;
-    /*Centre l'élément verticalement à l'intérieur de son conteneur.*/
-    width: 100%;
-    /*Fait en sorte que l'élément occupe toute la largeur de son conteneur parent.*/
-    background-color: #ffffff;
-    /* Couleur d'arrière-plan, à adapter selon vos besoins */
+.iconesuppr {
+    display: inline-block;
+    padding: 10px;
+    background-color: #BD0C0C;
+    color: #fff;
+    border: none;
+    margin: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+.iconesuppr:hover {
+    background-color: #890B0B;
+}
 
-/* CSS pour masquer les détails initialement */
-tr.demande+tr.details {
+/*------------------------------------
+|   MODAL BOOTSTRAP MESSAGE SUCCES   |
+-------------------------------------*/
+
+
+.modal {
     display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* CSS pour afficher les détails quand ils sont visibles */
-tr.demande.details-visible+tr.details {
-    display: table-row;
-}
-
-
-.error--id {
-    display: block;
-    background-color: #9ec5fe;
-    border: 1px solid;
-    border-radius: 10px;
-    margin-top: 2%;
-    margin-bottom: -3%;
-    padding: 1.2% 1.2% 1.2% 1.2%;
-    text-align: center;
-    width: 65%;
-}
-
-/* ## ~~ CSS FOR ELEMENT BOOTSTRAP ## ~~  */
-
-.align-items-center {
-    -ms-flex-align: center !important;
-    align-items: center !important;
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
     width: 80%;
 }
 
-.d-flex {
-    display: -ms-flexbox !important;
-    display: flex !important;
-    background-color: #9ec5fe !important;
-    border: 0.2rem solid #77aaf7 !important;
-    color: #000000 !important;
-    position: relative;
-    right: 60px;
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
+.close:hover,
+.close:focus {
+    color: #333;
+}
+
+#confirmDeleteBtn,
+#cancelDeleteBtn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #24af37;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#confirmDeleteBtn:hover,
+#cancelDeleteBtn:hover {
+    background-color: #1c8129;
+}
+
+
+/* CSS alert suppression*/
 .alert {
-    position: relative;
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.flex-shrink-0 {
-    -ms-flex-negative: 0!important;
-    flex-shrink: 0!important;
-    position: relative;
-    right: 160px;
+
+
+.toast {
+    position: fixed;
+    top: 75px;  /*Ajustez la valeur pour définir l'écart par rapport au haut */
+    right: 0;  /*Ajustez la valeur pour définir l'écart par rapport à la droite */
+    z-index: 9999;  /*Assurez-vous que le toast s'affiche au-dessus des autres éléments */
 }
 
-svg {
-    /* color: #f8d7da; */
-    width: 120px;
-    height: 90px;
+
+.toast-header {
+    background-color: #11C41F;  /*Couleur de fond pour l'en-tête du toast*/
 }
+
+
+
+/* Styles pour l'élément de calendrier */
+input[type="date"] {
+    appearance: none; /* Supprime l'apparence native du navigateur */
+    padding: 8px; /* Ajoute un espace autour de l'élément */
+    border: 1px solid #ccc; /* Ajoute une bordure */
+    border-radius: 4px; /* Ajoute une bordure arrondie */
+    background-color: #fff; /* Définit la couleur de fond */
+    font-size: 14px; /* Définit la taille de la police */
+    color: #333; /* Définit la couleur du texte */
+}
+
+/* Styles pour l'icône du calendrier */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent; /* Supprime l'arrière-plan par défaut de l'icône */
+    padding: 4px; /* Ajoute un espacement autour de l'icône */
+    cursor: pointer; /* Définit le curseur de la souris au survol de l'icône */
+}
+
+/* Styles pour le texte de l'étiquette */
+label {
+    display: block; /* Affiche le texte de l'étiquette en tant que bloc */
+    margin-bottom: 15px; /* Ajoute un espace en bas de l'étiquette */
+    font-weight: bold; /* Met en évidence le texte de l'étiquette */
+    margin-top: 8px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.toast-headerMODIFSuccess{
+    background-color: #11C41F;
+}
+
+
+.success {
+    border: 3px solid green;
+}
+
+.echec{
+    border:3px solid red;
+}
+
+
+#alertContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
+
+.imgArriere{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 30%;
+}
+
+
+/*-----------------
+|    PAGINATION    | 
+-----------------*/
+
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination-container a {
+    margin: 0 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #333;
+}
+
+.pagination-container a:hover {
+    background-color: #ccc;
+}
+
+
