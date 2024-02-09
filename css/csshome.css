@@ -6,6 +6,10 @@ body{
 }
 
 
+/*---------------------------
+|     BARRE DE NAVIGATION   |
+----------------------------*/
+
 
 .barre-arianne {
     position: fixed; /* utiliser "fixed" pour que la barre reste visible en tout temps */
@@ -92,8 +96,6 @@ body{
 }
 
 
-
-
 .MonCompte{
     position: absolute;
     right: 0;
@@ -103,7 +105,12 @@ body{
     font-weight: 900;
 
 }
-/* #form */
+
+
+/*------------------------------
+|    TABLEAU DES UTILISATEURS   |
+-------------------------------*/
+
 
 #tableau {
     position: absolute;
@@ -130,7 +137,6 @@ body{
 }
 
 
-
 table {
     border-collapse: collapse;
     margin-left: auto;
@@ -144,7 +150,6 @@ table {
     min-height: 200px; /* Ajuster la hauteur */
     margin-top: 155px;
 }
-
 
 
 th, td {
@@ -166,6 +171,10 @@ tr:hover {
     background-color: #ddd;
 }
 
+/*------------------------------------
+|  BOUTON EXPORT EXCEL UTILISATEURS   |
+-------------------------------------*/
+
 
 .btnexcel{
     position: fixed;
@@ -176,7 +185,6 @@ tr:hover {
     right: 0;
     margin-right: 7px;
 }
-
 
 .btnexcel button {
     padding: 10px 16px;
@@ -195,6 +203,9 @@ tr:hover {
 }
 
 
+/*------------------------------------
+|  AUTRES BOUTON (Submit, Retour)    | 
+-------------------------------------*/
 
 
 .btnajout {
@@ -207,7 +218,6 @@ tr:hover {
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
-
 
 .btnajout button {
     padding: 10px 16px;
@@ -225,6 +235,10 @@ tr:hover {
     background-color: #004281;
 }
 
+
+/*--------------------------
+|  FORMULAIRE DES DEMANDES  | 
+---------------------------*/
 
 
 #nvldemande {
@@ -382,6 +396,9 @@ label {
 }
 
 
+/*------------------------------------
+|   MODAL BOOTSTRAP MESSAGE SUCCES   |
+-------------------------------------*/
 
 
 .modal {
@@ -528,6 +545,10 @@ label {
     opacity: 30%;
 }
 
+
+/*-----------------
+|    PAGINATION    | 
+-----------------*/
 
 
 .pagination-container {
