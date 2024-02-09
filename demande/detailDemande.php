@@ -132,7 +132,7 @@
                 <input name="selectPrio" id="selectPrio" class="inputInfos" disabled pattern="[0-9]"
                 <?php 
                   $prt_dmd = $row[3];
-                  ?> value="<?php echo $qual_dmd; ?>">
+                  ?> value="<?php echo $prt_dmd; ?>">
               </div>
             </div>
           </fieldset>
