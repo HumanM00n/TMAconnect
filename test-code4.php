@@ -1,103 +1,270 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-  <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
-    <path
-      d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-  </symbol>
-</svg>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html>
 
-<?php
-// informations de connexion à la base de données MySQL
-$servername = "localhost:3308"; // nom du serveur
-$username = "root"; // nom d'utilisateur
-$password = "XVsikn92"; // mot de passe
-$dbname = "tmaconnect"; // nom de la base de données
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link href="css/test4.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" href="img/NLogo2.png" />
 
-try {
-  $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $select_domaine = isset($_POST['select_domaine']) ? $_POST['select_domaine'] : '';
-  $select_etat = isset($_POST['select_etat']) ? $_POST['select_etat'] : '';
-  $num_dmd = isset($_POST['num_dmd']) ? $_POST['num_dmd'] : '';
-  $lib_dmd = isset($_POST['lib_dmd']) ? $_POST['lib_dmd'] : '';
-  $lib_dmd = str_replace("'", "''", $lib_dmd);
-
-  // Requête SQL du tableau
-  $sql = "SELECT D.IdDemande, DOM.libelle, D.libelle, Q.libelle, D.date_crea, E.libelle, M.date_mep AS date_mep
-            FROM tc_demandes D
-            JOIN tc_domaine DOM ON D.dom_dmd = DOM.IdDomaine 
-            JOIN tc_qualif Q ON D.qual_dmd = Q.IdQual
-            JOIN tc_etat E ON D.etat_dmd = E.IdEtat
-            JOIN tc_mep M ON D.IdMep = M.IdMep";
+  <?php
+  $scriptName = filter_input(INPUT_SERVER, 'SCRIPT_NAME');
+  $pageActuelle = basename($scriptName); // Récupère le nom de fichier sans le chemin
+  $pageActuelle = pathinfo($pageActuelle, PATHINFO_FILENAME); // Récupère le nom de fichier sans l'extension
   
+  // echo "<title>TMAconnect - $pageActuelle</title>";
+  echo "<title>TC4</title>";
+  ?>
+</head>
 
-  if ($select_domaine != '') {
-    $sql .= " AND DOM.libelle = '$select_domaine'";
+<body>
+  <header>
+    <!-- <?php include('includes/header.html.inc.php'); ?> -->
+  </header>
+
+  <?php
+  // Informations de connexion à la base de données MySQL
+  $servername = "localhost:3308"; // nom du serveur
+  $username = "root"; // nom d'utilisateur
+  $password = "XVsikn92"; // mot de passe
+  $dbname = "tmaconnect"; // nom de la base de données
+  
+  try {
+    // Création d'une connexion à la base de données avec PDO
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+
+    // Configuration des attributs de PDO
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  } catch (PDOException $e) {
+    die("La connexion a échoué: " . $e->getMessage());
   }
+  ?>
 
-  if ($select_etat != '') {
-    $sql .= " AND E.libelle = '$select_etat' ";
-  }
 
-  if ($num_dmd != '') {
-    $num_dmd = $num_dmd . '%';
-    $sql .= " AND CAST(D.IdDemande AS CHAR) LIKE '$num_dmd' ";
-  }
+  <section id="modif">
+    <form class="formmodif" name="formmodif" action="" method="POST">
+      <fieldset id="infos">
+        <legend>Modifier un utilisateur</legend>
+        <div class="infosColumn">
+          <label for="i_nom">Nom :</label>
+          <!-- <input  name="i_nom" id="i_nom" size="35" disabled value=""> -->
+          <input type="text" class="form-control" id="i_nom" name="i_nom" disabled>
 
-  if ($lib_dmd != '') {
-    $sql .= " AND D.libelle LIKE '$lib_dmd'";
-  }
+          <label for="i_prenom">Prénom :</label>
+          <input type="text" name="i_prenom" id="i_prenom" size="35" disabled
+            pattern="^[a-zA-Zݟƌ\s\-]+$" required
+            oninput="convertToUppercase(this)" value="">
 
-  $sql .= " ORDER BY D.IdDemande DESC LIMIT 20";
+          <label for="i_matricule">Matricule :</label>
+          <input type="text" class="form-control" name="i_matricule" id="i_matricule" disabled pattern="C.*" requiredvalue="" maxlength="5" 
+          value="">
 
-  $stmt = $pdo->query($sql);
+          <label for="i_email">Email :</label>
+          <input type="email" name="i_email" id="i_email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required
+            value="">
 
-  // Vérification des résultats
-  if ($stmt->rowCount() > 0) {
-    $count = $stmt->rowCount();
-    $html = '<table class="table" id="table"><thead><tr><th class="icone-loupe">🔎</th><th>N°demande</th><th>Domaine</th><th>Libellé</th><th>Type</th><th>Demande créée</th><th>Charge</th><th>Etat</th><th>Date MEP</th><th>Télécharger</th></tr></thead><tbody>';
+          <label for="i_mdp">Mot de passe</label>
+          <input type="password" name="i_mdp" id="i_mdp" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required
+            value="">
 
-    while ($row = $stmt->fetch(PDO::FETCH_BOTH)) {
-      $html .= '<tr class="afficherDetails">';
-      $html .= '<td><button><a href="detailDemande.php?idDemande=' . $row[0] . '">🔎</a></button></td>';
-      $html .= '<td>' . $row[0] . '</td>';
-      $html .= '<td>' . $row[1] . '</td>';
-      $html .= '<td>' . $row[2] . '</td>';
-      $html .= '<td>' . $row[3] . '</td>';
-      $formattedDate = date("d-m-Y", strtotime($row[4]));
-      $html .= '<td>' . $formattedDate . '</td>';
-      $html .= '<td>2</td>'; // Quand l'eval sera faite, changer et appliquer sur cette ligne le row6 et mettre la date_mep $row7
-      $html .= '<td>' . $row[5] . '</td>';
+          <div class="form-check">
+            <label class="form-check-label" for="i_actif">Actif</label>
+            <input type="checkbox" class="form-check-input" name="i_mdp" id="i_actif">
+          </div>
 
-      // Vérifier si la colonne de tc_mep existe dans le tableau $row
-      if (isset($row['date_mep']) || isset($row[6])) {
-        // Formater la date au format dd-mm-yyyy
-        $formattedDate = date("d-m-Y", strtotime($row[6]));
-        $html .= '<td>' . $formattedDate . '</td>';
-      } else {
-        $html .= '<td>Indice 6 non défini</td>';
-      }
+        </div>
 
-      $html .= '<td><i class="bx bx-download"></i></td>';
-      $html .= '</tr>';
-    }
+        <?php
+        // if (isset($_POST['btn_modifier'])) {
+        //     $idUtilisateur = $_GET['id'];
+        //     $nouvelEmail = $_POST['i_email'];
+        
+        //     $sql = "UPDATE tc_utilisateur SET email = :nouvelEmail WHERE IdUtil = :idUtilisateur";
+        //     $stmt = $pdo->prepare($sql);
+        //     $stmt->bindParam(':nouvelEmail', $nouvelEmail, PDO::PARAM_STR);
+        //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+        //     $result = $stmt->execute();
+        // }
+        
+        // $sql0 = "SELECT IdService, s_libelle FROM tc_service";
+        // $stmt0 = $pdo->query($sql0);
+        // $result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
+        
+        // $sql1 = "SELECT IdPoste, p_libelle FROM tc_poste";
+        // $stmt1 = $pdo->query($sql1);
+        // $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+        
+        // $sql2 = "SELECT IdDroit, d_libelle FROM tc_droit";
+        // $stmt2 = $pdo->query($sql2);
+        // $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        ?>
 
-    $html .= '</tbody></table>';
+        <div class="infosColumn2">
+          <label for="lst_droit">Service :</label>
+          <select name="S_users" id="S_users" required>
+            <?php
+            // foreach ($result0 as $row) {
+            //     $idService = $row['IdService'];
+            //     $libelle1 = $row['s_libelle'];
+            //     $selected = ($idService == $service) ? 'selected' : '';
+            //     echo "<option value='$idService' $selected>$libelle1</option>";
+            // }
+            ?>
+          </select>
 
-    echo $html;
+          <?php
+          // if (isset($_POST['btn_modifier'])) {
+          //     $idUtilisateur = $_GET['id'];
+          //     $nouveauServ = $_POST['S_users'];
+          
+          //     $sql = "UPDATE tc_utilisateur SET S_users = :nouveauServ WHERE IdUtil = :idUtilisateur";
+          //     $stmt = $pdo->prepare($sql);
+          //     $stmt->bindParam(':nouveauServ', $nouveauServ, PDO::PARAM_INT);
+          //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+          //     $result = $stmt->execute();
+          // }
+          ?>
 
-  } else {
-    echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
-<svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-<div id="libError">
-  <p>Aucune demande trouvée</p>
-</div>
-</div>';
-  }
-} catch (PDOException $e) {
-  echo "Erreur de connexion à la base de données : " . $e->getMessage();
-}
-?>
+          <label for="lst_droit">Poste :</label>
+          <select name="P_users" id="P_users" required>
+            <?php
+            // foreach ($result1 as $row) {
+            //     $idPoste = $row['IdPoste'];
+            //     $libelle2 = $row['p_libelle'];
+            //     $selected = ($idPoste == $poste) ? 'selected' : '';
+            //     echo "<option value='$idPoste' $selected>$libelle2</option>";
+            // }
+            ?>
+          </select>
 
+          <?php
+          // if (isset($_POST['btn_modifier'])) {
+          //     $idUtilisateur = $_GET['id'];
+          //     $nouveauPoste = $_POST['P_users'];
+          
+          //     $sql = "UPDATE tc_utilisateur SET P_users = :nouveauPoste WHERE IdUtil = :idUtilisateur";
+          //     $stmt = $pdo->prepare($sql);
+          //     $stmt->bindParam(':nouveauPoste', $nouveauPoste, PDO::PARAM_INT);
+          //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+          //     $result = $stmt->execute();
+          // }
+          ?>
+
+          <label for="lst_droit">Droit :</label>
+          <select name="D_users" id="D_users" required value="">
+            <?php
+            // foreach ($result2 as $row) {
+            //     $idDroit = $row['IdDroit'];
+            //     $libelle3 = $row['d_libelle'];
+            //     $selected = ($idDroit == $droit) ? 'selected' : '';
+            //     echo "<option value='$idDroit' $selected>$libelle3</option>";
+            // }
+            ?>
+          </select>
+        </div>
+
+        <?php
+        // if (isset($_POST['btn_modifier'])) {
+        //     $idUtilisateur = $_GET['id'];
+        //     $nouveauDroit = $_POST['D_users'];
+        
+        //     $sql = "UPDATE tc_utilisateur SET D_users = :nouveauDroit WHERE IdUtil = :idUtilisateur";
+        //     $stmt = $pdo->prepare($sql);
+        //     $stmt->bindParam(':nouveauDroit', $nouveauDroit, PDO::PARAM_INT);
+        //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+        //     $result = $stmt->execute();
+        // }
+        ?>
+
+
+        <div>
+          <label>Date de fin : </label>
+          <input type="date" name="calendrier" id="calendrier" value="">
+        </div>
+
+        <?php
+        // if (isset($_POST['btn_modifier'])) {
+        //     $idUtilisateur = $_GET['id'];
+        //     $nouvelleDate = $_POST['calendrier'];
+        
+        //     $sql = "UPDATE tc_utilisateur SET dateFin = :nouvelleDate WHERE IdUtil = :idUtilisateur";
+        //     $stmt = $pdo->prepare($sql);
+        //     $stmt->bindParam(':nouvelleDate', $nouvelleDate, PDO::PARAM_STR);
+        //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+        //     $result = $stmt->execute();
+        // }
+        ?>
+
+        <div class="button-container">
+          <input type="submit" onclick="" name="btn_modifier" id="btn_modifier" value="Modifier">
+          <input type="reset" name="btn_annuler" id="btn_annuler" value="Annuler"
+            onclick="window.location.href = 'user/Utilisateurs.php';">
+        </div>
+
+        <?php
+        // if (isset($_POST['btn_modifier'])) {
+        //     // Le bouton "btnajouter" a été cliqué
+        //     if ($result) {
+        ?>
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+          <div class="toast-header">
+            <i class="far fa-check-circle" style="color: #ffffff;"></i>
+            <strong class="text-white">&ensp;TMA Connect</strong>
+          </div>
+          <div class="toast-body">
+            Les informations ont été modifiées.
+          </div>
+        </div>
+
+        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+        <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  -->
+        <script>
+          $(document).ready(function () {
+            $('.toast').toast('show');
+          });
+        </script>
+
+        <?php
+        // } else {
+        ?>
+
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+          <div class="toast-header1">
+            <i class="fas fa-times" style="color: #ffffff;"></i>
+            <strong class="text-white">&ensp;TMA Connect</strong>
+          </div>
+          <div class="toast-body">
+            Erreur lors des modifications.
+          </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+          $(document).ready(function () {
+            $('.toast').toast('show');
+          });
+        </script>
+
+        <?php
+        //                     }
+        //                 }
+        // } catch (PDOException $e) {
+        //     die("La connexion a  chou : " . $e->getMessage());
+        // }
+        ?>
+      </fieldset>
+    </form>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
