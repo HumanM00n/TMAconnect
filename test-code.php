@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
--->
 <html>
 
 <head>
@@ -26,7 +22,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
 <body>
     <header>
-        <!-- <?php include('includes/header.html.inc.php'); ?> -->
+        <?php include('includes/header.html.inc.php'); ?>
     </header>
 
     <?php
@@ -42,12 +38,31 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
         // Configuration des attributs de PDO
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-        die("La connexion a échoué: " . $e->getMessage());
-    }
+
+        // Récupération des informations de l'utilisateur à afficher dans les champs de saisie
+        $idUtilisateur = $_GET['id'];
+        $sql = "SELECT U.nom, U.prenom, U.matricule, U.email, S.IdService, P.IdPoste, D.IdDroit, U.dateFin
+            FROM tc_utilisateur U
+            INNER JOIN tc_service S ON U.S_users = S.IdService
+            INNER JOIN tc_poste P ON U.P_users = P.IdPoste
+            INNER JOIN tc_droit D ON U.D_users = D.IdDroit
+            WHERE U.IdUtil = :idUtilisateur";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $nom = $row['nom'];
+            $prenom = $row['prenom'];
+            $matricule = $row['matricule'];
+            $email = $row['email'];
+            $service = $row['IdService'];
+            $poste = $row['IdPoste'];
+            $droit = $row['IdDroit'];
+            $dateFin = $row['dateFin'];
+        }
     ?>
-
-
     <section id="modif">
         <form class="formmodif" name="formmodif" action="" method="POST">
             <fieldset id="infos">
@@ -65,59 +80,56 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                     </div>
                 </div>
 
-
-
                 <?php
-                // if (isset($_POST['btn_modifier'])) {
-                //     $idUtilisateur = $_GET['id'];
-                //     $nouvelleDate = $_POST['calendrier'];
+                if (isset($_POST['btn_modifier'])) {
+                    $idUtilisateur = $_GET['id'];
+                    $nouvelleDate = $_POST['calendrier'];
                 
-                //     $sql = "UPDATE tc_utilisateur SET dateFin = :nouvelleDate WHERE IdUtil = :idUtilisateur";
-                //     $stmt = $pdo->prepare($sql);
-                //     $stmt->bindParam(':nouvelleDate', $nouvelleDate, PDO::PARAM_STR);
-                //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
-                //     $result = $stmt->execute();
-                // }
+                    $sql = "UPDATE tc_utilisateur SET dateFin = :nouvelleDate WHERE IdUtil = :idUtilisateur";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindParam(':nouvelleDate', $nouvelleDate, PDO::PARAM_STR);
+                    $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+                    $result = $stmt->execute();
+                }
                 ?>
 
                 <div class="infosRow">
                     <label for="i_nom">Nom :</label>
-                    <input type="text" class="form-control" name="i_nom" id="i_nom" size="35" disabled value="">
+                    <input type="text" class="form-control" name="i_nom" id="i_nom" size="35" disabled>
 
                     <label for="i_prenom">Prénom :</label>
-                    <input type="text" class="form-control" name="i_prenom" id="i_prenom" size="35" disabled
+                    <input type="text" class="form-control" name="i_prenom" id="i_prenom" size="35"
                         pattern="^[a-zA-Z�����������������������������������������������������ݟƌ\s\-]+$" required
-                        oninput="convertToUppercase(this)" value="">
+                        disabled oninput="convertToUppercase(this)" value="">
 
                     <label for="i_matricule">Matricule :</label>
-                    <input type="text" class="form-control" name="i_matricule" id="i_matricule" disabled pattern="C.*"
-                        required value="" maxlength="5">
+                    <input type="text" class="form-control" name="i_matricule" id="i_matricule" pattern="C.*" required
+                        disabled value="" maxlength="5">
                 </div>
 
-
                 <?php
-                // if (isset($_POST['btn_modifier'])) {
-                //     $idUtilisateur = $_GET['id'];
-                //     $nouvelEmail = $_POST['i_email'];
+                if (isset($_POST['btn_modifier'])) {
+                    $idUtilisateur = $_GET['id'];
+                    $nouvelEmail = $_POST['i_email'];
                 
-                //     $sql = "UPDATE tc_utilisateur SET email = :nouvelEmail WHERE IdUtil = :idUtilisateur";
-                //     $stmt = $pdo->prepare($sql);
-                //     $stmt->bindParam(':nouvelEmail', $nouvelEmail, PDO::PARAM_STR);
-                //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
-                //     $result = $stmt->execute();
-                // }
-                
-                // $sql0 = "SELECT IdService, s_libelle FROM tc_service";
-                // $stmt0 = $pdo->query($sql0);
-                // $result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
-                
-                // $sql1 = "SELECT IdPoste, p_libelle FROM tc_poste";
-                // $stmt1 = $pdo->query($sql1);
-                // $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
-                
-                // $sql2 = "SELECT IdDroit, d_libelle FROM tc_droit";
-                // $stmt2 = $pdo->query($sql2);
-                // $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                    $sql = "UPDATE tc_utilisateur SET email = :nouvelEmail WHERE IdUtil = :idUtilisateur";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindParam(':nouvelEmail', $nouvelEmail, PDO::PARAM_STR);
+                    $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+                    $result = $stmt->execute();
+                }
+
+                $sql0 = "SELECT IdService, s_libelle FROM tc_service";
+                $stmt0 = $pdo->query($sql0);
+                $result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
+
+                $sql1 = "SELECT IdPoste, p_libelle FROM tc_poste";
+                $stmt1 = $pdo->query($sql1);
+                $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+                $sql2 = "SELECT IdDroit, d_libelle FROM tc_droit";
+                $stmt2 = $pdo->query($sql2);
+                $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
                 ?>
 
                 <div class="infoRow2">
@@ -129,101 +141,99 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                         </div>
 
                         <div class="col-auto">
-                            <label for="i_passwd" class="col-form-label">Password :</label>
+                            <label for="i_passwd" class="col-form-label">Mot de passe :</label>
                             <input type="password" id="inputPasswd" class="form-control"
                                 aria-describedby="passwordHelpInline">
                         </div>
 
                         <div class="col-auto">
-                            <label for="i_confirm" class="col-form-label">Confirmation :</label>
+                            <label for="i_confirm" class="col-form-label" id="labelConfirm">Confirmation mot de passe
+                                :</label>
                             <input type="password" id="inputConfirm" class="form-control"
                                 aria-describedby="passwordHelpInline">
                         </div>
                     </div>
                 </div>
 
-
-
                 <div class="infosRow3">
-                    <label for="lst_droit">Service :</label>
-                    <select name="S_users" id="S_users" required>
+                    <label for="lst_droit" class="labelService">Service :</label>
+                    <select class="form-select" id="S_users" name="S_users" aria-label="Default select example">
                         <?php
-                        // foreach ($result0 as $row) {
-                        //     $idService = $row['IdService'];
-                        //     $libelle1 = $row['s_libelle'];
-                        //     $selected = ($idService == $service) ? 'selected' : '';
-                        //     echo "<option value='$idService' $selected>$libelle1</option>";
-                        // }
+                        echo "<option value=''></option>";
+                        foreach ($result0 as $row) {
+                            $idService = $row['IdService'];
+                            $libelle1 = $row['s_libelle'];
+                            $selected = ($idService == $service) ? 'selected' : '';
+                            echo "<option value='$idService' $selected>$libelle1</option>";
+                        }
                         ?>
                     </select>
 
                     <?php
-                    // if (isset($_POST['btn_modifier'])) {
-                    //     $idUtilisateur = $_GET['id'];
-                    //     $nouveauServ = $_POST['S_users'];
-                    
-                    //     $sql = "UPDATE tc_utilisateur SET S_users = :nouveauServ WHERE IdUtil = :idUtilisateur";
-                    //     $stmt = $pdo->prepare($sql);
-                    //     $stmt->bindParam(':nouveauServ', $nouveauServ, PDO::PARAM_INT);
-                    //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
-                    //     $result = $stmt->execute();
-                    // }
+                    if (isset($_POST['btn_modifier'])) {
+                        $idUtilisateur = $_GET['id'];
+                        $nouveauServ = $_POST['S_users'];
+
+                        $sql = "UPDATE tc_utilisateur SET S_users = :nouveauServ WHERE IdUtil = :idUtilisateur";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':nouveauServ', $nouveauServ, PDO::PARAM_INT);
+                        $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+                        $result = $stmt->execute();
+                    }
                     ?>
 
                     <label for="lst_droit">Poste :</label>
-                    <select name="P_users" id="P_users" required>
+                    <select class="form-select" id="P_users" name="P_users" aria-label="Default select example">
                         <?php
-                        // foreach ($result1 as $row) {
-                        //     $idPoste = $row['IdPoste'];
-                        //     $libelle2 = $row['p_libelle'];
-                        //     $selected = ($idPoste == $poste) ? 'selected' : '';
-                        //     echo "<option value='$idPoste' $selected>$libelle2</option>";
-                        // }
+                        echo "<option value=''></option>";
+                        foreach ($result1 as $row) {
+                            $idPoste = $row['IdPoste'];
+                            $libelle2 = $row['p_libelle'];
+                            $selected = ($idPoste == $poste) ? 'selected' : '';
+                            echo "<option value='$idPoste' $selected>$libelle2</option>";
+                        }
                         ?>
                     </select>
 
                     <?php
-                    // if (isset($_POST['btn_modifier'])) {
-                    //     $idUtilisateur = $_GET['id'];
-                    //     $nouveauPoste = $_POST['P_users'];
-                    
-                    //     $sql = "UPDATE tc_utilisateur SET P_users = :nouveauPoste WHERE IdUtil = :idUtilisateur";
-                    //     $stmt = $pdo->prepare($sql);
-                    //     $stmt->bindParam(':nouveauPoste', $nouveauPoste, PDO::PARAM_INT);
-                    //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
-                    //     $result = $stmt->execute();
-                    // }
+                    if (isset($_POST['btn_modifier'])) {
+                        $idUtilisateur = $_GET['id'];
+                        $nouveauPoste = $_POST['P_users'];
+
+                        $sql = "UPDATE tc_utilisateur SET P_users = :nouveauPoste WHERE IdUtil = :idUtilisateur";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->bindParam(':nouveauPoste', $nouveauPoste, PDO::PARAM_INT);
+                        $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+                        $result = $stmt->execute();
+                    }
                     ?>
 
-
-                    <label for="lst_droit">Droit :</label>
-                    <select name="D_users" id="D_users" required value="">
+                    <label for="lst_droit" class="labelDroit">Droit :</label>
+                    <select class="form-select" id="D_users" name="D_users" aria-label="Default select example">
                         <?php
-                        // foreach ($result2 as $row) {
-                        //     $idDroit = $row['IdDroit'];
-                        //     $libelle3 = $row['d_libelle'];
-                        //     $selected = ($idDroit == $droit) ? 'selected' : '';
-                        //     echo "<option value='$idDroit' $selected>$libelle3</option>";
-                        // }
+                        echo "<option value=''></option>";
+                        foreach ($result2 as $row) {
+                            $idDroit = $row['IdDroit'];
+                            $libelle3 = $row['d_libelle'];
+                            $selected = ($idDroit == $droit) ? 'selected' : '';
+                            echo "<option value='$idDroit' $selected>$libelle3</option>";
+                        }
                         ?>
                     </select>
-
                 </div>
+
                 <?php
-                // if (isset($_POST['btn_modifier'])) {
-                //     $idUtilisateur = $_GET['id'];
-                //     $nouveauDroit = $_POST['D_users'];
-                
-                //     $sql = "UPDATE tc_utilisateur SET D_users = :nouveauDroit WHERE IdUtil = :idUtilisateur";
-                //     $stmt = $pdo->prepare($sql);
-                //     $stmt->bindParam(':nouveauDroit', $nouveauDroit, PDO::PARAM_INT);
-                //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
-                //     $result = $stmt->execute();
-                // }
+                if (isset($_POST['btn_modifier'])) {
+                    $idUtilisateur = $_GET['id'];
+                    $nouveauDroit = $_POST['D_users'];
+
+                    $sql = "UPDATE tc_utilisateur SET D_users = :nouveauDroit WHERE IdUtil = :idUtilisateur";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindParam(':nouveauDroit', $nouveauDroit, PDO::PARAM_INT);
+                    $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+                    $result = $stmt->execute();
+                }
                 ?>
-
-
-
 
                 <div class="btnajout">
                     <input type="submit" onclick="" name="btn_modifier" id="btn_modifier" value="Modifier">
@@ -232,49 +242,57 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                 </div>
 
                 <?php
-                // if (isset($_POST['btn_modifier'])) {
-                //     // Le bouton "btnajouter" a été cliqué
-                //     if ($result) {
-                ?>
-                <!-- <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
-                    <div class="toast-header">
-                        <i class="far fa-check-circle" style="color: #ffffff;"></i>
-                        <strong class="text-white">&ensp;TMA Connect</strong>
-                    </div>
-                    <div class="toast-body">
-                        Les informations ont été modifiées.
-                    </div>
-                </div> -->
+                if (isset($_POST['btn_modifier'])) {
+                    // Le bouton "btnajouter" a été cliqué
+                    if ($result) {
+                        ?>
+                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+                            <div class="toast-header">
+                                <i class="far fa-check-circle" style="color: #ffffff;"></i>
+                                <strong class="text-white">&ensp;TMA Connect</strong>
+                            </div>
+                            <div class="toast-body">
+                                Les informations ont été modifiées.
+                            </div>
+                        </div>
 
-                <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-                <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  -->
-                <script>
-                    $(document).ready(function () {
-                        $('.toast').toast('show');
-                    });
-                </script>
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $('.toast').toast('show');
+                            });
+                        </script>
 
-                <?php
-                // } else {
-                ?>
+                        <?php
+                    } else {
+                        ?>
 
+                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+                            <div class="toast-header">
+                                <i class="far fa-times-circle" style="color: #ffffff;"></i>
+                                <strong class="text-white">&ensp;TMA Connect</strong>
+                            </div>
+                            <div class="toast-body">
+                                Une erreur s'est produite lors de la modification.
+                            </div>
+                        </div>
 
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $('.toast').toast('show');
+                            });
+                        </script>
 
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-                <script>
-                    $(document).ready(function () {
-                        $('.toast').toast('show');
-                    });
-                </script>
-
-                <?php
-                //                     }
-                //                 }
-                // } catch (PDOException $e) {
-                //     die("La connexion a �chou�: " . $e->getMessage());
-                // }
-                ?>
+                        <?php
+                    }
+                }
+            } catch (PDOException $e) {
+                die("La connexion a échoué: " . $e->getMessage());
+            }
+            ?>
             </fieldset>
         </form>
     </section>
