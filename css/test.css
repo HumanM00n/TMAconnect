@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
 body {
     margin: 0;
     padding: 0;
@@ -130,7 +128,8 @@ body {
     bottom: 50px;
     left: 0;
     right: 0;
-    padding: 10px; /* Optional: Add padding for better appearance */
+    padding: 10px;
+    /* Optional: Add padding for better appearance */
     align-items: center;
     justify-content: center;
     display: flex;
@@ -330,7 +329,7 @@ body {
     justify-content: space-between;
 }
 
-.infoRow2 .col-auto:nth-child(1)  {
+.infoRow2 .col-auto:nth-child(1) {
     display: flex;
     flex-direction: row;
     position: relative;
@@ -338,7 +337,7 @@ body {
     margin: 0 5px;
 }
 
-.infoRow2 .col-auto:nth-child(2)  {
+.infoRow2 .col-auto:nth-child(2) {
     display: flex;
     flex-direction: row;
     position: relative;
@@ -375,12 +374,40 @@ body {
     left: 28px;
 }
 
+.password-container {
+    position: relative;
+    z-index: 1;
+}
+
+
+#eye,
+#eye-off {
+    width: 19px;
+    position: absolute;
+    top: 59%;
+    left: 290px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+#eye2,
+#eye-off2 {
+    width: 19px;
+    position: absolute;
+    top: 56%;
+    left: 320px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
+
 
 #inputConfirm {
     width: 180px;
     height: 2.1rem;
     position: relative;
-    top: 10px;
+    top: 22px;
     left: 12px;
 }
 
@@ -402,14 +429,16 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 5px; /* Optional: Add margin for spacing */
+    margin-bottom: 5px;
 }
 
 
 .labelService {
     display: flex;
+    align-items: center;
     position: relative;
     right: 3px;
+    top: 1px;
 }
 
 
@@ -420,7 +449,6 @@ body {
     right: 44px;
     bottom: 7px;
 }
-
 
 #P_users {
     width: 21rem;
@@ -434,8 +462,10 @@ body {
 
 .labelDroit {
     display: flex;
+    align-items: center;
     position: relative;
-    right: 48px;
+    bottom: 1px;
+    right: 45px;
 }
 
 #D_users {
@@ -443,9 +473,8 @@ body {
     display: flex;
     position: relative;
     left: 12px;
+    bottom: 7px;
 }
-
-
 
 
 
@@ -461,13 +490,13 @@ body {
     -moz-appearance: none;
     appearance: none;
     background-color: var(--bs-body-bg);
-    background-image: var(--bs-form-select-bg-img),var(--bs-form-select-bg-icon, none);
+    background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     background-size: 16px 12px;
     border: var(--bs-border-width) solid var(--bs-border-color);
     border-radius: var(--bs-border-radius);
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 /* Styles pour l'élément de calendrier */
