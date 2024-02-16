@@ -1,270 +1,222 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
--->
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-  <link href="css/test4.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/csshome.css">
   <link rel="icon" href="img/NLogo2.png" />
-
-
-  <?php
-  $scriptName = filter_input(INPUT_SERVER, 'SCRIPT_NAME');
-  $pageActuelle = basename($scriptName); // Récupère le nom de fichier sans le chemin
-  $pageActuelle = pathinfo($pageActuelle, PATHINFO_FILENAME); // Récupère le nom de fichier sans l'extension
-  
-  // echo "<title>TMAconnect - $pageActuelle</title>";
-  echo "<title>TC4</title>";
-  ?>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>TC4</title>
 </head>
 
 <body>
-  <header>
-    <!-- <?php include('includes/header.html.inc.php'); ?> -->
-  </header>
+
+  <?php include('includes/header.html.inc.php'); ?>
 
   <?php
-  // Informations de connexion à la base de données MySQL
+  // informations de connexion à la base de données MySQL
   $servername = "localhost:3308"; // nom du serveur
   $username = "root"; // nom d'utilisateur
   $password = "XVsikn92"; // mot de passe
   $dbname = "tmaconnect"; // nom de la base de données
-  
+// création d'une connexion à la base de données
   try {
-    // Création d'une connexion à la base de données avec PDO
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-
-    // Configuration des attributs de PDO
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
   } catch (PDOException $e) {
-    die("La connexion a échoué: " . $e->getMessage());
+    echo "La connexion a �chou� : " . $e->getMessage();
   }
+
+  // Requ�te SELECT pour r�cup�rer tous les utilisateurs
+  $sql = "SELECT U.IdUtil, U.nom, U.prenom, U.matricule, U.email, S.s_libelle, P.p_libelle, D.d_libelle, U.dateFin, U.derniere_connect 
+        FROM tc_utilisateur U
+        INNER JOIN tc_service S ON U.S_users = S.IdService
+        INNER JOIN tc_poste P ON U.P_users = P.IdPoste
+        INNER JOIN tc_droit D ON U.D_users = D.IdDroit
+        ORDER BY IdUtil;";
+  $result = $pdo->query($sql);
+
+  // V�rification des r�sultats
+  if ($result->rowCount() > 0) {
+    $count = $result->rowCount();
+
+    // Nombre d'enregistrements par page
+    $nombreParPage = 8;
+
+    // R�cup�rer le num�ro de page � partir des param�tres de requ�te GET
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+    // Calculer la position de d�part
+    $positionDepart = ($page - 1) * $nombreParPage;
+
+    // Modifier la requ�te SQL avec la clause LIMIT
+    $sql = "SELECT U.IdUtil, U.nom, U.prenom, U.matricule, U.email, S.s_libelle, P.p_libelle, D.d_libelle, U.dateFin, U.derniere_connect 
+            FROM tc_utilisateur U
+            INNER JOIN tc_service S ON U.S_users = S.IdService
+            INNER JOIN tc_poste P ON U.P_users = P.IdPoste
+            INNER JOIN tc_droit D ON U.D_users = D.IdDroit
+            ORDER BY IdUtil
+            LIMIT :positionDepart, :nombreParPage;";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':positionDepart', $positionDepart, PDO::PARAM_INT);
+    $stmt->bindValue(':nombreParPage', $nombreParPage, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Cr�ation du tableau HTML
+    echo "<table id='idTable' name='idTable'>";
+    // Affichage du nombre d'employ�s en titre de tableau
+    if ($count <= 1) {
+      echo "<div id='tableau'>$count employé enregistré</div>";
+    } else {
+      echo "<div id='tableau'>$count employés enregistrés</div>";
+    }
+
+    echo "<tr><th>ID</th><th>Nom</th><th>Prenom</th><th>Matricule</th><th>Email</th><th>Service</th><th>Poste</th><th>Droit</th><th>Date de fin</th><th>Dernière connexion</th><th class='action'>Actions</th></tr>";
+
+    // Boucle � travers tous les utilisateurs et affichage des r�sultats
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      // Convertir le format de la date 
+      if ($row["dateFin"] == "0000-00-00") {
+        $formattedDate = " - ";
+      } else {
+        $formattedDate = date("d-m-Y", strtotime($row["dateFin"]));
+      }
+      $format_Date = date("d-m-Y", strtotime($row["derniere_connect"]));
+
+      echo "<tr><td>" . $row["IdUtil"] . "</td><td>" . $row["nom"] . "</td><td>" . $row["prenom"] . "</td><td>" . $row["matricule"] . "</td><td>" . $row["email"] . "</td><td>" . $row["s_libelle"] . "</td><td>" . $row["p_libelle"] . "</td>"
+        . "<td>" . $row["d_libelle"] . "</td><td>" . $formattedDate . "</td><td>" . $format_Date . "</td>"
+        . "<td><button class='iconemodif' onclick='redirectModifierPage(" . $row['IdUtil'] . ")' title='Modifier les informations'><span class='fa fa-pencil-square-o fa-lg'></span></button><button class='iconesuppr' onclick=\"confirmation(" . $row["IdUtil"] . ")\" title='Supprimer employ�'><span class='fa fa-trash fa-lg' aria-hidden='true'></span></button></td></tr>";
+    }
+
+    ?>
+
+    <script>
+      function redirectModifierPage(idUtilisateur) {
+        // window.location.href = "user/Modifier.php?id=" + idUtilisateur;
+        window.location.href = "test-code.php?id=" + idUtilisateur;
+      }
+    </script>
+
+    <script>
+      function confirmation(idUtilisateur) {
+        if (confirm("Êtes-vous sûr de vouloir supprimer l'utilisateur?")) {
+          // Si l'utilisateur clique sur "OK", effectuer la suppression en appelant supprimer.php via AJAX
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+            // Vérification du traitement avec succès de la requête
+            if (this.readyState == 4) {
+              if (this.status == 200) {
+                // Succès : afficher un message d'alerte
+                var alertDiv = document.createElement("div");
+                alertDiv.className = "alert alert-success";
+                alertDiv.role = "alert";
+                alertDiv.innerHTML = 'L\'utilisateur a été supprimé avec succès.';
+
+                // Insérer l'élément d'alerte personnalisée dans le DOM
+                var container = document.getElementById("alertContainer");
+                container.appendChild(alertDiv);
+              } else {
+                // Erreur : afficher un message d'alerte d'erreur
+                var alertDiv = document.createElement("div");
+                alertDiv.className = "alert alert-danger";
+                alertDiv.role = "alert";
+                alertDiv.innerHTML = 'Erreur lors de la suppression de l\'utilisateur.';
+
+                // Insérer l'élément d'alerte personnalisée dans le DOM
+                var container = document.getElementById("alertContainer");
+                container.appendChild(alertDiv);
+              }
+              // Recharger la page pour mettre à jour la liste des utilisateurs
+              setTimeout(function () {
+                location.reload();
+              }, 5000);
+            }
+          };
+
+          xhttp.open("DELETE", "user/supprimer.php?id=" + idUtilisateur, true);
+          xhttp.send();
+        } else {
+          // Si l'utilisateur clique sur "Annuler", ne rien faire
+        }
+      }
+    </script>
+
+    <?php
+    // Fermeture du tableau HTML
+    echo "</table>";
+
+    // Calculer le nombre total de pages
+    $nombreTotalPages = ceil($count / $nombreParPage);
+
+    // Générer les liens de pagination
+    echo "<div class='pagination-container'>";
+
+    // Lien vers la page précédente
+    if ($page > 1) {
+      echo "<a href='?page=" . ($page - 1) . "' class='page-link'>&laquo;</a>";
+    }
+
+    // Afficher les numéros de page
+    for (
+      $i = 1;
+      $i <= $nombreTotalPages;
+      $i++
+    ) {
+      echo "<a href='?page=$i' class='page-link'>$i</a>";
+    }
+
+    // Lien vers la page suivante
+    if ($page < $nombreTotalPages) {
+      echo "<a href='?page=" . ($page + 1) . "' class='page-link'>&raquo;</a>";
+    }
+
+    // Lien vers la dernière page
+    echo "<a href='?page=$nombreTotalPages' class='page-link last-page'>$nombreTotalPages</a>";
+
+    echo "</div>";
+  } else {
+    echo "0 r�sultats";
+  }
+
+  // Fermeture de la connexion à la base de données
+  $pdo = null;
   ?>
 
+  <div class="btnexcel">
+    <button><span class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></span> Télécharger au format
+      Excel</button>
+  </div>
 
-  <section id="modif">
-    <form class="formmodif" name="formmodif" action="" method="POST">
-      <fieldset id="infos">
-        <legend>Modifier un utilisateur</legend>
-        <div class="infosColumn">
-          <label for="i_nom">Nom :</label>
-          <!-- <input  name="i_nom" id="i_nom" size="35" disabled value=""> -->
-          <input type="text" class="form-control" id="i_nom" name="i_nom" disabled>
-
-          <label for="i_prenom">Prénom :</label>
-          <input type="text" name="i_prenom" id="i_prenom" size="35" disabled
-            pattern="^[a-zA-Zݟƌ\s\-]+$" required
-            oninput="convertToUppercase(this)" value="">
-
-          <label for="i_matricule">Matricule :</label>
-          <input type="text" class="form-control" name="i_matricule" id="i_matricule" disabled pattern="C.*" requiredvalue="" maxlength="5" 
-          value="">
-
-          <label for="i_email">Email :</label>
-          <input type="email" name="i_email" id="i_email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required
-            value="">
-
-          <label for="i_mdp">Mot de passe</label>
-          <input type="password" name="i_mdp" id="i_mdp" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required
-            value="">
-
-          <div class="form-check">
-            <label class="form-check-label" for="i_actif">Actif</label>
-            <input type="checkbox" class="form-check-input" name="i_mdp" id="i_actif">
-          </div>
-
-        </div>
-
-        <?php
-        // if (isset($_POST['btn_modifier'])) {
-        //     $idUtilisateur = $_GET['id'];
-        //     $nouvelEmail = $_POST['i_email'];
-        
-        //     $sql = "UPDATE tc_utilisateur SET email = :nouvelEmail WHERE IdUtil = :idUtilisateur";
-        //     $stmt = $pdo->prepare($sql);
-        //     $stmt->bindParam(':nouvelEmail', $nouvelEmail, PDO::PARAM_STR);
-        //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
-        //     $result = $stmt->execute();
-        // }
-        
-        // $sql0 = "SELECT IdService, s_libelle FROM tc_service";
-        // $stmt0 = $pdo->query($sql0);
-        // $result0 = $stmt0->fetchAll(PDO::FETCH_ASSOC);
-        
-        // $sql1 = "SELECT IdPoste, p_libelle FROM tc_poste";
-        // $stmt1 = $pdo->query($sql1);
-        // $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
-        
-        // $sql2 = "SELECT IdDroit, d_libelle FROM tc_droit";
-        // $stmt2 = $pdo->query($sql2);
-        // $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-        ?>
-
-        <div class="infosColumn2">
-          <label for="lst_droit">Service :</label>
-          <select name="S_users" id="S_users" required>
-            <?php
-            // foreach ($result0 as $row) {
-            //     $idService = $row['IdService'];
-            //     $libelle1 = $row['s_libelle'];
-            //     $selected = ($idService == $service) ? 'selected' : '';
-            //     echo "<option value='$idService' $selected>$libelle1</option>";
-            // }
-            ?>
-          </select>
-
-          <?php
-          // if (isset($_POST['btn_modifier'])) {
-          //     $idUtilisateur = $_GET['id'];
-          //     $nouveauServ = $_POST['S_users'];
-          
-          //     $sql = "UPDATE tc_utilisateur SET S_users = :nouveauServ WHERE IdUtil = :idUtilisateur";
-          //     $stmt = $pdo->prepare($sql);
-          //     $stmt->bindParam(':nouveauServ', $nouveauServ, PDO::PARAM_INT);
-          //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
-          //     $result = $stmt->execute();
-          // }
-          ?>
-
-          <label for="lst_droit">Poste :</label>
-          <select name="P_users" id="P_users" required>
-            <?php
-            // foreach ($result1 as $row) {
-            //     $idPoste = $row['IdPoste'];
-            //     $libelle2 = $row['p_libelle'];
-            //     $selected = ($idPoste == $poste) ? 'selected' : '';
-            //     echo "<option value='$idPoste' $selected>$libelle2</option>";
-            // }
-            ?>
-          </select>
-
-          <?php
-          // if (isset($_POST['btn_modifier'])) {
-          //     $idUtilisateur = $_GET['id'];
-          //     $nouveauPoste = $_POST['P_users'];
-          
-          //     $sql = "UPDATE tc_utilisateur SET P_users = :nouveauPoste WHERE IdUtil = :idUtilisateur";
-          //     $stmt = $pdo->prepare($sql);
-          //     $stmt->bindParam(':nouveauPoste', $nouveauPoste, PDO::PARAM_INT);
-          //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
-          //     $result = $stmt->execute();
-          // }
-          ?>
-
-          <label for="lst_droit">Droit :</label>
-          <select name="D_users" id="D_users" required value="">
-            <?php
-            // foreach ($result2 as $row) {
-            //     $idDroit = $row['IdDroit'];
-            //     $libelle3 = $row['d_libelle'];
-            //     $selected = ($idDroit == $droit) ? 'selected' : '';
-            //     echo "<option value='$idDroit' $selected>$libelle3</option>";
-            // }
-            ?>
-          </select>
-        </div>
-
-        <?php
-        // if (isset($_POST['btn_modifier'])) {
-        //     $idUtilisateur = $_GET['id'];
-        //     $nouveauDroit = $_POST['D_users'];
-        
-        //     $sql = "UPDATE tc_utilisateur SET D_users = :nouveauDroit WHERE IdUtil = :idUtilisateur";
-        //     $stmt = $pdo->prepare($sql);
-        //     $stmt->bindParam(':nouveauDroit', $nouveauDroit, PDO::PARAM_INT);
-        //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
-        //     $result = $stmt->execute();
-        // }
-        ?>
+  <script>
+    document.querySelector(".btnexcel button").addEventListener("click", function () {
+      // Rediriger vers la page telechargement.php
+      window.location.href = "includes/telech.excel.php";
+    });
+  </script>
 
 
-        <div>
-          <label>Date de fin : </label>
-          <input type="date" name="calendrier" id="calendrier" value="">
-        </div>
 
-        <?php
-        // if (isset($_POST['btn_modifier'])) {
-        //     $idUtilisateur = $_GET['id'];
-        //     $nouvelleDate = $_POST['calendrier'];
-        
-        //     $sql = "UPDATE tc_utilisateur SET dateFin = :nouvelleDate WHERE IdUtil = :idUtilisateur";
-        //     $stmt = $pdo->prepare($sql);
-        //     $stmt->bindParam(':nouvelleDate', $nouvelleDate, PDO::PARAM_STR);
-        //     $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
-        //     $result = $stmt->execute();
-        // }
-        ?>
 
-        <div class="button-container">
-          <input type="submit" onclick="" name="btn_modifier" id="btn_modifier" value="Modifier">
-          <input type="reset" name="btn_annuler" id="btn_annuler" value="Annuler"
-            onclick="window.location.href = 'user/Utilisateurs.php';">
-        </div>
 
-        <?php
-        // if (isset($_POST['btn_modifier'])) {
-        //     // Le bouton "btnajouter" a été cliqué
-        //     if ($result) {
-        ?>
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
-          <div class="toast-header">
-            <i class="far fa-check-circle" style="color: #ffffff;"></i>
-            <strong class="text-white">&ensp;TMA Connect</strong>
-          </div>
-          <div class="toast-body">
-            Les informations ont été modifiées.
-          </div>
-        </div>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
-        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-        <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  -->
-        <script>
-          $(document).ready(function () {
-            $('.toast').toast('show');
-          });
-        </script>
 
-        <?php
-        // } else {
-        ?>
 
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
-          <div class="toast-header1">
-            <i class="fas fa-times" style="color: #ffffff;"></i>
-            <strong class="text-white">&ensp;TMA Connect</strong>
-          </div>
-          <div class="toast-body">
-            Erreur lors des modifications.
-          </div>
-        </div>
+  <div class="btnajout">
+    <a href="user/Ajouter.php"><button>Ajouter</button></a>
+  </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script>
-          $(document).ready(function () {
-            $('.toast').toast('show');
-          });
-        </script>
+  <div id="alertContainer"></div>
 
-        <?php
-        //                     }
-        //                 }
-        // } catch (PDOException $e) {
-        //     die("La connexion a  chou : " . $e->getMessage());
-        // }
-        ?>
-      </fieldset>
-    </form>
-  </section>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>
