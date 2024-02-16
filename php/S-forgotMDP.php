@@ -1,8 +1,5 @@
 <?php
-$dsn = "mysql:host=localhost:3308;dbname=tmaconnect";
-$username = 'root';
-$password = 'XVsikn92';
-$row = null;
+include("../includes/connexion.inc.php");
 
 if (isset($_POST['subpasswd'])) {
     $matricule = $_POST['matricule'];
@@ -45,4 +42,3 @@ if (isset($_POST['subpasswd'])) {
         }
     }
 }
-?>
