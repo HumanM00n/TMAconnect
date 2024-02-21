@@ -1,17 +1,18 @@
-<?php include('php/S-forgotMDP.php'); ?>
+<!-- <?php include('php/S-forgotMDP.php'); ?> -->
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/change-mdp.css">
-    <link rel="icon" href="../TMAconnect/img/NLogo2.png">
+    <link rel="icon" href="img/NLogo2.png">
     <title>Changement de mot de passe</title>
 </head>
 <header>
-    <center><img class="logo" src="../TMAconnect/img/NLogo.png"></center>
+    <center><img class="logo" src="img/NLogo.png"></center>
 </header>
 
 <body>
@@ -91,7 +92,8 @@
                 <?php if (!$motDePasseModifie) { ?>
                     <button type="submit" class="tma-btn" name="subpasswd">Enregistrer</button>
                 <?php } else { ?>
-                    <a href="./index.php"><input type="button" class="tma-btn" value="⬅️ Revenir à la page de connexion"></a>
+                    <a href="./index.php"><input type="button" class="tma-btn"
+                            value="⬅️ Revenir à la page de connexion"></a>
                 <?php } ?>
             </div>
         </form>
