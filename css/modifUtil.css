@@ -1,0 +1,668 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+/*---------------------------
+|     BARRE DE NAVIGATION   |
+----------------------------*/
+
+
+.barre-arianne {
+    position: fixed;
+    /* utiliser "fixed" pour que la barre reste visible en tout temps */
+    top: 0px;
+    overflow: visible;
+    left: 0;
+    right: 0;
+    background-color: #289297;
+    z-index: 80;
+}
+
+.barre-arianne ul {
+    list-style-type: none;
+    /* enlève les puces de la liste */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* utilise Flexbox pour aligner les éléments horizontalement */
+}
+
+.barre-arianne .Onglet {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    /* ajoute une position relative pour les éléments de menu déroulant */
+}
+
+.barre-arianne a {
+    display: block;
+    /* rend les liens cliquables sur toute la hauteur de la barre */
+    color: white;
+    /* couleur du texte des liens */
+    text-align: center;
+    /* centre le texte horizontalement */
+    font-weight: bold;
+    padding: 20px 20px;
+    /* ajoute un peu de marge autour du texte */
+    text-decoration: none;
+    /* enlève les soulignements par défaut */
+    text-align: center;
+    padding: 25px;
+}
+
+/* effet de survol des liens */
+.barre-arianne a:hover {
+    background-color: #0c156b;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Styles spécifiques pour le menu déroulant */
+.barre-arianne .sous {
+    display: none;
+    position: absolute;
+    background-color: #289297;
+    left: 0;
+    font-size: 15px;
+    top: 100%;
+    z-index: 100;
+}
+
+.barre-arianne li:hover .sous {
+    display: block;
+}
+
+.barre-arianne .sous li {
+    display: block;
+}
+
+
+.barre-arianne .sous2 {
+    display: none;
+    position: absolute;
+    background-color: #289297;
+    left: auto;
+    right: 0;
+    font-size: 15px;
+    top: 100%;
+    z-index: 100;
+    width: fit-content;
+    /* Ajuste la largeur du menu déroulant à son contenu */
+    white-space: nowrap;
+}
+
+.barre-arianne li:hover .sous2 {
+    display: block;
+}
+
+.barre-arianne .sous2 li {
+    display: block;
+    margin-left: 0px;
+}
+
+
+
+
+.MonCompte {
+    position: absolute;
+    right: 0;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    font-weight: 900;
+
+}
+
+
+/*------------------------------------
+|  AUTRES BOUTON (Submit, Retour)    | 
+-------------------------------------*/
+
+
+.btnajout {
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    /* Optional: Add padding for better appearance */
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+
+.btnajout input {
+    margin-left: 20px;
+    padding: 10px 16px;
+    background: #289297;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btnajout input:nth-child(2) {
+    margin-right: 10px;
+    padding: 10px 16px;
+    background: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btnajout input:hover:nth-child(1) {
+    background-color: #287074;
+}
+
+.btnajout input:hover:nth-child(2) {
+    background-color: rgb(221, 18, 18);
+}
+
+
+#modif {
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    height: 56.8rem;
+    background: linear-gradient(#f5f5f5, #e8e8e8);
+}
+
+
+.formmodif {
+    width: 1350px;
+    height: 91.8%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 75px;
+    margin-bottom: 0;
+    padding: 0px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+
+.formmodif fieldset {
+    width: 100%;
+    height: 640px;
+    position: absolute;
+    /* padding: 10px;  DE BASE */
+    padding: 18px;
+    margin-bottom: 30px;
+    border: 0.1px solid rgb(219 219 219 / 28%);
+    border-radius: 4px;
+    background: rgb(219 219 219 / 28%);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(50px);
+}
+
+
+.formmodif legend {
+    justify-content: center;
+    display: flex;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+
+.formmodif .label-container {
+    text-align: center;
+    display: inline-block;
+    width: calc(21.7% - 14px);
+    /* Chaque label-container occupe un tiers de la largeur moins la marge */
+    margin: 0;
+    margin-top: -21px;
+    vertical-align: top;
+    /* Aligne² les div en haut */
+    box-sizing: border-box;
+    /* Inclure la marge dans la largeur calculée */
+    height: 75px;
+}
+
+
+.form-check {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 1.5rem;
+    padding-left: 1.5em;
+    margin: 70px 0 47px 0;
+}
+
+
+.dateFin {
+    display: flex;
+    justify-content: center;
+}
+
+.checkActif {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    position: relative;
+    left: 133px;
+}
+
+
+.form-check-input[type=checkbox] {
+    width: 21px;
+    height: 20px;
+    position: relative;
+    right: 10px;
+    top: 6px;
+}
+
+
+/*----------------------------------------------------
+|    PREMIERE LIGNE : Nom : / Prénom : / Matricule :  | 
+-----------------------------------------------------*/
+
+.infosRow {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.infosRow input[type="text"] {
+    width: 135px;
+    height: 32px;
+    position: relative;
+    top: 5px;
+    right: 68px;
+}
+
+.infosRow input[type="text"]:nth-child(2) {
+    position: relative;
+    right: 111px;
+}
+
+
+#i_nom {
+    height: 2.1rem;
+}
+
+#i_prenom {
+    height: 2.1rem;
+    position: relative;
+    right: 90px;
+}
+
+#i_matricule {
+    height: 2.1rem;
+    position: relative;
+    right: 66px;
+}
+
+
+/*---------------------------------------------------------------------------
+|  DEUXIEME LIGNE : Email : / Mot de passe : / Confirmation mot de passe :  | 
+----------------------------------------------------------------------------*/
+
+
+.infoRow2 {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.infoRow2 .row.g-3.align-items-center {
+    width: 100%;
+    margin: 17px 0 17px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoRow2 .col-auto:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    right: 15px;
+    margin: 0 5px;
+}
+
+.infoRow2 .col-auto:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    right: 5px;
+    margin: 0 5px;
+}
+
+.infoRow2 .col-auto:nth-child(3) {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    right: 19px;
+    margin: 0 5px;
+}
+
+#labelConfirm {
+    width: 148px;
+}
+
+
+#inputEmail {
+    width: 180px;
+    height: 2.1rem;
+    position: relative;
+    top: 10px;
+    left: 28px;
+}
+
+#inputPasswd {
+    width: 180px;
+    height: 2.1rem;
+    position: relative;
+    top: 10px;
+    left: 28px;
+}
+
+.password-container {
+    position: relative;
+    z-index: 1;
+}
+
+
+#eye,
+#eye-off {
+    width: 19px;
+    position: absolute;
+    top: 59%;
+    left: 290px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+#eye2,
+#eye-off2 {
+    width: 19px;
+    position: absolute;
+    top: 56%;
+    left: 320px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
+
+
+#inputConfirm {
+    width: 180px;
+    height: 2.1rem;
+    position: relative;
+    top: 22px;
+    left: 12px;
+}
+
+
+
+#inputPasswd.form-control {
+    position: relative;
+    left: 20px;
+}
+
+
+/*------------------------------------------------------
+|  TROISIEME LIGNE : Service  : / Poste  : / Droit  :  | 
+------------------------------------------------------*/
+
+
+.infosRow3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+
+.labelService {
+    display: flex;
+    align-items: center;
+    position: relative;
+    right: 3px;
+    top: 1px;
+}
+
+
+#S_users {
+    width: 18rem;
+    display: flex;
+    position: relative;
+    right: 44px;
+    bottom: 7px;
+}
+
+#P_users {
+    width: 21rem;
+    display: flex;
+    position: relative;
+    left: 22px;
+    bottom: 7px;
+    margin-right: 48px;
+}
+
+
+.labelDroit {
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 1px;
+    right: 45px;
+}
+
+#D_users {
+    width: 13rem;
+    display: flex;
+    position: relative;
+    left: 12px;
+    bottom: 7px;
+}
+
+
+
+.form-select {
+    --bs-form-select-bg-img: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e);
+    display: block;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+/* Styles pour l'élément de calendrier */
+input[type="date"] {
+    appearance: none;
+    /* Supprime l'apparence native du navigateur */
+    padding: 8px;
+    /* Ajoute un espace autour de l'élément */
+    border: 1px solid #ccc;
+    /* Ajoute une bordure */
+    border-radius: 4px;
+    /* Ajoute une bordure arrondie */
+    background-color: #fff;
+    /* Définit la couleur de fond */
+    font-size: 14px;
+    /* Définit la taille de la police */
+    margin-left: 20px;
+    /* Décale l'input vers la gauche du label */
+    color: #333;
+    /* Définit la couleur du texte */
+    width: 117px;
+    height: 40px;
+}
+
+/* Styles pour l'icône du calendrier */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    /* Supprime l'arrière-plan par défaut de l'icône */
+    padding: 4px;
+    /* Ajoute un espacement autour de l'icône */
+    cursor: pointer;
+    /* Définit le curseur de la souris au survol de l'icône */
+}
+
+/* Styles pour le texte de l'étiquette */
+label {
+    display: block;
+    /* Affiche le texte de l'étiquette en tant que bloc */
+    margin-bottom: 15px;
+    /* Ajoute un espace en bas de l'étiquette */
+    font-weight: bold;
+    /* Met en évidence le texte de l'étiquette */
+    margin-top: 8px;
+}
+
+/*------------------------------------
+|   MODAL BOOTSTRAP MESSAGE SUCCES   |
+-------------------------------------*/
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #333;
+}
+
+#confirmDeleteBtn,
+#cancelDeleteBtn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #24af37;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#confirmDeleteBtn:hover,
+#cancelDeleteBtn:hover {
+    background-color: #1c8129;
+}
+
+
+/* CSS alert suppression*/
+.alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.toast {
+    position: absolute;
+    top: 90px;
+    right: 5px;
+    z-index: 9999; /*Affiche au-dessus des autres éléments */
+}
+
+
+.toast-header {
+    background-color: #11C41F;
+    /*Couleur de fond pour l'en-tête du toast*/
+}
+
+
+
+/* Styles pour le texte de l'étiquette */
+label {
+    display: block;
+    /* Affiche le texte de l'étiquette en tant que bloc */
+    margin-bottom: 15px;
+    /* Ajoute un espace en bas de l'étiquette */
+    font-weight: bold;
+    /* Met en évidence le texte de l'étiquette */
+    margin-top: 8px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.toast-headerMODIFSuccess {
+    background-color: #11C41F;
+}
+
+
+.success {
+    border: 3px solid green;
+}
+
+.echec {
+    border: 3px solid red;
+}
+
+
+#alertContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
