@@ -616,13 +616,9 @@ label {
 
 .toast {
     position: absolute;
-    top: 75px;
-    /*Ajustez la valeur pour définir l'écart par rapport au haut */
-    right: 0;
-    /*Ajustez la valeur pour définir l'écart par rapport à la droite */
-    /* left: 150px;   */
-    z-index: 9999;
-    /*Assurez-vous que le toast s'affiche au-dessus des autres éléments */
+    top: 90px;
+    right: 5px;
+    z-index: 9999; /*Affiche au-dessus des autres éléments */
 }
 
 
