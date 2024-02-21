@@ -1,3 +1,86 @@
+<?php
+
+// informations de connexion à la base de données MySQL
+$servername = "localhost:3308"; // nom du serveur
+$username = "root"; // nom d'utilisateur
+$password = "XVsikn92"; // mot de passe
+$dbname = "tmaconnect"; // nom de la base de données
+// création d'une connexion à la base de données
+
+
+try {
+  $bdd = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+  echo "La connexion a �chou� : " . $e->getMessage();
+}
+
+if (isset($_POST["username"]) && isset($_POST["password"])) {
+  $st = $bdd->prepare("SELECT passwd FROM tc_utilisateur WHERE matricule=:username");
+  $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+  $st->bindParam(':username', $username);
+
+  if ($st->execute()) {
+    $hashedPassword = $st->fetchColumn();
+
+    if ($hashedPassword && password_verify($_POST["password"], $hashedPassword)) {
+
+      session_start();
+
+      $username1 = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+      $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+
+      $_SESSION['username'] = $username1;
+      $_SESSION['password'] = $password;
+
+      $st1 = $bdd->prepare("UPDATE tc_utilisateur SET derniere_connect = now() WHERE matricule=:username");
+      $st1->bindParam(':username', $_POST["username"]);
+      $st1->execute();
+
+      header("Location: http://localhost/TMAconnect/home.php");
+      exit();
+    } else {
+      $error = true;
+    }
+  } else {
+    $error = true;
+  }
+}
+
+function Authentification($username1, $case_cochee)
+{
+  // Test d'authentification
+  $_SESSION['username'] = $username1; // Stocke l'identifiant de l'utilisateur dans la session
+  if ($case_cochee)
+    $_SESSION['lifetime'] = 60 * 2; // Si la case est cochée, définir la durée de session à 45 minutes
+  else
+    $_SESSION['lifetime'] = 60 * 1; // Sinon, définir la durée de session à 5 minutes
+
+  $_SESSION['activite'] = time(); // Stocke le temps actuel comme dernière activité
+}
+
+function activite()
+{
+  // Vérifie si les clés de session nécessaires sont définies et si la durée de session n'a pas expiré
+  if (isset($_SESSION['lifetime']) && isset($_SESSION['activite']) && ($_SESSION['lifetime'] + $_SESSION['activite'] > time())) {
+    $_SESSION['activite'] = time(); // Met à jour le temps de la dernière activité utilisateur
+  } else {
+    session_unset(); // Supprime les données de session
+    session_destroy(); // Détruit la session
+  }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $user = $_POST["username"]; // Récupère l'identifiant de l'utilisateur à partir du formulaire
+
+  // Vérifie si la case a été cochée
+  $case_cochee = isset($_POST["case_cochee"]);
+
+  Authentification($user, $case_cochee); // Appelle la fonction d'authentification avec les paramètres appropriés
+  activite(); // Vérifie et met à jour l'activité de session
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,218 +88,87 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/csshome.css">
+  <link rel="stylesheet" href="css/index.css">
   <link rel="icon" href="img/NLogo2.png" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>TC4</title>
+  <title>Authentification - TMAconnect</title>
 </head>
+<header>
+  <center><img class="logo" src="img/NLogo.png"></center>
+</header>
 
 <body>
+  <div class="container">
+    <h2>
+      <center>Connexion à votre compte</center>
+    </h2>
+    <?php
+    if (isset($error) && $error) {
 
-  <?php include('includes/header.html.inc.php'); ?>
-
-  <?php
-  // informations de connexion à la base de données MySQL
-  $servername = "localhost:3308"; // nom du serveur
-  $username = "root"; // nom d'utilisateur
-  $password = "XVsikn92"; // mot de passe
-  $dbname = "tmaconnect"; // nom de la base de données
-// création d'une connexion à la base de données
-  try {
-    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-  } catch (PDOException $e) {
-    echo "La connexion a �chou� : " . $e->getMessage();
-  }
-
-  // Requ�te SELECT pour r�cup�rer tous les utilisateurs
-  $sql = "SELECT U.IdUtil, U.nom, U.prenom, U.matricule, U.email, S.s_libelle, P.p_libelle, D.d_libelle, U.dateFin, U.derniere_connect 
-        FROM tc_utilisateur U
-        INNER JOIN tc_service S ON U.S_users = S.IdService
-        INNER JOIN tc_poste P ON U.P_users = P.IdPoste
-        INNER JOIN tc_droit D ON U.D_users = D.IdDroit
-        ORDER BY IdUtil;";
-  $result = $pdo->query($sql);
-
-  // V�rification des r�sultats
-  if ($result->rowCount() > 0) {
-    $count = $result->rowCount();
-
-    // Nombre d'enregistrements par page
-    $nombreParPage = 8;
-
-    // R�cup�rer le num�ro de page � partir des param�tres de requ�te GET
-    $page = isset($_GET['page']) ? $_GET['page'] : 1;
-
-    // Calculer la position de d�part
-    $positionDepart = ($page - 1) * $nombreParPage;
-
-    // Modifier la requ�te SQL avec la clause LIMIT
-    $sql = "SELECT U.IdUtil, U.nom, U.prenom, U.matricule, U.email, S.s_libelle, P.p_libelle, D.d_libelle, U.dateFin, U.derniere_connect 
-            FROM tc_utilisateur U
-            INNER JOIN tc_service S ON U.S_users = S.IdService
-            INNER JOIN tc_poste P ON U.P_users = P.IdPoste
-            INNER JOIN tc_droit D ON U.D_users = D.IdDroit
-            ORDER BY IdUtil
-            LIMIT :positionDepart, :nombreParPage;";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':positionDepart', $positionDepart, PDO::PARAM_INT);
-    $stmt->bindValue(':nombreParPage', $nombreParPage, PDO::PARAM_INT);
-    $stmt->execute();
-
-    // Cr�ation du tableau HTML
-    echo "<table id='idTable' name='idTable'>";
-    // Affichage du nombre d'employ�s en titre de tableau
-    if ($count <= 1) {
-      echo "<div id='tableau'>$count employé enregistré</div>";
-    } else {
-      echo "<div id='tableau'>$count employés enregistrés</div>";
+      echo '<center><p class="error--id">Identifiant ou mot de passe incorrecte</p></center>';
     }
-
-    echo "<tr><th>ID</th><th>Nom</th><th>Prenom</th><th>Matricule</th><th>Email</th><th>Service</th><th>Poste</th><th>Droit</th><th>Date de fin</th><th>Dernière connexion</th><th class='action'>Actions</th></tr>";
-
-    // Boucle � travers tous les utilisateurs et affichage des r�sultats
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      // Convertir le format de la date 
-      if ($row["dateFin"] == "0000-00-00") {
-        $formattedDate = " - ";
-      } else {
-        $formattedDate = date("d-m-Y", strtotime($row["dateFin"]));
-      }
-      $format_Date = date("d-m-Y", strtotime($row["derniere_connect"]));
-
-      echo "<tr><td>" . $row["IdUtil"] . "</td><td>" . $row["nom"] . "</td><td>" . $row["prenom"] . "</td><td>" . $row["matricule"] . "</td><td>" . $row["email"] . "</td><td>" . $row["s_libelle"] . "</td><td>" . $row["p_libelle"] . "</td>"
-        . "<td>" . $row["d_libelle"] . "</td><td>" . $formattedDate . "</td><td>" . $format_Date . "</td>"
-        . "<td><button class='iconemodif' onclick='redirectModifierPage(" . $row['IdUtil'] . ")' title='Modifier les informations'><span class='fa fa-pencil-square-o fa-lg'></span></button><button class='iconesuppr' onclick=\"confirmation(" . $row["IdUtil"] . ")\" title='Supprimer employ�'><span class='fa fa-trash fa-lg' aria-hidden='true'></span></button></td></tr>";
-    }
-
     ?>
 
-    <script>
-      function redirectModifierPage(idUtilisateur) {
-        // window.location.href = "user/Modifier.php?id=" + idUtilisateur;
-        window.location.href = "test-code.php?id=" + idUtilisateur;
-      }
-    </script>
+    <!-- CHAMPS DE FORMULAIRE -->
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+      <section class="bloc_id">
+        <div class="identifiant">
+          <p>Identifiant</p>
+          <input class="champs_txt" type="text" name="username" required minlength="5" max="5">
+          <span class="icon">
+            <ion-icon name="person"></ion-icon>
+          </span>
+        </div>
+      </section>
 
-    <script>
-      function confirmation(idUtilisateur) {
-        if (confirm("Êtes-vous sûr de vouloir supprimer l'utilisateur?")) {
-          // Si l'utilisateur clique sur "OK", effectuer la suppression en appelant supprimer.php via AJAX
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function () {
-            // Vérification du traitement avec succès de la requête
-            if (this.readyState == 4) {
-              if (this.status == 200) {
-                // Succès : afficher un message d'alerte
-                var alertDiv = document.createElement("div");
-                alertDiv.className = "alert alert-success";
-                alertDiv.role = "alert";
-                alertDiv.innerHTML = 'L\'utilisateur a été supprimé avec succès.';
+      <div class="lmdp">
+        <a href="./change-mdp.php" class="tma-btn">Mot de passe oublié</a>
+      </div>
 
-                // Insérer l'élément d'alerte personnalisée dans le DOM
-                var container = document.getElementById("alertContainer");
-                container.appendChild(alertDiv);
-              } else {
-                // Erreur : afficher un message d'alerte d'erreur
-                var alertDiv = document.createElement("div");
-                alertDiv.className = "alert alert-danger";
-                alertDiv.role = "alert";
-                alertDiv.innerHTML = 'Erreur lors de la suppression de l\'utilisateur.';
+      <section class="bloc_mdp">
+        <div class="mdp">
+          <label>
+            <p>Mot de passe</p>
+            <input class="champs_txt" type="password" name="password" required minlength="" maxlength="30">
 
-                // Insérer l'élément d'alerte personnalisée dans le DOM
-                var container = document.getElementById("alertContainer");
-                container.appendChild(alertDiv);
-              }
-              // Recharger la page pour mettre à jour la liste des utilisateurs
-              setTimeout(function () {
-                location.reload();
-              }, 5000);
-            }
-          };
+            <!-- ICONES -->
+            <div class="password-icon">
+              <i data-feather="eye"></i>
+              <i data-feather="eye-off"></i>
+            </div>
+          </label>
 
-          xhttp.open("DELETE", "user/supprimer.php?id=" + idUtilisateur, true);
-          xhttp.send();
-        } else {
-          // Si l'utilisateur clique sur "Annuler", ne rien faire
-        }
-      }
-    </script>
+          <script src="https://unpkg.com/feather-icons"></script>
+          <script>
+            feather.replace();
+          </script>
 
-    <?php
-    // Fermeture du tableau HTML
-    echo "</table>";
+          <script>
+            const eye = document.querySelector('.feather-eye');
+            const eyeoff = document.querySelector(' .feather-eye-off');
+            const passwordField = document.querySelector('input[type=password]');
 
-    // Calculer le nombre total de pages
-    $nombreTotalPages = ceil($count / $nombreParPage);
+            eye.addEventListener('click', () => {
+              eye.style.display = "none";
+              eyeoff.style.display = "block";
+              passwordField.type = "text";
+            });
 
-    // Générer les liens de pagination
-    echo "<div class='pagination-container'>";
-
-    // Lien vers la page précédente
-    if ($page > 1) {
-      echo "<a href='?page=" . ($page - 1) . "' class='page-link'>&laquo;</a>";
-    }
-
-    // Afficher les numéros de page
-    for (
-      $i = 1;
-      $i <= $nombreTotalPages;
-      $i++
-    ) {
-      echo "<a href='?page=$i' class='page-link'>$i</a>";
-    }
-
-    // Lien vers la page suivante
-    if ($page < $nombreTotalPages) {
-      echo "<a href='?page=" . ($page + 1) . "' class='page-link'>&raquo;</a>";
-    }
-
-    // Lien vers la dernière page
-    echo "<a href='?page=$nombreTotalPages' class='page-link last-page'>$nombreTotalPages</a>";
-
-    echo "</div>";
-  } else {
-    echo "0 r�sultats";
-  }
-
-  // Fermeture de la connexion à la base de données
-  $pdo = null;
-  ?>
-
-  <div class="btnexcel">
-    <button><span class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></span> Télécharger au format
-      Excel</button>
+            eyeoff.addEventListener('click', () => {
+              eyeoff.style.display = "none";
+              eye.style.display = "block";
+              passwordField.type = "password";
+            });
+          </script>
+        </div>
+        <a href="./home.php"><input class="tma-btn" type="submit" value="Se Connecter"></a>
+      </section>
+      <label class="remember"><input type="checkbox" id="case_cochee" name="case_cochee">Se souvenir de moi</label>
+    </form>
   </div>
-
-  <script>
-    document.querySelector(".btnexcel button").addEventListener("click", function () {
-      // Rediriger vers la page telechargement.php
-      window.location.href = "includes/telech.excel.php";
-    });
-  </script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 
 
 
-
-
-  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-
-
-
-  <div class="btnajout">
-    <a href="user/Ajouter.php"><button>Ajouter</button></a>
-  </div>
-
-  <div id="alertContainer"></div>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>
