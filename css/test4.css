@@ -1,686 +1,164 @@
-body{
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+@import url("style.css");
+
+header {
+    margin-top: 20px;
+}
+
+.logo {
+    margin-top: -15px;
+    margin-bottom: 4px;
+    height: 215px;
+}
+
+.container {
+    background-color: #f5f5f5;
+    border: solid;
+    border-radius: 15px;
+    margin: auto;
+    height: 500px;
+    width: 1000px;
+}
+
+h2 {
+    margin: 50px;
+    margin-bottom: 50px;
+}
+
+
+.error--id{
+    display: block;
+    background-color: #9ec5fe;
+    border: 1px solid;
+    border-radius: 10px;
+    margin-top: -3%;
+    margin-bottom: 3%;
+    padding: 1.2% 1.2% 1.2% 1.2%;
+    text-align: center;
+    width: 65%;
+}
+
+
+.identifiant {
+    margin-left: 100px;
+    margin-bottom: 30px;
+    border-spacing: 5px 1rem;
+    align-items: center;
+}
+
+.icon {
+    margin-left: -4%;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.btn_lmdp {
+    position: static;
+    background-color: #19C9D2;
+    color: azure;
+    margin-left: 55%;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.btn_lmdp:hover {
+    background-color: #168b96;
+}
+
+.mdp {
+    margin: 0 0 0 100px;
+}
+
+
+.champs_txt {
+    border-style: inset;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 50%;
+    height: 30px;
+}
+
+
+label {
+    margin-left: 9%;
+    position: relative;
+    outline: none;
     box-sizing: border-box;
 }
 
-/*---------------------------
-|     BARRE DE NAVIGATION   |
-----------------------------*/
-
-
-.barre-arianne {
-    position: fixed; /* utiliser "fixed" pour que la barre reste visible en tout temps */
-    top: 0px;
-    overflow: visible;
-    left: 0;
-    right: 0;
-    background-color: #289297;
-    z-index: 80;
+label input {
+    font: 1em;
+    background: transparent;
+    transition: all 0.2s
 }
 
-.barre-arianne ul {
-    list-style-type: none; /* enlève les puces de la liste */
-    margin: 0;
-    padding: 0;
-    display: flex; /* utilise Flexbox pour aligner les éléments horizontalement */
-}
-
-.barre-arianne .Onglet {
-    margin: 0;
-    padding: 0;
-    position: relative; /* ajoute une position relative pour les éléments de menu déroulant */
-}
-
-.barre-arianne a {
-    display: block; /* rend les liens cliquables sur toute la hauteur de la barre */
-    color: white; /* couleur du texte des liens */
-    text-align: center; /* centre le texte horizontalement */
-    font-weight: bold;
-    padding: 20px 20px; /* ajoute un peu de marge autour du texte */
-    text-decoration: none; /* enlève les soulignements par défaut */
-    text-align: center;
-    padding: 25px;
-}
-
-/* effet de survol des liens */
-.barre-arianne a:hover {
-    background-color: #0c156b;
-    color: white;
-    text-decoration: none;
+label input:focus {
+    border-color: black;
 }
 
 
-/* Styles spécifiques pour le menu déroulant */
-.barre-arianne .sous {
-    display: none;
-    position: absolute;
-    background-color: #289297;
-    left: 0;
-    font-size: 15px;
-    top: 100%;
-    z-index: 100;
-}
-
-.barre-arianne li:hover .sous {
-    display: block;
-}
-
-.barre-arianne .sous li {
-    display: block;
-}
-
-
-.barre-arianne .sous2 {
-    display: none;
-    position: absolute;
-    background-color: #289297;
-    left: auto;
-    right: 0;
-    font-size: 15px;
-    top: 100%;
-    z-index: 100;
-    width: fit-content; /* Ajuste la largeur du menu déroulant à son contenu */
-    white-space: nowrap;
-}
-
-.barre-arianne li:hover .sous2 {
-    display: block;
-}
-
-.barre-arianne .sous2 li {
-    display: block;
-    margin-left: 0px;
-}
-
-
-
-
-.MonCompte{
-    position: absolute;
-    right: 0;
+label body {
     display: flex;
-    gap: 20px;
-    flex-direction: row;
-    font-weight: 900;
-
-}
-
-
-/*------------------------------
-|    TABLEAU DES UTILISATEURS   |
--------------------------------*/
-
-#tableau {
-    position: absolute;
-    justify-content: center;
-    align-content: center;
-    max-width: 23%;
-    left: 0;
-    right: 0;
-    top: 90px;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: bold;
-    font-size: 12px;
-    padding: 10px;
-    background-color: #555;
-    color: white;  /* Couleur du texte */
-    text-transform: uppercase;  /* Convertit le texte en majuscules */
-    letter-spacing: 0.5px; /* Espacement entre les lettres */
-    border-radius: 5px; /* Arrondi les coins du conteneur */
-    text-align: center;
-    padding: 12px;
-    font-family: Arial, sans-serif;
-    border: 1px solid #ddd;
-}
-
-
-
-table {
-    border-collapse: collapse;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: Arial, sans-serif;
-    background-color: #FFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    min-height: 200px; /* Ajuster la hauteur */
-    margin-top: 155px;
-}
-
-
-
-th, td {
-    text-align: center;
-    padding: 12px;
-    border: 1px solid #ddd;
-}
-
-th {
-    background-color: #555;
-    color: #fff;
-}
-
-tr:nth-child(all) {
-    background-color: #f2f2f2;
-}
-
-tr:hover {
-    background-color: #ddd;
-}
-
-
-/*------------------------------------
-|  BOUTON EXPORT EXCEL UTILISATEURS   |
--------------------------------------*/
-
-.btnexcel{
-    position: fixed;
-    display: flex;
-    justify-content: flex-end;
-    align-content: flex-end;
-    top: 80px;
-    right: 0;
-    margin-right: 7px;
-}
-
-
-.btnexcel button {
-    padding: 10px 16px;
-    background: #24AF37;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.btnexcel button:hover {
-    background-color: #1C8129;
-}
-
-
-/*------------------------------------
-|  AUTRES BOUTON (Submit, Retour)    | 
--------------------------------------*/
-
-.btnajout {
     align-items: center;
     justify-content: center;
+}
+
+label .password-icon {
     display: flex;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-
-.btnajout button {
-    padding: 10px 16px;
-    background: #0055A4;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.btnajout button:hover {
-    background-color: #004281;
-}
-
-/*--------------------------
-|  FORMULAIRE DES DEMANDES  | 
----------------------------*/
-
-#nvldemande {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100%;
-    background: linear-gradient(#f5f5f5, #e8e8e8);
-}
-
-#form_nvldemande {
-    width: 800px; /* Ajuster la largeur selon vos besoins */
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0px; /* Augmenter l'espacement intérieur */
-    margin-top: 75px;
-    margin-bottom: 0;
-}
-
-#form_nvldemande h1 {
-    text-align: center;
-    color: #333;
-}
-
-#form_nvldemande fieldset {
-    margin-bottom: 30px; /* Augmenter l'espacement entre les champs */
-}
-
-#form_nvldemande legend {
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #555;
-    margin-left: 35.5%
-}
-
-#form_nvldemande div {
-    margin-bottom: 10px;
-}
-
-#form_nvldemande label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-#form_nvldemande input[type="text"],
-#form_nvldemande input[type="email"],
-#form_nvldemande select {
-    width: 100%;
-    padding: 12px; /* Augmenter la taille du padding */
-}
-
-#form_nvldemande input[type="number"] {
-    width: 50%; /* Ajuster la largeur du champ de type number */
-}
-
-#form_nvldemande button {
-    padding: 12px 20px;
-    background: #0055A4;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.input-validation {
-    color: red;
-    font-size: 12px;
+    position: absolute;
     margin-top: 5px;
+    top: 85%;
+    transform: translateY(-50%);
+    width: 20px;
+    transition: all 0.2s;
+    right: 10px;
 }
 
-/* Styles supplémentaires pour un aspect esthétique */
-#form_nvldemande {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-}
-
-
-
-#form_nvldemande input[type="text"],
-#form_nvldemande input[type="email"],
-#form_nvldemande select {
-    font-size: 14px;
-}
-
-#form_nvldemande button {
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-#form_nvldemande button:hover {
-    background-color: #004281;
-}
-
-
-#modif {
-    display: flex;
-    /* justify-content: center;
-    align-items: center; */
-    height: 56.8rem;
-    background: linear-gradient(#f5f5f5, #e8e8e8);
-}
-
-
-.formmodif {
-    width: 1350px;
-    height: 91.8%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 75px;
-    margin-bottom: 0;
-    padding: 0px;
-    font-family: Arial, sans-serif; 
-    font-size: 16px;
-}
-
-
-.formmodif fieldset {
-    width: 85%;
-    max-height: 700px;
-    position: absolute;
-    padding: 10px;
-    margin-bottom: 30px;
-    border: 0.1px solid rgb(219 219 219 / 28%);
-    border-radius: 4px;
-    background: rgb(219 219 219 / 28%);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(50px);
-}
-
-
-.formmodif legend {
-    justify-content: center;
-    display: flex;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #555;
-}
-
-
-.formmodif .label-container {
-    text-align: center;
-    display: inline-block;
-    width: calc(21.7% - 14px); /* Chaque label-container occupe un tiers de la largeur moins la marge */
-    margin: 0;
-    margin-top: -21px;
-    vertical-align: top; /* Aligne² les div en haut */
-    box-sizing: border-box; /* Inclure la marge dans la largeur calculée */
-    height: 75px;
-}
-
-.infosColumn {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    width: 250px;
-}
-
-.infosColumn input[type="text"] {
-    width: 135px;
-    height: 32px;
-    position: relative;
-}
-
-
-.infosColumn2 input[type="text"] {
-    width: 135px;
-    height: 32px;
-    position: relative;
-}
-
-.infosColumn2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    bottom: 391px;
-}
-
-.infosColumn2 label {
-    position: relative;
-    right: 41px;
-}
-
-.infosColumn2 label:nth-child(1){
-    position: relative;
-    right: 36px;
-}
-
-.infosColumn2 select {
-    width: 135px;
-    height: 32px;
-}
-
-.form-check {
-    display: inline-flex;  
-    flex-wrap: wrap-reverse;
-}
- 
-
-
-
-/* Styles pour l'élément de calendrier */
-input[type="date"] {
-    appearance: none; /* Supprime l'apparence native du navigateur */
-    padding: 8px; /* Ajoute un espace autour de l'élément */
-    border: 1px solid #ccc; /* Ajoute une bordure */
-    border-radius: 4px; /* Ajoute une bordure arrondie */
-    background-color: #fff; /* Définit la couleur de fond */
-    font-size: 14px; /* Définit la taille de la police */
-    color: #333; /* Définit la couleur du texte */
-}
-
-/* Styles pour l'icône du calendrier */
-input[type="date"]::-webkit-calendar-picker-indicator {
-    background: transparent; /* Supprime l'arrière-plan par défaut de l'icône */
-    padding: 4px; /* Ajoute un espacement autour de l'icône */
-    cursor: pointer; /* Définit le curseur de la souris au survol de l'icône */
-}
-
-/* Styles pour le texte de l'étiquette */
-label {
-    display: block; /* Affiche le texte de l'étiquette en tant que bloc */
-    margin-bottom: 15px; /* Ajoute un espace en bas de l'étiquette */
-    font-weight: bold; /* Met en évidence le texte de l'étiquette */
-    margin-top: 8px;
-}
-
-
-.iconemodif {
-    display: inline-block;
-    padding: 10px;
-    background-color: #0055A4;
-    color: #fff;
-    border: none;
-    margin: 2px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.iconemodif:hover {
-    background-color: #289297;
-}
-
-
-.iconesuppr {
-    display: inline-block;
-    padding: 10px;
-    background-color: #BD0C0C;
-    color: #fff;
-    border: none;
-    margin: 2px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.iconesuppr:hover {
-    background-color: #890B0B;
-}
-
-/*------------------------------------
-|   MODAL BOOTSTRAP MESSAGE SUCCES   |
--------------------------------------*/
-
-
-.modal {
+label .password-icon .feather-eye-off {
     display: none;
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    max-width: 400px;
-    width: 80%;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 24px;
-    font-weight: bold;
+label .password-icon:hover {
     cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.close:hover,
-.close:focus {
-    color: #333;
-}
-
-#confirmDeleteBtn,
-#cancelDeleteBtn {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #24af37;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#confirmDeleteBtn:hover,
-#cancelDeleteBtn:hover {
-    background-color: #1c8129;
+    color: black;
 }
 
 
-/* CSS alert suppression*/
-.alert {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 25px;
-    margin-left: auto;
-    margin-right: auto;
+.btn_log {
+    background-color: #19C9D2;
+    color: azure;
+    margin-top: 3%;
+    margin-left: 35%;
+    width: 15%;
 }
 
 
-
-.toast {
-    position: fixed;
-    top: 75px;  /*Ajustez la valeur pour définir l'écart par rapport au haut */
-    right: 0;  /*Ajustez la valeur pour définir l'écart par rapport à la droite */
-    z-index: 9999;  /*Assurez-vous que le toast s'affiche au-dessus des autres éléments */
+.btn_log:hover {
+    background-color: #168b96;
 }
 
 
-.toast-header {
-    background-color: #11C41F;  /*Couleur de fond pour l'en-tête du toast*/
-}
-
-
-
-/* Styles pour l'élément de calendrier */
-input[type="date"] {
-    appearance: none; /* Supprime l'apparence native du navigateur */
-    padding: 8px; /* Ajoute un espace autour de l'élément */
-    border: 1px solid #ccc; /* Ajoute une bordure */
-    border-radius: 4px; /* Ajoute une bordure arrondie */
-    background-color: #fff; /* Définit la couleur de fond */
-    font-size: 14px; /* Définit la taille de la police */
-    color: #333; /* Définit la couleur du texte */
-}
-
-/* Styles pour l'icône du calendrier */
-input[type="date"]::-webkit-calendar-picker-indicator {
-    background: transparent; /* Supprime l'arrière-plan par défaut de l'icône */
-    padding: 4px; /* Ajoute un espacement autour de l'icône */
-    cursor: pointer; /* Définit le curseur de la souris au survol de l'icône */
-}
-
-/* Styles pour le texte de l'étiquette */
-label {
-    display: block; /* Affiche le texte de l'étiquette en tant que bloc */
-    margin-bottom: 15px; /* Ajoute un espace en bas de l'étiquette */
-    font-weight: bold; /* Met en évidence le texte de l'étiquette */
-    margin-top: 8px;
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
-}
-
-
-.toast-headerMODIFSuccess{
-    background-color: #11C41F;
-}
-
-
-.success {
-    border: 3px solid green;
-}
-
-.echec{
-    border:3px solid red;
-}
-
-
-#alertContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-}
-
-
-
-.imgArriere{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 30%;
-}
-
-
-/*-----------------
-|    PAGINATION    | 
------------------*/
-
-
-.pagination-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.pagination-container a {
-    margin: 0 5px;
-    padding: 5px 10px;
+a.tma-btn {
     text-decoration: none;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    color: #333;
-}
-
-.pagination-container a:hover {
-    background-color: #ccc;
+    float: right;
+    margin-right: 100px;
 }
 
 
+.input--value {
+    height: 30px;
+    width: 450px;
+}
+
+
+input.tma-btn {
+    margin-top: 80px;
+    margin-left: 44%;
+}
+
+.remember {
+    top: -80px;
+}
