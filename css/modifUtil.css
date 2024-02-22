@@ -12,7 +12,6 @@ body {
 
 .barre-arianne {
     position: fixed;
-    /* utiliser "fixed" pour que la barre reste visible en tout temps */
     top: 0px;
     overflow: visible;
     left: 0;
@@ -22,38 +21,30 @@ body {
 }
 
 .barre-arianne ul {
-    list-style-type: none;
-    /* enlève les puces de la liste */
+    list-style-type: none;  /* Enlève les puces de la liste */
     margin: 0;
     padding: 0;
-    display: flex;
-    /* utilise Flexbox pour aligner les éléments horizontalement */
+    display: flex;     /* Utilise Flexbox pour aligner les éléments horizontalement */
 }
 
 .barre-arianne .Onglet {
     margin: 0;
     padding: 0;
-    position: relative;
-    /* ajoute une position relative pour les éléments de menu déroulant */
+    position: relative; /* Ajoute une position relative pour les éléments de menu déroulant */
 }
 
 .barre-arianne a {
-    display: block;
-    /* rend les liens cliquables sur toute la hauteur de la barre */
-    color: white;
-    /* couleur du texte des liens */
-    text-align: center;
-    /* centre le texte horizontalement */
+    display: block; /* Rend les liens cliquables sur toute la hauteur de la barre */
+    color: white; 
+    text-align: center; /* Centre le texte horizontalement */
     font-weight: bold;
-    padding: 20px 20px;
-    /* ajoute un peu de marge autour du texte */
-    text-decoration: none;
-    /* enlève les soulignements par défaut */
+    padding: 20px 20px; /* Ajoute un peu de marge autour du texte */
+    text-decoration: none; /* Enlève les soulignements par défaut */
     text-align: center;
     padding: 25px;
 }
 
-/* effet de survol des liens */
+
 .barre-arianne a:hover {
     background-color: #0c156b;
     color: white;
@@ -90,8 +81,7 @@ body {
     font-size: 15px;
     top: 100%;
     z-index: 100;
-    width: fit-content;
-    /* Ajuste la largeur du menu déroulant à son contenu */
+    width: fit-content; /* Ajuste la largeur du menu déroulant à son contenu */
     white-space: nowrap;
 }
 
@@ -103,8 +93,6 @@ body {
     display: block;
     margin-left: 0px;
 }
-
-
 
 
 .MonCompte {
@@ -119,9 +107,45 @@ body {
 
 
 /*------------------------------------
-|  AUTRES BOUTON (Submit, Retour)    | 
+|  AUTRES BOUTON (MODIF , RETOUR)    | 
 -------------------------------------*/
 
+/*************** BOUTON RETOUR ***************/
+
+.btnretour {
+    align-items: center;
+    justify-content: start;
+    display: flex;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+}
+
+.btnretour button {
+    width: 5rem;
+    height: 3rem;
+    position: absolute;
+    top: 60px;
+    left: 19px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    background: #289297;
+    color: #fff;
+}
+
+.btnretour button:hover {
+    background-color: #287074;
+    transition: 0.3s ease;
+}
+
+
+/*************** BOUTON MODIFIER***************/
 
 .btnajout {
     position: fixed;
@@ -129,7 +153,6 @@ body {
     left: 0;
     right: 0;
     padding: 10px;
-    /* Optional: Add padding for better appearance */
     align-items: center;
     justify-content: center;
     display: flex;
@@ -176,8 +199,6 @@ body {
 
 #modif {
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
     height: 56.8rem;
     background: linear-gradient(#f5f5f5, #e8e8e8);
 }
@@ -203,11 +224,9 @@ body {
     width: 100%;
     height: 640px;
     position: absolute;
-    /* padding: 10px;  DE BASE */
     padding: 18px;
     margin-bottom: 30px;
-    border: 0.1px solid rgb(219 219 219 / 28%);
-    border-radius: 4px;
+    border-radius: 15px;
     background: rgb(219 219 219 / 28%);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(50px);
@@ -226,14 +245,11 @@ body {
 .formmodif .label-container {
     text-align: center;
     display: inline-block;
-    width: calc(21.7% - 14px);
-    /* Chaque label-container occupe un tiers de la largeur moins la marge */
+    width: calc(21.7% - 14px); /* Chaque label-container occupe un tiers de la largeur moins la marge */
     margin: 0;
     margin-top: -21px;
-    vertical-align: top;
-    /* Aligne² les div en haut */
+    vertical-align: top; /* Aligne les div en haut */
     box-sizing: border-box;
-    /* Inclure la marge dans la largeur calculée */
     height: 75px;
 }
 
@@ -268,6 +284,19 @@ body {
     position: relative;
     right: 10px;
     top: 6px;
+}
+
+
+#calendrier {
+    width: 45%;
+    height: 35px;
+    position: relative;
+    left: 9px;  
+    top: 2px;
+    padding-left: 8px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 
@@ -499,46 +528,38 @@ body {
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+
+.form-select:hover {
+    color: #287074;
+}
+
+
 /* Styles pour l'élément de calendrier */
 input[type="date"] {
-    appearance: none;
-    /* Supprime l'apparence native du navigateur */
-    padding: 8px;
-    /* Ajoute un espace autour de l'élément */
+    appearance: none; /* Supprime l'apparence native du navigateur */
+    padding: 8px; 
     border: 1px solid #ccc;
-    /* Ajoute une bordure */
-    border-radius: 4px;
-    /* Ajoute une bordure arrondie */
+    border-radius: 4px; 
     background-color: #fff;
-    /* Définit la couleur de fond */
     font-size: 14px;
-    /* Définit la taille de la police */
     margin-left: 20px;
-    /* Décale l'input vers la gauche du label */
     color: #333;
-    /* Définit la couleur du texte */
     width: 117px;
     height: 40px;
 }
 
 /* Styles pour l'icône du calendrier */
 input[type="date"]::-webkit-calendar-picker-indicator {
-    background: transparent;
-    /* Supprime l'arrière-plan par défaut de l'icône */
-    padding: 4px;
-    /* Ajoute un espacement autour de l'icône */
-    cursor: pointer;
-    /* Définit le curseur de la souris au survol de l'icône */
+    background: transparent; /* Supprime l'arrière-plan par défaut de l'icône */
+    padding: 4px; /* Ajoute un espacement autour de l'icône */
+    cursor: pointer; /* Définit le curseur de la souris au survol de l'icône */
 }
 
 /* Styles pour le texte de l'étiquette */
 label {
-    display: block;
-    /* Affiche le texte de l'étiquette en tant que bloc */
-    margin-bottom: 15px;
-    /* Ajoute un espace en bas de l'étiquette */
-    font-weight: bold;
-    /* Met en évidence le texte de l'étiquette */
+    display: block;  /* Affiche le texte de l'étiquette en tant que bloc */
+    margin-bottom: 15px; /* Ajoute un espace en bas de l'étiquette */
+    font-weight: bold; /* Met en évidence le texte de l'étiquette */
     margin-top: 8px;
 }
 
@@ -624,7 +645,6 @@ label {
 
 .toast-header {
     background-color: #11C41F;
-    /*Couleur de fond pour l'en-tête du toast*/
 }
 
 
@@ -632,11 +652,8 @@ label {
 /* Styles pour le texte de l'étiquette */
 label {
     display: block;
-    /* Affiche le texte de l'étiquette en tant que bloc */
     margin-bottom: 15px;
-    /* Ajoute un espace en bas de l'étiquette */
     font-weight: bold;
-    /* Met en évidence le texte de l'étiquette */
     margin-top: 8px;
 }
 
