@@ -7,10 +7,12 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/test-css.css">
+    <link rel="stylesheet" href="css/csshome.css">
     <link rel="icon" href="img/NLogo2.png" />
     <title>TC2 - Eval</title>
 </head>
-<?php include('includes/connexion.inc.php') ?>
+    <?php include('includes/connexion.inc.php') ?>
+    <?php include('includes/header.html.inc.php') ?>
 
 <body>
     <!------------------------------------------
@@ -20,58 +22,53 @@
         <button onClick=" history.back();">Retour</button>
     </div>
     <main>
-        <section class="container" id="container">
-            <h3><b>Evaluation</b></h3>
-            <form class="row g-3" method="post">
+        <section id="modif">
+            <form class="formmodif" name="formmodif" action="" method="POST">
+                <fieldset id="infos">
+                    <legend>Evaluation</legend>
 
-                <div class="infosColumn">
-                    <div class="col-md-4" id="divPar">
-                        <label for="inputDate" class="form-label">Date d'Evaluation</label>
+                    <div class="infosRow">
+                        <label for="libDate" class="form-label">Date d'Evaluation</label>
                         <input type="text" class="form-control" id="datepicker" name="inputEval"
-                            pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="">
-                    </div>
+                                pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="">
 
-                    <div class="col-md-6" id="divDate">
-                        <label for="selectUtil" class="form-label">Par</label>
+                        <label for="libSelect" class="form-label">Par</label>
                         <select id="selectUtil" name="selectUtil" class="form-select">
-                            <option value=''></option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="infosColumn">
-                    <div class="col-md-4" id="divCharge">
-                        <label for="inputCharge" class="form-label">Charge</label>
-                        <select id="inputCharge" name="inputCharge" class="form-select">
-                            <option value=''></option>
-                        </select>
+                                <option value=''></option>
+                            </select>
                     </div>
 
-                    <div class="col-md-6" id="divTarif">
-                        <label for="inputTarif" class="form-label">Tarif</label>
-                        <input type="text" class="form-control" id="datepicker" name="datepicker"
-                            pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="">
-                    </div>
-                </div>
-
-                <div class="infosColumn">
-                    <div class="col-md-4" id="divCharge">
-                        <label for="inputCharge" class="form-label">Charge</label>
-                        <select id="inputCharge" name="inputCharge" class="form-select">
-                            <option value=''></option>
-                        </select>
+                    <div class="infosRow2">
+                        <label for="libCharge" class="form-label">Charge</label>
+                        <input type="text" class="form-control" id="inputCharge" name="inputCharge"
+                                pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="">
+                        
+                        <label for="libTarif" class="form-label">Tarif</label>
+                        <select id="selectTarif" name="selectTarif" class="form-select">
+                                <option value=''></option>
+                            </select>
                     </div>
 
-                    <div class="col-md-6" id="divTarif">
-                        <label for="inputTarif" class="form-label">Tarif</label>
-                        <input type="text" class="form-control" id="datepicker" name="datepicker"
-                            pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="">
+                    <div class="infosRow3">
+                        <div class="col-md-4" id="divCharge">
+                            <label for="libCharge" class="form-label">Charge</label>
+                            <select id="inputCharge" name="inputCharge" class="form-select">
+                                <option value=''></option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6" id="divTarif">
+                            <label for="inputTarif" class="form-label">Tarif</label>
+                            <input type="text" class="form-control" id="datepicker" name="datepicker"
+                                pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="">
+                        </div>
                     </div>
-                </div>
+
+                </fieldset>
             </form>
         </section>
     </main>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
