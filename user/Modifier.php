@@ -4,15 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <!-- LINK FEATHER -->
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script>
         feather.replace();
     </script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
     <link href="../css/modifUtil.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="../img/NLogo2.png" />
+
 
 
     <?php
@@ -21,7 +25,7 @@
     $pageActuelle = pathinfo($pageActuelle, PATHINFO_FILENAME); // Récupère le nom de fichier sans l'extension
     
     // echo "<title>TMAconnect - $pageActuelle</title>";
-    echo "<title>TC1</title>";
+    echo "<title>TMA - Modifier un utilisateur</title>";
     ?>
 </head>
 
@@ -29,6 +33,14 @@
     <header>
         <?php include('../includes/header.html.inc.php'); ?>
     </header>
+
+    <!------------------------------------------
+    |             BOUTON "RETOUR"              | 
+    ------------------------------------------->
+
+    <div class="btnretour">
+        <button onClick=" history.back();">Retour</button>
+    </div>
 
     <?php
     // Informations de connexion à la base de données MySQL
@@ -43,6 +55,7 @@
 
         // Configuration des attributs de PDO
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
         // ********************************** Requête Pour ACTIF **********************************
         if (isset($_POST['btn_modifier'])) {
@@ -68,11 +81,14 @@
             $idUtilisateur = $_GET['id'];
             $nouvelleDate = $_POST['calendrier'];
 
-            $sql = "UPDATE tc_utilisateur SET dateFin = :nouvelleDate WHERE IdUtil = :idUtilisateur";
+            $nouvelleDateUpdate = substr($nouvelleDate, 6, 4) . '/' . substr($nouvelleDate, 3, 2) . '/' . substr($nouvelleDate, 0, 2);
+
+            $sql = "UPDATE tc_utilisateur SET dateFin = :nouvelleDateUpdate WHERE IdUtil = :idUtilisateur";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':nouvelleDate', $nouvelleDate, PDO::PARAM_STR);
+            $stmt->bindParam(':nouvelleDateUpdate', $nouvelleDateUpdate, PDO::PARAM_STR);
             $stmt->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
             $result = $stmt->execute();
+
         }
 
         // ********************************** Requête Pour EMAIL **********************************
@@ -202,25 +218,44 @@
                             } ?>>
                         </div>
 
+                        <!-------------------
+                        |    DATE DE FIN    | 
+                        -------------------->
+
                         <div class="dateFin">
                             <label for="dateDeFin">Date de fin : </label>
-                            <input type="date" name="calendrier" id="calendrier" value="<?php echo $dateFin; ?>">
+                            <input type="text" name="calendrier" id="calendrier" placeholder="Nouvelle date" pattern="\d{1,2}/\d{1,2}/\d{4}"
+                            value="<?php 
+                                $dateFin_bon_format = substr($dateFin, 8, 2) . '/' . substr($dateFin, 5, 2) . '/' . substr($dateFin, 0, 4);
+                                echo $dateFin_bon_format; ?>"> 
                         </div>
                     </div>
 
+                        <!-------------------
+                        |        NOM        | 
+                        -------------------->
+
                     <div class="infosRow">
                         <label for="i_nom">Nom :</label>
-                        <input type="text" class="form-control" name="i_nom" id="i_nom" size="35" disabled
+                        <input type="text" class="form-control" name="i_nom" id="i_nom" size="35" disabled oninput="convertToUppercase(this)"
                             value="<?php echo $nom; ?>">
+
+                        <!-------------------
+                        |       PRENOM      | 
+                        -------------------->
 
                         <label for="i_prenom">Prénom :</label>
                         <input type="text" class="form-control" name="i_prenom" id="i_prenom" size="35"
-                            pattern="^[a-zA-Z                                                     ݟƌ\s\-]+$" required
-                            disabled oninput="convertToUppercase(this)" disabled value="<?php echo $prenom; ?>">
+                            pattern="^[a-zA-Zݟƌ\s\-]+$" required
+                            disabled oninput="convertToUppercase(this)" value="<?php echo $prenom; ?>">
+
+                        <!-------------------
+                        |     MATRICULE     | 
+                        -------------------->
 
                         <label for="i_matricule">Matricule :</label>
                         <input type="text" class="form-control" name="i_matricule" id="i_matricule" pattern="C.*" required
-                            maxlength="5" disabled value="<?php echo $matricule; ?>">
+                            maxlength="5" disabled oninput="convertToUppercase(this)" value="<?php echo $matricule; ?>">
                     </div>
 
                     <div class="infoRow2">
@@ -231,6 +266,10 @@
                                     value="<?php echo $email; ?>">
                             </div>
 
+                        <!-------------------
+                        |    MOT DE PASSE   | 
+                        -------------------->
+
                             <div class="col-auto">
                                 <label for="i_passwd" class="col-form-label">Mot de passe :</label>
                                 <input type="password" id="inputPasswd" name="inputPasswd" class="form-control">
@@ -240,6 +279,10 @@
                                 <i id="eye-off" data-feather="eye-off" style="display: none;"
                                     onclick="togglePasswordVisibility('inputPasswd', 'eye', 'eye-off', false)"></i>
                             </div>
+
+                        <!-----------------------------
+                        |  CONFIRMATION MOT DE PASSE  |  
+                        ------------------------------>
 
                             <div class="col-auto">
                                 <label for="i_confirm" class="col-form-label" id="labelConfirm">Confirmation mot de
@@ -269,6 +312,10 @@
                     $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
                     ?>
 
+                        <!-------------------
+                        |      SERVICE      | 
+                        -------------------->
+
                     <div class="infosRow3">
                         <label for="lst_droit" class="labelService">Service :</label>
                         <select class="form-select" id="S_users" name="S_users" aria-label="Default select example">
@@ -283,6 +330,10 @@
                             ?>
                         </select>
 
+                        <!-------------------
+                        |       POSTE       | 
+                        -------------------->
+
                         <label for="lst_droit">Poste :</label>
                         <select class="form-select" id="P_users" name="P_users" aria-label="Default select example">
                             <?php
@@ -296,6 +347,9 @@
                             ?>
                         </select>
 
+                        <!-------------------
+                        |        DROIT      | 
+                        -------------------->
 
                         <label for="lst_droit" class="labelDroit">Droit :</label>
                         <select class="form-select" id="D_users" name="D_users" aria-label="Default select example">
@@ -334,8 +388,6 @@
                         </div>
                     </div>
 
-                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
                     <script>
                         $(document).ready(function () {
                             $('.toast').toast('show');
@@ -355,9 +407,6 @@
                             Une erreur s'est produite lors de la modification.
                         </div>
                     </div>
-
-                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
                     <script>
                         $(document).ready(function () {
@@ -397,8 +446,8 @@
 
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <!-- Lien BOOTSTRAP -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- LINK JS BOOTSTRAP -->
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
     <!-- Script pour initialiser les icônes Feather -->
     <script>
         feather.replace();
