@@ -1,164 +1,688 @@
-@import url("style.css");
-
-header {
-    margin-top: 20px;
-}
-
-.logo {
-    margin-top: -15px;
-    margin-bottom: 4px;
-    height: 215px;
-}
-
-.container {
-    background-color: #f5f5f5;
-    border: solid;
-    border-radius: 15px;
-    margin: auto;
-    height: 500px;
-    width: 1000px;
-}
-
-h2 {
-    margin: 50px;
-    margin-bottom: 50px;
-}
-
-
-.error--id{
-    display: block;
-    background-color: #9ec5fe;
-    border: 1px solid;
-    border-radius: 10px;
-    margin-top: -3%;
-    margin-bottom: 3%;
-    padding: 1.2% 1.2% 1.2% 1.2%;
-    text-align: center;
-    width: 65%;
-}
-
-
-.identifiant {
-    margin-left: 100px;
-    margin-bottom: 30px;
-    border-spacing: 5px 1rem;
-    align-items: center;
-}
-
-.icon {
-    margin-left: -4%;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    z-index: 1;
-}
-
-.btn_lmdp {
-    position: static;
-    background-color: #19C9D2;
-    color: azure;
-    margin-left: 55%;
-    margin-top: 5px;
-    margin-bottom: 0px;
-}
-
-.btn_lmdp:hover {
-    background-color: #168b96;
-}
-
-.mdp {
-    margin: 0 0 0 100px;
-}
-
-
-.champs_txt {
-    border-style: inset;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    width: 50%;
-    height: 30px;
-}
-
-
-label {
-    margin-left: 9%;
-    position: relative;
-    outline: none;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
     box-sizing: border-box;
 }
 
-label input {
-    font: 1em;
-    background: transparent;
-    transition: all 0.2s
+/*---------------------------
+|     BARRE DE NAVIGATION   |
+----------------------------*/
+
+
+.barre-arianne {
+    position: fixed;
+    top: 0px;
+    overflow: visible;
+    left: 0;
+    right: 0;
+    background-color: #289297;
+    z-index: 80;
 }
 
-label input:focus {
-    border-color: black;
+.barre-arianne ul {
+    list-style-type: none;  /* Enlève les puces de la liste */
+    margin: 0;
+    padding: 0;
+    display: flex;     /* Utilise Flexbox pour aligner les éléments horizontalement */
+}
+
+.barre-arianne .Onglet {
+    margin: 0;
+    padding: 0;
+    position: relative; /* Ajoute une position relative pour les éléments de menu déroulant */
+}
+
+.barre-arianne a {
+    display: block; /* Rend les liens cliquables sur toute la hauteur de la barre */
+    color: white; 
+    text-align: center; /* Centre le texte horizontalement */
+    font-weight: bold;
+    padding: 20px 20px; /* Ajoute un peu de marge autour du texte */
+    text-decoration: none; /* Enlève les soulignements par défaut */
+    text-align: center;
+    padding: 25px;
 }
 
 
-label body {
+.barre-arianne a:hover {
+    background-color: #0c156b;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Styles spécifiques pour le menu déroulant */
+.barre-arianne .sous {
+    display: none;
+    position: absolute;
+    background-color: #289297;
+    left: 0;
+    font-size: 15px;
+    top: 100%;
+    z-index: 100;
+}
+
+.barre-arianne li:hover .sous {
+    display: block;
+}
+
+.barre-arianne .sous li {
+    display: block;
+}
+
+
+.barre-arianne .sous2 {
+    display: none;
+    position: absolute;
+    background-color: #289297;
+    left: auto;
+    right: 0;
+    font-size: 15px;
+    top: 100%;
+    z-index: 100;
+    width: fit-content; /* Ajuste la largeur du menu déroulant à son contenu */
+    white-space: nowrap;
+}
+
+.barre-arianne li:hover .sous2 {
+    display: block;
+}
+
+.barre-arianne .sous2 li {
+    display: block;
+    margin-left: 0px;
+}
+
+
+.MonCompte {
+    position: absolute;
+    right: 0;
     display: flex;
+    gap: 20px;
+    flex-direction: row;
+    font-weight: 900;
+
+}
+
+
+/*------------------------------------
+|  AUTRES BOUTON (MODIF , RETOUR)    | 
+-------------------------------------*/
+
+/*************** BOUTON RETOUR ***************/
+
+.btnretour {
     align-items: center;
+    justify-content: start;
+    display: flex;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+}
+
+.btnretour button {
+    width: 5rem;
+    height: 3rem;
+    position: absolute;
+    top: 60px;
+    left: 19px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    background: #289297;
+    color: #fff;
+}
+
+.btnretour button:hover {
+    background-color: #287074;
+    transition: 0.3s ease;
+}
+
+
+/*************** BOUTON MODIFIER***************/
+
+.btnajout {
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+
+.btnajout input {
+    margin-left: 20px;
+    padding: 10px 16px;
+    background: #289297;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btnajout input:nth-child(2) {
+    margin-right: 10px;
+    padding: 10px 16px;
+    background: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btnajout input:hover:nth-child(1) {
+    background-color: #287074;
+}
+
+.btnajout input:hover:nth-child(2) {
+    background-color: rgb(221, 18, 18);
+}
+
+
+#modif {
+    display: flex;
+    height: 56.8rem;
+    background: linear-gradient(#f5f5f5, #e8e8e8);
+}
+
+
+.formmodif {
+    width: 1350px;
+    height: 91.8%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 75px;
+    margin-bottom: 0;
+    padding: 0px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+
+.formmodif fieldset {
+    width: 100%;
+    height: 640px;
+    position: absolute;
+    padding: 18px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    background: rgb(219 219 219 / 28%);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(50px);
+}
+
+
+.formmodif legend {
+    justify-content: center;
+    display: flex;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+
+.formmodif .label-container {
+    text-align: center;
+    display: inline-block;
+    width: calc(21.7% - 14px); /* Chaque label-container occupe un tiers de la largeur moins la marge */
+    margin: 0;
+    margin-top: -21px;
+    vertical-align: top; /* Aligne les div en haut */
+    box-sizing: border-box;
+    height: 75px;
+}
+
+
+.form-check {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 1.5rem;
+    padding-left: 1.5em;
+    margin: 70px 0 47px 0;
+}
+
+
+.dateFin {
+    display: flex;
     justify-content: center;
 }
 
-label .password-icon {
+.checkActif {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    position: relative;
+    left: 133px;
+}
+
+
+.form-check-input[type=checkbox] {
+    width: 21px;
+    height: 20px;
+    position: relative;
+    right: 10px;
+    top: 6px;
+}
+
+
+#calendrier {
+    width: 45%;
+    height: 35px;
+    position: relative;
+    left: 9px;  
+    top: 2px;
+    padding-left: 8px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+
+/*----------------------------------------------------
+|    PREMIERE LIGNE : Nom : / Prénom : / Matricule :  | 
+-----------------------------------------------------*/
+
+.infosRow {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.infosRow input[type="text"] {
+    width: 135px;
+    height: 32px;
+    position: relative;
+    top: 5px;
+    right: 68px;
+}
+
+.infosRow input[type="text"]:nth-child(2) {
+    position: relative;
+    right: 111px;
+}
+
+
+#i_nom {
+    height: 2.1rem;
+}
+
+#i_prenom {
+    height: 2.1rem;
+    position: relative;
+    right: 90px;
+}
+
+#i_matricule {
+    height: 2.1rem;
+    position: relative;
+    right: 66px;
+}
+
+
+/*---------------------------------------------------------------------------
+|  DEUXIEME LIGNE : Email : / Mot de passe : / Confirmation mot de passe :  | 
+----------------------------------------------------------------------------*/
+
+
+.infoRow2 {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.infoRow2 .row.g-3.align-items-center {
+    width: 100%;
+    margin: 17px 0 17px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoRow2 .col-auto:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    right: 15px;
+    margin: 0 5px;
+}
+
+.infoRow2 .col-auto:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    right: 5px;
+    margin: 0 5px;
+}
+
+.infoRow2 .col-auto:nth-child(3) {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    right: 19px;
+    margin: 0 5px;
+}
+
+#labelConfirm {
+    width: 148px;
+}
+
+
+#inputEmail {
+    width: 180px;
+    height: 2.1rem;
+    position: relative;
+    top: 10px;
+    left: 28px;
+}
+
+#inputPasswd {
+    width: 180px;
+    height: 2.1rem;
+    position: relative;
+    top: 10px;
+    left: 28px;
+}
+
+.password-container {
+    position: relative;
+    z-index: 1;
+}
+
+
+#eye,
+#eye-off {
+    width: 19px;
+    position: absolute;
+    top: 59%;
+    left: 290px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+#eye2,
+#eye-off2 {
+    width: 19px;
+    position: absolute;
+    top: 56%;
+    left: 320px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
+
+
+#inputConfirm {
+    width: 180px;
+    height: 2.1rem;
+    position: relative;
+    top: 22px;
+    left: 12px;
+}
+
+
+
+#inputPasswd.form-control {
+    position: relative;
+    left: 20px;
+}
+
+
+/*------------------------------------------------------
+|  TROISIEME LIGNE : Service  : / Poste  : / Droit  :  | 
+------------------------------------------------------*/
+
+
+.infosRow3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+
+.labelService {
     display: flex;
     align-items: center;
-    position: absolute;
-    margin-top: 5px;
-    top: 85%;
-    transform: translateY(-50%);
-    width: 20px;
-    transition: all 0.2s;
-    right: 10px;
-}
-
-label .password-icon .feather-eye-off {
-    display: none;
-}
-
-label .password-icon:hover {
-    cursor: pointer;
-    color: black;
+    position: relative;
+    right: 3px;
+    top: 1px;
 }
 
 
-.btn_log {
-    background-color: #19C9D2;
-    color: azure;
-    margin-top: 3%;
-    margin-left: 35%;
-    width: 15%;
+#S_users {
+    width: 18rem;
+    display: flex;
+    position: relative;
+    right: 44px;
+    bottom: 7px;
+}
+
+#P_users {
+    width: 21rem;
+    display: flex;
+    position: relative;
+    left: 22px;
+    bottom: 7px;
+    margin-right: 48px;
 }
 
 
-.btn_log:hover {
-    background-color: #168b96;
+.labelDroit {
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 1px;
+    right: 45px;
+}
+
+#D_users {
+    width: 13rem;
+    display: flex;
+    position: relative;
+    left: 12px;
+    bottom: 7px;
 }
 
 
-a.tma-btn {
+
+.form-select {
+    --bs-form-select-bg-img: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e);
+    display: block;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+
+/* effet de survol des liens */
+.barre-arianne a:hover {
+    background-color: #0c156b;
+    color: white;
     text-decoration: none;
+}
+
+
+/* Styles pour l'élément de calendrier */
+input[type="date"] {
+    appearance: none; /* Supprime l'apparence native du navigateur */
+    padding: 8px; 
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+    background-color: #fff;
+    font-size: 14px;
+    margin-left: 20px;
+    color: #333;
+    width: 117px;
+    height: 40px;
+}
+
+/* Styles pour l'icône du calendrier */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent; /* Supprime l'arrière-plan par défaut de l'icône */
+    padding: 4px; /* Ajoute un espacement autour de l'icône */
+    cursor: pointer; /* Définit le curseur de la souris au survol de l'icône */
+}
+
+/* Styles pour le texte de l'étiquette */
+label {
+    display: block;  /* Affiche le texte de l'étiquette en tant que bloc */
+    margin-bottom: 15px; /* Ajoute un espace en bas de l'étiquette */
+    font-weight: bold; /* Met en évidence le texte de l'étiquette */
+    margin-top: 8px;
+}
+
+/*------------------------------------
+|   MODAL BOOTSTRAP MESSAGE SUCCES   |
+-------------------------------------*/
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
     float: right;
-    margin-right: 100px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #333;
+}
+
+#confirmDeleteBtn,
+#cancelDeleteBtn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #24af37;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#confirmDeleteBtn:hover,
+#cancelDeleteBtn:hover {
+    background-color: #1c8129;
 }
 
 
-.input--value {
-    height: 30px;
-    width: 450px;
+/* CSS alert suppression*/
+.alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
-input.tma-btn {
-    margin-top: 80px;
-    margin-left: 44%;
+
+.toast {
+    position: absolute;
+    top: 90px;
+    right: 5px;
+    z-index: 9999; /*Affiche au-dessus des autres éléments */
 }
 
-.remember {
-    top: -80px;
+
+.toast-header {
+    background-color: #11C41F;
+}
+
+
+
+/* Styles pour le texte de l'étiquette */
+label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.toast-headerMODIFSuccess {
+    background-color: #11C41F;
+}
+
+
+.success {
+    border: 3px solid green;
+}
+
+.echec {
+    border: 3px solid red;
+}
+
+
+#alertContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
 }
