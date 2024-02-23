@@ -1,0 +1,106 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+
+/*---------------------------
+|     BARRE DE NAVIGATION   |
+----------------------------*/
+
+
+.barre-arianne {
+    position: fixed; /* utiliser "fixed" pour que la barre reste visible en tout temps */
+    top: 0px;
+    overflow: visible;
+    left: 0;
+    right: 0;
+    background-color: #289297;
+    z-index: 80;
+}
+
+.barre-arianne ul {
+    list-style-type: none; /* enlève les puces de la liste */
+    margin: 0;
+    padding: 0;
+    display: flex; /* utilise Flexbox pour aligner les éléments horizontalement */
+}
+
+.barre-arianne .Onglet {
+    margin: 0;
+    padding: 0;
+    position: relative; /* ajoute une position relative pour les éléments de menu déroulant */
+}
+
+.barre-arianne a {
+    display: block; /* rend les liens cliquables sur toute la hauteur de la barre */
+    color: white; /* couleur du texte des liens */
+    text-align: center; /* centre le texte horizontalement */
+    font-weight: bold;
+    padding: 20px 20px; /* ajoute un peu de marge autour du texte */
+    text-decoration: none; /* enlève les soulignements par défaut */
+    text-align: center;
+    padding: 25px;
+}
+
+/* effet de survol des liens */
+.barre-arianne a:hover {
+    background-color: #0c156b;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Styles spécifiques pour le menu déroulant */
+.barre-arianne .sous {
+    display: none;
+    position: absolute;
+    background-color: #289297;
+    left: 0;
+    font-size: 15px;
+    top: 100%;
+    z-index: 100;
+}
+
+.barre-arianne li:hover .sous {
+    display: block;
+}
+
+.barre-arianne .sous li {
+    display: block;
+}
+
+
+.barre-arianne .sous2 {
+    display: none;
+    position: absolute;
+    background-color: #289297;
+    left: auto;
+    right: 0;
+    font-size: 15px;
+    top: 100%;
+    z-index: 100;
+    width: fit-content; /* Ajuste la largeur du menu déroulant à son contenu */
+    white-space: nowrap;
+}
+
+.barre-arianne li:hover .sous2 {
+    display: block;
+}
+
+.barre-arianne .sous2 li {
+    display: block;
+    margin-left: 0px;
+}
+
+
+.MonCompte{
+    position: absolute;
+    right: 0;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    font-weight: 900;
+}
