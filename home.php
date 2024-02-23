@@ -16,10 +16,7 @@
     <header>
         <?php include('includes/header.html.inc.php'); ?>
         <?php
-        include('php/S-Remember.php')
-            // if (isset($_SESSION['username'])) {
-            //     echo "Bonjour Home 111";
-            // }
+        include('php/S-Remember.php');
             ?>
     </header>
 
