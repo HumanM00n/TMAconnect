@@ -368,8 +368,7 @@
                     <!-- BOUTON SUBMIT  -->
                     <div class="btnajout">
                         <input type="submit" name="btn_modifier" id="btn_modifier" value="Modifier">
-                        <input type="reset" name="btn_annuler" id="btn_annuler" value="Annuler"
-                            onclick="window.location.href = 'user/Utilisateurs.php';">
+                        <input type="reset" name="btn_annuler" id="btn_annuler" value="Annuler">
                     </div>
                 </fieldset>
             </form>
