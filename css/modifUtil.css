@@ -529,11 +529,6 @@ body {
 }
 
 
-.form-select:hover {
-    color: #287074;
-}
-
-
 /* Styles pour l'élément de calendrier */
 input[type="date"] {
     appearance: none; /* Supprime l'apparence native du navigateur */
