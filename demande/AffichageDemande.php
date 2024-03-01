@@ -90,7 +90,7 @@
 
 
         <div class="bloc-btn">
-          <button type="submit" id="submit" name="appliquer">Appliquer</button>
+          <button type="submit" id="submit" name="appliquer">Rechercher</button>
           <button type="reset">Réinitialiser</button>
         </div>
       </fieldset>
