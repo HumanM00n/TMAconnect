@@ -181,7 +181,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
             $D_users = isset($_POST['D_users']) ? $_POST['D_users'] : '';
             $datefin = isset($_POST['calendrier']) ? $_POST['calendrier'] : '';
 
-            // $datefin = substr($datefin, 6, 4) . '/' . substr($datefin, 3, 2) . '/' . substr($datefin, 0, 2);
     
             $sql = "INSERT INTO tc_utilisateur (nom, prenom, matricule, email, passwd, S_users, P_users, D_users, dateFin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
