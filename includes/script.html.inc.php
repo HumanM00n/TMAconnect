@@ -39,7 +39,6 @@
   integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<!--  -->
 <!--************************ SCRIPT CDN JQUERY JS ************************-->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
