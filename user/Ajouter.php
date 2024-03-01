@@ -8,9 +8,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- LIEN FONT AWESOME -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- LIEN BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- LIEN JQUERY -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+    <!-- LIEN CSS / ICON -->
     <link href="../css/csshome.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="../img/NLogo2.png" />
 
@@ -106,6 +114,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                         <label for="S_users">Service :</label>
                         <select name="S_users" id="S_users">
                             <?php
+                            echo "<option></option>";
                             foreach ($result0 as $row) {
                                 $idService = $row['IdService'];
                                 $libelle1 = $row['s_libelle'];
@@ -119,6 +128,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                         <label for="P_users">Poste :</label>
                         <select name="P_users" id="P_users">
                             <?php
+                            echo "<option></option>";
                             foreach ($result1 as $row) {
                                 $idPoste = $row['IdPoste'];
                                 $libelle2 = $row['p_libelle'];
@@ -132,6 +142,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                         <label for="D_users">Droit :</label>
                         <select name="D_users" id="D_users">
                             <?php
+                            echo "<option></option>";
                             foreach ($result2 as $row) {
                                 $idDroit = $row['IdDroit'];
                                 $libelle3 = $row['d_libelle'];
@@ -143,7 +154,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
 
                     <div>
                         <label for="calendrier">Date de fin (optionnel) :</label>
-                        <input type="date" name="calendrier" id="calendrier">
+                        <input type="date" name="calendrier" id="calendrier" pattern="\d{1,2}/\d{1,2}/\d{4}"
+                            onchange="keepAndPutDate()">
+                        <script>
+
+                        </script>
                     </div>
 
                     <div class="btnajout">
@@ -166,6 +181,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
             $D_users = isset($_POST['D_users']) ? $_POST['D_users'] : '';
             $datefin = isset($_POST['calendrier']) ? $_POST['calendrier'] : '';
 
+            // $datefin = substr($datefin, 6, 4) . '/' . substr($datefin, 3, 2) . '/' . substr($datefin, 0, 2);
+    
             $sql = "INSERT INTO tc_utilisateur (nom, prenom, matricule, email, passwd, S_users, P_users, D_users, dateFin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$nom, $prenom, $matricule, $email, $passwd, $S_users, $P_users, $D_users, $datefin]);
@@ -182,8 +199,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                     </div>
                 </div>
 
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <!-- LIEN JQUERY -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+                    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+                    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+                <!-- LIEN BOOTSTRAP JS -->
+                <script src=script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+                    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+                    crossorigin="anonymous"></script>
+
                 <script>
                     $(document).ready(function () {
                         $('.toast').toast('show');
@@ -202,8 +227,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                     </div>
                 </div>
 
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <!-- LIEN JQUERY -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+                    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+                    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+                <!-- LIEN BOOTSTRAP JS -->
+                <script src=script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+                    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+                    crossorigin="anonymous"></script>
+
                 <script>
                     $(document).ready(function () {
                         $('.toast').toast('show');
@@ -216,7 +249,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                     die("La connexion a �chou�: " . $e->getMessage());
                 }
                 ?>
-
 </body>
 
 </html>
