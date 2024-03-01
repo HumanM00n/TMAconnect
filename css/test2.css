@@ -1,0 +1,198 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+}
+
+
+.btnretour button {
+    width: 5rem;
+    height: 3rem;
+    position: absolute;
+    top: 17px;
+    left: 19px;
+    padding: 10px 16px;
+    background: #289297;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/*------------------------------------
+|       FORMULAIRE EVALUATION        | 
+-------------------------------------*/
+
+#modif {
+    display: flex;
+    height: 56.8rem;
+}
+
+
+.formmodif {
+    width: 1350px;
+    height: 91.8%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 75px;
+    margin-bottom: 0;
+    padding: 0px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+
+.formmodif fieldset {
+    width: 100%;
+    height: 640px;
+    padding: 18px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    background: rgb(219 219 219 / 28%);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(50px);
+}
+
+
+.formmodif legend {
+    justify-content: center;
+    display: flex;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+
+input[type="date"] {
+    appearance: none;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    width: 140px;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+
+.containerRow {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+
+.infosRow {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin: 30px 0 0 10px;
+}
+
+.infosRow > .infosParEval {
+    margin-left: 190px;
+}
+
+.infosRow > .infosDateEval input[type="date"] {
+    width: 140px;
+    height: 39px;
+    position: relative;
+    bottom: 40px;
+    left: 132px;
+    margin-left: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    appearance: none;
+    color: #333;
+    
+}
+
+.infosRow select {
+    width: 158px;
+    position: relative;
+    bottom: 40px;
+    left: 40px;
+}
+
+
+.infosRow2 {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+
+.infosRow2 > select {
+    width: 150px;
+}
+
+
+.containerRow2 {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.infosRow2 {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin: 25px 0 0 10px;
+}
+
+.infosRow2 > .libTarif {
+    margin-left: 190px;
+}
+
+.infosRow2 > .infosDateEval input[type="date"] {
+    width: 140px;
+    height: 39px;
+    position: relative;
+    bottom: 40px;
+    left: 132px;
+    margin-left: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    appearance: none;
+    color: #333;
+    
+}
+
+
