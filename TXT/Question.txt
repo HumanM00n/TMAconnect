@@ -1,5 +1,0 @@
-Question :
-
-1 : Pour la sécurité des mdp 
-	- Vous voulez qu'il est un nombres de caractères précis ou pas ?
-	- Des règles de sécu : 1 caractère spéciale + chiffre .
