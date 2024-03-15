@@ -35,12 +35,6 @@ main {
 |       FORMULAIRE EVALUATION        | 
 -------------------------------------*/
 
-#modif {
-    display: flex;
-    height: 56.8rem;
-}
-
-
 .formmodif {
     width: 1350px;
     height: 91.8%;
@@ -70,129 +64,164 @@ main {
 
 
 .formmodif legend {
-    justify-content: center;
-    display: flex;
-    font-weight: bold;
-    margin-bottom: 10px;
     color: #555;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    font-weight: bold;
 }
-
 
 label {
-    display: block;
+    display: inline-flex;
+    margin-bottom: 0;
     font-weight: bold;
-    margin-top: 8px;
+    margin-top: 0;
+}
+
+.row-cols-lg-4>* {
+    width: 25%;
+    display: inline-flex;
+    flex: 0 0 auto;
 }
 
 
-input[type="date"] {
+#inputEval {
+    color: #333;
+    width: 140px;
+    height: 42px;
     appearance: none;
     padding: 8px;
+    margin-left: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #fff;
     font-size: 14px;
-    color: #333;
-    width: 140px;
 }
 
-input[type=number]::-webkit-inner-spin-button {
+
+#inputCharge {
+    color: #333;
+    height: 42px;
+    width: 140px;
+    appearance: none;
+    padding: 8px;
+    margin-left: 92px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+.form-label {
+    margin-bottom: 0;
+    font-weight: bold;
+    margin-top: 7px;
+}
+
+
+
+.form-select {
+    --bs-form-select-bg-img: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e);
+    display: block;
+    width: 190px;
+    height: 44px;
+    margin-top: 5px;
+    margin-left: 21px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 
-.containerRow {
-    width: auto;
-    height: auto;
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
+#selectUtil {
+    margin-left: 26px;
+    margin-top: 0;
 }
 
 
-.infosRow {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    margin: 30px 0 0 10px;
+#selectTarif {
+    margin-top: 0; 
+    margin-bottom: 0;
 }
 
-.infosRow > .infosParEval {
-    margin-left: 190px;
+/*--------------------------------
+|       AccepteDate / PAR        |
+--------------------------------*/
+
+.row-cols-lg-6>* {
+    width: 16.66666667%;
+    display: inline-flex !important;
+    flex: 0 0 auto;
 }
 
-.infosRow > .infosDateEval input[type="date"] {
-    width: 140px;
-    height: 39px;
+
+.form-check-input[type=checkbox] {
+    width: 18px;
+    height: 18px;
+    margin-left: 13px;
+    border-radius: 0.25em;
+}
+
+#accepteLe {
     position: relative;
-    bottom: 40px;
-    left: 132px;
-    margin-left: 10px;
+    right: 94px;
+}
+
+#inputDateLe {
+    color: #333;
+    width: 140px;
+    height: 42px;
+    appearance: none;
     padding: 8px;
+    margin-left: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #fff;
     font-size: 14px;
-    appearance: none;
-    color: #333;
-    
-}
-
-.infosRow select {
-    width: 158px;
     position: relative;
-    bottom: 40px;
-    left: 40px;
+    bottom: 8px;
 }
 
 
-.infosRow2 {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    margin-top: 20px;
-}
-
-
-.infosRow2 > select {
-    width: 150px;
-}
-
-
-.containerRow2 {
-    width: auto;
-    height: auto;
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-}
-
-.infosRow2 {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    margin: 25px 0 0 10px;
-}
-
-.infosRow2 > .libTarif {
-    margin-left: 190px;
-}
-
-.infosRow2 > .infosDateEval input[type="date"] {
-    width: 140px;
-    height: 39px;
+#TarifPar {
+    width: 264px;
     position: relative;
-    bottom: 40px;
-    left: 132px;
-    margin-left: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 14px;
-    appearance: none;
-    color: #333;
-    
+    right: 94px;
+}
+
+#libTarifPar {
+    margin-top: 2.5px;
+}
+
+#selectUtilTarif {
+    width: 190px;
+    margin-left: 14px;
+    margin-top: 0;
+    position: relative;
+    bottom: 6px;
 }
 
 
+
+/*---------------------------------
+|       NbrJoursPassé / RAP        |
+----------------------------------*/
+
+
+
+
+/*-------------------------------------------
+|       ImpressionDevis / DétailTâche        |
+--------------------------------------------*/
