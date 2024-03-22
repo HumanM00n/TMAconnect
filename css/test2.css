@@ -13,12 +13,22 @@ main {
     height: auto;
 }
 
+.btnretour {
+    align-items: center;
+    justify-content: start;
+    display: flex;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+}
 
 .btnretour button {
     width: 5rem;
     height: 3rem;
     position: absolute;
-    top: 17px;
+    top: 60px;
     left: 19px;
     padding: 10px 16px;
     background: #289297;
@@ -29,6 +39,11 @@ main {
     font-size: 14px;
     font-weight: bold;
     transition: background-color 0.3s ease;
+}
+
+.btnretour button:hover {
+    background-color: #287074;
+    transition: 0.3s ease;
 }
 
 /*------------------------------------
@@ -85,7 +100,7 @@ label {
 }
 
 
-#inputEval {
+.inputEval {
     color: #333;
     width: 140px;
     height: 42px;
@@ -99,7 +114,7 @@ label {
 }
 
 
-#inputCharge {
+.inputCharge {
     color: #333;
     height: 42px;
     width: 140px;
@@ -152,7 +167,7 @@ label {
 
 
 #selectTarif {
-    margin-top: 0; 
+    margin-top: 0;
     margin-bottom: 0;
 }
 
@@ -161,13 +176,13 @@ label {
 --------------------------------*/
 
 .row-cols-lg-6>* {
-    width: 16.66666667%;
+    width: 17%;
     display: inline-flex !important;
     flex: 0 0 auto;
 }
 
 
-.form-check-input[type=checkbox] {
+.form-check-input[type="checkbox"] {
     width: 18px;
     height: 18px;
     margin-left: 13px;
@@ -176,16 +191,16 @@ label {
 
 #accepteLe {
     position: relative;
-    right: 94px;
+    right: 102px;
 }
 
-#inputDateLe {
+.inputDateLe {
     color: #333;
     width: 140px;
     height: 42px;
     appearance: none;
     padding: 8px;
-    margin-left: 10px;
+    margin-left: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #fff;
@@ -198,11 +213,13 @@ label {
 #TarifPar {
     width: 264px;
     position: relative;
-    right: 94px;
+    right: 103px;
 }
 
 #libTarifPar {
-    margin-top: 2.5px;
+    position: relative;
+    right: 9px;
+    margin-top: 0.5px;
 }
 
 #selectUtilTarif {
@@ -210,7 +227,7 @@ label {
     margin-left: 14px;
     margin-top: 0;
     position: relative;
-    bottom: 6px;
+    bottom: 8px;
 }
 
 
@@ -220,8 +237,92 @@ label {
 ----------------------------------*/
 
 
+#RAP-NBJ-content input[type=text] {
+    width: 150px;
+}
+
+#libRAP {
+    margin-left: 10px;
+}
+
+#ResteApasser {
+    position: relative;
+    right: 74px;
+}
+
 
 
 /*-------------------------------------------
 |       ImpressionDevis / DétailTâche        |
 --------------------------------------------*/
+
+.containerBtn {
+    display: flex;
+    margin-top: 35px;
+}
+
+.GroupBtn {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.GroupBtn button {
+    color: #fff;
+    background-color: #289297;
+}
+
+.GroupBtn button:hover {
+    color: #fff;
+    background-color: #287074;
+}
+
+
+.detailBtn {
+    display: flex;
+    margin-left: 80px;
+}
+
+
+.containerBtn button {
+    padding: 10px 100px 10px 100px;
+}
+
+
+
+/*-------------------------------------------
+|       ImpressionDevis / DétailTâche        |
+--------------------------------------------*/
+
+.containerFacture {
+    /* border: 1px solid; */
+    width: 60%;
+    height: 100px;
+    display: flex;
+    justify-content: start;
+    margin: 25px 0;
+}
+
+.facture-content {
+    width: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.facture-content input[type=checkbox] {
+    width: 18px;
+    height: 18px;
+    margin-right: 40px;
+}
+
+.facture-content input[type=text] {
+    width: 17%;
+    height: 40%;
+    margin-right: 40px;
+}
+
+
+.facture-content button {
+    height: 39%;
+}
