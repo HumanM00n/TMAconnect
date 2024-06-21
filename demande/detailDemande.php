@@ -144,8 +144,8 @@
               <input type="text" name="demLibelle" id="demLibelle" size="35"
                 pattern="^[a-zA-Záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ ?ÀÂÄÃÅÇÉÈÊË ?ÌÎ ?ÑÓÒÔÖÕÚÙÛÜ ?ŸÆŒ\s\-]+$" disabled pattern="[0-9]"
                 <?php 
-                  $id_dmd = $row[4];
-                  ?> value="<?php echo $id_dmd; ?>">
+                  $lib_dmd = $row[4];
+                  ?> value="<?php echo $lib_dmd; ?>">
             </div>
 
             <!------------------------------------------
