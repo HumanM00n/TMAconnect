@@ -1,5 +1,5 @@
 <?php
-include("../includes/connexion.inc.php");
+include("includes/connexion.inc.php");
 
 if (isset($_POST['subpasswd'])) {
     $matricule = $_POST['matricule'];
@@ -14,8 +14,7 @@ if (isset($_POST['subpasswd'])) {
 
     } else {
         try {
-            $pdo = new PDO($dsn, $username, $password);
-
+            
             $selectQuery = "SELECT passwd FROM tc_utilisateur WHERE matricule = :matricule";
             $selectStmt = $pdo->prepare($selectQuery);
             $selectStmt->execute(['matricule' => $matricule]);

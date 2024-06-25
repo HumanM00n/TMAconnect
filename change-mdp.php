@@ -1,4 +1,5 @@
-<!-- <?php include('php/S-forgotMDP.php'); ?> -->
+<?php include('includes/connexion.inc.php'); ?>
+<?php include('php/S-forgotMDP.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +49,8 @@
 
                 echo '<center><p class="Successful">Le mot de passe a été modifié avec succès !</p></center>';
                 $motDePasseModifie = true; // Variable de drapeau pour indiquer si le mot de passe a été modifié avec succès
+
+                echo $n_passwd;
             }
         }
         ?>
